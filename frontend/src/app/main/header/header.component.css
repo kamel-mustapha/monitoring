@@ -1,0 +1,27 @@
+.page_header {
+  @apply bg-white rounded-2xl flex justify-between items-center py-3 px-6 text-gray-700 font-semibold shadow-md;
+}
+
+.page_header > div {
+  @apply flex items-center gap-6;
+}
+
+.page_header > div > span.username {
+  @apply max-w-100 overflow-hidden text-ellipsis;
+}
+
+.page_header img {
+  @apply w-10 h-10 rounded-full shadow-lg;
+}
+
+h1.page_title {
+  @apply w-content flex gap-4 items-center text-lg;
+}
+
+h1.page_title > span:first-child {
+  @apply relative h-10 w-10 rounded-lg text-center bg-gradient-to-b from-hover to-orange-500 text-gray-100;
+}
+
+h1.page_title > span:first-child > i {
+  @apply absolute left-0 right-0 mx-auto top-1/2 -translate-y-1/2;
+}

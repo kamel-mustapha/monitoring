@@ -1,0 +1,23 @@
+.events_list {
+  @apply mt-4 overflow-y-auto flex flex-col gap-2 overflow-auto;
+}
+
+.events_list > div {
+  @apply py-2 font-semibold flex justify-between items-center rounded-lg;
+}
+
+.events_list > div .monitor_status {
+  @apply text-sm flex items-center justify-center gap-2 w-24;
+}
+
+.events_list > div .monitor_status > span:first-child {
+  @apply inline-block w-2 h-2 rounded-full;
+}
+
+.events_list > div .monitor_status > span:last-child {
+  @apply w-12;
+}
+
+.events_list::-webkit-scrollbar {
+  @apply hidden;
+}

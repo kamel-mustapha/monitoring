@@ -1,0 +1,40 @@
+<nav
+  class="h-full py-8 shadow-xl flex flex-col justify-between gap-16 text-center"
+>
+  <div>
+    <a
+      (mouseenter)="animate_logo = true"
+      (mouseleave)="animate_logo = false"
+      href="/"
+      id="logo"
+    >
+      <span
+        [ngClass]="{ 'h-5': animate_logo, 'h-6': !animate_logo }"
+        class="left-0"
+      ></span>
+      <span
+        [ngClass]="{ 'h-6': animate_logo, 'h-4': !animate_logo }"
+        class="left-0 right-0 mx-auto"
+      ></span>
+      <span
+        [ngClass]="{ 'h-5': animate_logo, 'h-6': !animate_logo }"
+        class="right-0"
+      ></span>
+    </a>
+  </div>
+  <div class="flex flex-col gap-12">
+    <a routerLink="/home" class="website_link">
+      <i class="fas fa-home fa-xl"></i>
+      <div routerLinkActive="h-1/2"></div>
+    </a>
+    <a routerLink="/profile" class="website_link">
+      <i class="fas fa-user fa-xl" routerLinkActive="opacity-100"></i>
+      <div routerLinkActive="h-1/2"></div>
+    </a>
+    <a routerLink="/settings" class="website_link">
+      <i class="fas fa-cog fa-xl"></i>
+      <div routerLinkActive="h-1/2"></div>
+    </a>
+  </div>
+  <a class="website_link"><i class="fas fa-sign-out-alt fa-xl"></i></a>
+</nav>

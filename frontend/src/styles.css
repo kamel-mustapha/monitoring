@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* utils class */
+.hoverable {
+  @apply cursor-pointer px-4 py-3 rounded-lg duration-500 hover:bg-gray-200 active:bg-gray-300;
+}
+
+.st0 {
+  fill: #ff8906;
+}
+
+.content_title {
+  @apply font-bold text-2xl text-gray-800;
+}
+
+.text_overflow_ellipsis {
+  @apply overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
+/* global css */
+body {
+  @apply bg-primary;
+}
+
+#main_content {
+  @apply flex flex-col h-full;
+}
+
+#main_content > div:last-child {
+  @apply py-4 h-full grid gap-4 overflow-hidden grid-cols-12 grid-rows-6;
+}

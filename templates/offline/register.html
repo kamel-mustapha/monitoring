@@ -1,0 +1,37 @@
+{% extends 'offline/root.html' %} {% load static %} {% block content %}
+<form
+  class="w-full md:w-2/4 xl:w-4/12 mx-auto flex flex-col gap-8 py-12 mb-16 border border-gray-800 text-center rounded-xl px-12"
+  onsubmit="register_or_login(event, this, register=true)"
+>
+  <h1 class="text-headline text-2xl font-semibold">Create a FREE Account</h1>
+  <input type="hidden" value="{{csrf_token}}" name="csrfmiddlewaretoken" />
+  <input
+    required
+    type="text"
+    class="w-full h-12 text-gray-900 px-6 rounded-full border-none focus:outline-none focus:border-none focus:ring-transparent"
+    placeholder="Username"
+    name="username"
+  />
+  <input
+    required
+    type="email"
+    class="w-full h-12 text-gray-900 px-6 rounded-full border-none focus:outline-none focus:border-none focus:ring-transparent"
+    placeholder="Email"
+    name="email"
+  />
+  <input
+    type="password"
+    class="w-full h-12 text-gray-900 px-6 rounded-full focus:outline-none focus:border-none focus:ring-transparent"
+    placeholder="Your password"
+    name="password1"
+  />
+  <input
+    type="password"
+    class="w-full h-12 text-gray-900 px-6 rounded-full focus:outline-none focus:border-none focus:ring-transparent"
+    placeholder="Confirm your password"
+    name="password2"
+  />
+  <a href="{% url 'website:login' %}" class="w-content mx-auto hover:underline">I already have an account</a>
+  <button type="submit" class="bg-secondary text-button rounded-md px-6 py-2 text-lg hover:bg-hover">Register</button>
+</form>
+{%endblock %}
