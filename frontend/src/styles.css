@@ -20,7 +20,30 @@
 }
 
 .button {
-  @apply bg-secondary  text-gray-50 px-5 py-2 capitalize hover:shadow-md active:bg-hover;
+  @apply bg-secondary  text-gray-50 px-5 pt-1 pb-2 capitalize hover:shadow-md active:bg-hover;
+}
+.toggle {
+  @apply w-16 h-6 rounded-full relative cursor-pointer;
+}
+
+.toggle_on {
+  @apply bg-secondary;
+}
+
+.toggle_off {
+  @apply bg-gray-400;
+}
+
+.toggle > span {
+  @apply absolute w-8 h-8 bg-white rounded-full border -top-1;
+}
+
+.toggle_span_on {
+  @apply right-0 border-primary;
+}
+
+.toggle_span_off {
+  @apply left-0 border-gray-300;
 }
 
 /* global css */
@@ -33,5 +56,5 @@ body {
 }
 
 #main_content > div:last-child {
-  @apply h-full grid gap-4;
+  @apply h-full grid grid-cols-12 grid-rows-6 gap-4 overflow-hidden pb-2;
 }

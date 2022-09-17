@@ -12,12 +12,12 @@ export class PagesComponent implements OnInit {
 
   pages = [
     {
-      name: 'Light',
+      name: 'Default Light',
       premium: false,
       selected: true,
     },
     {
-      name: 'Black',
+      name: 'Default Black',
       premium: false,
       selected: false,
     },

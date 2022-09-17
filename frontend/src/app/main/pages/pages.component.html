@@ -1,33 +1,46 @@
 <div id="main_content">
   <app-header title="pages" icon="fa-file-code"></app-header>
-  <div
-    class="pages p-8 bg-white rounded-2xl grid-cols-3 gap-4 overflow-auto 1600:grid-cols-4"
-  >
+  <div>
     <div
-      *ngFor="let page of pages"
-      class="relative w-content shadow-md rounded-lg overflow-hidden flex flex-col"
+      class="px-4 col-span-full row-span-full overflow-auto grid gap-8 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 1600:grid-cols-4"
     >
-      <img class="h-96 w-96" src="../../../assets/page.png" alt="" />
-      <div class="flex justify-between px-4 py-6 items-center">
-        <a href="" class="text-blue-500 hover:underline">
-          {{ page.name | titlecase }}
-        </a>
-        <button
-          *ngIf="!page.selected"
-          class="bg-secondary text-gray-50 px-4 py-1 rounded-sm hover:shadow-lg active:bg-hover"
-        >
-          Select
-        </button>
-        <span *ngIf="page.selected">
-          Selected <i class="fas fa-check text-green-500"></i>
-        </span>
-      </div>
-      <span
-        *ngIf="page.premium"
-        class="bg-secondary text-gray-100 font-semibold px-12 absolute top-6 -right-12 rotate-45"
+      <div
+        *ngFor="let page of pages"
+        class="w-full h-content flex flex-col rounded-xl pb-1 relative"
       >
-        Premium
-      </span>
+        <div class="py-3 px-2 rounded-t-lg font-bold text-lg">
+          {{ page.name }}
+        </div>
+        <div class="relative overflow-hidden">
+          <img
+            class="rounded-t-lg w-full"
+            src="../../../assets/page.png"
+            alt=""
+          />
+          <span
+            *ngIf="page.premium"
+            class="absolute -right-8 top-4 bg-secondary px-8 pb-1 text-gray-100 rounded-lg rotate-45"
+          >
+            Premium
+          </span>
+        </div>
+        <div
+          class="flex justify-between rounded-b-lg shadow-lg py-5 px-2 bg-white"
+        >
+          <a href="" class="text-blue-500 hover:underline px-4"> Preview </a>
+          <div
+            [ngClass]="{ toggle_on: page.selected, toggle_off: !page.selected }"
+            class="toggle"
+          >
+            <span
+              [ngClass]="{
+                toggle_span_on: page.selected,
+                toggle_span_off: !page.selected
+              }"
+            ></span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

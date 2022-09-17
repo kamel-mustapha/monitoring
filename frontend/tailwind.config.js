@@ -25,6 +25,7 @@ module.exports = {
         85: "85vh",
         95: "95vh",
         most: "90%",
+        content: "fit-content"
       },
       maxWidth: {
         1900: "1920px",
