@@ -1,3 +1,11 @@
 .pages::-webkit-scrollbar {
   @apply hidden;
 }
+
+.page_container {
+  @apply px-4 col-span-full row-span-full overflow-auto grid gap-8 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 1600:grid-cols-4;
+}
+
+.page_container > div {
+  @apply w-full h-content flex flex-col rounded-xl pb-1 relative;
+}
