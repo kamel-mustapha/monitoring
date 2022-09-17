@@ -8,26 +8,28 @@
         *ngFor="let page of pages"
         class="w-full h-content flex flex-col rounded-xl pb-1 relative"
       >
-        <div class="py-3 px-2 rounded-t-lg font-bold text-lg">
+        <div class="py-4 px-2 rounded-t-lg font-bold text-lg">
           {{ page.name }}
         </div>
         <div class="relative overflow-hidden">
           <img
-            class="rounded-t-lg w-full"
+            class="rounded-t-xl w-full"
             src="../../../assets/page.png"
             alt=""
           />
           <span
             *ngIf="page.premium"
-            class="absolute -right-8 top-4 bg-secondary px-8 pb-1 text-gray-100 rounded-lg rotate-45"
+            class="absolute -right-9 top-4 bg-secondary px-8 pb-1 text-gray-100 rounded-lg rotate-45"
           >
             Premium
           </span>
         </div>
         <div
-          class="flex justify-between rounded-b-lg shadow-lg py-5 px-2 bg-white"
+          class="flex justify-between rounded-b-xl shadow-lg py-5 px-2 bg-white"
         >
-          <a href="" class="text-blue-500 hover:underline px-4"> Preview </a>
+          <a href="" class="text-blue-500 hover:underline px-4 text-lg"
+            >Preview
+          </a>
           <div
             [ngClass]="{ toggle_on: page.selected, toggle_off: !page.selected }"
             class="toggle"

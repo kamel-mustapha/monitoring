@@ -19,13 +19,12 @@ module.exports = {
       },
       width: {
         content: "fit-content",
-        93: "93%",
       },
       height: {
         85: "85vh",
         95: "95vh",
         most: "90%",
-        content: "fit-content"
+        content: "fit-content",
       },
       maxWidth: {
         1900: "1920px",
