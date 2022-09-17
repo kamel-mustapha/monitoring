@@ -18,6 +18,22 @@
   @apply w-12;
 }
 
+.events_list > div .event_code {
+  @apply w-52 overflow-hidden text-ellipsis;
+}
+
+.events_list > div .monitor_name {
+  @apply w-36 overflow-hidden text-ellipsis;
+}
+
 .events_list::-webkit-scrollbar {
   @apply hidden;
+}
+
+.statistics_content > div {
+  @apply bg-white p-4 w-full text-center font-bold shadow-md rounded-xl;
+}
+
+.statistics_content > div > div:last-child {
+  @apply text-gray-500 mt-4;
 }

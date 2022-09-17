@@ -23,16 +23,12 @@
     </a>
   </div>
   <div class="flex flex-col gap-12">
-    <a routerLink="/home" class="website_link">
-      <i class="fas fa-home fa-xl"></i>
-      <div routerLinkActive="h-1/2"></div>
-    </a>
-    <a routerLink="/profile" class="website_link">
-      <i class="fas fa-user fa-xl" routerLinkActive="opacity-100"></i>
-      <div routerLinkActive="h-1/2"></div>
-    </a>
-    <a routerLink="/settings" class="website_link">
-      <i class="fas fa-cog fa-xl"></i>
+    <a
+      *ngFor="let link of navbar_links"
+      routerLink="{{ link.link }}"
+      class="website_link"
+    >
+      <i class="{{ link.icon }} fa-xl"></i>
       <div routerLinkActive="h-1/2"></div>
     </a>
   </div>

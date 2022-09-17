@@ -1,19 +1,19 @@
 <div id="main_content">
   <app-header></app-header>
-  <div>
+  <div class="grid-cols-12 grid-rows-6">
     <div
-      class="col-start-1 col-end-6 row-start-1 row-end-5 flex flex-col bg-white rounded-2xl px-7 py-6 shadow-md"
+      class="col-start-1 col-end-6 row-start-1 row-end-7 flex flex-col bg-white rounded-2xl px-7 py-6 shadow-md"
     >
       <div class="flex justify-between">
         <div class="content_title">Monitors</div>
         <div class="hoverable flex items-center gap-2">
-          <i class="fas fa-plus fa-xs text-green-500"></i>
+          <i class="fas fa-plus fa-sm text-green-500"></i>
           <span>Add a monitor</span>
         </div>
       </div>
       <div class="events_list">
         <!-- <div class="w-content mx-auto text-gray-700">No monitor yet.</div> -->
-        <div>
+        <div *ngFor="let monitor of monitors">
           <div class="w-36 text_overflow_ellipsis">My First Monitor</div>
           <div class="text-sm text_overflow_ellipsis">https://google.com</div>
           <div><i class="fas fa-ellipsis-v hoverable"></i></div>
@@ -21,19 +21,18 @@
       </div>
     </div>
     <div
-      class="col-start-6 col-end-13 row-start-1 row-end-5 flex flex-col bg-white rounded-2xl px-7 py-6 shadow-md"
+      class="col-start-6 col-end-13 row-start-1 row-end-7 flex flex-col bg-white rounded-2xl px-7 py-6 shadow-md"
     >
       <div class="content_title">Events</div>
       <div class="events_list h-5/6">
         <!-- <div class="w-content mx-auto text-gray-700">No event yet.</div> -->
-        <!-- use with ngfor -->
-        <div class="">
-          <div class="w-36 text_overflow_ellipsis">My First Monitor</div>
+        <div *ngFor="let monitor of monitors">
+          <div class="monitor_name">My First Monitor</div>
           <div class="monitor_status">
             <span class="bg-green-500"></span>
             <span>Up</span>
           </div>
-          <div>200 - Ok</div>
+          <div class="event_code">200 - Ok</div>
           <div class="text-sm">10/09/2022 15:17 UTC</div>
         </div>
         <div class="">
@@ -42,15 +41,10 @@
             <span class="bg-red-500"></span>
             <span>Down</span>
           </div>
-          <div>502 - Bad Gateway</div>
+          <div class="event_code">502 - Bad Gateway</div>
           <div class="text-sm">10/09/2022 15:17 UTC</div>
         </div>
       </div>
-    </div>
-    <div
-      class="bg-white shadow-md rounded-2xl col-span-full row-start-5 row-end-7 flex flex-col p-4"
-    >
-      <div class="content_title px-3">Statistics</div>
     </div>
   </div>
 </div>

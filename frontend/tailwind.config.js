@@ -48,6 +48,9 @@ module.exports = {
       boxShadow: {
         button: "0 0 10px 1px rgba(0, 0, 0, 0.3)",
       },
+      screens: {
+        1600: "1600px",
+      },
     },
   },
   plugins: [],

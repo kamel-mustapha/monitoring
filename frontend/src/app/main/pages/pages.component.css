@@ -1,0 +1,3 @@
+.pages::-webkit-scrollbar {
+  @apply hidden;
+}

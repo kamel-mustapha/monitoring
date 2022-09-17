@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './main/home/home.component';
-import { StatsComponent } from './main/stats/stats.component';
+
 import { ProfileComponent } from './main/profile/profile.component';
 import { SettingsComponent } from './main/settings/settings.component';
 import { HeaderComponent } from './main/header/header.component';
+import { PagesComponent } from './main/pages/pages.component';
 
 @NgModule({
   declarations: [
@@ -17,16 +18,14 @@ import { HeaderComponent } from './main/header/header.component';
     NavbarComponent,
     MainComponent,
     HomeComponent,
-    StatsComponent,
+
     ProfileComponent,
     SettingsComponent,
-    HeaderComponent
+    HeaderComponent,
+    PagesComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
