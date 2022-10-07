@@ -23,7 +23,7 @@
   @apply bg-secondary  text-gray-50 px-5 pt-1 pb-2 capitalize hover:shadow-md active:bg-hover;
 }
 .toggle {
-  @apply w-16 h-6 rounded-full relative cursor-pointer;
+  @apply w-16 h-6 rounded-full relative cursor-pointer duration-500;
 }
 
 .toggle_on {
@@ -35,7 +35,7 @@
 }
 
 .toggle > span {
-  @apply absolute w-8 h-8 bg-white rounded-full border -top-1;
+  @apply absolute w-8 h-8 bg-white rounded-full border -top-1 duration-500;
 }
 
 .toggle_span_on {

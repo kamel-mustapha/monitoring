@@ -1,0 +1,11 @@
+.profile_item {
+  @apply p-6;
+}
+
+.user_image:hover > img {
+  @apply brightness-50 contrast-50;
+}
+
+.user_image:hover > span {
+  @apply visible;
+}
