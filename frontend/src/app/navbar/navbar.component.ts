@@ -21,10 +21,10 @@ export class NavbarComponent implements OnInit {
       link: '/profile',
       icon: 'fas fa-user',
     },
-    {
-      link: '/settings',
-      icon: 'fas fa-cog',
-    },
+    // {
+    //   link: '/settings',
+    //   icon: 'fas fa-cog',
+    // },
   ];
   animate_logo: boolean = false;
 

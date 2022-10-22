@@ -2,9 +2,9 @@
   <app-header></app-header>
   <div>
     <div
-      class="col-start-1 col-end-6 row-span-full flex flex-col bg-white rounded-2xl px-7 py-6 shadow-md"
+      class="col-start-1 col-end-6 row-span-full flex flex-col bg-white rounded-2xl px-8 py-4 shadow-md"
     >
-      <div class="flex justify-between">
+      <div class="flex justify-between items-center">
         <div class="content_title">Monitors</div>
         <div class="hoverable flex items-center gap-2">
           <i class="fas fa-plus fa-sm text-green-500"></i>
@@ -13,7 +13,7 @@
       </div>
       <div class="events_list">
         <!-- <div class="w-content mx-auto text-gray-700">No monitor yet.</div> -->
-        <div *ngFor="let monitor of monitors">
+        <div *ngFor="let monitor of monitors" class="pr-4">
           <div class="w-36 text_overflow_ellipsis">My First Monitor</div>
           <div class="text-sm text_overflow_ellipsis">https://google.com</div>
           <div><i class="fas fa-ellipsis-v hoverable"></i></div>
@@ -21,12 +21,18 @@
       </div>
     </div>
     <div
-      class="col-start-6 col-end-13 row-span-full flex flex-col bg-white rounded-2xl px-7 py-6 shadow-md"
+      class="col-start-6 col-end-13 row-span-full flex flex-col bg-white rounded-2xl px-8 py-4 shadow-md"
     >
-      <div class="content_title">Events</div>
+      <div class="flex justify-between items-center">
+        <div class="content_title">Events</div>
+        <span class="hoverable">
+          <span>My First Monitor</span>
+          &nbsp;<span><i class="fas fa-chevron-down"></i></span>
+        </span>
+      </div>
       <div class="events_list h-5/6">
-        <!-- <div class="w-content mx-auto text-gray-700">No event yet.</div> -->
-        <div *ngFor="let monitor of monitors">
+        <div class="w-content mx-auto text-gray-700">No event yet.</div>
+        <!-- <div *ngFor="let monitor of monitors" class="pr-4">
           <div class="monitor_name">My First Monitor</div>
           <div class="monitor_status">
             <span class="bg-green-500"></span>
@@ -34,16 +40,7 @@
           </div>
           <div class="event_code">200 - Ok</div>
           <div class="text-sm">10/09/2022 15:17 UTC</div>
-        </div>
-        <div class="">
-          <div class="w-36 text_overflow_ellipsis">My First Monitor</div>
-          <div class="monitor_status">
-            <span class="bg-red-500"></span>
-            <span>Down</span>
-          </div>
-          <div class="event_code">502 - Bad Gateway</div>
-          <div class="text-sm">10/09/2022 15:17 UTC</div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
