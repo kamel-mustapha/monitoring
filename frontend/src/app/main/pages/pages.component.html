@@ -25,20 +25,16 @@
             <a href="" class="text-blue-500 hover:underline text-lg">
               Preview
             </a>
-            <div
-              [ngClass]="{
-                toggle_on: page.selected,
-                toggle_off: !page.selected
-              }"
-              class="toggle"
+            <span *ngIf="page.owned" class="flex items-center gap-2">
+              Owend
+              <i class="fas fa-check-circle text-green-600"></i>
+            </span>
+            <a
+              *ngIf="!page.owned"
+              class="flex items-center gap-2 cursor-pointer text-blue-500 hover:underline"
             >
-              <span
-                [ngClass]="{
-                  toggle_span_on: page.selected,
-                  toggle_span_off: !page.selected
-                }"
-              ></span>
-            </div>
+              {{ page.price }}$
+            </a>
           </div>
         </div>
       </div>

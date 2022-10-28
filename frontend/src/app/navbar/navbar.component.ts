@@ -12,14 +12,17 @@ export class NavbarComponent implements OnInit {
     {
       link: '/home',
       icon: 'fas fa-home',
+      name: 'home',
     },
     {
       link: '/pages',
       icon: 'fas fa-file-code',
+      name: 'pages',
     },
     {
       link: '/profile',
       icon: 'fas fa-user',
+      name: 'profile',
     },
     // {
     //   link: '/settings',

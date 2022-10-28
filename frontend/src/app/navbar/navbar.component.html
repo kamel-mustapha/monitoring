@@ -24,6 +24,7 @@
   </div>
   <div class="flex flex-col gap-12">
     <a
+      title="{{ link.name | titlecase }}"
       *ngFor="let link of navbar_links"
       routerLink="{{ link.link }}"
       class="website_link"
@@ -32,5 +33,7 @@
       <div routerLinkActive="h-1/2"></div>
     </a>
   </div>
-  <a class="website_link"><i class="fas fa-sign-out-alt fa-xl"></i></a>
+  <a title="Logout" href="" class="website_link"
+    ><i class="fas fa-sign-out-alt fa-xl"></i
+  ></a>
 </nav>
