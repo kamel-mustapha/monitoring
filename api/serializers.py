@@ -4,4 +4,5 @@ from api.models import *
 class MonitorData(serializers.ModelSerializer):
     class Meta:
         model = Monitor
-        fields = ('__all__',)
+        fields = ('id', 'name', 'type', 'link', 'page', 'interval', 'alert_emails')
+        depth = 1
