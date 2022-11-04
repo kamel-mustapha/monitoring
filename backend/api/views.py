@@ -49,8 +49,6 @@ class Monitoring(View):
                                                 monitor.alert_emails.add(alert_email[0])
                                         if monitor:
                                                 monitor_data = MonitorData(monitor)
-                                                # launch_monitor(monitor)
-                                                launch_all_monitors()
                                                 req.res["monitor"] = monitor_data.data
                                                 req.res["status"] = 200
                                                 req.res["message"] = "success"

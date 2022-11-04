@@ -1,0 +1,28 @@
+version: "3"
+services:
+  web:
+    build: ./backend/
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend/:/code/
+  management:
+    build: ./management/
+    restart: always
+    ports:
+      - 8080:8000
+    volumes:
+      - ./management/:/code/
+  db:
+    image: mysql:8.0.31
+    restart: always
+    environment:
+      MYSQL_DATABASE: monitoring
+      MYSQL_USER: musk
+      MYSQL_PASSWORD: musk
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./monitordb:/var/lib/mysql
+    ports:
+      - 20000:3306

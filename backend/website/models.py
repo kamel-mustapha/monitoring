@@ -12,7 +12,12 @@ class User(AbstractUser):
             self.api_key = hashlib.md5(f"{self.email}{self.username}{self.password}".encode()).hexdigest()
         super().save(*args, **kwargs)
 
+    class Meta:
+        db_table = "User"
 
 class Activation(models.Model):
     code = models.CharField(max_length=200, default=uuid.uuid4)
     used = models.BooleanField(default = False)
+
+    class Meta:
+        db_table = "Activation"
