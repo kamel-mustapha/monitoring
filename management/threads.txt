@@ -1,7 +1,0 @@
-PID   USER     TIME  COMMAND
-    1 root      0:00 python manage.py runserver 0.0.0.0:8000
-  110 root      0:00 /usr/local/bin/python manage.py runserver 0.0.0.0:8000
-  111 root      0:00 /usr/local/bin/python manage.py runserver 0.0.0.0:8000
-  112 root      0:00 /usr/local/bin/python manage.py runserver 0.0.0.0:8000
-  113 root      0:00 /usr/local/bin/python manage.py runserver 0.0.0.0:8000
-  114 root      0:00 ps -T

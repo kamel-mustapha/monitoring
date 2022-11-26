@@ -1,0 +1,5 @@
+Django==2.2
+mysqlclient==2.1.1
+python-prctl==1.8.1
+django-background-tasks==1.2.5
+requests==2.28.1

@@ -1,20 +1,21 @@
 version: "3"
 services:
   web:
+    container_name: main
     build: ./backend/
     restart: always
     ports:
       - 8000:8000
     volumes:
       - ./backend/:/code/
-  management:
-    build: ./management/
+  jobs:
+    container_name: jobs
+    build: ./jobs/
     restart: always
-    ports:
-      - 8080:8000
     volumes:
-      - ./management/:/code/
+      - ./jobs/:/code/
   db:
+    container_name: database
     image: mysql:8.0.31
     restart: always
     environment:
