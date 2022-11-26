@@ -1,5 +1,5 @@
 .events_list {
-  @apply mt-4 overflow-y-auto flex flex-col gap-2 overflow-auto;
+  @apply h-full mt-4 overflow-y-auto flex flex-col gap-2 overflow-auto;
 }
 
 .events_list > div {

@@ -10,6 +10,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 
+from logging import getLogger
+logger = getLogger(__name__)
+
 @method_decorator(csrf_exempt, name='dispatch')
 class Monitoring(View):
         def get(self, req, *args, **kwargs):
@@ -34,7 +37,7 @@ class Monitoring(View):
                                 data = json.loads(req.body)
                                 if validate_entry(
                                         data, 
-                                        ["name", "type", "link", "page", "interval", "alert_emails"]
+                                        ["name", "type", "link", "page", "interval", "alert_emails", "success_status", "timeout"]
                                         ):
                                         monitor = Monitor.objects.create(
                                                 user=req.user,
@@ -42,7 +45,9 @@ class Monitoring(View):
                                                 type=data.get("type"),
                                                 link=data.get("link"),
                                                 page=Page.objects.get(id=data.get("page")),
-                                                interval=data.get("interval")
+                                                interval=data.get("interval"), 
+                                                success_status=data.get("success_status"),
+                                                timeout=data.get("timeout")
                                         )
                                         for email in data.get("alert_emails"):
                                                 alert_email = AlertEmail.objects.get_or_create(email=str(email).lower().strip())
@@ -52,5 +57,8 @@ class Monitoring(View):
                                                 req.res["monitor"] = monitor_data.data
                                                 req.res["status"] = 200
                                                 req.res["message"] = "success"
+                                                r = requests.get(f"http://jobs:8000/create-task?monitor_id={monitor.id}")
+                                                if r and r.status_code == 200:
+                                                        logger.info(f"Created job for monitor {monitor.id}")
                 except Exception as e: print(e)
                 return JsonResponse(req.res, status=req.res["status"])

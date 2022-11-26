@@ -1,6 +1,11 @@
+import requests, time
 from django.db import models
 from website.models import User
-import uuid
+from django.dispatch import receiver
+
+
+from logging import getLogger
+logger = getLogger(__name__)
 
 class Monitor(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -19,6 +24,17 @@ class Monitor(models.Model):
 
     class Meta:
         db_table = "Monitors"
+
+# @receiver(models.signals.post_save, sender = Monitor)
+# def monitor_created(sender, instance, created, **kwargs):
+#     try:
+#         if created:
+#             instance.save()
+#             r = requests.get(f"http://jobs:8000/create-task?monitor_id={instance.id}")
+#             if r and r.status_code == 200:
+#                 logger.info(f"Created job for monitor {instance.id}")
+#     except Exception as e:
+#         logger.exception(e)
 
 class Page(models.Model):
     name = models.CharField(max_length=100)

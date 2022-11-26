@@ -4,5 +4,5 @@ from api.views import *
 
 
 urlpatterns = [
-    path('monitor/', Monitoring.as_view(), name="monitors"),
+    path('monitor', Monitoring.as_view(), name="monitors"),
 ]

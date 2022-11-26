@@ -1,0 +1,30 @@
+.creation_window {
+  @apply fixed top-0 left-0 w-full h-full bg-black bg-opacity-10 backdrop-blur-sm;
+}
+
+.creation_window > div {
+  @apply flex flex-col absolute bg-white left-0 right-0 top-1/2 -translate-y-1/2 mx-auto h-content w-content rounded-lg shadow-xl;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.creation_window > div > .creation_mode {
+  @apply px-6 py-4  overflow-auto;
+}
+
+#monitor_creation_form {
+  @apply flex flex-col gap-2;
+}
+
+#monitor_creation_form .property_box {
+  @apply flex flex-col gap-2;
+}
+
+#monitor_creation_form label {
+  @apply text-gray-600 text-sm w-content py-1;
+}
+
+#monitor_creation_form input,
+#monitor_creation_form select {
+  @apply border rounded-md px-4 py-2 bg-white border-gray-200 outline-none focus:border-primary;
+}

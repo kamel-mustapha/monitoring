@@ -2,26 +2,31 @@
   <app-header></app-header>
   <div>
     <div
-      class="col-start-1 col-end-6 row-span-full flex flex-col bg-white rounded-2xl px-8 py-4 shadow-md"
+      class="col-start-1 col-end-7 row-span-full flex flex-col bg-white rounded-2xl px-8 py-4 shadow-md"
     >
       <div class="flex justify-between items-center">
         <div class="content_title">Monitors</div>
-        <div class="hoverable flex items-center gap-2">
+        <div
+          (click)="show_monitor_creation()"
+          class="hoverable flex items-center gap-2"
+        >
           <i class="fas fa-plus fa-sm text-green-500"></i>
           <span>Add</span>
         </div>
       </div>
       <div class="events_list">
-        <!-- <div class="w-content mx-auto text-gray-700">No monitor yet.</div> -->
-        <div *ngFor="let monitor of monitors" class="pr-4">
+        <div class="w-content h-full mx-auto text-gray-500">
+          No monitor yet.
+        </div>
+        <!-- <div *ngFor="let monitor of monitors" class="pr-4">
           <div class="w-36 text_overflow_ellipsis">My First Monitor</div>
           <div class="text-sm text_overflow_ellipsis">https://google.com</div>
           <div><i class="fas fa-ellipsis-v hoverable"></i></div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div
-      class="col-start-6 col-end-13 row-span-full flex flex-col bg-white rounded-2xl px-8 py-4 shadow-md"
+      class="col-start-7 col-end-13 row-span-full flex flex-col bg-white rounded-2xl px-8 py-4 shadow-md"
     >
       <div class="flex justify-between items-center">
         <div class="content_title">Events</div>
@@ -31,7 +36,7 @@
         </span>
       </div>
       <div class="events_list h-5/6">
-        <div class="w-content mx-auto text-gray-700">No event yet.</div>
+        <div class="w-content h-full mx-auto text-gray-500">No event yet.</div>
         <!-- <div *ngFor="let monitor of monitors" class="pr-4">
           <div class="monitor_name">My First Monitor</div>
           <div class="monitor_status">

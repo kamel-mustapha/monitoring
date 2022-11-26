@@ -24,6 +24,12 @@ BACKGROUND_TASK_ASYNC_THREADS = 100
 
 MAX_RUN_TIME = 50
 
+MAX_ATTEMPTS = 10 
+
+TIME_ZONE = 'UTC'
+
+USE_TZ = True
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
