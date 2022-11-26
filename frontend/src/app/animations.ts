@@ -9,12 +9,12 @@ import {
 export const animations = [
   trigger('fadeInOut', [
     state('void', style({ opacity: 0 })),
-    transition('void <=> *', [animate(200)]),
+    transition('void <=> *', [animate(300)]),
   ]),
-  trigger('slideIn', [
-    transition('void => *', [
+  trigger('slideInOut', [
+    transition('void <=> *', [
       style({ transform: 'translateY(-20%)' }),
-      animate(500),
+      animate(300),
     ]),
   ]),
   trigger('slideRight', [
@@ -27,6 +27,6 @@ export const animations = [
     transition('void <=> *', [style({ top: '-400px' }), animate(500)]),
   ]),
   trigger('scaleY', [
-    transition('void => *', [style({ transform: 'scaleY(0)' }), animate(500)]),
+    transition('void <=> *', [style({ transform: 'scaleY(0)' }), animate(500)]),
   ]),
 ];

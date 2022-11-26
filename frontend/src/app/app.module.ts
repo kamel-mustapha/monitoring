@@ -11,6 +11,7 @@ import { ProfileComponent } from './main/profile/profile.component';
 import { SettingsComponent } from './main/settings/settings.component';
 import { HeaderComponent } from './main/header/header.component';
 import { PagesComponent } from './main/pages/pages.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,12 @@ import { PagesComponent } from './main/pages/pages.component';
     HeaderComponent,
     PagesComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

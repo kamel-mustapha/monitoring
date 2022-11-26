@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { animations } from '../animations';
 import { SharedService } from '../services/shared.service';
 
@@ -28,5 +29,9 @@ export class MainComponent implements OnInit {
   @HostListener('document:keydown.escape')
   hide_creation_window() {
     this.shared.turn_off_creation();
+  }
+
+  submit_monitor(form: NgForm) {
+    console.log(form.value);
   }
 }

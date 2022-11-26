@@ -12,43 +12,57 @@
       >
     </div>
     <div class="creation_mode" *ngIf="creation_modes['monitor_creation']">
-      <form id="monitor_creation_form" action="">
+      <form
+        id="monitor_creation_form"
+        #f="ngForm"
+        (ngSubmit)="submit_monitor(f)"
+      >
         <h1 class="font-semibold text-lg text-gray-800 text-center">
           Create Monitor
         </h1>
         <div class="property_box">
           <label for="">Name</label>
-          <input type="text" placeholder="My Website" />
+          <input type="text" placeholder="My Website" ngModel name="name" />
         </div>
         <div class="property_box">
           <label for="">Type</label>
-          <select name="">
+          <select name="type" ngModl>
             <option value="">Http</option>
           </select>
         </div>
         <div class="property_box">
           <label for="">Page</label>
-          <select name="">
+          <select name="page" ngModel>
             <option value="">Default light</option>
             <option value="">Default black</option>
           </select>
         </div>
         <div class="property_box">
           <label for="">Link</label>
-          <input type="text" placeholder="https://mywebsite.com" />
+          <input
+            type="text"
+            placeholder="https://mywebsite.com"
+            name="link"
+            ngModel
+          />
         </div>
         <div class="grid grid-cols-2 gap-4">
           <div class="property_box">
             <label for="">Check interval</label>
-            <input type="number" value="60" />
+            <input type="number" placeholder="60" name="interval" ngModel />
           </div>
           <div class="property_box">
             <label for="">Success Status</label>
-            <input type="number" value="200" />
+            <input
+              type="number"
+              placeholder="200"
+              name="success_status"
+              ngModel
+            />
           </div>
           <div class="property_box">
             <label for="">Timeout</label>
-            <input type="number" value="30" />
+            <input type="number" placeholder="30" name="timeout" ngModel />
           </div>
         </div>
         <button
