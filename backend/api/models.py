@@ -13,10 +13,10 @@ class Monitor(models.Model):
     type = models.CharField(max_length=50)
     link = models.CharField(max_length=255)
     page = models.ForeignKey("Page", on_delete=models.SET_NULL, null=True)
-    interval = models.IntegerField(default=30)
+    interval = models.IntegerField(default=300)
     alert_emails = models.ManyToManyField("AlertEmail", through="MonitorAlertEmail")
     running = models.BooleanField(default=False)
-    success_status = models.IntegerField(null=True, blank=True)
+    success_status = models.IntegerField(default=200)
     timeout = models.IntegerField(default=30)
     
     def __str__(self):

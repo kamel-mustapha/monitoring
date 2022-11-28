@@ -39,18 +39,24 @@ class Monitoring(View):
                                         data, 
                                         ["name", "type", "link", "page", "interval", "alert_emails", "success_status", "timeout"]
                                         ):
+                                        page_id = data.get("page") if data.get("page") and type(data.get("page")) == int else int(data.get("page"))
                                         monitor = Monitor.objects.create(
                                                 user=req.user,
                                                 name=data.get("name"),
                                                 type=data.get("type"),
                                                 link=data.get("link"),
-                                                page=Page.objects.get(id=data.get("page")),
+                                                page=Page.objects.get(id=page_id),
                                                 interval=data.get("interval"), 
                                                 success_status=data.get("success_status"),
-                                                timeout=data.get("timeout")
+                                                timeout=data.get("timeout"),
+                                                running=True
                                         )
-                                        for email in data.get("alert_emails"):
-                                                alert_email = AlertEmail.objects.get_or_create(email=str(email).lower().strip())
+                                        if data.get("alert_emails"):
+                                                for email in data.get("alert_emails"):
+                                                        alert_email = AlertEmail.objects.get_or_create(email=str(email).lower().strip())
+                                                        monitor.alert_emails.add(alert_email[0])
+                                        else:
+                                                alert_email = AlertEmail.objects.get_or_create(email=req.user.email.lower().strip())
                                                 monitor.alert_emails.add(alert_email[0])
                                         if monitor:
                                                 monitor_data = MonitorData(monitor)

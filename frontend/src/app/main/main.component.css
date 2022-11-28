@@ -6,6 +6,8 @@
   @apply flex flex-col absolute bg-white left-0 right-0 top-1/2 -translate-y-1/2 mx-auto h-content w-content rounded-lg shadow-xl;
   max-height: 100%;
   max-width: 100%;
+  min-width: 300px;
+  min-height: 400px;
 }
 
 .creation_window > div > .creation_mode {
@@ -13,18 +15,22 @@
 }
 
 #monitor_creation_form {
-  @apply flex flex-col gap-2;
+  @apply flex flex-col gap-1;
 }
 
 #monitor_creation_form .property_box {
-  @apply flex flex-col gap-2;
+  @apply flex flex-col gap-1;
 }
 
 #monitor_creation_form label {
-  @apply text-gray-600 text-sm w-content py-1;
+  @apply text-gray-600 font-semibold text-sm w-content py-1 flex items-center gap-2;
+}
+
+#monitor_creation_form label i {
+  @apply cursor-pointer;
 }
 
 #monitor_creation_form input,
 #monitor_creation_form select {
-  @apply border rounded-md px-4 py-2 bg-white border-gray-200 outline-none focus:border-primary;
+  @apply border rounded-md px-4 py-2 bg-white outline-none focus:border-primary;
 }
