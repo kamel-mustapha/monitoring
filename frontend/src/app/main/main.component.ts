@@ -21,7 +21,7 @@ export class MainComponent implements OnInit {
       this.show_creation = show_creation;
     });
     // temporary
-    this.shared.turn_on_creation('monitor_creation');
+    // this.shared.turn_on_creation('monitor_creation');
   }
 
   show_creation: boolean = false;
@@ -55,6 +55,7 @@ export class MainComponent implements OnInit {
       this.server.create_monitor(form.value).subscribe((response) => {
         if (response && response.status == 200) {
           this.shared.turn_off_creation();
+          this.shared.show_alert('Monitor created successfully');
           form.reset();
         } else {
           console.log(response);

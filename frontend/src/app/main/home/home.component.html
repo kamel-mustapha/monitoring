@@ -15,14 +15,19 @@
         </div>
       </div>
       <div class="events_list">
-        <div class="w-content h-full mx-auto text-gray-500">
+        <div
+          *ngIf="monitors.length == 0"
+          class="w-content h-full mx-auto text-gray-500 mt-40"
+        >
           No monitor yet.
         </div>
-        <!-- <div *ngFor="let monitor of monitors" class="pr-4">
-          <div class="w-36 text_overflow_ellipsis">My First Monitor</div>
-          <div class="text-sm text_overflow_ellipsis">https://google.com</div>
-          <div><i class="fas fa-ellipsis-v hoverable"></i></div>
-        </div> -->
+        <div *ngIf="monitors.length > 0">
+          <div *ngFor="let monitor of monitors" class="monitor_element">
+            <div class="w-36 text_overflow_ellipsis">{{ monitor.name }}</div>
+            <div class="text-sm text_overflow_ellipsis">{{ monitor.link }}</div>
+            <div><i class="fas fa-ellipsis-v hoverable"></i></div>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -30,13 +35,15 @@
     >
       <div class="flex justify-between items-center">
         <div class="content_title">Events</div>
-        <!-- <span class="hoverable">
+        <span class="hoverable">
           <span>My First Monitor</span>
           &nbsp;<span><i class="fas fa-chevron-down"></i></span>
-        </span> -->
+        </span>
       </div>
       <div class="events_list h-5/6">
-        <div class="w-content h-full mx-auto text-gray-500">No event yet.</div>
+        <div class="w-content h-full mx-auto text-gray-500 mt-40">
+          Choose a monitor to see the events.
+        </div>
         <!-- <div *ngFor="let monitor of monitors" class="pr-4">
           <div class="monitor_name">My First Monitor</div>
           <div class="monitor_status">

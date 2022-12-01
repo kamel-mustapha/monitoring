@@ -27,7 +27,8 @@ class Monitoring(View):
                                 else:
                                         req.res["status"] = 404
                                         req.res["message"] = "you have no monitors"
-                except: pass
+                except Exception as e:
+                        logger.exception(e)
                 return JsonResponse(req.res, status=req.res["status"])
 
         
@@ -37,15 +38,13 @@ class Monitoring(View):
                                 data = json.loads(req.body)
                                 if validate_entry(
                                         data, 
-                                        ["name", "type", "link", "page", "interval", "alert_emails", "success_status", "timeout"]
+                                        ["name", "type", "link", "interval", "alert_emails", "success_status", "timeout"]
                                         ):
-                                        page_id = data.get("page") if data.get("page") and type(data.get("page")) == int else int(data.get("page"))
                                         monitor = Monitor.objects.create(
                                                 user=req.user,
                                                 name=data.get("name"),
                                                 type=data.get("type"),
                                                 link=data.get("link"),
-                                                page=Page.objects.get(id=page_id),
                                                 interval=data.get("interval"), 
                                                 success_status=data.get("success_status"),
                                                 timeout=data.get("timeout"),
@@ -66,5 +65,6 @@ class Monitoring(View):
                                                 r = requests.get(f"http://jobs:8000/create-task?monitor_id={monitor.id}")
                                                 if r and r.status_code == 200:
                                                         logger.info(f"Created job for monitor {monitor.id}")
-                except Exception as e: print(e)
+                except Exception as e: 
+                        logger.exception(e)
                 return JsonResponse(req.res, status=req.res["status"])

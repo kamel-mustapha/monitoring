@@ -24,7 +24,7 @@ export const animations = [
     ]),
   ]),
   trigger('slideTop', [
-    transition('void <=> *', [style({ top: '-400px' }), animate(500)]),
+    transition('void => *', [style({ top: '-400px' }), animate(500)]),
   ]),
   trigger('scaleY', [
     transition('void <=> *', [style({ transform: 'scaleY(0)' }), animate(500)]),

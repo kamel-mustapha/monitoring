@@ -143,3 +143,35 @@ EMAIL_HOST_USER = "musk96.km@gmail.com"
 EMAIL_HOST_PASSWORD = "eacfvajdbpzoannp"
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+        },
+    },
+    'handlers': {
+        'main': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': BASE_DIR / "logs" / "main.log",
+            'formatter': 'standard',
+            'maxBytes' : 1024*1024*25, # 25MB
+            'backupCount': 100, # 100 max backup files
+        },
+    },
+    'loggers': {
+        'api': {
+            'handlers': ['main'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'website': {
+            'handlers': ['main'],
+            'level': 'INFO',
+            'propagate': True,
+        }
+    },
+}

@@ -1,0 +1,4 @@
+.alert_popup {
+  @apply w-content px-4 py-2 fixed z-10 top-2 left-0 right-0 mx-auto flex items-center gap-4 bg-opacity-90 rounded-lg border capitalize shadow-sm;
+  max-width: 500px;
+}

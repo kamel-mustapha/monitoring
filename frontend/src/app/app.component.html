@@ -6,3 +6,40 @@
     <app-main></app-main>
   </div>
 </div>
+
+<div
+  @slideTop
+  *ngIf="is_alert"
+  [ngClass]="{
+    'bg-green-100 border-green-500': popup_alert['success'],
+    'bg-blue-100 border-blue-500': popup_alert['info'],
+    'bg-orange-100 border-orange-500': popup_alert['alarm'],
+    'bg-red-100 border-red-500': popup_alert['alert']
+  }"
+  class="alert_popup"
+>
+  <div
+    [ngClass]="{
+      'bg-green-600': popup_alert['success'],
+      'bg-blue-600': popup_alert['info'],
+      'bg-orange-600': popup_alert['alert'],
+      'bg-red-600': popup_alert['alarm']
+    }"
+    class="rounded-md p-1"
+  >
+    <i
+      [ngClass]="{
+        'fa-check-circle': popup_alert['success'],
+        'fa-info-circle': popup_alert['info'],
+        'fa-exclamation-triangle': popup_alert['alert'] || popup_alert['alarm']
+      }"
+      class="fa-xl fas text-white"
+    ></i>
+  </div>
+  <div>{{ popup_message }}</div>
+  <div (click)="hide_popup()">
+    <i
+      class="fas fa-times cursor-pointer hover:bg-white active:bg-gray-100 p-2 rounded-lg"
+    ></i>
+  </div>
+</div>

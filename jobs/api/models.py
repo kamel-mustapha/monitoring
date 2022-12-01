@@ -11,7 +11,6 @@ class Monitor(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=50)
     link = models.CharField(max_length=255)
-    page = models.ForeignKey("Page", on_delete=models.SET_NULL, null=True)
     interval = models.IntegerField(default=30)
     alert_emails = models.ManyToManyField("AlertEmail", through="MonitorAlertEmail")
     running = models.BooleanField(default=False)
