@@ -17,14 +17,14 @@ export class MainComponent implements OnInit {
     this.shared.creation_modes_subject.subscribe((modes) => {
       this.creation_modes = modes;
     });
-    this.shared.show_creation_subject.subscribe((show_creation) => {
-      this.show_creation = show_creation;
+    this.shared.shown_popups_subject.subscribe((show_creation) => {
+      this.shown_popups = show_creation;
     });
     // temporary
     // this.shared.turn_on_creation('monitor_creation');
   }
 
-  show_creation: boolean = false;
+  shown_popups: any = {};
   creation_modes: any;
   creation_in_progress: boolean = false;
 
@@ -36,7 +36,7 @@ export class MainComponent implements OnInit {
 
   @HostListener('document:keydown.escape')
   hide_creation_window() {
-    this.shared.turn_off_creation();
+    this.shared.reset_all_popups();
   }
 
   reset_validation() {

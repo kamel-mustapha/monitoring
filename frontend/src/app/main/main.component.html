@@ -2,7 +2,11 @@
   <router-outlet></router-outlet>
 </div>
 <!-- creation windows -->
-<div class="creation_window" *ngIf="show_creation" @fadeInOut>
+<div
+  class="creation_window monitor_creation"
+  *ngIf="shown_popups['monitor_creation']"
+  @fadeInOut
+>
   <div class="relative">
     <div
       class="absolute top-2 right-2 w-8 h-8 rounded-md text-gray-700 hover:bg-red-500 active:bg-red-700 hover:text-white cursor-pointer duration-300"

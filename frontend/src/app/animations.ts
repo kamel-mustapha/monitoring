@@ -24,9 +24,15 @@ export const animations = [
     ]),
   ]),
   trigger('slideTop', [
-    transition('void => *', [style({ top: '-400px' }), animate(500)]),
+    transition('void => *', [style({ top: '-400px' }), animate(300)]),
   ]),
   trigger('scaleY', [
-    transition('void <=> *', [style({ transform: 'scaleY(0)' }), animate(500)]),
+    transition('void <=> *', [style({ transform: 'scaleY(0)' }), animate(300)]),
+  ]),
+  trigger('slideTopShort', [
+    transition('void => *', [
+      style({ top: '-50px', opacity: 0 }),
+      animate(250),
+    ]),
   ]),
 ];

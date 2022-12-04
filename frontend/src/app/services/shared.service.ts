@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class SharedService {
-  // popup
+  // toast
   types_popup: any = {
     success: false,
     info: false,
@@ -47,23 +47,43 @@ export class SharedService {
     monitor_creation: false,
   };
   creation_modes_subject = new Subject<object>();
-  show_creation_subject = new Subject<boolean>();
+
   turn_on_creation(mode: any) {
     this.creation_modes[mode] = true;
-    this.emit_creation_modes();
-    this.show_creation_subject.next(true);
+    this.creation_modes_subject.next(this.creation_modes);
+    this.show_hide_element('monitor_creation');
   }
   turn_off_creation() {
-    this.show_creation_subject.next(false);
+    this.reset_all_popups();
     this.reset_creation_modes();
-    this.emit_creation_modes();
+    this.creation_modes_subject.next(this.creation_modes);
   }
   reset_creation_modes() {
     for (let i in this.creation_modes) {
       this.creation_modes[i] = false;
     }
   }
-  emit_creation_modes() {
-    this.creation_modes_subject.next(this.creation_modes);
+
+  // popups
+  shown_popups: any = {};
+  shown_popups_subject = new Subject<any>();
+
+  add_to_popups(elem: any) {
+    this.shown_popups = {};
+    this.shown_popups[elem] = true;
+    this.shown_popups_subject.next(this.shown_popups);
+  }
+
+  reset_all_popups() {
+    this.shown_popups = {};
+    this.shown_popups_subject.next(this.shown_popups);
+  }
+
+  show_hide_element(elem: string) {
+    if (this.shown_popups[elem]) {
+      this.reset_all_popups();
+    } else {
+      this.add_to_popups(elem);
+    }
   }
 }

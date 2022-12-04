@@ -37,3 +37,37 @@
 /* .statistics_content > div > div:last-child {
   @apply text-gray-500 mt-4;
 } */
+
+.monitor_events_select {
+  @apply relative;
+}
+
+.monitor_events_select > div {
+  @apply overflow-hidden bg-white cursor-pointer rounded-md;
+  width: 200px;
+}
+.monitor_events_select > div:first-child {
+  @apply py-2 px-4 hover:bg-gray-200 active:bg-gray-300;
+}
+
+.monitors_select {
+  @apply mt-2 overflow-y-auto absolute top-8 flex flex-col gap-1 border border-gray-200 shadow-lg;
+  max-height: 300px;
+}
+
+.monitors_select > span {
+  @apply py-2 px-4 rounded-md hover:bg-gray-200 active:bg-gray-300;
+}
+
+.monitor_events_select span {
+  @apply overflow-hidden text-ellipsis;
+}
+
+.campaign_element_popup {
+  @apply absolute flex flex-col bg-white shadow-lg top-0 -left-24 text-sm font-normal rounded-md;
+}
+
+.campaign_element_popup > div {
+  @apply px-4 py-1 cursor-pointer rounded-lg hover:bg-gray-200 active:bg-gray-300 grid items-center gap-2;
+  grid-template-columns: 30% 80%;
+}

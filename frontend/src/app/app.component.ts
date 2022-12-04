@@ -22,6 +22,17 @@ export class AppComponent implements OnInit {
     this.shared.types_popup_subject.subscribe((value) => {
       this.popup_alert = value;
     });
+
+    document.addEventListener('click', (event) => {
+      for (let i in this.shared.shown_popups) {
+        let parent_childs_elements: any[] = Array.from(
+          document.querySelectorAll(`.main_popup_activator *`)
+        );
+        if (!parent_childs_elements.includes(event.target)) {
+          this.shared.reset_all_popups();
+        }
+      }
+    });
   }
 
   is_alert: boolean = false;
