@@ -20,7 +20,7 @@
 }
 
 .button {
-  @apply bg-secondary  text-gray-50 px-5 pt-1 pb-2 capitalize hover:shadow-md active:bg-hover;
+  @apply bg-secondary  text-gray-50 px-5 pt-2 pb-2 rounded-sm capitalize hover:shadow-md active:bg-hover;
 }
 .toggle {
   @apply w-16 h-6 rounded-full relative cursor-pointer duration-500;

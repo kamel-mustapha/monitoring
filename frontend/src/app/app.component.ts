@@ -24,13 +24,11 @@ export class AppComponent implements OnInit {
     });
 
     document.addEventListener('click', (event) => {
-      for (let i in this.shared.shown_popups) {
-        let parent_childs_elements: any[] = Array.from(
-          document.querySelectorAll(`.main_popup_activator *`)
-        );
-        if (!parent_childs_elements.includes(event.target)) {
-          this.shared.reset_all_popups();
-        }
+      let popup_activator: any[] = Array.from(
+        document.querySelectorAll(`.main_popup_activator *`)
+      );
+      if (!popup_activator.includes(event.target)) {
+        this.shared.reset_all_popups();
       }
     });
   }
