@@ -5,12 +5,33 @@
   </h1>
   <div>
     <a href="" class="button">upgrade</a>
-    <span class="hoverable">
-      <i class="fas fa-bell fa-lg text-gray-700"></i>
-    </span>
-    <span class="hoverable">
-      <span class="username">musk96</span>
-      &nbsp;<span><i class="fas fa-chevron-down"></i></span>
-    </span>
+    <div class="relative main_popup_activator">
+      <span
+        class="hoverable relative"
+        (click)="show_hide_element('header_notification_popup')"
+      >
+        <i class="fas fa-bell fa-lg text-gray-700"></i>
+        <span class="notification_ring"></span>
+      </span>
+      <div
+        @slideTopShort
+        *ngIf="shown_popups['header_notification_popup']"
+        class="z-20 absolute top-12 right-0 w-60 h-72 bg-white rounded-md shadow-md"
+      ></div>
+    </div>
+    <div class="relative main_popup_activator">
+      <span
+        class="hoverable"
+        (click)="show_hide_element('header_profile_popup')"
+      >
+        <span class="username">musk96</span>
+        &nbsp;<span><i class="fas fa-chevron-down"></i></span>
+      </span>
+      <div
+        @slideTopShort
+        *ngIf="shown_popups['header_profile_popup']"
+        class="z-20 absolute top-12 right-0 w-60 h-72 bg-white rounded-md shadow-md"
+      ></div>
+    </div>
   </div>
 </div>

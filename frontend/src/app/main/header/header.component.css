@@ -1,3 +1,12 @@
+@keyframes shine {
+  from {
+    box-shadow: 0 0 15px 2px rgb(255, 29, 29);
+  }
+  to {
+    box-shadow: 0 0 5px 2px rgb(255, 29, 29);
+  }
+}
+
 .page_header {
   @apply bg-white rounded-2xl flex justify-between items-center py-3 px-6 text-gray-700 font-semibold shadow-md;
 }
@@ -24,4 +33,11 @@ h1.page_title > span:first-child {
 
 h1.page_title > span:first-child > i {
   @apply absolute left-0 right-0 mx-auto top-1/2 -translate-y-1/2;
+}
+
+.notification_ring {
+  @apply absolute  bg-red-500 right-3 top-2 rounded-full;
+  animation: shine 2s infinite;
+  width: 7px;
+  height: 7px;
 }

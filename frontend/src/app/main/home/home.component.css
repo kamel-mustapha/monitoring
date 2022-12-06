@@ -51,7 +51,7 @@
 }
 
 .monitors_select {
-  @apply mt-2 overflow-y-auto absolute top-8 flex flex-col gap-1 border border-gray-200 shadow-lg;
+  @apply mt-2 overflow-y-auto absolute top-8 flex flex-col gap-1 shadow-lg;
   max-height: 300px;
 }
 
