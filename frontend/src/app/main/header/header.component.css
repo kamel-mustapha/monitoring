@@ -36,7 +36,7 @@ h1.page_title > span:first-child > i {
 }
 
 .notification_ring {
-  @apply absolute  bg-red-500 right-3 top-2 rounded-full;
+  @apply absolute  bg-red-500 right-3 top-3 rounded-full;
   animation: shine 2s infinite;
   width: 7px;
   height: 7px;
