@@ -11,5 +11,6 @@ a.website_link > div {
 }
 
 #logo > span {
-  @apply block w-1 bg-secondary rounded-full absolute bottom-0 duration-300;
+  @apply block bg-secondary rounded-full absolute duration-300;
+  width: 6px;
 }
