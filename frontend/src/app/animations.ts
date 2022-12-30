@@ -31,8 +31,8 @@ export const animations = [
   ]),
   trigger('slideTopShort', [
     transition('void => *', [
-      style({ top: '-50px', opacity: 0 }),
-      animate(250),
+      style({ top: '-50px', opacity: 0, transform: 'scale(0.1)' }),
+      animate(200),
     ]),
   ]),
 ];

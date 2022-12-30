@@ -21,10 +21,22 @@ export class HomeComponent implements OnInit {
 
   monitors: any[] = [];
   shown_popups: any = {};
+  loading_monitors: boolean = true;
+  loading_events: boolean = true;
+  selected_monitor: string = 'Select a monitor';
+  monitor_selected: boolean = false;
+  events: any[] = [];
 
   get_monitors() {
     this.server.get_monitors().subscribe((value) => {
-      this.monitors = value.monitors;
+      if (value.monitors) {
+        this.monitors = value.monitors;
+      }
+
+      setTimeout(() => {
+        this.loading_monitors = false;
+        this.loading_events = false;
+      }, 500);
     });
   }
 
@@ -37,7 +49,29 @@ export class HomeComponent implements OnInit {
   }
 
   show_campaign_edit(id: number) {
-    this.shared.add_to_popups(`campaign_edit_element_${id}`);
-    console.log(this.shown_popups);
+    this.shared.show_hide_element(`campaign_edit_element_${id}`);
+  }
+
+  select_monitor(id: number) {
+    this.loading_events = true;
+    let monitor = this.monitors.find((elem) => elem.id == id);
+    this.server.get_events(id).subscribe((res) => {
+      if (res && res.status && res.status == 200) {
+        this.events = res.events;
+        this.selected_monitor = monitor.name;
+      }
+      setTimeout(() => {
+        this.loading_events = false;
+        this.monitor_selected = true;
+      }, 500);
+    });
+  }
+
+  delete_monitor(id: number) {
+    this.server.delete_monitor({ body: { monitor: id } }).subscribe((res) => {
+      if (res && res.status && res.status == 200) {
+        this.shared.show_alert('Monitor deleted successfully');
+      }
+    });
   }
 }

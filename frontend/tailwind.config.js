@@ -51,6 +51,9 @@ module.exports = {
       screens: {
         1600: "1600px",
       },
+      spacing: {
+        "1px": "1px",
+      },
     },
   },
   plugins: [],

@@ -68,9 +68,13 @@ class MonitorEvent(models.Model):
     status = models.IntegerField(null=True, blank=True)
     time = models.FloatField(null=True, blank=True)
     message = models.CharField(max_length=300)
+    created_time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    is_success = models.BooleanField(default=False)
 
     def __str__(self):
         return self.status
     
     class Meta:
         db_table = "Events"
+
+

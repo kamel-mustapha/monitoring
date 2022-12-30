@@ -15,7 +15,7 @@ def index(req):
         monitor = Monitor.objects.get(id=int(req_data.get("monitor_id")))
         alert_emails = list(monitor.alert_emails.all().values_list("email" , flat=True))
         if monitor.type == "http":
-            monitor_http(monitor.id, monitor.link, monitor.success_status, monitor.timeout, alert_emails, repeat=monitor.interval, creator=monitor.user, verbose_name=monitor.name)
+            monitor_http(monitor.id, monitor.link, monitor.success_status, monitor.timeout, alert_emails, repeat=monitor.interval, creator=monitor.user, verbose_name=monitor.id)
         res["status"] = 200    
     except Exception as e:
         logger.exception(e)

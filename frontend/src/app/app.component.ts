@@ -12,7 +12,7 @@ import { SharedService } from './services/shared.service';
 export class AppComponent implements OnInit {
   constructor(private router: Router, private shared: SharedService) {}
   ngOnInit(): void {
-    this.router.navigate(['home']);
+    // this.router.navigate(['home']);
     this.shared.show_popup_subject.subscribe((value) => {
       this.is_alert = value;
     });

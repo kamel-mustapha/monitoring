@@ -2,7 +2,7 @@
   <app-header></app-header>
   <div>
     <div
-      class="relative col-start-1 col-end-7 row-span-full flex flex-col bg-white rounded-2xl px-8 py-4 shadow-md"
+      class="relative col-start-1 col-end-7 row-span-full flex flex-col bg-white rounded-2xl px-10 py-8 shadow-md"
     >
       <div class="flex justify-between items-center">
         <div class="content_title">Monitors</div>
@@ -16,7 +16,18 @@
           </div>
         </div>
       </div>
-      <div class="events_list">
+      <div *ngIf="loading_monitors" class="events_list">
+        <div class="h-full overflow-hidden my-0">
+          <div
+            *ngFor="let i of [].constructor(100)"
+            class="h-6 loading_animation mb-4 rounded-full"
+          >
+            <div></div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!loading_monitors" class="events_list">
         <div
           *ngIf="monitors.length == 0"
           class="w-content text-gray-500 absolute top-1/2 -translate-y-1/2 left-0 right-0 mx-auto"
@@ -24,11 +35,18 @@
           No monitor yet.
         </div>
         <div *ngIf="monitors.length > 0">
-          <div *ngFor="let monitor of monitors" class="monitor_element">
+          <div
+            *ngFor="let monitor of monitors"
+            class="monitor_element monitor_grid"
+          >
             <div class="w-36 text_overflow_ellipsis">{{ monitor.name }}</div>
             <div class="text-sm text_overflow_ellipsis">{{ monitor.link }}</div>
             <div class="relative main_popup_activator">
               <i
+                [ngClass]="{
+                  'bg-gray-200':
+                    shown_popups['campaign_edit_element_' + monitor.id]
+                }"
                 (click)="show_campaign_edit(monitor.id)"
                 class="fas fa-ellipsis-v hoverable"
               >
@@ -36,11 +54,13 @@
               <div
                 @slideTopShort
                 *ngIf="shown_popups['campaign_edit_element_' + monitor.id]"
-                class="campaign_element_popup"
+                class="campaign_element_popup text-left"
               >
                 <div><i class="fa-solid fa-circle-pause"></i> Pause</div>
                 <div><i class="fa-solid fa-pen-to-square"></i> Edit</div>
-                <div><i class="fa-solid fa-trash-can"></i> Delete</div>
+                <div (click)="delete_monitor(monitor.id)">
+                  <i class="fa-solid fa-trash-can"></i> Delete
+                </div>
               </div>
             </div>
           </div>
@@ -48,61 +68,100 @@
       </div>
     </div>
     <div
-      class="relative col-start-7 col-end-13 row-span-full flex flex-col bg-white rounded-2xl px-8 py-6 shadow-md"
+      class="relative col-start-7 col-end-13 row-span-full flex flex-col bg-white rounded-2xl px-10 py-9 shadow-md"
     >
       <div class="flex justify-between items-center select_events">
-        <div class="content_title">Events</div>
-        <span *ngIf="monitors.length == 0" class="text-gray-700">
-          You have no monitor
-        </span>
-        <div
-          *ngIf="monitors.length > 0"
-          class="monitor_events_select main_popup_activator"
-        >
+        <div class="content_title pb-4">Events</div>
+        <div *ngIf="!loading_events">
+          <span *ngIf="monitors.length == 0" class="text-gray-700">
+            You have no monitor
+          </span>
           <div
-            (click)="show_hide_element('select_events')"
-            class="flex justify-between"
+            *ngIf="monitors.length > 0"
+            class="monitor_events_select main_popup_activator"
           >
-            <span>{{ monitors[0].name }}</span>
-            <span
-              ><i
-                [ngClass]="{
-                  'fa-chevron-down': !shown_popups['select_events'],
-                  'fa-chevron-up': shown_popups['select_events']
-                }"
-                class="fas"
-              ></i
-            ></span>
-          </div>
-          <div
-            @slideTopShort
-            *ngIf="shown_popups['select_events']"
-            class="monitors_select"
-          >
-            <span
-              *ngFor="let monitor of monitors; let i = index"
-              class="flex items-center gap-2"
+            <div
+              (click)="show_hide_element('select_events')"
+              class="flex justify-between"
             >
-              {{ monitor.name }}
-            </span>
+              <span>{{ selected_monitor }}</span>
+              <span
+                ><i
+                  [ngClass]="{
+                    'fa-chevron-down': !shown_popups['select_events'],
+                    'fa-chevron-up': shown_popups['select_events']
+                  }"
+                  class="fas"
+                ></i
+              ></span>
+            </div>
+            <div
+              @slideTopShort
+              *ngIf="shown_popups['select_events']"
+              class="monitors_select"
+            >
+              <span
+                *ngFor="let monitor of monitors; let i = index"
+                class="flex items-center gap-2"
+                (click)="select_monitor(monitor.id)"
+              >
+                {{ monitor.name }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="events_list h-5/6">
+      <div *ngIf="loading_events" class="events_list">
+        <div class="h-full overflow-hidden my-0">
+          <div
+            *ngFor="let i of [].constructor(100)"
+            class="h-6 loading_animation mb-4 rounded-full"
+          >
+            <div></div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!loading_events" class="events_list h-5/6">
         <div
+          *ngIf="!monitor_selected"
           class="w-content text-gray-500 absolute top-1/2 -translate-y-1/2 left-0 right-0 mx-auto"
         >
-          Choose a monitor to see the events.
+          <span *ngIf="monitors.length > 0"
+            >Select a monitor to see the events.</span
+          >
+          <span *ngIf="monitors.length == 0">You have no monitors yet.</span>
         </div>
-        <!-- <div *ngFor="let monitor of monitors" class="pr-4">
-          <div class="monitor_name">My First Monitor</div>
-          <div class="monitor_status">
-            <span class="bg-green-500"></span>
-            <span>Up</span>
+        <div *ngIf="monitor_selected">
+          <div
+            *ngIf="events.length == 0"
+            class="w-content text-gray-500 absolute top-1/2 -translate-y-1/2 left-0 right-0 mx-auto"
+          >
+            No events found for this monitor
           </div>
-          <div class="event_code">200 - Ok</div>
-          <div class="text-sm">10/09/2022 15:17 UTC</div>
-        </div> -->
+          <div *ngIf="events.length > 0">
+            <div
+              *ngFor="let event of events"
+              class="monitor_element event_grid text-sm capitalize"
+            >
+              <div class="monitor_status">
+                <span
+                  class="status_dot"
+                  [ngClass]="{
+                    'bg-green-500': event.is_success,
+                    'bg-red-500': !event.is_success
+                  }"
+                ></span>
+                <span>{{ event.status }}</span>
+              </div>
+              <div>{{ event.message }}</div>
+              <div>
+                {{ event.time.toString().split(".")[0] }}
+                <span class="lowercase">ms</span>
+              </div>
+              <div>{{ event.created_time }}</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

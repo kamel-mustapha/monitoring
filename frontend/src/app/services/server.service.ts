@@ -18,4 +18,17 @@ export class ServerService {
       monitor
     );
   }
+
+  delete_monitor(monitor: {}) {
+    return this.server.delete<any>(
+      'http://127.0.0.1:8000/api/monitor?key=417fe54b852719f87777f44f2a283e14',
+      monitor
+    );
+  }
+
+  get_events(monitor: number) {
+    return this.server.get<any>(
+      `http://127.0.0.1:8000/api/event?monitor=${monitor}&key=417fe54b852719f87777f44f2a283e14`
+    );
+  }
 }

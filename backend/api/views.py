@@ -22,11 +22,10 @@ class Monitoring(View):
                                 monitors_data = MonitorData(user_monitors, many=True)
                                 if monitors_data.data:
                                         req.res["monitors"] = monitors_data.data
-                                        req.res["status"] = 200
                                         req.res["message"] = "success"
                                 else:
-                                        req.res["status"] = 404
                                         req.res["message"] = "you have no monitors"
+                                req.res["status"] = 200
                 except Exception as e:
                         logger.exception(e)
                 return JsonResponse(req.res, status=req.res["status"])
@@ -62,9 +61,61 @@ class Monitoring(View):
                                                 req.res["monitor"] = monitor_data.data
                                                 req.res["status"] = 200
                                                 req.res["message"] = "success"
-                                                r = requests.get(f"http://jobs:8000/create-task?monitor_id={monitor.id}")
-                                                if r and r.status_code == 200:
-                                                        logger.info(f"Created job for monitor {monitor.id}")
+                                                start_task(monitor)
                 except Exception as e: 
                         logger.exception(e)
                 return JsonResponse(req.res, status=req.res["status"])
+        def delete(self, req, *args, **kwargs):
+                data = json.loads(req.body)
+                monitor = Monitor.objects.filter(id=int(data.get("monitor")))
+                if monitor:
+                        monitor = monitor[0]
+                        delete_task(monitor)
+                        monitor.delete()
+                        req.res["status"] = 200
+                        req.res["message"] = "success"
+                return JsonResponse(req.res, status=req.res["status"])
+
+@method_decorator(csrf_exempt, name='dispatch')
+class Event(View):
+        def get(self, req, *args, **kwargs):
+                try:
+                        if req.user.is_authenticated:
+                                data = req.GET
+                                monitor_events = MonitorEvent.objects.filter(monitor_id=int(data.get("monitor"))).order_by("-id")
+                                events_data = EventData(monitor_events, many=True)
+                                if events_data.data:
+                                        req.res["events"] = events_data.data
+                                        req.res["message"] = "success"
+                                else:
+                                        req.res["events"] = []
+                                        req.res["message"] = "no events found for this monitor"
+                                req.res["status"] = 200
+                except Exception as e:
+                        logger.exception(e)
+                return JsonResponse(req.res, status=req.res["status"])
+
+
+def pause_monitor(req):
+        data = req.GET
+        monitor = Monitor.objects.filter(id=int(data.get("monitor")))
+        if monitor:
+                monitor = monitor[0]
+                delete_task(monitor)
+                monitor.running = False
+                monitor.save()
+                req.res["status"] = 200
+                req.res["message"] = "success"
+        return JsonResponse(req.res)
+
+def start_monitor(req):
+        data = req.GET
+        monitor = Monitor.objects.filter(id=int(data.get("monitor")))
+        if monitor:
+                monitor = monitor[0]
+                start_task(monitor)
+                monitor.running = True
+                monitor.save()
+                req.res["status"] = 200
+                req.res["message"] = "success"
+        return JsonResponse(req.res)

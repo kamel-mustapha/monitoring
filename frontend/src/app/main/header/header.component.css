@@ -41,3 +41,77 @@ h1.page_title > span:first-child > i {
   width: 7px;
   height: 7px;
 }
+
+.notification_container {
+  top: 53px;
+  @apply z-20 absolute right-0 h-content max-h-96 bg-white rounded-sm shadow-md flex flex-col justify-between text-sm overflow-hidden;
+}
+
+.notification_container > div:last-child {
+  @apply py-2 border-t border-gray-200 text-center text-xs font-normal text-blue-600;
+}
+
+.notification_list {
+  @apply h-full overflow-auto;
+}
+
+.notification_list > div {
+  @apply relative w-72 flex gap-4 items-center border-b border-gray-200 px-4 py-6;
+}
+
+.notification_list > div > div {
+  @apply flex flex-col w-full gap-1;
+}
+
+.notification_list i {
+  @apply absolute right-3 top-4 hover:text-gray-400 active:text-gray-500 cursor-pointer;
+}
+
+.notification_list img {
+  @apply rounded-full;
+}
+
+.notification_list h1 {
+  @apply font-bold;
+}
+
+.notification_list h2 {
+  @apply font-normal;
+}
+
+.notification_list p {
+  @apply text-xs text-gray-700;
+}
+
+.profile_popup {
+  top: 65px;
+  @apply z-20 absolute right-0 w-60 bg-white rounded-sm shadow-md flex flex-col text-sm;
+}
+
+.profile_popup > div:first-child {
+  @apply pl-6 pr-6 flex items-center gap-4 justify-between border-b;
+}
+
+.profile_popup > div:nth-child(2) {
+  @apply flex justify-center gap-4 px-4 py-4;
+}
+
+.profile_popup > div:nth-child(3) {
+  @apply px-6 pb-2;
+}
+
+.profile_popup > div:nth-child(3) > div:first-child {
+  @apply flex justify-between items-center mb-1 text-gray-500;
+}
+
+.profile_popup > div:nth-child(4) {
+  @apply flex flex-col pt-1 text-gray-600;
+}
+
+.profile_popup > div:nth-child(4) > a {
+  @apply py-3 px-6 rounded-md hover:bg-gray-200 active:bg-gray-300;
+}
+
+.profile_popup > a {
+  @apply px-6 py-3 border-t text-gray-600 hover:bg-gray-200 active:bg-gray-300;
+}
