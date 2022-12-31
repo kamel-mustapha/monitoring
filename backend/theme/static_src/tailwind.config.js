@@ -25,6 +25,8 @@ module.exports = {
       },
       width: {
         content: "fit-content",
+        400: "400px",
+        550: "550px",
       },
       height: {
         85: "85vh",
@@ -32,6 +34,7 @@ module.exports = {
       maxWidth: {
         1900: "1920px",
         300: "500px",
+        1400: "1400px",
       },
       minHeight: {
         "85vh": "90vh",
@@ -46,6 +49,7 @@ module.exports = {
       },
       fontFamily: {
         Changa: ["Changa", "sans"],
+        work: ["Work Sans"],
       },
       boxShadow: {
         button: "0 0 10px 1px rgba(0, 0, 0, 0.3)",

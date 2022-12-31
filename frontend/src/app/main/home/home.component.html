@@ -56,7 +56,12 @@
                 *ngIf="shown_popups['campaign_edit_element_' + monitor.id]"
                 class="campaign_element_popup text-left"
               >
-                <div><i class="fa-solid fa-circle-pause"></i> Pause</div>
+                <div *ngIf="monitor.running">
+                  <i class="fa-solid fa-circle-pause"></i> Pause
+                </div>
+                <div *ngIf="!monitor.running">
+                  <i class="fa-solid fa-circle-play"></i> Start
+                </div>
                 <div><i class="fa-solid fa-pen-to-square"></i> Edit</div>
                 <div (click)="delete_monitor(monitor.id)">
                   <i class="fa-solid fa-trash-can"></i> Delete

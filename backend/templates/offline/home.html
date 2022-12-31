@@ -1,52 +1,45 @@
 {% extends 'offline/root.html' %} {% load static %} {% block content %}
-<div class="flex px-32 pb-4 mx-auto">
-  <div class="w-full pt-14">
-    <h1 class="text-primary text-5xl font-bold leading-large">Lorem ipsum <span class="text-secondary font-semibold">dolor</span> Sit amet</h1>
-    <p class="text-secondary text-xl leading-medium mt-2">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis id quam non vulputate. Fusce rhoncus lectus a dapibus fermentum.
-      Suspendisse potenti.
+<div class="flex max-w-1400 mx-auto px-6 2xl:px-0">
+  <div class="w-8/12 py-16 flex flex-col gap-20">
+    <h1 class="text-primary text-6xl font-bold whitespace-nowrap"><span class="text-secondary font-semibold">Monitor</span> your websites</h1>
+    <p class="text-secondary text-2xl leading-medium">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis id quam non vulputate. Fusce rhoncus lectus a dapibus fermentum. Suspendisse potenti.
     </p>
-    <a href="" class="bg-secondary text-button px-12 py-3 text-lg font-semibold mt-8 block w-content rounded-full hover:bg-hover">Start right now</a>
+    <a href="" class="bg-secondary text-button px-12 py-3 text-2xl block w-content rounded-full hover:bg-hover">Start right now</a>
   </div>
   <div class="w-full">
     <img class="w-8/12 ml-auto mr-0" src="{% static 'character_18.svg' %}" alt="" />
   </div>
 </div>
 
-<div class="bg-gray-100 text-gray-700 py-32 px-24 min-h-800">
-  <div
-    x-data="{ show_elements: false }"
-    x-cloak
-    @scroll.window="show_elements = (window.pageYOffset > 200) ? true : false"
-    class="w-content mx-auto text-center text-5xl font-bold leading-relaxed"
-  >
-    <span x-show="show_elements" x-transition.duration.500ms>Don't let your customers catch your</span>
-    <br />
-    <span x-show="show_elements" x-transition.duration.1500ms><span class="text-hover"> DOWNTIMES </span> before you.</span>
-  </div>
-  <div
-    x-data="{ show_elements: false }"
-    x-cloak
-    @scroll.window="show_elements = (window.pageYOffset > 400) ? true : false"
-    class="grid grid-cols-3 gap-10 mt-16"
-  >
-    <div x-show="show_elements" x-transition.duration.1000ms class="h-96 w-fullrounded-lg shadow-lg"></div>
-    <div x-show="show_elements" x-transition.duration.2000ms class="h-96 w-full rounded-lg shadow-lg"></div>
-    <div x-show="show_elements" x-transition.duration.3000ms class="h-96 w-full rounded-lg shadow-lg"></div>
+<div class="bg-gray-100 text-gray-700">
+  <div class="max-w-1400 mx-auto py-24">
+    <div
+      x-data="{ show_elements: false }"
+      x-cloak
+      @scroll.window="show_elements = (window.pageYOffset > 200) ? true : false"
+      class="w-content mx-auto text-center text-6xl font-bold leading-relaxed"
+    >
+      <span x-transition.duration.500ms>Don't let your customers catch your</span>
+      <br />
+      <span x-transition.duration.1500ms><span class="text-hover"> DOWNTIMES </span> before you.</span>
+    </div>
+    <div x-data="{ show_elements: false }" x-cloak @scroll.window="show_elements = (window.pageYOffset > 400) ? true : false" class="grid grid-cols-3 gap-10 mt-16">
+      <div x-transition.duration.1000ms class="h-96 w-fullrounded-lg shadow-lg"></div>
+      <div x-transition.duration.2000ms class="h-96 w-full rounded-lg shadow-lg"></div>
+      <div x-transition.duration.3000ms class="h-96 w-full rounded-lg shadow-lg"></div>
+    </div>
   </div>
 </div>
 
-<div class="flex px-32 py-16 mx-auto">
-  <div class="w-full">
+<div class="flex mx-auto max-w-1400 px-6 2xl:px-0">
+  <div class="w-full pt-4">
     <img class="w-8/12 mr-auto ml-0" src="{% static 'character_9.svg' %}" alt="" />
   </div>
-  <div x-data="{ show_elements: false }" x-cloak @scroll.window="show_elements = (window.pageYOffset > 1200) ? true : false" class="w-full pt-32">
-    <h1 x-show="show_elements" x-transition.duration.500ms class="text-primary text-5xl font-bold leading-large">
-      Lorem ipsum <span class="text-secondary font-semibold">dolor</span> Sit amet
-    </h1>
-    <p x-show="show_elements" x-transition.duration.1000ms class="text-secondary text-xl leading-medium mt-2">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis id quam non vulputate. Fusce rhoncus lectus a dapibus fermentum.
-      Suspendisse potenti.
+  <div x-data="{ show_elements: false }" x-cloak @scroll.window="show_elements = (window.pageYOffset > 1200) ? true : false" class="w-full py-36">
+    <h2 x-transition.duration.500ms class="text-primary text-6xl font-bold leading-large">Lorem ipsum <span class="text-secondary font-semibold">dolor</span> Sit amet</h2>
+    <p x-transition.duration.1000ms class="text-secondary text-2xl leading-medium mt-2">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis id quam non vulputate. Fusce rhoncus lectus a dapibus fermentum. Suspendisse potenti.
     </p>
   </div>
 </div>
