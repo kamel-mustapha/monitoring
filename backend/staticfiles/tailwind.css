@@ -938,6 +938,10 @@ select {
   gap: 2rem;
 }
 
+.gap-16 {
+  gap: 4rem;
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
 }

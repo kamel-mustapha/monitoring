@@ -36,11 +36,12 @@
   <div class="w-full pt-4">
     <img class="w-8/12 mr-auto ml-0" src="{% static 'character_9.svg' %}" alt="" />
   </div>
-  <div x-data="{ show_elements: false }" x-cloak @scroll.window="show_elements = (window.pageYOffset > 1200) ? true : false" class="w-full py-36">
-    <h2 x-transition.duration.500ms class="text-primary text-6xl font-bold leading-large">Lorem ipsum <span class="text-secondary font-semibold">dolor</span> Sit amet</h2>
-    <p x-transition.duration.1000ms class="text-secondary text-2xl leading-medium mt-2">
+  <div x-data="{ show_elements: false }" x-cloak @scroll.window="show_elements = (window.pageYOffset > 1200) ? true : false" class="w-full py-36 flex flex-col gap-16">
+    <h2 x-transition.duration.500ms class="text-primary text-6xl font-bold">Lorem ipsum <span class="text-secondary font-semibold">dolor</span> Sit</h2>
+    <p x-transition.duration.1000ms class="text-secondary text-2xl leading-medium">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis id quam non vulputate. Fusce rhoncus lectus a dapibus fermentum. Suspendisse potenti.
     </p>
+    <a href="" class="bg-secondary text-button px-12 py-3 text-2xl block w-content rounded-full hover:bg-hover">Start right now</a>
   </div>
 </div>
 {% endblock %}
