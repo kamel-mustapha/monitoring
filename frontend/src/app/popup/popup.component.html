@@ -1,1 +1,18 @@
-<p>popup works!</p>
+<div
+  class="creation_window main_popup_activator"
+  *ngIf="shown_popups['monitor_creation']"
+  @fadeInOut
+>
+  <div class="relative">
+    <div
+      (click)="show_creation_window()"
+      class="absolute top-2 right-3 w-8 h-8 rounded-md text-gray-700 hover:bg-red-500 active:bg-red-700 hover:text-white cursor-pointer duration-300"
+    >
+      <i
+        class="fas fa-times fa-lg absolute w-content h-content left-0 right-0 top-1/2 -translate-y-1/2 mx-auto"
+      >
+      </i>
+    </div>
+    <div class="creation_mode"><ng-content></ng-content></div>
+  </div>
+</div>
