@@ -16,6 +16,7 @@ class Home(View):
             return render(req, 'online/index.html')
         else:
             return render(req, 'offline/home.html')
+        # return JsonResponse({}, status=404)
 
 class Login(View):
     def get(self, req, *args, **kwargs):

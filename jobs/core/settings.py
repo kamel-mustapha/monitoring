@@ -41,6 +41,16 @@ DATABASES = {
     }
 }
 
+EMAIL_HOST = "smtp.gmail.com"
+
+EMAIL_USE_TLS = True
+
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = "musk96.km@gmail.com"
+
+EMAIL_HOST_PASSWORD = "eacfvajdbpzoannp"
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

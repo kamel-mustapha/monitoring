@@ -271,7 +271,13 @@
               class="fa-solid fa-circle-exclamation"
             ></i>
           </label>
-          <input type="number" placeholder="60" name="interval" ngModel="60" />
+          <input
+            type="number"
+            placeholder="60"
+            name="interval"
+            ngModel="60"
+            min="1"
+          />
         </div>
         <div class="property_box">
           <label for="">
@@ -286,6 +292,7 @@
             placeholder="200"
             name="success_status"
             ngModel="200"
+            min="0"
           />
         </div>
         <div class="property_box">
@@ -296,7 +303,13 @@
               class="fa-solid fa-circle-exclamation"
             ></i>
           </label>
-          <input type="number" placeholder="30" name="timeout" ngModel="30" />
+          <input
+            type="number"
+            placeholder="30"
+            name="timeout"
+            ngModel="30"
+            min="5"
+          />
         </div>
         <div class="property_box">
           <label for="">
