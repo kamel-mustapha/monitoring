@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from api.common import *
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-
+from website.models import *
 
 from logging import getLogger
 logger = getLogger(__name__)
@@ -119,3 +119,5 @@ def start_monitor(req):
                 req.res["status"] = 200
                 req.res["message"] = "success"
         return JsonResponse(req.res)
+
+
