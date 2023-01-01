@@ -13,7 +13,9 @@ import { HeaderComponent } from './main/header/header.component';
 import { PagesComponent } from './main/pages/pages.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ServerService } from './services/server.service';
+import { SharedService } from './services/shared.service';
+import { PopupComponent } from './popup/popup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     SettingsComponent,
     HeaderComponent,
     PagesComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [ServerService, SharedService, HomeComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

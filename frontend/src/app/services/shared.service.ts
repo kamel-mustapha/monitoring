@@ -42,27 +42,6 @@ export class SharedService {
   hide_popup() {
     this.show_popup_subject.next(false);
   }
-  // monitor creation
-  creation_modes: any = {
-    monitor_creation: false,
-  };
-  creation_modes_subject = new Subject<object>();
-
-  turn_on_creation(mode: any) {
-    this.creation_modes[mode] = true;
-    this.creation_modes_subject.next(this.creation_modes);
-    this.show_hide_element('monitor_creation');
-  }
-  turn_off_creation() {
-    this.reset_all_popups();
-    this.reset_creation_modes();
-    this.creation_modes_subject.next(this.creation_modes);
-  }
-  reset_creation_modes() {
-    for (let i in this.creation_modes) {
-      this.creation_modes[i] = false;
-    }
-  }
 
   // popups
   shown_popups: any = {};

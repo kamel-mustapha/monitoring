@@ -12,11 +12,15 @@
 
 .monitor_grid {
   @apply py-2;
-  grid-template-columns: 60% 30% 10%;
+  grid-template-columns: 30% 30% 30% 10%;
 }
 .event_grid {
   @apply py-4 border-b border-gray-100;
-  grid-template-columns: 20% 20% 20% 40%;
+  grid-template-columns: 20% 30% 10% 40%;
+}
+
+.event_grid > div {
+  @apply whitespace-nowrap;
 }
 
 .events_list div.monitor_element .monitor_status {
@@ -84,4 +88,25 @@
 .campaign_element_popup > div {
   @apply px-4 py-1 cursor-pointer rounded-lg hover:bg-gray-200  active:bg-gray-300 grid items-center gap-2;
   grid-template-columns: 30% 80%;
+}
+
+#monitor_creation_form {
+  @apply flex flex-col gap-1;
+}
+
+#monitor_creation_form .property_box {
+  @apply flex flex-col gap-1;
+}
+
+#monitor_creation_form label {
+  @apply text-gray-600 font-semibold text-sm w-content py-1 flex items-center gap-2;
+}
+
+#monitor_creation_form label i {
+  @apply cursor-pointer;
+}
+
+#monitor_creation_form input,
+#monitor_creation_form select {
+  @apply border rounded-md px-4 py-2 bg-white outline-none focus:border-primary;
 }

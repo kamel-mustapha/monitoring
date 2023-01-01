@@ -49,7 +49,7 @@ module.exports = {
       },
       fontFamily: {
         Changa: ["Changa", "sans"],
-        work: ["Work Sans"],
+        work: ["Work Sans", "arial", "sans"],
       },
       boxShadow: {
         button: "0 0 10px 1px rgba(0, 0, 0, 0.3)",

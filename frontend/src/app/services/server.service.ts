@@ -26,6 +26,18 @@ export class ServerService {
     );
   }
 
+  pause_monitor(monitor: number) {
+    return this.server.get<any>(
+      `http://127.0.0.1:8000/api/pause-monitor?monitor=${monitor}&key=417fe54b852719f87777f44f2a283e14`
+    );
+  }
+
+  start_monitor(monitor: number) {
+    return this.server.get<any>(
+      `http://127.0.0.1:8000/api/start-monitor?monitor=${monitor}&key=417fe54b852719f87777f44f2a283e14`
+    );
+  }
+
   get_events(monitor: number) {
     return this.server.get<any>(
       `http://127.0.0.1:8000/api/event?monitor=${monitor}&key=417fe54b852719f87777f44f2a283e14`

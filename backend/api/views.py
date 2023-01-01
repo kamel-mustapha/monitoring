@@ -18,7 +18,7 @@ class Monitoring(View):
         def get(self, req, *args, **kwargs):
                 try:
                         if req.user.is_authenticated:
-                                user_monitors = Monitor.objects.filter(user=req.user)
+                                user_monitors = Monitor.objects.filter(user=req.user).order_by("-id")
                                 monitors_data = MonitorData(user_monitors, many=True)
                                 if monitors_data.data:
                                         req.res["monitors"] = monitors_data.data
