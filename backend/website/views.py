@@ -85,3 +85,5 @@ def activate_account(req, user, code):
         activation_code[0].save()
         # login(req, activation_user[0])
     return redirect('website:login')
+
+

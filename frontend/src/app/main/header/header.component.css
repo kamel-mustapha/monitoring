@@ -56,7 +56,7 @@ h1.page_title > span:first-child > i {
 }
 
 .notification_list > div {
-  @apply relative w-72 flex gap-4 items-center border-b border-gray-200 px-4 py-6;
+  @apply relative w-72 flex gap-4 items-center border-b border-gray-200 px-4 py-6 duration-500;
 }
 
 .notification_list > div > div {

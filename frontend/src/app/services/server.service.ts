@@ -43,4 +43,24 @@ export class ServerService {
       `http://127.0.0.1:8000/api/event?monitor=${monitor}&key=417fe54b852719f87777f44f2a283e14`
     );
   }
+
+  get_notifications() {
+    return this.server.get<any>(
+      `http://127.0.0.1:8000/api/notification?key=417fe54b852719f87777f44f2a283e14`
+    );
+  }
+
+  see_all_notifications(data: {}) {
+    return this.server.put<any>(
+      `http://127.0.0.1:8000/api/notification?key=417fe54b852719f87777f44f2a283e14`,
+      data
+    );
+  }
+
+  delete_notifications(data: {}) {
+    return this.server.delete<any>(
+      `http://127.0.0.1:8000/api/notification?key=417fe54b852719f87777f44f2a283e14`,
+      data
+    );
+  }
 }

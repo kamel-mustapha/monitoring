@@ -8,6 +8,8 @@ from django.http import JsonResponse
 from api.common import *
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from website.models import Notification
+from django.db.models import Q
 
 
 from logging import getLogger
@@ -119,3 +121,40 @@ def start_monitor(req):
                 req.res["status"] = 200
                 req.res["message"] = "success"
         return JsonResponse(req.res)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class Notifications(View):
+        def get(self, req):
+                notifications = Notification.objects.filter(Q(user=req.user) | Q(for_all=True)).order_by("-id")
+                req.res["notifications"] = []
+                for notification in notifications:
+                        if req.user not in notification.deleted_by.all():
+                                notification_object = {
+                                        "id": notification.id,
+                                        "title": notification.title,
+                                        "text": notification.text,
+                                        "image": notification.image,
+                                        "seen": True if req.user in notification.seen_by.all() else False
+                                }
+                                req.res["notifications"].append(notification_object)
+                req.res["status"] = 200
+                req.res["message"] = "success"
+                return JsonResponse(req.res)
+        def put(self, req):
+                data = json.loads(req.body)
+                notifications = Notification.objects.filter(id__in=data.get("ids"))
+                for notification in notifications:
+                        notification.seen_by.add(req.user)
+                req.res["status"] = 200
+                req.res["message"] = "success"
+                return JsonResponse(req.res)
+
+        def delete(self, req):
+                data = json.loads(req.body)
+                notifications = Notification.objects.filter(id__in=data.get("ids"))
+                for notification in notifications:
+                        notification.deleted_by.add(req.user)
+                req.res["status"] = 200
+                req.res["message"] = "success"
+                return JsonResponse(req.res)

@@ -12,7 +12,7 @@
         (click)="show_hide_element('header_notification_popup')"
       >
         <i class="fas fa-bell fa-lg text-gray-700"></i>
-        <span class="notification_ring"></span>
+        <span [ngClass]="{ notification_ring: !all_notifications_seen }"></span>
       </span>
       <!-- notification popup -->
       <div
@@ -20,27 +20,37 @@
         @slideTopShort
         class="notification_container"
       >
-        <div class="notification_list">
-          <div>
+        <div *ngIf="notifications.length > 0" class="notification_list">
+          <div
+            *ngFor="let notification of notifications"
+            [ngClass]="{ 'bg-gray-200': !notification.seen }"
+          >
             <img
-              src="https://letsenhance.io/static/334225cab5be263aad8e3894809594ce/75c5a/MainAfter.jpg"
+              src="{{ notification.image }}"
               alt=""
               width="100"
               height="100"
             />
             <div>
-              <h1>Hello musk96</h1>
-              <p>Welcome to monitoringly</p>
-              <h2>1 day ago</h2>
+              <h1>{{ notification.title }}</h1>
+              <p>{{ notification.text }}</p>
             </div>
-            <span>
+            <!-- <span>
               <i class="fas fa-times fa-lg"></i>
-            </span>
+            </span> -->
           </div>
         </div>
-        <div>
-          <button class="hover:underline">Clear all</button>
+        <div *ngIf="notifications.length > 0">
+          <button class="hover:underline" (click)="delete_all_notifications()">
+            Clear all
+          </button>
         </div>
+        <p
+          *ngIf="notifications.length <= 0"
+          class="inline-block text-center p-2 mx-auto w-52 text-gray-700"
+        >
+          You have no notification
+        </p>
       </div>
     </div>
 
@@ -63,7 +73,9 @@
             <span>musk96</span>
             <span class="text-gray-500">musk96@hotmail.fr</span>
           </div>
-          <i class="fas fa-cog text-gray-600 hoverable"></i>
+          <a routerLink="/profile"
+            ><i class="fas fa-cog text-gray-600 hoverable"></i
+          ></a>
         </div>
         <div>
           <span class="text-gray-700 text-sm"> Current plan: </span>
@@ -86,7 +98,6 @@
           <a routerLink="">Pages marketplace</a>
           <a routerLink="">Documentation</a>
         </div>
-        <a routerLink="">Log out</a>
       </div>
     </div>
   </div>
