@@ -13,9 +13,12 @@ from django.core.mail import send_mail
 class Home(View):
     def get(self, req, *args, **kwargs):
         if req.user.is_authenticated:
-            return render(req, 'online/index.html')
+            response = render(req, 'online/index.html')
+            response.set_cookie("API_KEY", req.user.api_key)
+            return response
         else:
             return render(req, 'offline/home.html')
+        # return JsonResponse({}, status=404)
 
 class Login(View):
     def get(self, req, *args, **kwargs):

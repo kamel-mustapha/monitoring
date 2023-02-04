@@ -69,19 +69,22 @@
                   *ngIf="monitor.running"
                   (click)="pause_monitor(monitor.id)"
                 >
-                  <i class="fa-solid fa-circle-pause"></i>
+                  <i class="fa-solid fa-circle-pause text-gray-500"></i>
                   Pause
                 </div>
                 <div
                   *ngIf="!monitor.running"
                   (click)="start_monitor(monitor.id)"
                 >
-                  <i class="fa-solid fa-circle-play"></i>
+                  <i class="fa-solid fa-circle-play text-green-500"></i>
                   Start
                 </div>
-                <div><i class="fa-solid fa-pen-to-square"></i> Edit</div>
+                <div>
+                  <i class="fa-solid fa-pen-to-square text-blue-500"></i> Edit
+                </div>
                 <div (click)="delete_monitor(monitor.id)">
-                  <i class="fa-solid fa-trash-can"></i> Delete
+                  <i class="fa-solid fa-trash-can text-red-500"></i>
+                  Delete
                 </div>
               </div>
             </div>
@@ -189,136 +192,125 @@
   </div>
 </div>
 
-<!-- creation window -->
-<div
-  class="creation_window main_popup_activator"
-  *ngIf="shown_popups['monitor_creation']"
-  @fadeInOut
->
-  <div class="relative">
-    <div
-      (click)="show_creation_window()"
-      class="absolute top-2 right-2 w-8 h-8 rounded-md text-gray-700 hover:bg-red-500 active:bg-red-700 hover:text-white cursor-pointer duration-300"
-    >
-      <i
-        class="fas fa-times fa-lg absolute w-content h-content left-0 right-0 top-1/2 -translate-y-1/2 mx-auto"
+<app-popup>
+  <form id="monitor_creation_form" #f="ngForm" (ngSubmit)="submit_monitor(f)">
+    <h1 class="font-bold text-lg text-gray-700 text-center">Create Monitor</h1>
+    <div class="property_box">
+      <label for="">Name</label>
+      <input
+        [ngClass]="{
+          'border-red-400': monitor_form_validation['name'],
+          'border-gray-200 focus:border-primary':
+            !monitor_form_validation['name']
+        }"
+        type="text"
+        placeholder="My Website"
+        ngModel
+        name="name"
+        required
+      />
+    </div>
+    <div class="property_box">
+      <label for="">Link</label>
+      <input
+        [ngClass]="{
+          'border-red-400': monitor_form_validation['link'],
+          'border-gray-200 focus:border-primary':
+            !monitor_form_validation['link']
+        }"
+        type="text"
+        placeholder="https://mywebsite.com"
+        name="link"
+        ngModel
+        required
+      />
+    </div>
+    <div class="property_box">
+      <label for="">Type</label>
+      <select
+        [ngClass]="{
+          'border-red-400': monitor_form_validation['type'],
+          'border-gray-200 focus:border-primary':
+            !monitor_form_validation['type']
+        }"
+        name="type"
+        ngModel
+        required
       >
-      </i>
+        <option value="">Monitor type</option>
+        <option value="http">http</option>
+      </select>
     </div>
 
-    <form
-      id="monitor_creation_form"
-      #f="ngForm"
-      (ngSubmit)="submit_monitor(f)"
-      class="creation_mode"
+    <div class="grid grid-cols-2 gap-1">
+      <div class="property_box">
+        <label for="">
+          Check interval
+          <i
+            title="The interval between checks."
+            class="fa-solid fa-circle-exclamation"
+          ></i>
+        </label>
+        <input
+          type="number"
+          placeholder="60"
+          name="interval"
+          ngModel="60"
+          min="1"
+        />
+      </div>
+      <div class="property_box">
+        <label for="">
+          Success Status
+          <i
+            title="If not set 200 will be used."
+            class="fa-solid fa-circle-exclamation"
+          ></i>
+        </label>
+        <input
+          type="number"
+          placeholder="200"
+          name="success_status"
+          ngModel="200"
+          min="0"
+        />
+      </div>
+      <div class="property_box">
+        <label for="">
+          Timeout
+          <i
+            title="The timeout when requesting your website."
+            class="fa-solid fa-circle-exclamation"
+          ></i>
+        </label>
+        <input
+          type="number"
+          placeholder="30"
+          name="timeout"
+          ngModel="30"
+          min="5"
+        />
+      </div>
+      <div class="property_box">
+        <label for="">
+          Alert Emails
+          <i
+            title="Emails to alert when failure. Write emails separated by a space. If not set only your account email will be notified."
+            class="fa-solid fa-circle-exclamation"
+          ></i>
+        </label>
+        <input type="text" name="alert_emails" ngModel="musk96@hotmail.fr" />
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="bg-green-500 active:bg-green-700 py-2 mt-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
     >
-      <h1 class="font-bold text-lg text-gray-700 text-center">
-        Create Monitor
-      </h1>
-      <div class="property_box">
-        <label for="">Name</label>
-        <input
-          [ngClass]="{
-            'border-red-400': monitor_form_validation['name'],
-            'border-gray-200 focus:border-primary':
-              !monitor_form_validation['name']
-          }"
-          type="text"
-          placeholder="My Website"
-          ngModel
-          name="name"
-          required
-        />
-      </div>
-      <div class="property_box">
-        <label for="">Link</label>
-        <input
-          [ngClass]="{
-            'border-red-400': monitor_form_validation['link'],
-            'border-gray-200 focus:border-primary':
-              !monitor_form_validation['link']
-          }"
-          type="text"
-          placeholder="https://mywebsite.com"
-          name="link"
-          ngModel
-          required
-        />
-      </div>
-      <div class="property_box">
-        <label for="">Type</label>
-        <select
-          [ngClass]="{
-            'border-red-400': monitor_form_validation['type'],
-            'border-gray-200 focus:border-primary':
-              !monitor_form_validation['type']
-          }"
-          name="type"
-          ngModel
-          required
-        >
-          <option value="">Monitor type</option>
-          <option value="http">http</option>
-        </select>
-      </div>
-
-      <div class="grid grid-cols-2 gap-1">
-        <div class="property_box">
-          <label for="">
-            Check interval
-            <i
-              title="The interval between checks."
-              class="fa-solid fa-circle-exclamation"
-            ></i>
-          </label>
-          <input type="number" placeholder="60" name="interval" ngModel="60" />
-        </div>
-        <div class="property_box">
-          <label for="">
-            Success Status
-            <i
-              title="If not set 200 will be used."
-              class="fa-solid fa-circle-exclamation"
-            ></i>
-          </label>
-          <input
-            type="number"
-            placeholder="200"
-            name="success_status"
-            ngModel="200"
-          />
-        </div>
-        <div class="property_box">
-          <label for="">
-            Timeout
-            <i
-              title="The timeout when requesting your website."
-              class="fa-solid fa-circle-exclamation"
-            ></i>
-          </label>
-          <input type="number" placeholder="30" name="timeout" ngModel="30" />
-        </div>
-        <div class="property_box">
-          <label for="">
-            Alert Emails
-            <i
-              title="Emails to alert when failure. Write emails separated by a space. If not set only your account email will be notified."
-              class="fa-solid fa-circle-exclamation"
-            ></i>
-          </label>
-          <input type="text" name="alert_emails" ngModel="musk96@hotmail.fr" />
-        </div>
-      </div>
-      <button
-        type="submit"
-        class="bg-green-500 active:bg-green-700 py-2 mt-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
-      >
-        <i
-          *ngIf="creation_in_progress"
-          class="fa-solid fa-circle-notch fa-spin"
-        ></i>
-        <span *ngIf="!creation_in_progress">Create</span>
-      </button>
-    </form>
-  </div>
-</div>
+      <i
+        *ngIf="creation_in_progress"
+        class="fa-solid fa-circle-notch fa-spin"
+      ></i>
+      <span *ngIf="!creation_in_progress">Create</span>
+    </button>
+  </form>
+</app-popup>

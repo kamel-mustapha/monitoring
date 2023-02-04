@@ -80,6 +80,8 @@ export class HomeComponent implements OnInit {
       if (res && res.status && res.status == 200) {
         this.shared.show_alert('Monitor deleted successfully');
         this.monitors = this.monitors.filter((monitor) => monitor.id != id);
+        this.monitor_selected = false;
+        this.selected_monitor = 'Select a monitor';
       }
     });
   }
