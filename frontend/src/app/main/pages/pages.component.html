@@ -1,8 +1,102 @@
 <div id="main_content">
   <app-header title="pages" icon="fa-file-code"></app-header>
-  <div>
-    <div class="page_container">
-      <!-- all pages  -->
+  <div class="pages_toolbar">
+    <div class="main_popup_activator">
+      <div class="flex items-center gap-2" (click)="show_creation_window()">
+        <i class="fas fa-plus fa-sm text-green-600"></i>
+        Create
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <i class="fas fa-trash fa-sm text-red-600"></i>
+      Delete
+    </div>
+    <div *ngIf="one_page_selected" class="flex items-center gap-2">
+      <i class="fas fa-pen fa-sm text-blue-600"></i>
+      Edit
+    </div>
+  </div>
+  <div class="bg-white rounded-2xl py-6 flex flex-col border border-gray-300">
+    <div class="pages_grid header">
+      <div
+        *ngIf="pages.length > 0"
+        (click)="select_all_pages()"
+        class="checkbox"
+        [ngClass]="{
+          'bg-blue-500 border-blue-500': all_pages_selected,
+          'border-gray-400 bg-white': !all_pages_selected
+        }"
+      >
+        <i
+          class="fas fa-check fa-xs"
+          [ngClass]="{
+            'text-white': all_pages_selected,
+            'text-transparent': !all_pages_selected
+          }"
+        ></i>
+      </div>
+      <div *ngIf="pages.length == 0"></div>
+      <div>Title</div>
+      <div>Total seen</div>
+      <div>Monitors</div>
+      <div>Link</div>
+      <div></div>
+    </div>
+    <div class="h-full overflow-auto relative">
+      <div *ngIf="pages.length > 0">
+        <div *ngFor="let page of pages; let i = index" class="pages_grid item">
+          <div
+            (click)="select_page(i)"
+            class="checkbox"
+            [ngClass]="{
+              'bg-blue-500 border-blue-500': page.selected,
+              'border-gray-400 bg-white': !page.selected
+            }"
+          >
+            <i
+              class="fas fa-check fa-xs"
+              [ngClass]="{
+                'text-white': page.selected,
+                'text-transparent': !page.selected
+              }"
+            ></i>
+          </div>
+          <div>{{ page.name }}</div>
+          <div>{{ page.seen }}</div>
+          <div>{{ page.monitors_nb }}</div>
+          <div>{{ page.link }}</div>
+          <div><span>See page</span></div>
+        </div>
+      </div>
+      <div
+        *ngIf="pages.length == 0"
+        class="absolute w-content mx-auto left-0 right-0 top-1/2 -translate-y-1/2 flex flex-col items-center gap-2"
+      >
+        <i class="fas fa-folder-times fa-xl"></i>
+        <span>You have no page</span>
+      </div>
+    </div>
+  </div>
+</div>
+<app-popup>
+  <form id="monitor_creation_form" #f="ngForm" (ngSubmit)="submit_page(f)">
+    <h1 class="font-bold text-lg text-gray-700 text-center">Create Page</h1>
+
+    <!-- <button
+      type="submit"
+      class="bg-green-500 active:bg-green-700 py-2 mt-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
+    >
+      <i
+        *ngIf="creation_in_progress"
+        class="fa-solid fa-circle-notch fa-spin"
+      ></i>
+      <span *ngIf="!creation_in_progress">Create</span>
+    </button> -->
+  </form>
+</app-popup>
+
+<!-- <div class="page_container">
+      all pages
       <div *ngFor="let page of pages">
         <div class="py-4 px-2 rounded-t-lg font-bold text-lg">
           {{ page.name }}
@@ -38,6 +132,4 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+    </div> -->

@@ -9,3 +9,32 @@
 .page_container > div {
   @apply w-full h-content flex flex-col rounded-xl pb-1 relative;
 }
+
+.pages_grid {
+  @apply grid  px-12  items-center border-b;
+  grid-template-columns: 10% 20% 20% 20% 20% 10%;
+}
+
+.pages_grid > div:last-child {
+  @apply text-right;
+}
+
+.pages_grid > div:last-child > span {
+  @apply text-blue-700 lg:cursor-pointer lg:hover:underline;
+}
+
+.pages_grid.header {
+  @apply border-b border-gray-300 font-medium pb-4;
+}
+
+.pages_grid.item {
+  @apply py-4 hover:bg-gray-200;
+}
+
+.pages_toolbar {
+  @apply flex items-center gap-8 px-2;
+}
+
+.pages_toolbar > div {
+  @apply lg:cursor-pointer hover:text-gray-600;
+}

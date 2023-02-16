@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../services/shared.service';
+import { animations } from 'src/app/animations';
 @Component({
   selector: 'app-popup',
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.css'],
+  animations: animations,
 })
 export class PopupComponent implements OnInit {
   constructor(private shared: SharedService) {}

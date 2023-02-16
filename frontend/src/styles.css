@@ -66,11 +66,11 @@ body {
 }
 
 #main_content {
-  @apply flex flex-col h-full gap-4;
+  @apply flex flex-col h-full gap-2;
 }
 
 #main_content > div:last-child {
-  @apply h-full grid grid-cols-12 grid-rows-6 gap-4 overflow-hidden pb-2;
+  @apply h-full  overflow-hidden pb-2;
 }
 
 .progress_bar {
@@ -83,7 +83,7 @@ body {
 }
 
 .loading_animation {
-  @apply relative overflow-hidden bg-gradient-to-l from-gray-100 to-gray-200;
+  @apply relative overflow-hidden bg-gradient-to-l from-gray-200 to-gray-300;
   animation: loading_animation 1s infinite linear alternate;
 }
 
@@ -94,7 +94,7 @@ body {
 }
 
 .creation_window {
-  @apply fixed top-0 left-0 w-full h-full bg-black bg-opacity-10 backdrop-blur-sm;
+  @apply fixed top-0 left-0 w-full h-full bg-black bg-opacity-40;
 }
 
 .creation_window > div {
@@ -107,4 +107,12 @@ body {
 
 .creation_window > div > .creation_mode {
   @apply px-6 py-4  overflow-auto;
+}
+
+.checkbox {
+  @apply relative w-4 h-4 border-2 rounded-sm duration-300;
+}
+
+.checkbox > i {
+  @apply absolute top-1/2 -translate-y-1/2  left-0 right-0 mx-auto w-content lg:cursor-pointer duration-150;
 }

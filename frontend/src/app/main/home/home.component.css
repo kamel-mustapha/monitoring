@@ -16,11 +16,11 @@
 }
 .event_grid {
   @apply py-4 border-b border-gray-100;
-  grid-template-columns: 20% 30% 10% 40%;
+  grid-template-columns: 20% 20% 20% 40%;
 }
 
 .event_grid > div {
-  @apply whitespace-nowrap;
+  @apply overflow-hidden text-ellipsis whitespace-nowrap;
 }
 
 .events_list div.monitor_element .monitor_status {
@@ -103,7 +103,7 @@
 }
 
 #monitor_creation_form label i {
-  @apply cursor-pointer;
+  @apply sm:cursor-pointer text-gray-500 hover:text-gray-900 mt-1;
 }
 
 #monitor_creation_form input,

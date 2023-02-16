@@ -9,7 +9,7 @@ import {
 export const animations = [
   trigger('fadeInOut', [
     state('void', style({ opacity: 0 })),
-    transition('void <=> *', [animate(300)]),
+    transition('void <=> *', [animate(200)]),
   ]),
   trigger('slideInOut', [
     transition('void <=> *', [
