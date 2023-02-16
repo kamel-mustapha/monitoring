@@ -22,48 +22,48 @@ export class PagesComponent implements OnInit {
   one_page_selected: boolean = false;
   shown_popups: any = {};
   pages: any[] = [
-    // {
-    //   id: 1,
-    //   name: 'Default Light',
-    //   premium: false,
-    //   selected: false,
-    //   owned: true,
-    //   monitors_nb: 10,
-    //   link: 'https://google.com',
-    //   seen: 5,
-    // },
-    // {
-    //   id: 2,
-    //   name: 'Default Black',
-    //   premium: false,
-    //   selected: false,
-    //   owned: true,
-    //   monitors_nb: 10,
-    //   link: 'https://google.com',
-    //   seen: 5,
-    // },
-    // {
-    //   id: 3,
-    //   name: 'Total sense',
-    //   premium: true,
-    //   selected: false,
-    //   owned: false,
-    //   price: 5.99,
-    //   monitors_nb: 10,
-    //   link: 'https://google.com',
-    //   seen: 5,
-    // },
-    // {
-    //   id: 4,
-    //   name: 'Red shift',
-    //   premium: true,
-    //   selected: false,
-    //   owned: false,
-    //   price: 5.99,
-    //   monitors_nb: 10,
-    //   link: 'https://google.com',
-    //   seen: 5,
-    // },
+    {
+      id: 1,
+      name: 'Default Light',
+      premium: false,
+      selected: false,
+      owned: true,
+      monitors_nb: 10,
+      link: 'https://google.com',
+      seen: 5,
+    },
+    {
+      id: 2,
+      name: 'Default Black',
+      premium: false,
+      selected: false,
+      owned: true,
+      monitors_nb: 10,
+      link: 'https://google.com',
+      seen: 5,
+    },
+    {
+      id: 3,
+      name: 'Total sense',
+      premium: true,
+      selected: false,
+      owned: false,
+      price: 5.99,
+      monitors_nb: 10,
+      link: 'https://google.com',
+      seen: 5,
+    },
+    {
+      id: 4,
+      name: 'Red shift',
+      premium: true,
+      selected: false,
+      owned: false,
+      price: 5.99,
+      monitors_nb: 10,
+      link: 'https://google.com',
+      seen: 5,
+    },
   ];
   monitor_form_validation: any = {
     name: false,
@@ -71,6 +71,10 @@ export class PagesComponent implements OnInit {
     link: false,
   };
   creation_in_progress: boolean = false;
+  page_creations_modes = {
+    page: true,
+    monitors: false,
+  };
   select_all_pages() {
     this.all_pages_selected = !this.all_pages_selected;
     if (this.all_pages_selected) {
@@ -95,5 +99,10 @@ export class PagesComponent implements OnInit {
     this.shared.show_hide_element('monitor_creation');
   }
 
-  submit_page(form: NgForm) {}
+  submit_page(form: NgForm, step: number) {
+    if (step == 0) {
+      this.page_creations_modes['page'] = false;
+      this.page_creations_modes['monitors'] = true;
+    }
+  }
 }

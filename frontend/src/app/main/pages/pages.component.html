@@ -79,57 +79,100 @@
   </div>
 </div>
 <app-popup>
-  <form id="monitor_creation_form" #f="ngForm" (ngSubmit)="submit_page(f)">
-    <h1 class="font-bold text-lg text-gray-700 text-center">Create Page</h1>
-
-    <!-- <button
+  <form
+    *ngIf="page_creations_modes['page']"
+    #f="ngForm"
+    (ngSubmit)="submit_page(f, 0)"
+  >
+    <h1 class="font-bold text-lg text-gray-700 text-center">Select the page</h1>
+    <div class="flex flex-col gap-2 mt-4">
+      <div class="relative overflow-hidden">
+        <img class="rounded-xl w-full" src="../../../assets/page.png" alt="" />
+        <span
+          class="absolute -right-9 top-4 bg-secondary px-8 pb-1 text-gray-100 rounded-lg rotate-45 text-sm font-medium"
+        >
+          Premium
+        </span>
+      </div>
+      <div class="flex justify-between rounded-b-xl py-5 px-4 w-1/2 mx-auto">
+        <button type="button" class="active:translate-y-1 duration-200">
+          <i class="fas fa-arrow-left text-gray-600"></i>
+        </button>
+        <a href="" class="text-blue-500 hover:underline">Preview</a>
+        <button type="button" class="active:translate-y-1 duration-200">
+          <i class="fas fa-arrow-right text-gray-600"></i>
+        </button>
+      </div>
+    </div>
+    <button
       type="submit"
-      class="bg-green-500 active:bg-green-700 py-2 mt-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
+      class="w-full bg-green-500 active:bg-green-700 py-2 mt-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
     >
       <i
         *ngIf="creation_in_progress"
         class="fa-solid fa-circle-notch fa-spin"
       ></i>
-      <span *ngIf="!creation_in_progress">Create</span>
-    </button> -->
+      <span *ngIf="!creation_in_progress">Next</span>
+    </button>
+  </form>
+  <form
+    *ngIf="page_creations_modes['monitors']"
+    #f1="ngForm"
+    (ngSubmit)="submit_page(f1, 1)"
+    class="flex flex-col h-full justify-between"
+  >
+    <h1 class="font-bold text-lg text-gray-700 text-center">
+      Associate monitors
+    </h1>
+    <div class="grid grid-cols-2 h-72 p-4 my-4 overflow-auto">
+      <div class="checkbox"></div>
+      <div>Mymonitor</div>
+    </div>
+    <button
+      type="submit"
+      class="w-full bg-green-500 active:bg-green-700 py-2 mt-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
+    >
+      <i
+        *ngIf="creation_in_progress"
+        class="fa-solid fa-circle-notch fa-spin"
+      ></i>
+      <span *ngIf="!creation_in_progress">Next</span>
+    </button>
   </form>
 </app-popup>
 
 <!-- <div class="page_container">
-      all pages
-      <div *ngFor="let page of pages">
-        <div class="py-4 px-2 rounded-t-lg font-bold text-lg">
-          {{ page.name }}
-        </div>
-        <div class="bg-white shadow-lg rounded-xl">
-          <div class="relative overflow-hidden">
-            <img
-              class="rounded-t-xl w-full"
-              src="../../../assets/page.png"
-              alt=""
-            />
-            <span
-              *ngIf="page.premium"
-              class="absolute -right-9 top-4 bg-secondary px-8 pb-1 text-gray-100 rounded-lg rotate-45"
-            >
-              Premium
-            </span>
-          </div>
-          <div class="flex justify-between rounded-b-xl py-5 px-4">
-            <a href="" class="text-blue-500 hover:underline text-lg">
-              Preview
-            </a>
-            <span *ngIf="page.owned" class="flex items-center gap-2">
-              Owend
-              <i class="fas fa-check-circle text-green-600"></i>
-            </span>
-            <a
-              *ngIf="!page.owned"
-              class="flex items-center gap-2 cursor-pointer text-blue-500 hover:underline"
-            >
-              {{ page.price }}$
-            </a>
-          </div>
-        </div>
+  <div *ngFor="let page of pages">
+    <div class="py-4 px-2 rounded-t-lg font-bold text-lg">
+      {{ page.name }}
+    </div>
+    <div class="bg-white shadow-lg rounded-xl">
+      <div class="relative overflow-hidden">
+        <img
+          class="rounded-t-xl w-full"
+          src="../../../assets/page.png"
+          alt=""
+        />
+        <span
+          *ngIf="page.premium"
+          class="absolute -right-9 top-4 bg-secondary px-8 pb-1 text-gray-100 rounded-lg rotate-45"
+        >
+          Premium
+        </span>
       </div>
-    </div> -->
+      <div class="flex justify-between rounded-b-xl py-5 px-4">
+        <a href="" class="text-blue-500 hover:underline text-lg"> Preview </a>
+        <span *ngIf="page.owned" class="flex items-center gap-2">
+          Owend
+          <i class="fas fa-check-circle text-green-600"></i>
+        </span>
+        <a
+          *ngIf="!page.owned"
+          class="flex items-center gap-2 cursor-pointer text-blue-500 hover:underline"
+        >
+          {{ page.price }}$
+        </a>
+      </div>
+    </div>
+  </div>
+</div> -->
