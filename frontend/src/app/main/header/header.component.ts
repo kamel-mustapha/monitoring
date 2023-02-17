@@ -10,7 +10,7 @@ import { animations } from 'src/app/animations';
   animations: animations,
 })
 export class HeaderComponent implements OnInit {
-  @Input() title: string = 'home';
+  @Input() title_: string = 'home';
   @Input() icon: string = 'fa-home';
   constructor(private shared: SharedService, private server: ServerService) {}
 

@@ -65,16 +65,41 @@ export class PagesComponent implements OnInit {
       seen: 5,
     },
   ];
+
+  pages_marketplace: any[] = [
+    {
+      link: '',
+      name: 'default black',
+      picture: '../../../assets/page.png',
+      premium: false,
+    },
+    {
+      link: '',
+      name: 'default light',
+      picture: '../../../assets/page_2.png',
+      premium: true,
+    },
+  ];
+
+  page_creation_active_index: number = 0;
+
   monitor_form_validation: any = {
     name: false,
     type: false,
     link: false,
   };
+
   creation_in_progress: boolean = false;
+
   page_creations_modes = {
     page: true,
     monitors: false,
+    details: false,
   };
+
+  monitors = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  page_creation_forms: any[] = [];
+
   select_all_pages() {
     this.all_pages_selected = !this.all_pages_selected;
     if (this.all_pages_selected) {
@@ -101,8 +126,42 @@ export class PagesComponent implements OnInit {
 
   submit_page(form: NgForm, step: number) {
     if (step == 0) {
+      this.page_creation_forms.push(form.value);
+      this.page_creations_modes['page'] = true;
+      this.page_creations_modes['monitors'] = false;
+      this.page_creations_modes['monitors'] = false;
+    } else if (step == 1) {
+      this.page_creation_forms.push(form.value);
       this.page_creations_modes['page'] = false;
       this.page_creations_modes['monitors'] = true;
+      this.page_creations_modes['details'] = false;
+    } else if (step == 2) {
+      this.page_creation_forms.push(form.value);
+      this.page_creations_modes['page'] = false;
+      this.page_creations_modes['monitors'] = false;
+      this.page_creations_modes['details'] = true;
+    } else if (step == 3) {
+      this.page_creation_forms.push(form.value);
+      this.show_creation_window();
+    }
+  }
+
+  change_active_page(step: number) {
+    if (step == 0) {
+      if (
+        this.page_creation_active_index ==
+        this.pages_marketplace.length - 1
+      ) {
+        this.page_creation_active_index = 0;
+      } else {
+        this.page_creation_active_index += 1;
+      }
+    } else {
+      if (this.page_creation_active_index == 0) {
+        this.page_creation_active_index = this.pages_marketplace.length - 1;
+      } else {
+        this.page_creation_active_index -= 1;
+      }
     }
   }
 }

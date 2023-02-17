@@ -1,5 +1,5 @@
 <div id="main_content">
-  <app-header title="pages" icon="fa-file-code"></app-header>
+  <app-header title_="pages" icon="fa-file-code"></app-header>
   <div class="pages_toolbar">
     <div class="main_popup_activator">
       <div class="flex items-center gap-2" (click)="show_creation_window()">
@@ -82,24 +82,43 @@
   <form
     *ngIf="page_creations_modes['page']"
     #f="ngForm"
-    (ngSubmit)="submit_page(f, 0)"
+    (ngSubmit)="submit_page(f, 1)"
   >
-    <h1 class="font-bold text-lg text-gray-700 text-center">Select the page</h1>
+    <h1 class="font-bold text-lg text-gray-700 text-center">Select page</h1>
     <div class="flex flex-col gap-2 mt-4">
       <div class="relative overflow-hidden">
-        <img class="rounded-xl w-full" src="../../../assets/page.png" alt="" />
+        <img
+          width="500"
+          class="rounded-xl shadow-lg"
+          [src]="pages_marketplace[page_creation_active_index].picture"
+          alt=""
+        />
         <span
+          *ngIf="pages_marketplace[page_creation_active_index].premium"
           class="absolute -right-9 top-4 bg-secondary px-8 pb-1 text-gray-100 rounded-lg rotate-45 text-sm font-medium"
         >
           Premium
         </span>
       </div>
-      <div class="flex justify-between rounded-b-xl py-5 px-4 w-1/2 mx-auto">
-        <button type="button" class="active:translate-y-1 duration-200">
+      <div
+        class="flex justify-between rounded-b-xl py-5 gap-8 px-4 lg:w-1/2 mx-auto"
+      >
+        <button
+          type="button"
+          class="active:translate-y-px duration-200"
+          (click)="change_active_page(1)"
+        >
           <i class="fas fa-arrow-left text-gray-600"></i>
         </button>
-        <a href="" class="text-blue-500 hover:underline">Preview</a>
-        <button type="button" class="active:translate-y-1 duration-200">
+        <a href="" class="text-blue-500 hover:underline capitalize">{{
+          pages_marketplace[page_creation_active_index].name
+        }}</a>
+        <button
+          type="button"
+          class="active:translate-y-px duration-200"
+          change_active_page
+          (click)="change_active_page(0)"
+        >
           <i class="fas fa-arrow-right text-gray-600"></i>
         </button>
       </div>
@@ -118,26 +137,183 @@
   <form
     *ngIf="page_creations_modes['monitors']"
     #f1="ngForm"
-    (ngSubmit)="submit_page(f1, 1)"
+    (ngSubmit)="submit_page(f1, 2)"
     class="flex flex-col h-full justify-between"
   >
     <h1 class="font-bold text-lg text-gray-700 text-center">
       Associate monitors
     </h1>
-    <div class="grid grid-cols-2 h-72 p-4 my-4 overflow-auto">
-      <div class="checkbox"></div>
-      <div>Mymonitor</div>
-    </div>
-    <button
-      type="submit"
-      class="w-full bg-green-500 active:bg-green-700 py-2 mt-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
+    <div
+      class="max-w-full max-h-52 my-8 overflow-y-auto grid gap-4 lg:gap-2"
+      [ngClass]="{
+        'lg:grid-cols-2': monitors.length > 1,
+        'my-12': monitors.length == 1
+      }"
     >
-      <i
-        *ngIf="creation_in_progress"
-        class="fa-solid fa-circle-notch fa-spin"
-      ></i>
-      <span *ngIf="!creation_in_progress">Next</span>
-    </button>
+      <div
+        *ngFor="let monitor of monitors"
+        (click)="select_all_pages()"
+        class="w-72 flex items-center gap-4 lg:cursor-pointer bg-gray-200 px-4 py-2 rounded-md shadow-md hover:bg-gray-300"
+      >
+        <div
+          *ngIf="pages.length > 0"
+          class="checkbox"
+          [ngClass]="{
+            'bg-blue-500 border-blue-500': all_pages_selected,
+            'border-gray-400 bg-white': !all_pages_selected
+          }"
+        >
+          <i
+            class="fas fa-check fa-xs"
+            [ngClass]="{
+              'text-white': all_pages_selected,
+              'text-transparent': !all_pages_selected
+            }"
+          ></i>
+        </div>
+        <div>Mymonitor</div>
+      </div>
+    </div>
+    <div class="flex gap-2">
+      <button
+        type="button"
+        (click)="submit_page(f1, 0)"
+        class="w-full bg-gray-500 active:bg-gray-700 pb-2 pt-1 px-4 text-gray-100 font-semibold rounded-md hover:bg-gray-600 duration-300"
+      >
+        <i
+          *ngIf="creation_in_progress"
+          class="fa-solid fa-circle-notch fa-spin"
+        ></i>
+        <span *ngIf="!creation_in_progress">Previous</span>
+      </button>
+      <button
+        type="submit"
+        class="w-full bg-green-500 active:bg-green-700 pb-2 pt-1 px-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
+      >
+        <i
+          *ngIf="creation_in_progress"
+          class="fa-solid fa-circle-notch fa-spin"
+        ></i>
+        <span *ngIf="!creation_in_progress">Next</span>
+      </button>
+    </div>
+  </form>
+  <form
+    *ngIf="page_creations_modes['details']"
+    #f2="ngForm"
+    (ngSubmit)="submit_page(f2, 3)"
+    id="monitor_creation_form"
+    class="flex flex-col h-full justify-between"
+  >
+    <h1 class="font-bold text-lg text-gray-700 text-center">Add details</h1>
+    <div class="property_box w-96 max-w-full mt-4">
+      <label>
+        Friendly name
+        <i
+          title="The verbose name that your customers see on the pages."
+          class="fa-solid fa-circle-exclamation fa-sm"
+        ></i>
+      </label>
+      <input
+        [ngClass]="{
+          'border-red-400': monitor_form_validation['name'],
+          'border-gray-200 focus:border-primary':
+            !monitor_form_validation['name']
+        }"
+        type="text"
+        placeholder="My Website"
+        ngModel
+        name="name"
+        required
+      />
+    </div>
+    <div class="property_box">
+      <label>
+        Title
+        <i
+          title="The http link of your application."
+          class="fa-solid fa-circle-exclamation fa-sm"
+        ></i>
+      </label>
+      <input
+        [ngClass]="{
+          'border-red-400': monitor_form_validation['link'],
+          'border-gray-200 focus:border-primary':
+            !monitor_form_validation['link']
+        }"
+        type="text"
+        placeholder="Status | My website"
+        name="title"
+        ngModel
+        required
+      />
+    </div>
+    <div class="property_box">
+      <label>
+        Href link
+        <i
+          title="The http link of your application."
+          class="fa-solid fa-circle-exclamation fa-sm"
+        ></i>
+      </label>
+      <input
+        [ngClass]="{
+          'border-red-400': monitor_form_validation['link'],
+          'border-gray-200 focus:border-primary':
+            !monitor_form_validation['link']
+        }"
+        type="text"
+        placeholder="https://website.com"
+        name="title"
+        ngModel
+        required
+      />
+    </div>
+    <div class="property_box">
+      <label>
+        Icon
+        <i
+          title="The http link of your application."
+          class="fa-solid fa-circle-exclamation fa-sm"
+        ></i>
+      </label>
+      <input
+        [ngClass]="{
+          'border-red-400': monitor_form_validation['link'],
+          'border-gray-200 focus:border-primary':
+            !monitor_form_validation['link']
+        }"
+        class="border-none"
+        type="file"
+        placeholder="Status | My website"
+        name="title"
+        ngModel
+        required
+      />
+    </div>
+    <div class="flex gap-2 mt-8">
+      <button
+        type="button"
+        (click)="submit_page(f2, 1)"
+        class="w-full bg-gray-500 active:bg-gray-700 pb-2 pt-1 px-4 text-gray-100 font-semibold rounded-md hover:bg-gray-600 duration-300"
+      >
+        <i
+          *ngIf="creation_in_progress"
+          class="fa-solid fa-circle-notch fa-spin"
+        ></i>
+        <span *ngIf="!creation_in_progress">Previous</span>
+      </button>
+      <button
+        type="submit"
+        class="w-full bg-green-500 active:bg-green-700 pb-2 pt-1 px-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
+      >
+        <i
+          *ngIf="creation_in_progress"
+          class="fa-solid fa-circle-notch fa-spin"
+        ></i>
+        <span *ngIf="!creation_in_progress">Create</span>
+      </button>
+    </div>
   </form>
 </app-popup>
 
