@@ -8,7 +8,7 @@
 }
 
 .page_header {
-  @apply bg-white rounded-2xl flex justify-between items-center py-3 px-6 text-gray-700 font-semibold  border border-gray-300;
+  @apply bg-white rounded-2xl flex justify-between items-center py-2 px-6 text-gray-700 font-semibold  border border-gray-300;
 }
 
 .page_header > div {

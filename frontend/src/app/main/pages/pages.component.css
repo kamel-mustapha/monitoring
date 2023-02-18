@@ -56,5 +56,5 @@
 
 #monitor_creation_form input,
 #monitor_creation_form select {
-  @apply border border-gray-300 rounded-md px-4 py-2 bg-white outline-none focus:border-primary;
+  @apply border  rounded-md px-4 py-2 bg-white outline-none focus:border-primary;
 }

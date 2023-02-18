@@ -43,37 +43,50 @@
       <div></div>
     </div>
     <div class="h-full overflow-auto relative">
-      <div *ngIf="pages.length > 0">
-        <div *ngFor="let page of pages; let i = index" class="pages_grid item">
+      <div *ngIf="!loading_pages">
+        <div *ngIf="pages.length > 0">
           <div
-            (click)="select_page(i)"
-            class="checkbox"
-            [ngClass]="{
-              'bg-blue-500 border-blue-500': page.selected,
-              'border-gray-400 bg-white': !page.selected
-            }"
+            *ngFor="let page of pages; let i = index"
+            class="pages_grid item"
           >
-            <i
-              class="fas fa-check fa-xs"
+            <div
+              (click)="select_page(i)"
+              class="checkbox"
               [ngClass]="{
-                'text-white': page.selected,
-                'text-transparent': !page.selected
+                'bg-blue-500 border-blue-500': page.selected,
+                'border-gray-400 bg-white': !page.selected
               }"
-            ></i>
+            >
+              <i
+                class="fas fa-check fa-xs"
+                [ngClass]="{
+                  'text-white': page.selected,
+                  'text-transparent': !page.selected
+                }"
+              ></i>
+            </div>
+            <div>{{ page.name }}</div>
+            <div>{{ page.seen }}</div>
+            <div>{{ page.monitors_nb }}</div>
+            <div>{{ page.link }}</div>
+            <div><span>See page</span></div>
           </div>
-          <div>{{ page.name }}</div>
-          <div>{{ page.seen }}</div>
-          <div>{{ page.monitors_nb }}</div>
-          <div>{{ page.link }}</div>
-          <div><span>See page</span></div>
+        </div>
+        <div
+          *ngIf="pages.length == 0"
+          class="absolute w-content mx-auto left-0 right-0 top-1/2 -translate-y-1/2 flex flex-col items-center gap-2"
+        >
+          <i class="fas fa-folder-times fa-xl"></i>
+          <span>You have no page</span>
         </div>
       </div>
-      <div
-        *ngIf="pages.length == 0"
-        class="absolute w-content mx-auto left-0 right-0 top-1/2 -translate-y-1/2 flex flex-col items-center gap-2"
-      >
-        <i class="fas fa-folder-times fa-xl"></i>
-        <span>You have no page</span>
+      <div *ngIf="loading_pages" class="h-full overflow-hidden py-4 px-8">
+        <div
+          *ngFor="let i of [].constructor(100)"
+          class="h-6 loading_animation mb-4 rounded-full"
+        >
+          <div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -110,28 +123,28 @@
         >
           <i class="fas fa-arrow-left text-gray-600"></i>
         </button>
-        <a href="" class="text-blue-500 hover:underline capitalize">{{
-          pages_marketplace[page_creation_active_index].name
-        }}</a>
+        <a href="" class="text-blue-500 hover:underline capitalize">
+          {{ pages_marketplace[page_creation_active_index].name }}
+        </a>
         <button
           type="button"
           class="active:translate-y-px duration-200"
-          change_active_page
           (click)="change_active_page(0)"
         >
           <i class="fas fa-arrow-right text-gray-600"></i>
         </button>
+        <input
+          type="hidden"
+          [ngModel]="pages_marketplace[page_creation_active_index].id"
+          name="page_id"
+        />
       </div>
     </div>
     <button
       type="submit"
       class="w-full bg-green-500 active:bg-green-700 py-2 mt-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
     >
-      <i
-        *ngIf="creation_in_progress"
-        class="fa-solid fa-circle-notch fa-spin"
-      ></i>
-      <span *ngIf="!creation_in_progress">Next</span>
+      Next
     </button>
   </form>
   <form
@@ -146,32 +159,39 @@
     <div
       class="max-w-full max-h-52 my-8 overflow-y-auto grid gap-4 lg:gap-2"
       [ngClass]="{
-        'lg:grid-cols-2': monitors.length > 1,
+        'lg:grid-cols-2': monitors.length > 2,
         'my-12': monitors.length == 1
       }"
     >
       <div
-        *ngFor="let monitor of monitors"
-        (click)="select_all_pages()"
+        [ngClass]="{
+          'w-48': monitors.length > 2,
+          'w-60': monitors.length <= 2
+        }"
+        *ngFor="let monitor of monitors; let i = index"
+        (click)="select_monitor(i)"
+        [title]="monitor.name"
         class="w-72 flex items-center gap-4 lg:cursor-pointer bg-gray-200 px-4 py-2 rounded-md shadow-md hover:bg-gray-300"
       >
         <div
           *ngIf="pages.length > 0"
           class="checkbox"
           [ngClass]="{
-            'bg-blue-500 border-blue-500': all_pages_selected,
-            'border-gray-400 bg-white': !all_pages_selected
+            'bg-blue-500 border-blue-500': monitor.selected,
+            'border-gray-400 bg-white': !monitor.selected
           }"
         >
           <i
             class="fas fa-check fa-xs"
             [ngClass]="{
-              'text-white': all_pages_selected,
-              'text-transparent': !all_pages_selected
+              'text-white': monitor.selected,
+              'text-transparent': !monitor.selected
             }"
           ></i>
         </div>
-        <div>Mymonitor</div>
+        <div class="w-3/4 overflow-hidden text-ellipsis">
+          {{ monitor.name }}
+        </div>
       </div>
     </div>
     <div class="flex gap-2">
@@ -180,21 +200,13 @@
         (click)="submit_page(f1, 0)"
         class="w-full bg-gray-500 active:bg-gray-700 pb-2 pt-1 px-4 text-gray-100 font-semibold rounded-md hover:bg-gray-600 duration-300"
       >
-        <i
-          *ngIf="creation_in_progress"
-          class="fa-solid fa-circle-notch fa-spin"
-        ></i>
-        <span *ngIf="!creation_in_progress">Previous</span>
+        Previous
       </button>
       <button
         type="submit"
         class="w-full bg-green-500 active:bg-green-700 pb-2 pt-1 px-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
       >
-        <i
-          *ngIf="creation_in_progress"
-          class="fa-solid fa-circle-notch fa-spin"
-        ></i>
-        <span *ngIf="!creation_in_progress">Next</span>
+        Next
       </button>
     </div>
   </form>
@@ -217,7 +229,7 @@
       <input
         [ngClass]="{
           'border-red-400': monitor_form_validation['name'],
-          'border-gray-200 focus:border-primary':
+          'border-gray-300 focus:border-primary':
             !monitor_form_validation['name']
         }"
         type="text"
@@ -237,9 +249,9 @@
       </label>
       <input
         [ngClass]="{
-          'border-red-400': monitor_form_validation['link'],
-          'border-gray-200 focus:border-primary':
-            !monitor_form_validation['link']
+          'border-red-400': monitor_form_validation['title'],
+          'border-gray-300 focus:border-primary':
+            !monitor_form_validation['title']
         }"
         type="text"
         placeholder="Status | My website"
@@ -250,7 +262,7 @@
     </div>
     <div class="property_box">
       <label>
-        Href link
+        Main link
         <i
           title="The http link of your application."
           class="fa-solid fa-circle-exclamation fa-sm"
@@ -259,12 +271,12 @@
       <input
         [ngClass]="{
           'border-red-400': monitor_form_validation['link'],
-          'border-gray-200 focus:border-primary':
+          'border-gray-300 focus:border-primary':
             !monitor_form_validation['link']
         }"
         type="text"
         placeholder="https://website.com"
-        name="title"
+        name="link"
         ngModel
         required
       />
@@ -278,17 +290,11 @@
         ></i>
       </label>
       <input
-        [ngClass]="{
-          'border-red-400': monitor_form_validation['link'],
-          'border-gray-200 focus:border-primary':
-            !monitor_form_validation['link']
-        }"
-        class="border-none"
         type="file"
         placeholder="Status | My website"
-        name="title"
+        name="image"
         ngModel
-        required
+        (input)="load_icon_file($event)"
       />
     </div>
     <div class="flex gap-2 mt-8">
@@ -297,11 +303,7 @@
         (click)="submit_page(f2, 1)"
         class="w-full bg-gray-500 active:bg-gray-700 pb-2 pt-1 px-4 text-gray-100 font-semibold rounded-md hover:bg-gray-600 duration-300"
       >
-        <i
-          *ngIf="creation_in_progress"
-          class="fa-solid fa-circle-notch fa-spin"
-        ></i>
-        <span *ngIf="!creation_in_progress">Previous</span>
+        Previous
       </button>
       <button
         type="submit"

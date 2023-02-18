@@ -68,4 +68,11 @@ export class ServerService {
       data
     );
   }
+
+  create_user_page(data: any) {
+    return this.server.post<any>(
+      `http://127.0.0.1:8000/api/create-user-page?key=417fe54b852719f87777f44f2a283e14`,
+      data
+    );
+  }
 }

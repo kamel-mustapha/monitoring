@@ -17,10 +17,36 @@ export class PagesComponent implements OnInit {
     this.shared.shown_popups_subject.subscribe((value) => {
       this.shown_popups = value;
     });
+
+    this.load_pages();
   }
+
   all_pages_selected: boolean = false;
   one_page_selected: boolean = false;
+  creation_in_progress: boolean = false;
+  loading_pages: boolean = true;
+  icon_file: any;
+  page_creation_active_index: number = 0;
   shown_popups: any = {};
+
+  page_creations_modes: any = {
+    page: true,
+    monitors: false,
+    details: false,
+  };
+
+  monitor_form_validation: any = {
+    name: false,
+    type: false,
+    link: false,
+  };
+
+  page_creation_forms: any = {
+    page: true,
+    monitors: false,
+    details: false,
+  };
+
   pages: any[] = [
     {
       id: 1,
@@ -32,73 +58,22 @@ export class PagesComponent implements OnInit {
       link: 'https://google.com',
       seen: 5,
     },
-    {
-      id: 2,
-      name: 'Default Black',
-      premium: false,
-      selected: false,
-      owned: true,
-      monitors_nb: 10,
-      link: 'https://google.com',
-      seen: 5,
-    },
-    {
-      id: 3,
-      name: 'Total sense',
-      premium: true,
-      selected: false,
-      owned: false,
-      price: 5.99,
-      monitors_nb: 10,
-      link: 'https://google.com',
-      seen: 5,
-    },
-    {
-      id: 4,
-      name: 'Red shift',
-      premium: true,
-      selected: false,
-      owned: false,
-      price: 5.99,
-      monitors_nb: 10,
-      link: 'https://google.com',
-      seen: 5,
-    },
   ];
 
   pages_marketplace: any[] = [
     {
+      id: 1,
       link: '',
       name: 'default black',
       picture: '../../../assets/page.png',
       premium: false,
     },
-    {
-      link: '',
-      name: 'default light',
-      picture: '../../../assets/page_2.png',
-      premium: true,
-    },
   ];
 
-  page_creation_active_index: number = 0;
-
-  monitor_form_validation: any = {
-    name: false,
-    type: false,
-    link: false,
-  };
-
-  creation_in_progress: boolean = false;
-
-  page_creations_modes = {
-    page: true,
-    monitors: false,
-    details: false,
-  };
-
-  monitors = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  page_creation_forms: any[] = [];
+  monitors: any[] = [
+    { name: 'my_monitor', selected: false, id: 1 },
+    { name: 'monitoring', selected: false, id: 2 },
+  ];
 
   select_all_pages() {
     this.all_pages_selected = !this.all_pages_selected;
@@ -125,24 +100,37 @@ export class PagesComponent implements OnInit {
   }
 
   submit_page(form: NgForm, step: number) {
+    this.monitor_form_validation = {};
     if (step == 0) {
-      this.page_creation_forms.push(form.value);
-      this.page_creations_modes['page'] = true;
-      this.page_creations_modes['monitors'] = false;
-      this.page_creations_modes['monitors'] = false;
+      this.activate_page_creation_mode('page');
     } else if (step == 1) {
-      this.page_creation_forms.push(form.value);
-      this.page_creations_modes['page'] = false;
-      this.page_creations_modes['monitors'] = true;
-      this.page_creations_modes['details'] = false;
+      this.page_creation_forms['page'] = form.value;
+      this.activate_page_creation_mode('monitors');
     } else if (step == 2) {
-      this.page_creation_forms.push(form.value);
-      this.page_creations_modes['page'] = false;
-      this.page_creations_modes['monitors'] = false;
-      this.page_creations_modes['details'] = true;
+      this.page_creation_forms['monitors'] = form.value;
+      this.activate_page_creation_mode('details');
     } else if (step == 3) {
-      this.page_creation_forms.push(form.value);
-      this.show_creation_window();
+      if (form.valid) {
+        this.creation_in_progress = true;
+        let form_data = this.build_form_data(form);
+        this.server.create_user_page(form_data).subscribe((res) => {
+          if (res.status && res.status == 200) {
+            this.show_creation_window();
+            this.shared.show_alert('Page created successfully');
+            form.reset();
+            this.monitors.forEach((monitor) => (monitor.selected = false));
+            this.page_creation_active_index = 0;
+            this.activate_page_creation_mode('page');
+          }
+          this.creation_in_progress = false;
+        });
+      } else {
+        for (let i in form.value) {
+          if (form.value[i].length == 0) {
+            this.monitor_form_validation[i] = true;
+          }
+        }
+      }
     }
   }
 
@@ -163,5 +151,47 @@ export class PagesComponent implements OnInit {
         this.page_creation_active_index -= 1;
       }
     }
+  }
+
+  load_icon_file(event: any) {
+    this.icon_file = event.target.files[0];
+  }
+
+  select_monitor(index: number) {
+    this.monitors[index].selected = !this.monitors[index].selected;
+  }
+
+  activate_page_creation_mode(mode: string) {
+    for (let i in this.page_creations_modes) {
+      this.page_creations_modes[i] = false;
+    }
+    this.page_creations_modes[mode] = true;
+  }
+
+  build_form_data(form: NgForm) {
+    let form_data = new FormData();
+    form_data.append(
+      'page_id',
+      this.pages_marketplace[this.page_creation_active_index].id
+    );
+    form_data.append(
+      'monitors',
+      String(
+        this.monitors
+          .filter((monitor) => monitor.selected)
+          .map((monitor) => monitor.id)
+      )
+    );
+    for (let i in form.value) {
+      form_data.append(i, form.value[i]);
+    }
+    if (this.icon_file) {
+      form_data.append('image', this.icon_file, this.icon_file.name);
+    }
+    return form_data;
+  }
+
+  load_pages() {
+    setTimeout(() => (this.loading_pages = false), 1000);
   }
 }

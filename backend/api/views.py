@@ -112,6 +112,7 @@ def pause_monitor(req):
 
 def start_monitor(req):
         data = req.GET
+        print(data)
         monitor = Monitor.objects.filter(id=int(data.get("monitor")))
         if monitor:
                 monitor = monitor[0]
@@ -158,3 +159,27 @@ class Notifications(View):
                 req.res["status"] = 200
                 req.res["message"] = "success"
                 return JsonResponse(req.res)
+        
+@csrf_exempt
+def create_user_page(req):
+        if req.method == "POST":
+                try:
+                        data = req.POST
+                        files = req.FILES
+                        user_page = UserPage(
+                                user=req.user,
+                                page_id=int(data.get('page_id')),
+                                name=data.get('name'),
+                                title=data.get('title'),
+                                href_link=data.get('link'),
+                        )
+                        if files:
+                                # files['image'] = "ss.jpg"
+                                print(files.get('image'))
+                                user_page.icon_link = files.get('image')
+                        user_page.save()
+                        req.res["message"] = "success"
+                        req.res["status"] = 200
+                except Exception as e:
+                        print(e)
+        return JsonResponse(req.res)

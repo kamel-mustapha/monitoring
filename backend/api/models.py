@@ -79,3 +79,25 @@ class MonitorEvent(models.Model):
         db_table = "Events"
 
 
+class UserPage(models.Model):
+    def personal_image_filename(self, filename):
+        return f'userpages/{self.user.id}/{self.href_link}/{filename}'
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    page = models.ForeignKey(Page, on_delete=models.CASCADE, blank=True, null=True)
+    monitors = models.ManyToManyField(Monitor, through="PageMonitors")
+    name = models.CharField(max_length=200, blank=True, null=True)
+    title = models.CharField(max_length=300, blank=True, null=True)
+    href_link = models.CharField(max_length=300, blank=True, null=True)
+    icon_link = models.ImageField(upload_to=personal_image_filename, blank=True, null=True)
+
+    class Meta:
+        db_table = "UserPage"
+
+
+class PageMonitors(models.Model):
+    user_page = models.ForeignKey(UserPage, on_delete=models.CASCADE)
+    monitor = models.ForeignKey(Monitor, on_delete=models.CASCADE)
+    
+    class Meta:
+        db_table = "MTM_UserPageMonitors"

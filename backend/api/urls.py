@@ -8,5 +8,6 @@ urlpatterns = [
     path('event', Event.as_view(), name="events"),
     path('pause-monitor', pause_monitor),
     path('start-monitor', start_monitor),
-    path('notification', Notifications.as_view())
+    path('notification', Notifications.as_view()),
+    path('create-user-page', create_user_page)
 ]

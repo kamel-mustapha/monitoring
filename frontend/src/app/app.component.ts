@@ -32,14 +32,14 @@ export class AppComponent implements OnInit {
       this.popup_alert = value;
     });
 
-    document.addEventListener('click', (event) => {
-      let popup_activator: any[] = Array.from(
-        document.querySelectorAll(`.main_popup_activator *`)
-      );
-      if (!popup_activator.includes(event.target)) {
-        this.shared.reset_all_popups();
-      }
-    });
+    // document.addEventListener('click', (event) => {
+    //   let popup_activator: any[] = Array.from(
+    //     document.querySelectorAll(`.main_popup_activator *`)
+    //   );
+    //   if (!popup_activator.includes(event.target)) {
+    //     this.shared.reset_all_popups();
+    //   }
+    // });
   }
   get_api_key(): string {
     let api_key: string = '';
