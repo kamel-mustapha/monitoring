@@ -37,7 +37,11 @@ class Monitor(models.Model):
 
 class Page(models.Model):
     name = models.CharField(max_length=100)
-    
+    link = models.CharField(max_length=500, blank=True, null=True)
+    picture = models.ImageField(upload_to="pages_marketplace/", blank=True, null=True)
+    premium = models.BooleanField(default=False)
+
+
     def __str__(self):
         return self.name
 
@@ -90,7 +94,8 @@ class UserPage(models.Model):
     title = models.CharField(max_length=300, blank=True, null=True)
     href_link = models.CharField(max_length=300, blank=True, null=True)
     icon_link = models.ImageField(upload_to=personal_image_filename, blank=True, null=True)
-
+    seen = models.IntegerField(default=0)
+    
     class Meta:
         db_table = "UserPage"
 

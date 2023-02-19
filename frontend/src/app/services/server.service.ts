@@ -75,4 +75,14 @@ export class ServerService {
       data
     );
   }
+
+  get_pages() {
+    return this.server.get<any>(`http://127.0.0.1:8000/api/get-pages`);
+  }
+
+  get_user_pages() {
+    return this.server.get<any>(
+      `http://127.0.0.1:8000/api/get-user-pages?key=417fe54b852719f87777f44f2a283e14`
+    );
+  }
 }

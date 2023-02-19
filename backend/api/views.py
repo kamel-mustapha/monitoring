@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from website.models import Notification
 from django.db.models import Q
-
+from django.db.models import Count
 
 from logging import getLogger
 logger = getLogger(__name__)
@@ -178,8 +178,36 @@ def create_user_page(req):
                                 print(files.get('image'))
                                 user_page.icon_link = files.get('image')
                         user_page.save()
+                        if data.get("monitors"):
+                                monitors_ids = data.get("monitors").split(",")
+                                for monitor in monitors_ids:
+                                        monitor = Monitor.objects.get(id=int(monitor.strip()))
+                                        user_page.monitors.add(monitor)
                         req.res["message"] = "success"
                         req.res["status"] = 200
                 except Exception as e:
                         print(e)
+        return JsonResponse(req.res)
+
+
+def get_pages(req):
+        try:
+                pages = Page.objects.all()
+                pages_serial = PagesData(pages, many=True)
+                req.res["pages"] = pages_serial.data
+                req.res["status"] = 200
+                req.res["message"] = "success"
+        except Exception as e:
+                logger.exception(e)
+        return JsonResponse(req.res)
+
+def get_user_pages(req):
+        try:
+                pages = UserPage.objects.filter(user=req.user).annotate(monitors_nb=Count('monitors'))
+                # pages_serial = UserPageData(pages, many=True)
+                req.res["pages"] = list(pages.values('id', 'name', 'href_link', 'seen', 'title', 'monitors_nb'))
+                req.res["status"] = 200
+                req.res["message"] = "success"
+        except Exception as e:
+                logger.exception(e)
         return JsonResponse(req.res)

@@ -19,7 +19,7 @@
   @apply text-right;
 }
 
-.pages_grid > div:last-child > span {
+.pages_grid > div:last-child > a {
   @apply text-blue-700 lg:cursor-pointer lg:hover:underline;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .pages_grid.item {
-  @apply py-4 hover:bg-gray-200;
+  @apply py-3 hover:bg-gray-200;
 }
 
 .pages_toolbar {

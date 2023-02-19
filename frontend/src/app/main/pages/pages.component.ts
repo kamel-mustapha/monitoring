@@ -18,7 +18,23 @@ export class PagesComponent implements OnInit {
       this.shown_popups = value;
     });
 
-    this.load_pages();
+    this.server.get_monitors().subscribe((res) => {
+      if (res.status && res.status == 200) {
+        this.monitors = res.monitors;
+        this.monitors.forEach((monitor) => (monitor.selected = false));
+      }
+    });
+
+    this.server.get_pages().subscribe((res) => {
+      if (res.status && res.status == 200) {
+        this.pages_marketplace = res.pages;
+        // for dev
+        this.pages_marketplace.forEach(
+          (page) => (page.picture = `http://localhost:8000${page.picture}`)
+        );
+      }
+    });
+    this.refresh_user_pages();
   }
 
   all_pages_selected: boolean = false;
@@ -47,33 +63,11 @@ export class PagesComponent implements OnInit {
     details: false,
   };
 
-  pages: any[] = [
-    {
-      id: 1,
-      name: 'Default Light',
-      premium: false,
-      selected: false,
-      owned: true,
-      monitors_nb: 10,
-      link: 'https://google.com',
-      seen: 5,
-    },
-  ];
+  pages: any[] = [];
 
-  pages_marketplace: any[] = [
-    {
-      id: 1,
-      link: '',
-      name: 'default black',
-      picture: '../../../assets/page.png',
-      premium: false,
-    },
-  ];
+  pages_marketplace: any[] = [];
 
-  monitors: any[] = [
-    { name: 'my_monitor', selected: false, id: 1 },
-    { name: 'monitoring', selected: false, id: 2 },
-  ];
+  monitors: any[] = [];
 
   select_all_pages() {
     this.all_pages_selected = !this.all_pages_selected;
@@ -115,6 +109,7 @@ export class PagesComponent implements OnInit {
         let form_data = this.build_form_data(form);
         this.server.create_user_page(form_data).subscribe((res) => {
           if (res.status && res.status == 200) {
+            this.refresh_user_pages();
             this.show_creation_window();
             this.shared.show_alert('Page created successfully');
             form.reset();
@@ -191,7 +186,13 @@ export class PagesComponent implements OnInit {
     return form_data;
   }
 
-  load_pages() {
-    setTimeout(() => (this.loading_pages = false), 1000);
+  refresh_user_pages() {
+    this.loading_pages = true;
+    this.server.get_user_pages().subscribe((res) => {
+      if (res.status && res.status == 200) {
+        this.pages = res.pages;
+        this.loading_pages = false;
+      }
+    });
   }
 }
