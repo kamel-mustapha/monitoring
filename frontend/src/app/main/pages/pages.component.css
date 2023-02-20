@@ -24,7 +24,7 @@
 }
 
 .pages_grid.header {
-  @apply border-b border-gray-300 font-medium pb-4;
+  @apply border-b border-gray-200 font-medium py-3;
 }
 
 .pages_grid.item {

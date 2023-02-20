@@ -44,7 +44,8 @@ class Monitoring(View):
                                         monitor = Monitor.objects.create(
                                                 user=req.user,
                                                 name=data.get("name"),
-                                                type=data.get("type"),
+                                                type="http",
+                                                # type=data.get("type"),
                                                 link=data.get("link"),
                                                 interval=data.get("interval"), 
                                                 success_status=data.get("success_status"),

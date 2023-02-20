@@ -2,7 +2,7 @@
   <app-header></app-header>
   <div class="flex gap-2">
     <div
-      class="relative w-full flex flex-col bg-white rounded-2xl px-10 py-6 border border-gray-300"
+      class="relative w-full flex flex-col bg-white rounded-2xl p-8 py-4 border border-gray-300"
     >
       <div class="flex justify-between items-center">
         <div class="content_title">Monitors</div>
@@ -47,7 +47,7 @@
               <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
               Paused
             </div>
-            <div class="text_overflow_ellipsis">{{ monitor.type }}</div>
+            <div class="text_overflow_ellipsis">{{ monitor.name }}</div>
             <!-- <div class="text_overflow_ellipsis">{{ monitor.name }}</div> -->
 
             <div class="text-sm text_overflow_ellipsis">{{ monitor.link }}</div>
@@ -94,7 +94,7 @@
       </div>
     </div>
     <div
-      class="relative w-8/12 flex flex-col bg-white rounded-2xl px-10 py-8 border border-gray-300"
+      class="relative w-8/12 flex flex-col bg-white rounded-2xl p-6 border border-gray-300"
     >
       <div class="flex justify-between items-center select_events">
         <div class="content_title pb-4">Events</div>
@@ -238,7 +238,7 @@
         required
       />
     </div>
-    <div class="property_box">
+    <!-- <div class="property_box">
       <label>
         Type
         <i
@@ -259,7 +259,7 @@
         <option value="">Monitor type</option>
         <option value="http">http</option>
       </select>
-    </div>
+    </div> -->
 
     <div class="grid grid-cols-2 gap-1">
       <div class="property_box">
