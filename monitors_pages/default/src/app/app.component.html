@@ -1,0 +1,39 @@
+<app-header></app-header>
+<main class="max-w-1000 mx-auto py-8 min-h-screen">
+  <div class="mb-12 flex items-center justify-between">
+    <h1 class="text-3xl flex gap-4">
+      <span class="font-medium">Monitoring</span>
+      <span class="text-gray-600 font-semibold text-xl self-end">90 Days</span>
+    </h1>
+    <div class="text-xs flex items-center gap-6 text-gray-500 font-medium">
+      <span class="text-gray-900 font-bold">24 HOURS</span>
+      <span>7 DAYS</span>
+      <span>30 DAYS</span>
+    </div>
+  </div>
+
+  <div
+    *ngFor="let monitor of monitors"
+    class="my-12 border-b border-gray-300 pb-4"
+  >
+    <h2 class="mb-2">
+      <span class="capitalize">{{ monitor.name }}</span> - Checking every 1 min
+    </h2>
+    <div class="flex justify-between gap-8 items-center">
+      <div class="w-full">
+        <canvas class="w-full" id="chart_{{ monitor.id }}" height="58"></canvas>
+      </div>
+      <div class="w-2/12 flex items-center justify-between gap-6">
+        <span>
+          <span class="block text-gray-700">Availability</span>
+          <span class="block font-medium text-xl">100%</span>
+        </span>
+        <span>
+          <span class="block text-gray-700">Response</span>
+          <span class="block font-medium text-xl">500ms</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>
