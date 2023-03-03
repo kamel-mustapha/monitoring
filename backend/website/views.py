@@ -90,3 +90,5 @@ def activate_account(req, user, code):
     return redirect('website:login')
 
 
+def user_monitor(req, id):
+    return render(req, "monitors/default.html")

@@ -1,5 +1,25 @@
-canvas {
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+@keyframes slideup {
+  from {
+    height: 0;
+  }
+}
+
+.track_bar {
+  animation: slideup 300ms ease-in;
+}
+.track_bar:hover > div,
+.track_bar:active > div {
+  @apply grid;
+}
+
+.track_bar span {
+  @apply absolute w-full bg-green-700 shadow-xl bottom-0;
+}
+
+.track_bar:hover > span {
+  @apply bg-green-900;
+}
+
+.filters > span {
+  @apply lg:cursor-pointer hover:text-gray-700;
 }

@@ -6,7 +6,12 @@ module.exports = {
         600: "600px",
       },
       maxWidth: {
-        1000: "1000px",
+        1000: "1200px",
+      },
+      gridTemplateColumns: {
+        screen: "repeat(90, 1fr)",
+        medium: "repeat(60, 1fr)",
+        mobile: "repeat(30, 1fr)",
       },
     },
   },

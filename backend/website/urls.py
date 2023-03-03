@@ -10,7 +10,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page = "/")),
     path('pricing/', TemplateView.as_view(template_name = "offline/pricing.html"), name = "pricing"),
     path('activation/', TemplateView.as_view(template_name = "offline/activation.html")),
-    path('activate-account/<int:user>/<str:code>', activate_account)
+    path('activate-account/<int:user>/<str:code>', activate_account),
+    path('monitor/<int:id>', user_monitor)
 ]
 
 app_name = 'website'

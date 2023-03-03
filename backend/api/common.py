@@ -39,3 +39,8 @@ def sync_jobs():
         elif jobs and not monitor.running:
             for job in jobs:
                 job.delete()
+
+
+def calculate_percentage(response, max):
+    percentage = (response * 100) / max
+    return percentage

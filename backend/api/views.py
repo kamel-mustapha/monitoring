@@ -212,3 +212,45 @@ def get_user_pages(req):
         except Exception as e:
                 logger.exception(e)
         return JsonResponse(req.res)
+
+
+
+@csrf_exempt
+def monitor_page_stats(req):
+        req.res["status"] = 200
+        req.res["monitors"] = [
+                {
+                "id": 0,
+                "name": 'API',
+                "uptime_day": 95,
+                "uptime_week": 97,
+                "uptime_month": 98,
+                "response_day": 400,
+                "response_week": 540,
+                "response_month": 450,
+                "max_response_time": 500,
+                "uptimes": [
+                        { "date": '21 Feb 2023', "value": 100 },
+                        { "date": '21 Feb 2023', "value": 98 },
+                ],
+                "responses": [
+                        {
+                        "date": '21 Feb 2023',
+                        "value": 500,
+                          "percentage": calculate_percentage(500, 500),
+                        },
+                        {
+                        "date": '21 Feb 2023',
+                        "value": 250,
+                          "percentage": calculate_percentage(250, 500),
+                        },
+                        {
+                        "date": '21 Feb 2023',
+                        "value": 400,
+                          "percentage": calculate_percentage(400, 500),
+                        },
+                ],
+                },
+        ]
+        return JsonResponse(req.res)
+

@@ -1,154 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js';
-
+import { HttpClient } from '@angular/common/http';
+import { isDevMode } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  constructor(private http: HttpClient) {}
   ngOnInit(): void {
-    for (let monitor of this.monitors) {
-      setTimeout(() => {
-        this.build_charts(monitor);
-      }, 200);
+    if (window.innerWidth < 640) {
+      this.monitor_time = 30;
+      this.monitors.forEach((monitor: any) => {
+        monitor.responses = monitor.responses.slice(-30);
+        monitor.uptimes = monitor.uptimes.slice(-30);
+      });
+    } else if (window.innerWidth >= 640 && window.innerWidth <= 1024) {
+      this.monitor_time = 60;
+      this.monitors.forEach((monitor: any) => {
+        monitor.responses = monitor.responses.slice(-60);
+        monitor.uptimes = monitor.uptimes.slice(-60);
+      });
+    }
+    const monitor_container: any =
+      document.getElementById('monitor_id')?.dataset.id;
+    const monitor_id: number = parseInt(monitor_container);
+    const api_url = isDevMode()
+      ? `http://localhost:8000/api/monitor-page-stats?id=${monitor_id}`
+      : `/api/monitor-page-stats?id=${monitor_id}`;
+    this.http.get<any>(api_url).subscribe((res) => {
+      if (res.status && res.status == 200) {
+        this.monitors = res.monitors;
+      }
+      this.loading = false;
+    });
+  }
+  loading: boolean = true;
+  response_active: boolean = false;
+  timings: any = { day: true };
+  monitor_time: number = 90;
+  monitors: any = [];
+  change_mode(mode: number) {
+    if (mode == 0) {
+      this.response_active = true;
+    } else {
+      this.response_active = false;
     }
   }
-  monitors = [
-    { id: 0, name: 'API' },
-    { id: 1, name: 'Website' },
-  ];
-  build_charts(monitor: any) {
-    const ctx: any = document.getElementById(`chart_${monitor.id}`);
-    const labels = [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      '20 Feb 2023',
-    ];
-    const data = {
-      labels: labels,
-      datasets: [
-        {
-          label: monitor.name,
-          data: [
-            100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-            100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-            100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-            100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-            100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-            100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-            100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-          ],
-          backgroundColor: 'green',
-        },
-      ],
-    };
-
-    new Chart(ctx, {
-      type: 'bar',
-      data: data,
-      options: {
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-        scales: {
-          x: {
-            display: false,
-          },
-          y: {
-            display: false,
-          },
-        },
-      },
-    });
+  change_timing(timing: string) {
+    this.timings = {};
+    this.timings[timing] = true;
   }
 }

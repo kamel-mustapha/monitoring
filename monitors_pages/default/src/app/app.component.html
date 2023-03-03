@@ -1,39 +1,232 @@
 <app-header></app-header>
-<main class="max-w-1000 mx-auto py-8 min-h-screen">
-  <div class="mb-12 flex items-center justify-between">
-    <h1 class="text-3xl flex gap-4">
+<main class="relative max-w-1000 mx-auto py-8 px-6 min-h-screen">
+  <div *ngIf="!loading">
+    <h1 class="text-3xl">
       <span class="font-medium">Monitoring</span>
-      <span class="text-gray-600 font-semibold text-xl self-end">90 Days</span>
+      <span
+        class="text-gray-600 font-semibold text-lg sm:text-xl self-end ml-4"
+      >
+        {{ monitor_time }} Days
+      </span>
     </h1>
-    <div class="text-xs flex items-center gap-6 text-gray-500 font-medium">
-      <span class="text-gray-900 font-bold">24 HOURS</span>
-      <span>7 DAYS</span>
-      <span>30 DAYS</span>
+    <div
+      class="mt-14 pl-1 flex flex-col sm:flex-row gap-10 sm:items-center justify-between"
+    >
+      <div
+        class="filters text-xs flex items-center gap-6 text-gray-500 font-medium"
+      >
+        <span
+          (click)="change_mode(1)"
+          [ngClass]="{ 'text-gray-900 font-bold': !response_active }"
+        >
+          By uptime
+        </span>
+        <span
+          (click)="change_mode(0)"
+          [ngClass]="{ 'text-gray-900 font-bold': response_active }"
+        >
+          By resopnse time
+        </span>
+      </div>
+      <div
+        class="filters text-xs flex items-center gap-6 text-gray-500 font-medium"
+      >
+        <span
+          (click)="change_timing('day')"
+          [ngClass]="{ 'text-gray-900 font-bold': timings.day }"
+        >
+          24 HOURS
+        </span>
+        <span
+          (click)="change_timing('week')"
+          [ngClass]="{ 'text-gray-900 font-bold': timings.week }"
+        >
+          7 DAYS
+        </span>
+        <span
+          (click)="change_timing('month')"
+          [ngClass]="{ 'text-gray-900 font-bold': timings.month }"
+        >
+          30 DAYS
+        </span>
+      </div>
     </div>
-  </div>
 
-  <div
-    *ngFor="let monitor of monitors"
-    class="my-12 border-b border-gray-300 pb-4"
-  >
-    <h2 class="mb-2">
-      <span class="capitalize">{{ monitor.name }}</span> - Checking every 1 min
-    </h2>
-    <div class="flex justify-between gap-8 items-center">
-      <div class="w-full">
-        <canvas class="w-full" id="chart_{{ monitor.id }}" height="58"></canvas>
-      </div>
-      <div class="w-2/12 flex items-center justify-between gap-6">
-        <span>
-          <span class="block text-gray-700">Availability</span>
-          <span class="block font-medium text-xl">100%</span>
-        </span>
-        <span>
-          <span class="block text-gray-700">Response</span>
-          <span class="block font-medium text-xl">500ms</span>
-        </span>
+    <div
+      *ngFor="let monitor of monitors"
+      class="my-12 border-b border-gray-300 pb-4"
+    >
+      <h2 class="mb-6">
+        <span class="capitalize">{{ monitor.name }}</span> - Checking every 1
+        min
+      </h2>
+      <div class="flex justify-between flex-col md:flex-row gap-4 items-center">
+        <div
+          *ngIf="!response_active"
+          class="w-full grid grid-cols-mobile md:grid-cols-medium lg:grid-cols-screen gap-px"
+        >
+          <div
+            *ngFor="let uptime of monitor.uptimes"
+            class="track_bar relative w-2 h-10 lg:cursor-pointer"
+          >
+            <span
+              [style.height]="uptime.value + '%'"
+              [style.min-height]="'20%'"
+              class="rounded-full"
+            >
+            </span>
+            <div
+              class="hidden absolute bg-gray-900 -left-10 -top-11 text-xs rounded-md shadow-lg text-gray-100 px-2 py-1"
+            >
+              <div class="whitespace-nowrap">{{ uptime.date }}</div>
+              <div class="whitespace-nowrap">{{ uptime.value }}%</div>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="response_active"
+          class="w-full grid grid-cols-mobile md:grid-cols-medium lg:grid-cols-screen gap-px"
+        >
+          <div
+            *ngFor="let response of monitor.responses"
+            class="track_bar relative w-2 h-10 lg:cursor-pointer"
+          >
+            <span
+              [style.height]="response.percentage + '%'"
+              [style.min-height]="'20%'"
+              class="rounded-sm"
+            >
+            </span>
+            <div
+              class="hidden absolute bg-gray-900 -left-10 -top-11 text-xs rounded-md shadow-lg text-gray-100 px-2 py-1"
+            >
+              <div class="whitespace-nowrap">{{ response.date }}</div>
+              <div class="whitespace-nowrap">{{ response.value }} ms</div>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-between gap-6">
+          <span>
+            <span class="block text-gray-700">Availability</span>
+            <span class="block font-medium text-xl">
+              <span *ngIf="timings['day']">{{ monitor.uptime_day }}%</span>
+              <span *ngIf="timings['week']">{{ monitor.uptime_week }}%</span>
+              <span *ngIf="timings['month']">{{ monitor.uptime_month }}%</span>
+            </span>
+          </span>
+          <span>
+            <span class="block text-gray-700">Response</span>
+            <span class="block font-medium text-xl">
+              <span *ngIf="timings['day']">{{ monitor.response_day }}ms</span>
+              <span *ngIf="timings['week']">{{ monitor.response_week }}ms</span>
+              <span *ngIf="timings['month']"
+                >{{ monitor.response_month }}ms</span
+              >
+            </span>
+          </span>
+        </div>
       </div>
     </div>
   </div>
+  <svg
+    *ngIf="loading"
+    width="50"
+    height="50"
+    viewBox="0 0 135 140"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="#000"
+    class="absolute left-0 right-0 mx-auto top-1/4"
+  >
+    <rect y="10" width="15" height="120" rx="6">
+      <animate
+        attributeName="height"
+        begin="0.5s"
+        dur="1s"
+        values="120;110;100;90;80;70;60;50;40;140;120"
+        calcMode="linear"
+        repeatCount="indefinite"
+      />
+      <animate
+        attributeName="y"
+        begin="0.5s"
+        dur="1s"
+        values="10;15;20;25;30;35;40;45;50;0;10"
+        calcMode="linear"
+        repeatCount="indefinite"
+      />
+    </rect>
+    <rect x="30" y="10" width="15" height="120" rx="6">
+      <animate
+        attributeName="height"
+        begin="0.25s"
+        dur="1s"
+        values="120;110;100;90;80;70;60;50;40;140;120"
+        calcMode="linear"
+        repeatCount="indefinite"
+      />
+      <animate
+        attributeName="y"
+        begin="0.25s"
+        dur="1s"
+        values="10;15;20;25;30;35;40;45;50;0;10"
+        calcMode="linear"
+        repeatCount="indefinite"
+      />
+    </rect>
+    <rect x="60" width="15" height="140" rx="6">
+      <animate
+        attributeName="height"
+        begin="0s"
+        dur="1s"
+        values="120;110;100;90;80;70;60;50;40;140;120"
+        calcMode="linear"
+        repeatCount="indefinite"
+      />
+      <animate
+        attributeName="y"
+        begin="0s"
+        dur="1s"
+        values="10;15;20;25;30;35;40;45;50;0;10"
+        calcMode="linear"
+        repeatCount="indefinite"
+      />
+    </rect>
+    <rect x="90" y="10" width="15" height="120" rx="6">
+      <animate
+        attributeName="height"
+        begin="0.25s"
+        dur="1s"
+        values="120;110;100;90;80;70;60;50;40;140;120"
+        calcMode="linear"
+        repeatCount="indefinite"
+      />
+      <animate
+        attributeName="y"
+        begin="0.25s"
+        dur="1s"
+        values="10;15;20;25;30;35;40;45;50;0;10"
+        calcMode="linear"
+        repeatCount="indefinite"
+      />
+    </rect>
+    <rect x="120" y="10" width="15" height="120" rx="6">
+      <animate
+        attributeName="height"
+        begin="0.5s"
+        dur="1s"
+        values="120;110;100;90;80;70;60;50;40;140;120"
+        calcMode="linear"
+        repeatCount="indefinite"
+      />
+      <animate
+        attributeName="y"
+        begin="0.5s"
+        dur="1s"
+        values="10;15;20;25;30;35;40;45;50;0;10"
+        calcMode="linear"
+        repeatCount="indefinite"
+      />
+    </rect>
+  </svg>
 </main>
 <app-footer></app-footer>
