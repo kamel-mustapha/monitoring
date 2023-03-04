@@ -75,6 +75,7 @@ class MonitorEvent(models.Model):
     created_time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     is_success = models.BooleanField(default=False)
     failure_start = models.BooleanField(default=False)
+    failure_end = models.BooleanField(default=False)
     
     class Meta:
         db_table = "Events"
@@ -92,6 +93,7 @@ class UserPage(models.Model):
     href_link = models.CharField(max_length=300, blank=True, null=True)
     icon_link = models.ImageField(upload_to=personal_image_filename, blank=True, null=True)
     seen = models.IntegerField(default=0)
+    link = models.CharField(max_length=300, blank=True, null=True)
     
     class Meta:
         db_table = "UserPage"

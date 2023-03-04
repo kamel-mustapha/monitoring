@@ -10,7 +10,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  @Input() page_title: string = '';
   @Input() page_icon: string = '';
   @Input() page_link: string = '';
+  @Input() page_name: string = '';
 }

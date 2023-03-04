@@ -61,12 +61,19 @@ def calculate_uptime(events):
     if downtimes:
         incident_time = 0
         for downtime in downtimes:
-            downtime_fixed = events.filter(created_time__gt=downtime.created_time, is_success=True)
+            downtime_fixed = events.filter(created_time__gt=downtime.created_time, failure_end=True).order_by("id")
             if downtime_fixed:
                 downtime_fixed = downtime_fixed[0]
                 time_of_incident = downtime_fixed.created_time - downtime.created_time
                 time_of_incident = time_of_incident.total_seconds()*1000
                 incident_time += time_of_incident
+            else:
+                pass
+                # end_of_day = timezone.datetime(day=downtime.day, month=downtime.month, year=downtime.year) + td(days=1)
+                # time_of_incident = end_of_day - downtime.created_time
+                # time_of_incident = time_of_incident.total_seconds()*1000
+                # incident_time += time_of_incident
+
         uptime = (incident_time*100)/86400000 #total milliseconds in a day
         uptime = round(100-uptime, 2)
         return uptime

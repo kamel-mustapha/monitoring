@@ -72,6 +72,7 @@ export class HomeComponent implements OnInit {
         this.loading_events = false;
         this.monitor_selected = true;
       }, 500);
+      this.show_hide_element('select_events');
     });
   }
 

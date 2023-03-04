@@ -100,7 +100,10 @@ def user_monitor(req, id):
             "PAGE_ID": id,
             "PAGE_TITLE": page.title,
             "PAGE_LINK": page.href_link,
-            "PAGE_ICON": page.icon_link
+            "PAGE_ICON": page.icon_link,
+            "PAGE_NAME": page.name
         }
-        return render(req, "monitors/default.html", context=context)
+        page.seen += 1
+        page.save()
+        return render(req, f"monitors/{page.page.html_file}.html", context=context)
     raise Http404

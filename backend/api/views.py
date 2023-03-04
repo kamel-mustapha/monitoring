@@ -40,7 +40,7 @@ class Monitoring(View):
                                 data = json.loads(req.body)
                                 if validate_entry(
                                         data, 
-                                        ["name", "type", "link", "interval", "alert_emails", "success_status", "timeout"]
+                                        ["name", "link", "interval", "alert_emails", "success_status", "timeout"]
                                         ):
                                         monitor = Monitor.objects.create(
                                                 user=req.user,
@@ -91,7 +91,7 @@ class Event(View):
                                         event.created_time = get_verbose_datetime(event.created_time)
                                 events_data = EventData(monitor_events, many=True)
                                 if events_data.data:
-                                        req.res["events"] = events_data.data
+                                        req.res["events"] = events_data.data[:1000]
                                         req.res["message"] = "success"
                                 else:
                                         req.res["events"] = []
@@ -187,6 +187,8 @@ def create_user_page(req):
                                 for monitor in monitors_ids:
                                         monitor = Monitor.objects.get(id=int(monitor.strip()))
                                         user_page.monitors.add(monitor)
+                        user_page.link = f"/monitor/{user_page.id}"
+                        user_page.save()
                         req.res["message"] = "success"
                         req.res["status"] = 200
                 except Exception as e:
@@ -209,7 +211,7 @@ def get_user_pages(req):
         try:
                 pages = UserPage.objects.filter(user=req.user).annotate(monitors_nb=Count('monitors'))
                 # pages_serial = UserPageData(pages, many=True)
-                req.res["pages"] = list(pages.values('id', 'name', 'href_link', 'seen', 'title', 'monitors_nb'))
+                req.res["pages"] = list(pages.values('id', 'name', 'link', 'seen', 'title', 'monitors_nb'))
                 req.res["status"] = 200
                 req.res["message"] = "success"
         except Exception as e:

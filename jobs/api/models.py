@@ -57,6 +57,7 @@ class MonitorEvent(models.Model):
     created_time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     is_success = models.BooleanField(default=False)
     failure_start = models.BooleanField(default=False)
+    failure_end = models.BooleanField(default=False)
     
     def __str__(self):
         return self.status

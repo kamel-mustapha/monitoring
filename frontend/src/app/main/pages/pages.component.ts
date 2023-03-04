@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, isDevMode } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SharedService } from 'src/app/services/shared.service';
 import { ServerService } from 'src/app/services/server.service';
@@ -29,14 +29,22 @@ export class PagesComponent implements OnInit {
       if (res.status && res.status == 200) {
         this.pages_marketplace = res.pages;
         // for dev
-        this.pages_marketplace.forEach(
-          (page) => (page.picture = `http://localhost:8000${page.picture}`)
-        );
+        if (this.pages_marketplace) {
+          this.pages_marketplace.forEach(
+            (page) => (page.picture = `http://localhost:8000${page.picture}`)
+          );
+        }
       }
     });
     this.refresh_user_pages();
+    if (isDevMode()) {
+      this.website_link = 'http://localhost:8000';
+    } else {
+      this.website_link = 'https://statuschecks.net';
+    }
   }
 
+  website_link: string = '';
   all_pages_selected: boolean = false;
   one_page_selected: boolean = false;
   creation_in_progress: boolean = false;

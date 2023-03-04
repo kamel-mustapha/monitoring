@@ -6,7 +6,7 @@
     <title>{{PAGE_TITLE}}</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="{{PAGE_ICON}}" />
+    <link rel="icon" type="image/x-icon" href="/media/{{PAGE_ICON}}" />
     <style>
       *,
       :before,
@@ -91,9 +91,9 @@
   <body class="bg-gray-100">
     <app-root></app-root>
     <span style="display: none" id="monitor_id" data-id="{{PAGE_ID}}"></span>
-    <span style="display: none" id="monitor_title" data-id="{{PAGE_TITLE}}"></span>
     <span style="display: none" id="monitor_link" data-id="{{PAGE_LINK}}"></span>
-    <span style="display: none" id="monitor_icon" data-id="{{PAGE_ICON}}"></span>
+    <span style="display: none" id="monitor_icon" data-id="/media/{{PAGE_ICON}}"></span>
+    <span style="display: none" id="monitor_name" data-id="{{PAGE_NAME}}"></span>
     <script src="{% static 'monitors/default/runtime.js' %}" type="module"></script>
     <script src="{% static 'monitors/default/polyfills.js' %}" type="module"></script>
     <script src="{% static 'monitors/default/main.js' %}" type="module"></script>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, isDevMode } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { isDevMode } from '@angular/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -35,17 +35,17 @@ export class AppComponent implements OnInit {
       this.loading = false;
     });
 
-    const page_title_container: any = document.getElementById('monitor_title');
     const page_icon_container: any = document.getElementById('monitor_icon');
     const page_link_container: any = document.getElementById('monitor_link');
-    this.page_title = page_title_container.dataset.id;
+    const page_name_container: any = document.getElementById('monitor_name');
     this.page_icon = page_icon_container.dataset.id;
     this.page_link = page_link_container.dataset.id;
+    this.page_name = page_name_container.dataset.id;
   }
   loading: boolean = true;
   response_active: boolean = false;
   timings: any = { week: true };
-  page_title: string = 'Monitoring page';
+  page_name: string = '';
   page_icon: string = '';
   page_link: string = '';
   monitor_time: number = 90;

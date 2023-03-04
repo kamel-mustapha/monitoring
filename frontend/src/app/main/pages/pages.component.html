@@ -68,8 +68,10 @@
             <div>{{ page.name }}</div>
             <div>{{ page.seen }}</div>
             <div>{{ page.monitors_nb }}</div>
-            <div>{{ page.href_link }}</div>
-            <div><a [href]="page.href_link" target="_blank">See page</a></div>
+            <div>{{ website_link }}{{ page.link }}</div>
+            <div>
+              <a [href]="website_link + page.link" target="_blank">See page</a>
+            </div>
           </div>
         </div>
         <div
@@ -98,10 +100,10 @@
     (ngSubmit)="submit_page(f, 1)"
   >
     <h1 class="font-bold text-lg text-gray-700 text-center">Select page</h1>
-    <div class="flex flex-col gap-2 mt-4">
+    <div *ngIf="pages_marketplace.length > 0" class="flex flex-col gap-2 mt-4">
       <div class="relative overflow-hidden">
         <img
-          class="rounded-xl shadow-lg h-56 w-96"
+          class="rounded-xl h-56 max-w-full"
           [src]="pages_marketplace[page_creation_active_index].picture"
           alt=""
         />
@@ -122,9 +124,9 @@
         >
           <i class="fas fa-arrow-left text-gray-600"></i>
         </button>
-        <a href="" class="text-blue-500 hover:underline capitalize">
+        <span class="text-blue-500">
           {{ pages_marketplace[page_creation_active_index].name }}
-        </a>
+        </span>
         <button
           type="button"
           class="active:translate-y-px duration-200"
@@ -152,7 +154,7 @@
     (ngSubmit)="submit_page(f1, 2)"
     class="flex flex-col h-full justify-between"
   >
-    <h1 class="font-bold text-lg text-gray-700 text-center">
+    <h1 class="font-bold text-lg text-gray-700 text-center px-16">
       Associate monitors
     </h1>
     <div

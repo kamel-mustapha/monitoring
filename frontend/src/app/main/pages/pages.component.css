@@ -12,7 +12,7 @@
 
 .pages_grid {
   @apply grid  px-12  items-center border-b;
-  grid-template-columns: 10% 20% 20% 20% 20% 10%;
+  grid-template-columns: 10% 20% 15% 15% 20% 20%;
 }
 
 .pages_grid > div:last-child {

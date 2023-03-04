@@ -175,6 +175,7 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
     request_time = 0
     is_success = False
     failure_start = False
+    failure_end = False
     last_event = MonitorEvent.objects.all().order_by("-id")[:1]
     try:
         logger.info(f"Started monitoring {monitor_id}")
@@ -186,8 +187,9 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
         if status == success_status:
             is_success = True
             if last_event and not last_event[0].is_success:
-                downtime_start = MonitorEvent.objects.filter(failure_start=True).order_by("-id")[:1]
-                send_alert_email(alert_emails, monitor_link, status, downtime=last_event[0].created_time-downtime_start[0].created_time, success=True)
+                failure_end = True
+                downtime_start = MonitorEvent.objects.filter(failure_start=True).order_by("-id")[0]
+                send_alert_email(alert_emails, monitor_link, status, downtime=last_event[0].created_time-downtime_start.created_time, success=True)
         elif status != success_status and last_event and last_event[0].is_success:
             failure_start = True
             send_alert_email(alert_emails, monitor_link, status)
@@ -201,5 +203,6 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
             time=request_time,
             message=status_messages.get(status),
             is_success=is_success,
-            failure_start=failure_start
+            failure_start=failure_start,
+            failure_end=failure_end
         )
