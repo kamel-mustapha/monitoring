@@ -40,7 +40,7 @@ class Page(models.Model):
     link = models.CharField(max_length=500, blank=True, null=True)
     picture = models.ImageField(upload_to="pages_marketplace/", blank=True, null=True)
     premium = models.BooleanField(default=False)
-
+    html_file = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -75,9 +75,6 @@ class MonitorEvent(models.Model):
     created_time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     is_success = models.BooleanField(default=False)
     failure_start = models.BooleanField(default=False)
-    
-    def __str__(self):
-        return self.status
     
     class Meta:
         db_table = "Events"

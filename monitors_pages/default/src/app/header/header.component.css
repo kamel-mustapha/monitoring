@@ -1,0 +1,7 @@
+a {
+  width: fit-content;
+}
+
+header > div {
+  min-height: 80px;
+}

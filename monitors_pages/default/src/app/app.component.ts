@@ -34,10 +34,20 @@ export class AppComponent implements OnInit {
       }
       this.loading = false;
     });
+
+    const page_title_container: any = document.getElementById('monitor_title');
+    const page_icon_container: any = document.getElementById('monitor_icon');
+    const page_link_container: any = document.getElementById('monitor_link');
+    this.page_title = page_title_container.dataset.id;
+    this.page_icon = page_icon_container.dataset.id;
+    this.page_link = page_link_container.dataset.id;
   }
   loading: boolean = true;
   response_active: boolean = false;
-  timings: any = { day: true };
+  timings: any = { week: true };
+  page_title: string = 'Monitoring page';
+  page_icon: string = '';
+  page_link: string = '';
   monitor_time: number = 90;
   monitors: any = [];
   change_mode(mode: number) {

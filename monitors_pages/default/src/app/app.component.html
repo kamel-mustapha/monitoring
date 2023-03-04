@@ -1,16 +1,20 @@
-<app-header></app-header>
+<app-header
+  [page_title]="page_title"
+  [page_icon]="page_icon"
+  [page_link]="page_link"
+></app-header>
 <main class="relative max-w-1000 mx-auto py-8 px-6 min-h-screen">
   <div *ngIf="!loading">
-    <h1 class="text-3xl">
+    <!-- <h1 class="text-3xl">
       <span class="font-medium">Monitoring</span>
       <span
         class="text-gray-600 font-semibold text-lg sm:text-xl self-end ml-4"
       >
         {{ monitor_time }} Days
       </span>
-    </h1>
+    </h1> -->
     <div
-      class="mt-14 pl-1 flex flex-col sm:flex-row gap-10 sm:items-center justify-between"
+      class="mt-4 pl-1 flex flex-col sm:flex-row gap-10 sm:items-center justify-between"
     >
       <div
         class="filters text-xs flex items-center gap-6 text-gray-500 font-medium"
@@ -32,12 +36,6 @@
         class="filters text-xs flex items-center gap-6 text-gray-500 font-medium"
       >
         <span
-          (click)="change_timing('day')"
-          [ngClass]="{ 'text-gray-900 font-bold': timings.day }"
-        >
-          24 HOURS
-        </span>
-        <span
           (click)="change_timing('week')"
           [ngClass]="{ 'text-gray-900 font-bold': timings.week }"
         >
@@ -49,6 +47,12 @@
         >
           30 DAYS
         </span>
+        <span
+          (click)="change_timing('ninty')"
+          [ngClass]="{ 'text-gray-900 font-bold': timings.ninty }"
+        >
+          90 DAYS
+        </span>
       </div>
     </div>
 
@@ -57,7 +61,8 @@
       class="my-12 border-b border-gray-300 pb-4"
     >
       <h2 class="mb-6">
-        <span class="capitalize">{{ monitor.name }}</span> - Checking every 1
+        <span class="capitalize">{{ monitor.name }}</span> - Checking every
+        {{ monitor.check_interval }}
         min
       </h2>
       <div class="flex justify-between flex-col md:flex-row gap-4 items-center">
@@ -109,18 +114,20 @@
           <span>
             <span class="block text-gray-700">Availability</span>
             <span class="block font-medium text-xl">
-              <span *ngIf="timings['day']">{{ monitor.uptime_day }}%</span>
               <span *ngIf="timings['week']">{{ monitor.uptime_week }}%</span>
               <span *ngIf="timings['month']">{{ monitor.uptime_month }}%</span>
+              <span *ngIf="timings['ninty']">{{ monitor.uptime_ninty }}%</span>
             </span>
           </span>
           <span>
             <span class="block text-gray-700">Response</span>
             <span class="block font-medium text-xl">
-              <span *ngIf="timings['day']">{{ monitor.response_day }}ms</span>
               <span *ngIf="timings['week']">{{ monitor.response_week }}ms</span>
               <span *ngIf="timings['month']"
                 >{{ monitor.response_month }}ms</span
+              >
+              <span *ngIf="timings['ninty']"
+                >{{ monitor.response_ninty }}ms</span
               >
             </span>
           </span>
@@ -229,4 +236,8 @@
     </rect>
   </svg>
 </main>
-<app-footer></app-footer>
+<app-footer
+  [page_title]="page_title"
+  [page_icon]="page_icon"
+  [page_link]="page_link"
+></app-footer>

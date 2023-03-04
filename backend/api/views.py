@@ -1,4 +1,4 @@
-import json
+import json, datetime
 from django.shortcuts import render
 from django.views.generic import View
 from api.serializers import *
@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 from website.models import Notification
 from django.db.models import Q
 from django.db.models import Count
+from django.utils import timezone
 
 from logging import getLogger
 logger = getLogger(__name__)
@@ -86,6 +87,8 @@ class Event(View):
                         if req.user.is_authenticated:
                                 data = req.GET
                                 monitor_events = MonitorEvent.objects.filter(monitor_id=int(data.get("monitor"))).order_by("-id")
+                                for event in monitor_events:
+                                        event.created_time = get_verbose_datetime(event.created_time)
                                 events_data = EventData(monitor_events, many=True)
                                 if events_data.data:
                                         req.res["events"] = events_data.data
@@ -217,40 +220,21 @@ def get_user_pages(req):
 
 @csrf_exempt
 def monitor_page_stats(req):
-        req.res["status"] = 200
-        req.res["monitors"] = [
-                {
-                "id": 0,
-                "name": 'API',
-                "uptime_day": 95,
-                "uptime_week": 97,
-                "uptime_month": 98,
-                "response_day": 400,
-                "response_week": 540,
-                "response_month": 450,
-                "max_response_time": 500,
-                "uptimes": [
-                        { "date": '21 Feb 2023', "value": 100 },
-                        { "date": '21 Feb 2023', "value": 98 },
-                ],
-                "responses": [
-                        {
-                        "date": '21 Feb 2023',
-                        "value": 500,
-                          "percentage": calculate_percentage(500, 500),
-                        },
-                        {
-                        "date": '21 Feb 2023',
-                        "value": 250,
-                          "percentage": calculate_percentage(250, 500),
-                        },
-                        {
-                        "date": '21 Feb 2023',
-                        "value": 400,
-                          "percentage": calculate_percentage(400, 500),
-                        },
-                ],
-                },
-        ]
+        try:
+                data = req.GET
+                page = UserPage.objects.filter(id=int(data.get("id")))
+                if page:
+                        page = page[0]
+                        req.res["monitors"] = []
+                        page_monitors = page.monitors.all()
+                        for monitor in page_monitors:
+                                three_month_date = timezone.now() - datetime.timedelta(days=90)
+                                monitor_events = MonitorEvent.objects.filter(monitor=monitor, created_time__gte=three_month_date)
+                                monitor_data = create_monitor_data(monitor, monitor_events, 90)
+                                req.res["monitors"].append(monitor_data)
+                        req.res["status"] = 200
+                        del req.res["message"]
+        except Exception as e:
+                logger.exception(e)
         return JsonResponse(req.res)
 

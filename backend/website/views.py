@@ -8,6 +8,8 @@ from django.contrib.auth import logout
 from django.db.models import Q
 from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail
+from api.models import UserPage
+from django.http import Http404
 
 
 class Home(View):
@@ -91,4 +93,14 @@ def activate_account(req, user, code):
 
 
 def user_monitor(req, id):
-    return render(req, "monitors/default.html")
+    page = UserPage.objects.filter(id=id)
+    if page:
+        page = page[0]
+        context = {
+            "PAGE_ID": id,
+            "PAGE_TITLE": page.title,
+            "PAGE_LINK": page.href_link,
+            "PAGE_ICON": page.icon_link
+        }
+        return render(req, "monitors/default.html", context=context)
+    raise Http404
