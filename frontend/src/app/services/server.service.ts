@@ -51,38 +51,38 @@ export class ServerService {
 
   get_notifications() {
     return this.server.get<any>(
-      `${this.api_link}/notification?key=${this.api_key}`
+      `${this.api_link}notification?key=${this.api_key}`
     );
   }
 
   see_all_notifications(data: {}) {
     return this.server.put<any>(
-      `${this.api_link}/notification?key=${this.api_key}`,
+      `${this.api_link}notification?key=${this.api_key}`,
       data
     );
   }
 
   delete_notifications(data: {}) {
     return this.server.delete<any>(
-      `${this.api_link}/notification?key=${this.api_key}`,
+      `${this.api_link}notification?key=${this.api_key}`,
       data
     );
   }
 
   create_user_page(data: any) {
     return this.server.post<any>(
-      `${this.api_link}/create-user-page?key=${this.api_key}`,
+      `${this.api_link}create-user-page?key=${this.api_key}`,
       data
     );
   }
 
   get_pages() {
-    return this.server.get<any>(`${this.api_link}/get-pages`);
+    return this.server.get<any>(`${this.api_link}get-pages`);
   }
 
   get_user_pages() {
     return this.server.get<any>(
-      `${this.api_link}/get-user-pages?key=${this.api_key}`
+      `${this.api_link}get-user-pages?key=${this.api_key}`
     );
   }
 }
