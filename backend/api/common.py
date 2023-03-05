@@ -58,7 +58,8 @@ def calculate_response(events):
 
 def calculate_uptime(events):
     downtimes = events.filter(failure_start=True)
-    if downtimes:
+    downtimes_end = events.filter(failure_end=True)
+    if downtimes or downtimes_end:
         incident_time = 0
         for downtime in downtimes:
             downtime_fixed = events.filter(created_time__gt=downtime.created_time, failure_end=True).order_by("id")
@@ -68,12 +69,22 @@ def calculate_uptime(events):
                 time_of_incident = time_of_incident.total_seconds()*1000
                 incident_time += time_of_incident
             else:
-                pass
-                # end_of_day = timezone.datetime(day=downtime.day, month=downtime.month, year=downtime.year) + td(days=1)
-                # time_of_incident = end_of_day - downtime.created_time
-                # time_of_incident = time_of_incident.total_seconds()*1000
-                # incident_time += time_of_incident
-
+                today = timezone.datetime(day=downtime.created_time.day, month=downtime.created_time.month, year=downtime.created_time.year, tzinfo=ZoneInfo("UTC")) 
+                if timezone.now().date() == today.date():
+                    time_of_incident = timezone.now() - downtime.created_time
+                    time_of_incident = time_of_incident.total_seconds()*1000
+                else:
+                    time_of_incident = (today + td(days=1)) - downtime.created_time
+                    time_of_incident = time_of_incident.total_seconds()*1000
+                incident_time += time_of_incident
+        if downtimes_end:
+            downtime_end = downtimes_end[0]
+            no_uptime = events.filter(created_time__lt=downtime_end.created_time, failure_start=True)
+            if not no_uptime:
+                start_of_day = timezone.datetime(day=downtime_end.created_time.day, month=downtime_end.created_time.month, year=downtime_end.created_time.year, tzinfo=ZoneInfo("UTC")) 
+                time_of_incident = downtime_end.created_time - start_of_day
+                time_of_incident = time_of_incident.total_seconds()*1000
+                incident_time += time_of_incident
         uptime = (incident_time*100)/86400000 #total milliseconds in a day
         uptime = round(100-uptime, 2)
         return uptime

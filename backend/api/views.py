@@ -231,7 +231,7 @@ def monitor_page_stats(req):
                         page_monitors = page.monitors.all()
                         for monitor in page_monitors:
                                 three_month_date = timezone.now() - datetime.timedelta(days=90)
-                                monitor_events = MonitorEvent.objects.filter(monitor=monitor, created_time__gte=three_month_date)
+                                monitor_events = MonitorEvent.objects.filter(monitor=monitor, created_time__gte=three_month_date).order_by("id")
                                 monitor_data = create_monitor_data(monitor, monitor_events, 90)
                                 req.res["monitors"].append(monitor_data)
                         req.res["status"] = 200
