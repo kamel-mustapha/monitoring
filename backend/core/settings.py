@@ -158,4 +158,4 @@ LOGGING = {
 }
 
 
-CSRF_TRUSTED_ORIGINS = ["statuschecks.net", "www.statuschecks.net"]
+CSRF_TRUSTED_ORIGINS = ["https://statuschecks.net", "https://www.statuschecks.net"]
