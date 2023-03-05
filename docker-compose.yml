@@ -5,7 +5,7 @@ services:
     build: ./backend/
     restart: always
     ports:
-      - 8000:8000
+      - 80:8000
     volumes:
       - ./backend/:/code/
   jobs:

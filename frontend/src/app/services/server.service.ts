@@ -51,38 +51,38 @@ export class ServerService {
 
   get_notifications() {
     return this.server.get<any>(
-      `http://127.0.0.1:8000/api/notification?key=417fe54b852719f87777f44f2a283e14`
+      `${this.api_link}api/notification?key=${this.api_key}`
     );
   }
 
   see_all_notifications(data: {}) {
     return this.server.put<any>(
-      `http://127.0.0.1:8000/api/notification?key=417fe54b852719f87777f44f2a283e14`,
+      `${this.api_link}/api/notification?key=${this.api_key}`,
       data
     );
   }
 
   delete_notifications(data: {}) {
     return this.server.delete<any>(
-      `http://127.0.0.1:8000/api/notification?key=417fe54b852719f87777f44f2a283e14`,
+      `${this.api_link}/api/notification?key=${this.api_key}`,
       data
     );
   }
 
   create_user_page(data: any) {
     return this.server.post<any>(
-      `http://127.0.0.1:8000/api/create-user-page?key=417fe54b852719f87777f44f2a283e14`,
+      `${this.api_link}/api/create-user-page?key=${this.api_key}`,
       data
     );
   }
 
   get_pages() {
-    return this.server.get<any>(`http://127.0.0.1:8000/api/get-pages`);
+    return this.server.get<any>(`${this.api_link}/api/get-pages`);
   }
 
   get_user_pages() {
     return this.server.get<any>(
-      `http://127.0.0.1:8000/api/get-user-pages?key=417fe54b852719f87777f44f2a283e14`
+      `${this.api_link}/api/get-user-pages?key=${this.api_key}`
     );
   }
 }

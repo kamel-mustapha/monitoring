@@ -29,11 +29,11 @@ export class PagesComponent implements OnInit {
       if (res.status && res.status == 200) {
         this.pages_marketplace = res.pages;
         // for dev
-        if (this.pages_marketplace) {
-          this.pages_marketplace.forEach(
-            (page) => (page.picture = `http://localhost:8000${page.picture}`)
-          );
-        }
+        // if (this.pages_marketplace) {
+        //   this.pages_marketplace.forEach(
+        //     (page) => (page.picture = `http://localhost:8000${page.picture}`)
+        //   );
+        // }
       }
     });
     this.refresh_user_pages();
