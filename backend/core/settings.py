@@ -156,3 +156,6 @@ LOGGING = {
         }
     },
 }
+
+
+CSRF_TRUSTED_ORIGINS = ["statuschecks.net", "www.statuschecks.net"]
