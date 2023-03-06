@@ -200,6 +200,7 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
         request_time = (end-start)*1000
         if last_event and last_event[0].is_success:
             failure_start = True
+            send_alert_email(alert_emails, monitor_link, status)
         logger.exception(e)
         
     MonitorEvent.objects.create(
