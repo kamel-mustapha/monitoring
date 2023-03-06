@@ -1,8 +1,12 @@
+import json
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-cp3%&%3l1xm_)_ig%40i6&64ddrl_mvx4#wpy6pe5d@f!d5i7$'
+with open(BASE_DIR / 'creds.json', "r") as f:
+    CREDS = json.load(f)
+
+SECRET_KEY = CREDS.get("SECRET_KEY")
 
 DEBUG = True
 
@@ -33,23 +37,23 @@ USE_TZ = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'monitoring',
-        'USER': 'musk',
-        'PASSWORD': 'musk',
+        'NAME': CREDS.get("DB_NAME"),
+        'USER': CREDS.get("DB_USER"),
+        'PASSWORD': CREDS.get("DB_PASSWORD"),
         'HOST': 'db',
         'PORT': '3306',
     }
 }
 
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = CREDS.get("SMTP_HOST")
 
 EMAIL_USE_TLS = True
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_USER = "musk96.km@gmail.com"
+EMAIL_HOST_USER = CREDS.get("EMAIL_HOST_USER")
 
-EMAIL_HOST_PASSWORD = "eacfvajdbpzoannp"
+EMAIL_HOST_PASSWORD = CREDS.get("EMAIL_HOST_PASSWORD")
 
 LOGGING = {
     'version': 1,

@@ -8,7 +8,7 @@ with open(BASE_DIR / 'creds.json', "r") as f:
 
 SECRET_KEY = CREDS.get("SECRET_KEY")
 
-DEBUG = CREDS.get("DEBUG")
+DEBUG = 0
 
 ALLOWED_HOSTS = CREDS.get("ALLOWED_HOSTS")
 
