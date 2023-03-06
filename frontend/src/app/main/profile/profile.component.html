@@ -1,28 +1,28 @@
 <div id="main_content">
   <app-header title_="profile" icon="fa-user"></app-header>
   <div>
-    <div class="flex gap-4 col-span-full row-span-full">
+    <div class="flex gap-4 h-full">
       <div
-        class="w-80 h-content flex flex-col gap-6 p-6 bg-white rounded-xl shadow-lg"
+        class="w-80 h-content flex flex-col gap-6 p-6 bg-white rounded-2xl border border-gray-300"
       >
         <div class="flex justify-between items-center gap-4 font-semibold">
-          <span>musk96@hotmail.fr</span>
+          <span>{{ user_details.email }}</span>
           <span class="bg-green-900 text-gray-100 px-2 rounded-sm pb-1 text-sm">
-            Free
+            {{ user_details.sub }}
           </span>
         </div>
         <div>
           <div class="flex justify-between items-center">
             <span>Monitors</span>
-            <span class="text-sm">1/5</span>
+            <span class="text-sm">{{ user_details.monitors }}/5</span>
           </div>
           <div class="progress_bar">
-            <div></div>
+            <div [ngStyle]="{ 'width.%': user_details.usage }"></div>
           </div>
         </div>
       </div>
       <div
-        class="rounded-xl bg-white shadow-lg w-full h-full px-10 py-6 overflow-auto"
+        class="rounded-xl bg-white w-full h-full px-10 py-6 overflow-auto border border-gray-300"
       >
         <div class="relative border-b border-gray-300 py-2">
           <span
@@ -32,7 +32,7 @@
           </span>
         </div>
         <div class="grid grid-cols-3 gap-3 py-8">
-          <div class="information_section">
+          <!-- <div class="information_section">
             <div>
               <span>Timezone</span>
               <div class="hoverable flex items-center gap-2">
@@ -41,7 +41,7 @@
               </div>
             </div>
             <span>GMT</span>
-          </div>
+          </div> -->
 
           <div class="information_section">
             <div>
@@ -52,31 +52,9 @@
               </div>
             </div>
             <div class="overflow-auto">
-              <div>sfsiipofjoldgkdslkgdlsjl</div>
+              <div>{{ user_details.api_key }}</div>
             </div>
           </div>
-
-          <div class="information_section">
-            <div>
-              <span>Alert Emails</span>
-              <div class="hoverable flex items-center gap-2">
-                <i class="fas fa-plus fa-sm text-green-500"></i>
-                <span class="text-sm">Add</span>
-              </div>
-            </div>
-            <div class="overflow-auto">
-              <div>musk96@hotmail.fr</div>
-            </div>
-          </div>
-        </div>
-        <div class="relative border-b border-gray-300 py-2">
-          <span
-            class="absolute font-semibold w-content bg-white px-6 left-0 right-0 top-0 mx-auto"
-          >
-            Payment
-          </span>
-        </div>
-        <div class="grid grid-cols-3 gap-3 py-8">
           <div class="information_section">
             <div class="flex justify-between items-center">
               <span>Payment cards</span>
@@ -92,9 +70,9 @@
                 style="max-height: 70px"
                 class="flex justify-between items-center pr-4 overflow-auto"
               >
-                <span class="text-gray-600 text-sm">No card added.</span>
-                <!-- <span>5678</span>
-                <i class="fab fa-xl fa-cc-visa text-blue-800"></i> -->
+                <!-- <span class="text-gray-600 text-sm">No card added.</span> -->
+                <span>5678</span>
+                <i class="fab fa-xl fa-cc-visa text-blue-800"></i>
               </div>
             </div>
           </div>

@@ -19,13 +19,16 @@ export class HeaderComponent implements OnInit {
       this.shown_popups = value;
     });
     this.refresh_notifications();
+    this.server.get_user_details().subscribe((res) => {
+      this.user_details = res.user;
+    });
   }
 
   shown_popups: any = {};
   all_notifications_seen = true;
 
   notifications: any[] = [];
-
+  user_details: any;
   show_hide_element(elem: string) {
     this.shared.show_hide_element(elem);
     if (!this.all_notifications_seen) {

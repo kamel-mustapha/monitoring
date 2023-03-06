@@ -59,7 +59,9 @@
         class="hoverable flex items-center gap-2"
         (click)="show_hide_element('header_profile_popup')"
       >
-        <span class="username">musk96</span>
+        <span class="username" *ngIf="user_details">
+          {{ user_details.username }}
+        </span>
         <span><i class="fas fa-chevron-down"></i></span>
       </span>
       <!-- profile popup -->
@@ -70,8 +72,8 @@
       >
         <div>
           <div class="flex flex-col gap-2 py-4">
-            <span>musk96</span>
-            <span class="text-gray-500">musk96@hotmail.fr</span>
+            <span>{{ user_details.username }}</span>
+            <span class="text-gray-500">{{ user_details.email }}</span>
           </div>
           <a routerLink="/profile"
             ><i class="fas fa-cog text-gray-600 hoverable"></i
@@ -80,22 +82,21 @@
         <div>
           <span class="text-gray-700 text-sm"> Current plan: </span>
           <span class="bg-green-900 text-gray-100 px-2 pb-1 rounded-sm text-sm">
-            Free
+            {{ user_details.sub | titlecase }}
           </span>
         </div>
         <div>
           <div>
             <span>Monitors</span>
-            <span>5/5</span>
+            <span>{{ user_details.monitors }}/5</span>
           </div>
           <!-- progress bar -->
           <div class="progress_bar">
-            <div></div>
+            <div [ngStyle]="{ 'width.%': user_details.usage }"></div>
           </div>
         </div>
         <div>
           <a routerLink="">Plans</a>
-          <a routerLink="">Pages marketplace</a>
           <a routerLink="">Documentation</a>
         </div>
       </div>

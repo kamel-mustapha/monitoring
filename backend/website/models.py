@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     email = models.EmailField(max_length=200, unique=True)
     api_key = models.CharField(max_length=200, unique=True, blank=True, null=True)
+    sub = models.CharField(max_length=50, blank=True, null=True, default="Free")
 
     def save(self, *args, **kwargs):
         if not self.api_key:

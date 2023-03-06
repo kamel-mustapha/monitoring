@@ -85,4 +85,10 @@ export class ServerService {
       `${this.api_link}get-user-pages?key=${this.api_key}`
     );
   }
+
+  get_user_details() {
+    return this.server.get<any>(
+      `${this.api_link}get-user-details?key=${this.api_key}`
+    );
+  }
 }

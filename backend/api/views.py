@@ -240,3 +240,19 @@ def monitor_page_stats(req):
                 logger.exception(e)
         return JsonResponse(req.res)
 
+
+
+def get_user_details(req):
+        if req.user.is_authenticated:
+                user_monitors = Monitor.objects.filter(user=req.user).count()
+                req.res["user"] = {
+                        "username": req.user.username,
+                        "email": req.user.email,
+                        "api_key": req.user.api_key,
+                        "sub": req.user.sub,
+                        "monitors": user_monitors,
+                        "usage": (user_monitors*100)/5
+                }
+                req.res["status"] = 200
+                req.res["message"] = "success"
+        return JsonResponse(req.res)

@@ -79,7 +79,7 @@ body {
 }
 
 .progress_bar > div {
-  @apply absolute top-0 left-0 h-full w-full bg-gradient-to-r from-green-400 to-green-600;
+  @apply absolute top-0 left-0 h-full bg-gradient-to-r from-green-400 to-green-600;
 }
 
 .loading_animation {
