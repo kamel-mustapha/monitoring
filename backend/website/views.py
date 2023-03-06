@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login
 from django.core.mail import send_mail
 from api.models import UserPage
 from django.http import Http404
+from django.conf import settings
 
 
 class Home(View):
@@ -55,22 +56,21 @@ class Register(View):
             req_data = json.loads(req.body)
             user_form = UserForm(data=req_data)
             if user_form.is_valid():
-                print('valid')
                 new_user = user_form.save()
                 new_user.is_active = False
                 new_user.save()
                 res['status'] = 'success'
                 res['message'] = 'Successful registration'
                 activation_code = Activation.objects.create()
+                website = "http://localhost:8000" if settings.DEBUG else "https://statuschecks.net"
                 send_mail(
                     'Account Activation',
                     'Click on the link to activate your account.',
                     'musk96.km@gmail.com',
                     [new_user.email],
                     fail_silently=False,
-                    html_message=f'<a href = "http://localhost:8000/activate-account/{new_user.id}/{activation_code.code}">Click here</a>'
+                    html_message=f'<a href = "{website}/activate-account/{new_user.id}/{activation_code.code}">Click here</a>'
                 )
-                print(activation_code.code)
             else:
                 errors = user_form.errors.values()
                 res['errors'] = list(errors)

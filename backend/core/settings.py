@@ -1,12 +1,16 @@
+import json
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-*7a9n)j7%w9am4qe(3#_igq4o6i#^n7-b)50#m7djx%uc_3mfp'
+with open(BASE_DIR / 'creds.json', "r") as f:
+    CREDS = json.load(f)
 
-DEBUG = True
+SECRET_KEY = CREDS.get("SECRET_KEY")
 
-ALLOWED_HOSTS = ["*"]
+DEBUG = CREDS.get("DEBUG")
+
+ALLOWED_HOSTS = CREDS.get("ALLOWED_HOSTS")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -36,7 +40,6 @@ MIDDLEWARE = [
     'api.middleware.KeyLogin',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -63,9 +66,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'monitoring',
-        'USER': 'musk',
-        'PASSWORD': 'musk',
+        'NAME': CREDS.get("DB_NAME"),
+        'USER': CREDS.get("DB_USER"),
+        'PASSWORD': CREDS.get("DB_PASSWORD"),
         'HOST': 'db',
         'PORT': '3306',
     }
@@ -113,17 +116,18 @@ INTERNAL_IPS = [
 ]
 
 # SMTP
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = CREDS.get("SMTP_HOST")
 
 EMAIL_USE_TLS = True
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_USER = "musk96.km@gmail.com"
+EMAIL_HOST_USER = CREDS.get("EMAIL_HOST_USER")
 
-EMAIL_HOST_PASSWORD = "eacfvajdbpzoannp"
+EMAIL_HOST_PASSWORD = CREDS.get("EMAIL_HOST_PASSWORD")
 
-CORS_ALLOW_ALL_ORIGINS = True
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
 
 LOGGING = {
     'version': 1,
