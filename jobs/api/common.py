@@ -194,15 +194,20 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
             failure_start = True
             send_alert_email(alert_emails, monitor_link, status)
     except Exception as e:
+        status = 404
+        is_success = False
+        end = time.time()
+        request_time = (end-start)*1000
+        if last_event and last_event[0].is_success:
+            failure_start = True
         logger.exception(e)
         
-    if request_time > 0:
-        MonitorEvent.objects.create(
-            monitor_id=monitor_id,
-            status=status,
-            time=request_time,
-            message=status_messages.get(status),
-            is_success=is_success,
-            failure_start=failure_start,
-            failure_end=failure_end
-        )
+    MonitorEvent.objects.create(
+        monitor_id=monitor_id,
+        status=status,
+        time=request_time,
+        message=status_messages.get(status),
+        is_success=is_success,
+        failure_start=failure_start,
+        failure_end=failure_end
+    )
