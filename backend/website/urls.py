@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from website.views import *
 from django.contrib.auth.views import LogoutView
 from django.views.generic import TemplateView
@@ -11,7 +11,8 @@ urlpatterns = [
     path('pricing/', TemplateView.as_view(template_name = "offline/pricing.html"), name = "pricing"),
     path('activation/', TemplateView.as_view(template_name = "offline/activation.html")),
     path('activate-account/<int:user>/<str:code>', activate_account),
-    path('monitor/<int:id>', user_monitor)
+    path('monitor/<int:id>', user_monitor),
+    re_path(r".*/", Home.as_view())
 ]
 
 app_name = 'website'
