@@ -3,6 +3,8 @@ from website.views import *
 from django.contrib.auth.views import LogoutView
 from django.views.generic import TemplateView
 
+ANGULAR_PATHS = ["home", "pages", "profile"]
+
 urlpatterns = [
     path('', Home.as_view(), name="home"),
     path('register/', Register.as_view() , name="register"),
@@ -12,7 +14,11 @@ urlpatterns = [
     path('activation/', TemplateView.as_view(template_name = "offline/activation.html")),
     path('activate-account/<int:user>/<str:code>', activate_account),
     path('monitor/<int:id>', user_monitor),
-    re_path(r".*/", Home.as_view())
 ]
+
+for url_path in ANGULAR_PATHS:
+    urlpatterns.append(
+        path(f"{url_path}", Home.as_view())
+    )
 
 app_name = 'website'
