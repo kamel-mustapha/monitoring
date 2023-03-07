@@ -8,10 +8,18 @@
   <div class="flex justify-between max-w-1400 mx-auto">
     <a href="/" class="text-4xl font-bold bg-gradient-to-r from-orange-600 to-red-300 bg-clip-text text-transparent">Manytoring</a>
     <span class="py-2 text-lg">
-      <a href="{% url 'website:pricing' %}" class="mr-6 bg-primary rounded-md px-6 py-2 duration-300 hover:text-secondary hover:text-hover">Pricing</a>
+      <a href="{% url 'website:pricing' %}" class="mr-6 bg-primary rounded-md px-6 py-2 duration-300 hover:text-secondary hover:text-hover">
+        Pricing
+      </a>
       <a href="" class="mr-6 bg-primary rounded-md px-6 py-2 duration-300 hover:text-secondary hover:text-hover">Services</a>
+      {% if user.is_authenticated %}
+      <a href="/home" class="bg-secondary text-button rounded-full px-8 py-3 font-semibold hover:bg-hover">Dashboard</a>
+      {% else %}
       <a href="{% url 'website:login' %}" class="mr-6 bg-primary rounded-md px-6 py-2 duration-300 hover:text-secondary hover:text-hover">Login</a>
-      <a href="{% url 'website:register' %}" class="bg-secondary text-button rounded-full px-8 py-3 font-semibold hover:bg-hover">Register for FREE</a>
+      <a href="{% url 'website:register' %}" class="bg-secondary text-button rounded-full px-8 py-3 font-semibold hover:bg-hover">
+        Register for FREE
+      </a>
+      {% endif %}
     </span>
   </div>
 </header>
