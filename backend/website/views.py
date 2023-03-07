@@ -15,13 +15,10 @@ from django.conf import settings
 
 class Home(View):
     def get(self, req, *args, **kwargs):
+        response = render(req, 'online/home.html')
         if req.user.is_authenticated:
-            response = render(req, 'online/index.html')
             response.set_cookie("API_KEY", req.user.api_key)
-            return response
-        else:
-            return render(req, 'offline/home.html')
-        # return JsonResponse({}, status=404)
+        return response
 
 class Login(View):
     def get(self, req, *args, **kwargs):

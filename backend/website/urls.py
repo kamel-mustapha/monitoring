@@ -2,6 +2,8 @@ from django.urls import path, re_path
 from website.views import *
 from django.contrib.auth.views import LogoutView
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+
 
 ANGULAR_PATHS = ["home", "pages", "profile"]
 
@@ -18,7 +20,7 @@ urlpatterns = [
 
 for url_path in ANGULAR_PATHS:
     urlpatterns.append(
-        path(f"{url_path}", Home.as_view())
+        path(f"{url_path}", login_required(Home.as_view()))
     )
 
 app_name = 'website'
