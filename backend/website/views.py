@@ -15,7 +15,7 @@ from django.conf import settings
 
 class Home(View):
     def get(self, req, *args, **kwargs):
-        response = render(req, 'online/home.html')
+        response = render(req, 'offline/home.html')
         if req.user.is_authenticated:
             response.set_cookie("API_KEY", req.user.api_key)
         return response

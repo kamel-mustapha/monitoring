@@ -20,7 +20,7 @@ urlpatterns = [
 
 for url_path in ANGULAR_PATHS:
     urlpatterns.append(
-        path(f"{url_path}", login_required(Home.as_view()))
+        path(f"{url_path}", login_required(TemplateView.as_view(template_name="online/index.html")))
     )
 
 app_name = 'website'
