@@ -176,7 +176,7 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
     is_success = False
     failure_start = False
     failure_end = False
-    last_event = MonitorEvent.objects.all().order_by("-id")[:1]
+    last_event = MonitorEvent.objects.filter(monitor_id=monitor_id).order_by("-id")[:1]
     try:
         logger.info(f"Started monitoring {monitor_id}")
         start = time.time()
