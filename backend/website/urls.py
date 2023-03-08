@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 
 
-ANGULAR_PATHS = ["home", "pages", "profile"]
+ANGULAR_PATHS = ["dashboard", "pages", "profile"]
 
 urlpatterns = [
     path('', Home.as_view(), name="home"),
