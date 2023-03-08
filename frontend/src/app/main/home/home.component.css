@@ -91,7 +91,7 @@
 }
 
 #monitor_creation_form {
-  @apply flex flex-col gap-4;
+  @apply flex flex-col gap-5;
 }
 
 #monitor_creation_form .property_box {

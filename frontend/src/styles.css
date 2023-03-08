@@ -75,11 +75,11 @@ body {
 
 .progress_bar {
   height: 8px;
-  @apply relative w-full bg-green-200 border border-green-400;
+  @apply relative w-full bg-secondary bg-opacity-20 border border-primary;
 }
 
 .progress_bar > div {
-  @apply absolute top-0 left-0 h-full bg-gradient-to-r from-green-400 to-green-600;
+  @apply absolute top-0 left-0 h-full bg-secondary;
 }
 
 .loading_animation {

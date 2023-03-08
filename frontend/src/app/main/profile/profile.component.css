@@ -14,6 +14,23 @@
   @apply font-semibold flex justify-between items-center;
 }
 
+.profile-grid {
+  grid-template-columns: 8% 92%;
+  @apply grid  gap-4;
+}
+
+.profile-grid > div {
+  @apply py-5;
+}
+
+.profile-grid > div:first-child {
+  @apply font-semibold;
+}
+
+.profile-grid > div:last-child {
+  @apply px-6 rounded-lg bg-white border border-gray-300;
+}
+
 /* .information_section > div:last-child {
   @apply py-4;
 } */

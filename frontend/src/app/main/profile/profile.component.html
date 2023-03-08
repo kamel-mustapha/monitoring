@@ -1,81 +1,104 @@
 <div id="main_content">
   <app-header title_="profile" icon="fa-user"></app-header>
-  <div>
-    <div class="flex gap-4 h-full">
-      <div
-        class="w-80 h-content flex flex-col gap-6 p-6 bg-white rounded-2xl border border-gray-300"
-      >
-        <div class="flex justify-between items-center gap-4 font-semibold">
-          <span>{{ user_details.email }}</span>
-          <span class="bg-green-900 text-gray-100 px-2 rounded-sm pb-1 text-sm">
-            {{ user_details.sub }}
-          </span>
-        </div>
-        <div>
-          <div class="flex justify-between items-center">
-            <span>Monitors</span>
-            <span class="text-sm">{{ user_details.monitors }}/5</span>
-          </div>
-          <div class="progress_bar">
-            <div [ngStyle]="{ 'width.%': user_details.usage }"></div>
+  <div class="overflow-auto relative">
+    <span
+      class="absolute right-2 top-10 text-red-500 font-medium hover:underline xl:cursor-pointer text-sm"
+    >
+      <i class="fas fa-trash"></i>
+      Delete my account
+    </span>
+    <div class="grid gap-3 mt-5 px-6">
+      <div class="profile-grid">
+        <div>Subscription:</div>
+        <div style="background: transparent; padding-left: 0; border: none">
+          <div
+            class="bg-green-900 text-gray-100 px-3 pb-1 rounded-sm w-content font-semibold"
+          >
+            {{ user_details.sub | titlecase }}
           </div>
         </div>
       </div>
-      <div
-        class="rounded-xl bg-white w-full h-full px-10 py-6 overflow-auto border border-gray-300"
-      >
-        <div class="relative border-b border-gray-300 py-2">
-          <span
-            class="absolute font-semibold w-content bg-white px-6 left-0 right-0 top-0 mx-auto"
+      <div class="profile-grid">
+        <div>Monitors:</div>
+        <div
+          style="
+            background: transparent;
+            padding-left: 0;
+            padding-right: 0;
+            border: none;
+          "
+        >
+          <div
+            class="relative bg-secondary bg-opacity-20 h-full w-1/4 shadow-sm border border-gray-300 py-4 rounded-md"
           >
-            General
+            <div
+              class="bg-secondary absolute top-0 left-0 h-full"
+              [ngStyle]="{ 'width.%': user_details.usage }"
+              [ngClass]="{
+                'rounded-l-md': user_details.usage < 100,
+                'rounded-md': user_details.usage == 100
+              }"
+            ></div>
+            <span
+              class="absolute left-0 right-0 mx-auto w-content text-xs top-1/2 -translate-y-1/2 font-semibold text-gray-600"
+            >
+              {{ user_details.monitors }} / 5
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="profile-grid">
+        <div>Username:</div>
+        <div>{{ user_details.username }}</div>
+      </div>
+      <div class="profile-grid">
+        <div>Email:</div>
+        <div>{{ user_details.email }}</div>
+      </div>
+      <div class="profile-grid">
+        <div>API Key:</div>
+        <div class="flex justify-between">
+          <span>{{ user_details.api_key }}</span>
+          <span
+            class="flex gap-2 text-blue-600 items-center xl:cursor-pointer hover:underline font-medium text-sm"
+          >
+            <i class="fas fa-copy"></i>
+            Copy
           </span>
         </div>
-        <div class="grid grid-cols-3 gap-3 py-8">
-          <!-- <div class="information_section">
-            <div>
-              <span>Timezone</span>
-              <div class="hoverable flex items-center gap-2">
-                <i class="fas fa-edit fa-sm text-green-500"></i>
-                <span class="text-sm">Edit</span>
-              </div>
-            </div>
-            <span>GMT</span>
-          </div> -->
-
-          <div class="information_section">
-            <div>
-              <span>API Key</span>
-              <div class="hoverable flex items-center gap-2">
-                <i class="fas fa-copy fa-sm text-green-500"></i>
-                <span class="text-sm">Copy</span>
-              </div>
-            </div>
-            <div class="overflow-auto">
-              <div>{{ user_details.api_key }}</div>
-            </div>
-          </div>
-          <div class="information_section">
-            <div class="flex justify-between items-center">
-              <span>Payment cards</span>
-              <div class="hoverable flex items-center gap-2">
-                <i class="fas fa-plus fa-sm text-green-500"></i>
-                <span class="text-sm">Add</span>
-                <!-- <i class="fas fa-minus fa-sm text-red-500"></i>
-                <span class="text-sm">Delete</span> -->
-              </div>
-            </div>
-            <div class="overflow-auto">
-              <div
-                style="max-height: 70px"
-                class="flex justify-between items-center pr-4 overflow-auto"
-              >
-                <!-- <span class="text-gray-600 text-sm">No card added.</span> -->
-                <span>5678</span>
-                <i class="fab fa-xl fa-cc-visa text-blue-800"></i>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div class="profile-grid">
+        <div>Credit card:</div>
+        <div
+          *ngIf="user_details.card"
+          class="flex justify-between items-center"
+        >
+          <span
+            >**** **** **** 5484
+            <i class="fab fa-xl fa-cc-visa text-blue-800 ml-4"></i>
+          </span>
+          <span class="flex gap-12 items-center">
+            <span
+              class="flex gap-2 items-center text-red-500 xl:cursor-pointer hover:underline font-medium text-sm"
+            >
+              <i class="fas fa-trash"></i>
+              Delete
+            </span>
+          </span>
+        </div>
+        <div
+          *ngIf="!user_details.card"
+          class="flex justify-between items-center"
+        >
+          <span class="text-gray-500 font-medium"> No credit card </span>
+          <span class="flex gap-12 items-center">
+            <span
+              class="flex gap-2 items-center text-green-600 xl:cursor-pointer hover:underline font-medium text-sm"
+            >
+              <i class="fas fa-plus"></i>
+              Add
+            </span>
+          </span>
         </div>
       </div>
     </div>

@@ -39,6 +39,8 @@
             *ngFor="let monitor of monitors"
             class="monitor_element monitor_grid"
           >
+            <div class="text_overflow_ellipsis">{{ monitor.name }}</div>
+            <div class="text-sm text_overflow_ellipsis">{{ monitor.link }}</div>
             <div *ngIf="monitor.running" class="flex items-center gap-2">
               <span class="w-2 h-2 bg-green-500 rounded-full"></span>
               Running
@@ -47,10 +49,9 @@
               <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
               Paused
             </div>
-            <div class="text_overflow_ellipsis">{{ monitor.name }}</div>
+
             <!-- <div class="text_overflow_ellipsis">{{ monitor.name }}</div> -->
 
-            <div class="text-sm text_overflow_ellipsis">{{ monitor.link }}</div>
             <div class="relative main_popup_activator">
               <i
                 [ngClass]="{
