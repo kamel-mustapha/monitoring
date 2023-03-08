@@ -78,13 +78,21 @@
               [style.height]="uptime.value + '%'"
               [style.min-height]="'20%'"
               class="rounded-full"
+              [ngClass]="{
+                'bg-[#26b756]': uptime.value == 100,
+                'bg-[#9DEAB8]': uptime.value < 100
+              }"
             >
             </span>
             <div
-              class="hidden absolute bg-gray-900 -left-10 -top-11 text-xs rounded-md shadow-lg text-gray-100 px-2 py-1"
+              class="hidden absolute bg-gray-900 -left-2 -top-16 text-sm shadow-lg text-gray-100 px-3 py-2 rounded-md"
             >
               <div class="whitespace-nowrap">{{ uptime.date }}</div>
               <div class="whitespace-nowrap">{{ uptime.value }}%</div>
+              <span
+                style="width: 10px; height: 10px; left: 7px"
+                class="absolute bg-gray-900 top-12 rotate-45 rounded-sm"
+              ></span>
             </div>
           </div>
         </div>
@@ -99,14 +107,18 @@
             <span
               [style.height]="response.percentage + '%'"
               [style.min-height]="'20%'"
-              class="rounded-sm"
+              class="rounded-sm bg-[#26b756]"
             >
             </span>
             <div
-              class="hidden absolute bg-gray-900 -left-10 -top-11 text-xs rounded-md shadow-lg text-gray-100 px-2 py-1"
+              class="hidden absolute bg-gray-900 -left-2 -top-16 text-sm rounded-md shadow-lg text-gray-100 px-3 py-2"
             >
               <div class="whitespace-nowrap">{{ response.date }}</div>
               <div class="whitespace-nowrap">{{ response.value }} ms</div>
+              <span
+                style="width: 10px; height: 10px; left: 7px"
+                class="absolute bg-gray-900 top-12 rotate-45 rounded-sm"
+              ></span>
             </div>
           </div>
         </div>

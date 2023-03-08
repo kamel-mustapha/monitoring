@@ -13,11 +13,11 @@
 }
 
 .track_bar span {
-  @apply absolute w-full bg-green-700 shadow-xl bottom-0;
+  @apply absolute w-full  shadow-xl bottom-0;
 }
 
 .track_bar:hover > span {
-  @apply bg-green-900;
+  @apply -translate-y-px;
 }
 
 .filters > span {

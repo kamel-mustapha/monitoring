@@ -259,6 +259,7 @@ class UserPages(View):
 def monitor_page_stats(req):
         try:
                 data = req.GET
+                print(data)
                 page = UserPage.objects.filter(id=int(data.get("id")))
                 if page:
                         page = page[0]
@@ -269,6 +270,7 @@ def monitor_page_stats(req):
                                 monitor_events = MonitorEvent.objects.filter(monitor=monitor, created_time__gte=three_month_date).order_by("id")
                                 monitor_data = create_monitor_data(monitor, monitor_events, 90)
                                 req.res["monitors"].append(monitor_data)
+                        print(req.res)
                         req.res["status"] = 200
                         del req.res["message"]
         except Exception as e:

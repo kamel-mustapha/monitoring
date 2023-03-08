@@ -139,9 +139,10 @@ def round_monitor_results(data):
 def create_monitor_data(monitor, events, events_time):
     today = timezone.datetime.now()
     responses, uptimes = build_responses_time(events, events_time, today)
+    uptimes.append({"date": "ss", "value":100})
     data = {
         "name": monitor.name,
-        "check_interval": monitor.interval/60,
+        "check_interval": monitor.interval,
         "uptimes": uptimes,
         "responses": responses,
     }
