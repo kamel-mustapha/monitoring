@@ -76,7 +76,11 @@
         <div>
           <div class="flex flex-col gap-2 py-4">
             <span>{{ user_details.username }}</span>
-            <span class="text-gray-500">{{ user_details.email }}</span>
+            <span
+              class="max-w-[150px] text-gray-500 overflow-hidden text-ellipsis"
+            >
+              {{ user_details.email }}ssssssssssssss
+            </span>
           </div>
           <a routerLink="/profile"
             ><i class="fas fa-cog text-gray-600 hoverable"></i

@@ -44,7 +44,7 @@ h1.page_title > span:first-child > i {
 
 .notification_container {
   top: 53px;
-  @apply z-20 absolute right-0 h-content max-h-96 bg-white rounded-sm shadow-md flex flex-col justify-between text-sm overflow-hidden;
+  @apply z-20 absolute right-0 h-content max-h-96 bg-white rounded-lg shadow-md flex flex-col justify-between text-sm overflow-hidden border border-gray-300;
 }
 
 .notification_container > div:last-child {
@@ -85,7 +85,7 @@ h1.page_title > span:first-child > i {
 
 .profile_popup {
   top: 65px;
-  @apply z-20 absolute right-0 w-60 bg-white rounded-sm shadow-md flex flex-col text-sm;
+  @apply z-20 absolute right-0 w-content max-w-[280px] bg-white rounded-lg shadow-md flex flex-col gap-2 text-sm border border-gray-300;
 }
 
 .profile_popup > div:first-child {
