@@ -259,7 +259,6 @@ class UserPages(View):
 def monitor_page_stats(req):
         try:
                 data = req.GET
-                print(data)
                 page = UserPage.objects.filter(id=int(data.get("id")))
                 if page:
                         page = page[0]
