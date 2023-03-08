@@ -177,10 +177,11 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
     failure_start = False
     failure_end = False
     last_event = MonitorEvent.objects.filter(monitor_id=monitor_id).order_by("-id")[:1]
+    headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0'}
     try:
         logger.info(f"Started monitoring {monitor_id}")
         start = time.time()
-        r = requests.get(monitor_link, timeout=timeout)
+        r = requests.get(monitor_link, timeout=timeout, headers=headers)
         end = time.time()
         status = r.status_code
         request_time = (end-start)*1000
