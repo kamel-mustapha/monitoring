@@ -3,7 +3,8 @@
   <div class="w-8/12 py-16 flex flex-col gap-20">
     <h1 class="text-primary text-6xl font-bold whitespace-nowrap"><span class="text-secondary font-semibold">Monitor</span> your websites</h1>
     <p class="text-secondary text-2xl leading-medium">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis id quam non vulputate. Fusce rhoncus lectus a dapibus fermentum. Suspendisse potenti.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis id quam non vulputate. Fusce rhoncus lectus a dapibus fermentum.
+      Suspendisse potenti.
     </p>
     <a href="" class="bg-secondary text-button px-12 py-3 text-2xl block w-content rounded-full hover:bg-hover">Start right now</a>
   </div>
@@ -24,7 +25,12 @@
       <br />
       <span x-transition.duration.1500ms><span class="text-hover"> DOWNTIMES </span> before you.</span>
     </div>
-    <div x-data="{ show_elements: false }" x-cloak @scroll.window="show_elements = (window.pageYOffset > 400) ? true : false" class="grid grid-cols-3 gap-10 mt-16">
+    <div
+      x-data="{ show_elements: false }"
+      x-cloak
+      @scroll.window="show_elements = (window.pageYOffset > 400) ? true : false"
+      class="grid grid-cols-3 gap-10 mt-16"
+    >
       <div x-transition.duration.1000ms class="h-96 w-fullrounded-lg shadow-lg"></div>
       <div x-transition.duration.2000ms class="h-96 w-full rounded-lg shadow-lg"></div>
       <div x-transition.duration.3000ms class="h-96 w-full rounded-lg shadow-lg"></div>
@@ -36,10 +42,18 @@
   <div class="w-full pt-4">
     <img class="w-8/12 mr-auto ml-0" src="{% static 'character_9.svg' %}" alt="" />
   </div>
-  <div x-data="{ show_elements: false }" x-cloak @scroll.window="show_elements = (window.pageYOffset > 1200) ? true : false" class="w-full py-36 flex flex-col gap-16">
-    <h2 x-transition.duration.500ms class="text-primary text-6xl font-bold">Lorem ipsum <span class="text-secondary font-semibold">dolor</span> Sit</h2>
+  <div
+    x-data="{ show_elements: false }"
+    x-cloak
+    @scroll.window="show_elements = (window.pageYOffset > 1200) ? true : false"
+    class="w-full py-36 flex flex-col gap-16"
+  >
+    <h2 x-transition.duration.500ms class="text-primary text-6xl font-bold">
+      Lorem ipsum <span class="text-secondary font-semibold">dolor</span> Sit
+    </h2>
     <p x-transition.duration.1000ms class="text-secondary text-2xl leading-medium">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis id quam non vulputate. Fusce rhoncus lectus a dapibus fermentum. Suspendisse potenti.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis id quam non vulputate. Fusce rhoncus lectus a dapibus fermentum.
+      Suspendisse potenti.
     </p>
     <a href="" class="bg-secondary text-button px-12 py-3 text-2xl block w-content rounded-full hover:bg-hover">Start right now</a>
   </div>
