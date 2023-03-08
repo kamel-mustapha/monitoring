@@ -80,8 +80,9 @@
                   <i class="fa-solid fa-circle-play text-green-500"></i>
                   Start
                 </div>
-                <div>
-                  <i class="fa-solid fa-pen-to-square text-blue-500"></i> Edit
+                <div (click)="show_creation_window(true, monitor.id)">
+                  <i class="fa-solid fa-pen-to-square text-blue-500"></i>
+                  Edit
                 </div>
                 <div (click)="delete_monitor(monitor.id)">
                   <i class="fa-solid fa-trash-can text-red-500"></i>
@@ -212,7 +213,7 @@
         }"
         type="text"
         placeholder="My Website"
-        ngModel
+        [ngModel]="monitor_creation_defaults.name"
         name="name"
         required
       />
@@ -234,7 +235,7 @@
         type="text"
         placeholder="https://mywebsite.com"
         name="link"
-        ngModel
+        [ngModel]="monitor_creation_defaults.link"
         required
       />
     </div>
@@ -274,7 +275,7 @@
           type="number"
           placeholder="60"
           name="interval"
-          ngModel="60"
+          [ngModel]="monitor_creation_defaults.interval"
           min="1"
         />
       </div>
@@ -290,7 +291,7 @@
           type="number"
           placeholder="200"
           name="success_status"
-          ngModel="200"
+          [ngModel]="monitor_creation_defaults.success"
           min="0"
         />
       </div>
@@ -306,7 +307,7 @@
           type="number"
           placeholder="30"
           name="timeout"
-          ngModel="30"
+          [ngModel]="monitor_creation_defaults.timeout"
           min="5"
         />
       </div>
@@ -318,7 +319,11 @@
             class="fa-solid fa-circle-exclamation fa-sm"
           ></i>
         </label>
-        <input type="text" name="alert_emails" ngModel="musk96@hotmail.fr" />
+        <input
+          type="text"
+          name="alert_emails"
+          [ngModel]="monitor_creation_defaults.alert_emails"
+        />
       </div>
     </div>
     <button
@@ -329,7 +334,7 @@
         *ngIf="creation_in_progress"
         class="fa-solid fa-circle-notch fa-spin"
       ></i>
-      <span *ngIf="!creation_in_progress">Create</span>
+      <span *ngIf="!creation_in_progress">{{ create_word }}</span>
     </button>
   </form>
 </app-popup>

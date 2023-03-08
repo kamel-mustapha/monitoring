@@ -91,4 +91,11 @@ export class ServerService {
       `${this.api_link}get-user-details?key=${this.api_key}`
     );
   }
+
+  update_monitor(monitor: {}) {
+    return this.server.put<any>(
+      `${this.api_link}monitor?key=${this.api_key}`,
+      monitor
+    );
+  }
 }

@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ServerService } from './server.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedService {
+  constructor(private server: ServerService) {}
+
   // toast
   types_popup: any = {
     success: false,
@@ -64,5 +67,18 @@ export class SharedService {
     } else {
       this.add_to_popups(elem);
     }
+  }
+  user_data: any;
+  user_data_subject = new Subject();
+  refresh_user_data() {
+    this.server.get_user_details().subscribe((res) => {
+      if (res.status && res.status == 200) {
+        this.user_data = res.user;
+        this.user_data_subject.next(this.user_data);
+      }
+    });
+  }
+  emit_user_data() {
+    this.user_data_subject.next(this.user_data);
   }
 }

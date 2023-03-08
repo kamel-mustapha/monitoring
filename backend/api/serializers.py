@@ -7,7 +7,7 @@ from website.models import Notification
 class MonitorData(serializers.ModelSerializer):
     class Meta:
         model = Monitor
-        fields = ('id', 'name', 'type', 'link', 'interval', 'alert_emails', 'running')
+        fields = ('id', 'name', 'type', 'link', 'interval', 'alert_emails', 'running', 'success_status', 'timeout')
         depth = 1
 
 class EventData(serializers.ModelSerializer):

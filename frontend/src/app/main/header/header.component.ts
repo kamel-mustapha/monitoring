@@ -19,9 +19,10 @@ export class HeaderComponent implements OnInit {
       this.shown_popups = value;
     });
     this.refresh_notifications();
-    this.server.get_user_details().subscribe((res) => {
-      this.user_details = res.user;
+    this.shared.user_data_subject.subscribe((res) => {
+      this.user_details = res;
     });
+    this.shared.emit_user_data();
   }
 
   shown_popups: any = {};

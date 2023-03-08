@@ -10,9 +10,9 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {}
   navbar_links = [
     {
-      link: '/home',
+      link: '/dashboard',
       icon: 'fas fa-home',
-      name: 'home',
+      name: 'dashboard',
     },
     {
       link: '/pages',

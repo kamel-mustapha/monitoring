@@ -6,7 +6,7 @@ import { ProfileComponent } from './main/profile/profile.component';
 import { SettingsComponent } from './main/settings/settings.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'dashboard', component: HomeComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'pages', component: PagesComponent },

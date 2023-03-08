@@ -59,7 +59,10 @@
         class="hoverable flex items-center gap-2"
         (click)="show_hide_element('header_profile_popup')"
       >
-        <span class="username" *ngIf="user_details">
+        <span
+          class="username w-20 overflow-hidden text-ellipsis"
+          *ngIf="user_details"
+        >
           {{ user_details.username }}
         </span>
         <span><i class="fas fa-chevron-down"></i></span>
@@ -97,7 +100,7 @@
         </div>
         <div>
           <a routerLink="">Plans</a>
-          <a routerLink="">Documentation</a>
+          <!-- <a routerLink="">Documentation</a> -->
         </div>
       </div>
     </div>

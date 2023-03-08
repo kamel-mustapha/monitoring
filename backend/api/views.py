@@ -69,15 +69,45 @@ class Monitoring(View):
                 except Exception as e: 
                         logger.exception(e)
                 return JsonResponse(req.res, status=req.res["status"])
+        
+        def put(self, req, *args, **kwargs):
+                try:
+                        data = json.loads(req.body)
+                        monitor = Monitor.objects.filter(id=int(data.get("monitor")))
+                        if monitor:
+                                monitor = monitor[0]
+                                delete_task(monitor)
+                                for email in monitor.alert_emails.all():
+                                        monitor.alert_emails.remove(email)
+                                for email in data.get("alert_emails"):
+                                        alert_email = AlertEmail.objects.get_or_create(email=str(email).lower().strip())
+                                        monitor.alert_emails.add(alert_email[0])
+                                monitor.name = data.get("name")
+                                monitor.link = data.get("link")
+                                monitor.interval = data.get("interval")
+                                monitor.status = data.get("success_status")
+                                monitor.timeout = data.get("timeout")
+                                monitor.save()
+                                start_task(monitor)
+                                req.res["status"] = 200
+                                req.res["message"] = "success"
+                except Exception as e:
+                        logger.exception(e)
+                return JsonResponse(req.res, status=req.res["status"])
+        
+        
         def delete(self, req, *args, **kwargs):
-                data = json.loads(req.body)
-                monitor = Monitor.objects.filter(id=int(data.get("monitor")))
-                if monitor:
-                        monitor = monitor[0]
-                        delete_task(monitor)
-                        monitor.delete()
-                        req.res["status"] = 200
-                        req.res["message"] = "success"
+                try:
+                        data = json.loads(req.body)
+                        monitor = Monitor.objects.filter(id=int(data.get("monitor")))
+                        if monitor:
+                                monitor = monitor[0]
+                                delete_task(monitor)
+                                monitor.delete()
+                                req.res["status"] = 200
+                                req.res["message"] = "success"
+                except Exception as e:
+                        logger.exception(e)
                 return JsonResponse(req.res, status=req.res["status"])
 
 @method_decorator(csrf_exempt, name='dispatch')

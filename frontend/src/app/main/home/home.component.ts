@@ -18,9 +18,14 @@ export class HomeComponent implements OnInit {
     this.shared.shown_popups_subject.subscribe((value) => {
       this.shown_popups = value;
     });
+    this.shared.user_data_subject.subscribe((res: any) => {
+      this.user_data = res;
+      this.build_monitor_creation_default();
+    });
   }
 
   monitors: any[] = [];
+  monitor_to_edit: any;
   shown_popups: any = {};
   loading_monitors: boolean = true;
   loading_events: boolean = true;
@@ -29,12 +34,27 @@ export class HomeComponent implements OnInit {
   events: any[] = [];
   creation_modes: any;
   creation_in_progress: boolean = false;
+  create_word: string = 'Create';
+  user_data: any = {};
+  monitor_creation_defaults: any = {};
   monitor_form_validation: any = {
     name: false,
     type: false,
     link: false,
   };
 
+  build_monitor_creation_default() {
+    this.monitor_creation_defaults = {
+      name: '',
+      link: '',
+      interval: 60,
+      success: 200,
+      timeout: 30,
+    };
+    setTimeout(() => {
+      this.monitor_creation_defaults.alert_emails = this.user_data.email;
+    }, 300);
+  }
   get_monitors() {
     this.server.get_monitors().subscribe((value) => {
       if (value.monitors) {
@@ -48,8 +68,27 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  show_creation_window() {
+  show_creation_window(edit = false, monitor_id = null) {
     this.shared.show_hide_element('monitor_creation');
+    if (edit) {
+      this.create_word = 'Edit';
+      this.monitor_to_edit = this.monitors.find(
+        (monitor) => monitor.id == monitor_id
+      );
+      let alert_emails = '';
+      alert_emails += `${this.monitor_to_edit.alert_emails.map(
+        (email: any) => email.email
+      )} `;
+      alert_emails = alert_emails.trim();
+      this.monitor_creation_defaults.alert_emails = alert_emails;
+      this.monitor_creation_defaults.interval = this.monitor_to_edit.interval;
+      this.monitor_creation_defaults.link = this.monitor_to_edit.link;
+      this.monitor_creation_defaults.name = this.monitor_to_edit.name;
+      this.monitor_creation_defaults.success =
+        this.monitor_to_edit.success_status;
+      this.monitor_creation_defaults.timeout = this.monitor_to_edit.timeout;
+      console.log(this.monitor_creation_defaults);
+    }
   }
 
   show_hide_element(elem: string) {
@@ -115,17 +154,34 @@ export class HomeComponent implements OnInit {
       if (form.value.alert_emails.length > 0) {
         form.value.alert_emails = form.value.alert_emails.split(' ');
       }
-      this.server.create_monitor(form.value).subscribe((response) => {
-        if (response && response.status == 200) {
-          this.shared.show_alert('Monitor created successfully');
-          form.reset();
-          this.show_creation_window();
-          this.get_monitors();
-        } else {
-          console.log(response);
-        }
-        this.creation_in_progress = false;
-      });
+      if (this.create_word == 'Create') {
+        this.server.create_monitor(form.value).subscribe((response) => {
+          if (response && response.status == 200) {
+            this.shared.show_alert('Monitor created successfully');
+            this.show_creation_window();
+            this.get_monitors();
+            this.shared.refresh_user_data();
+            this.build_monitor_creation_default();
+          } else {
+            console.log(response);
+          }
+          this.creation_in_progress = false;
+        });
+      } else {
+        form.value.monitor = this.monitor_to_edit.id;
+        this.server.update_monitor(form.value).subscribe((response) => {
+          if (response && response.status == 200) {
+            this.shared.show_alert('Monitor updated successfully');
+            this.show_creation_window();
+            this.get_monitors();
+            this.shared.refresh_user_data();
+            this.build_monitor_creation_default();
+          } else {
+            console.log(response);
+          }
+          this.creation_in_progress = false;
+        });
+      }
     } else {
       for (let i in form.value) {
         if (form.value[i].length == 0) {
