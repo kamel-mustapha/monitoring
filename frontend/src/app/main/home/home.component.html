@@ -80,7 +80,10 @@
                   <i class="fa-solid fa-circle-play text-green-500"></i>
                   Start
                 </div>
-                <div (click)="show_creation_window(true, monitor.id)">
+                <div
+                  class="main_popup_activator"
+                  (click)="show_creation_window(true, monitor.id)"
+                >
                   <i class="fa-solid fa-pen-to-square text-blue-500"></i>
                   Edit
                 </div>

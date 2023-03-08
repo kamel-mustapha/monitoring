@@ -98,16 +98,24 @@ export class PagesComponent implements OnInit {
   }
 
   show_creation_window() {
-    this.shared.show_hide_element('monitor_creation');
+    if (this.monitors && this.monitors.length > 0) {
+      this.shared.show_hide_element('monitor_creation');
+    } else {
+      this.shared.show_alert('You need to create monitors first', 'alert');
+    }
   }
 
   submit_page(form: NgForm, step: number) {
     this.monitor_form_validation = {};
     if (step == 0) {
-      this.activate_page_creation_mode('page');
+      setTimeout(() => {
+        this.activate_page_creation_mode('page');
+      }, 50);
     } else if (step == 1) {
       this.page_creation_forms['page'] = form.value;
-      this.activate_page_creation_mode('monitors');
+      setTimeout(() => {
+        this.activate_page_creation_mode('monitors');
+      }, 50);
     } else if (step == 2) {
       this.page_creation_forms['monitors'] = form.value;
       this.activate_page_creation_mode('details');
@@ -201,6 +209,26 @@ export class PagesComponent implements OnInit {
         this.pages = res.pages;
         this.loading_pages = false;
       }
+    });
+  }
+
+  delete_user_page() {
+    this.pages
+      .filter((page) => page.selected)
+      .forEach((page) => {
+        const data = { body: { page: page.id } };
+        this.server.delete_user_page(data).subscribe((res: any) => {
+          if (res.status && res.status == 200) {
+            this.refresh_user_pages();
+            this.shared.show_alert('Page deleted successfully');
+          }
+        });
+      });
+  }
+
+  select_all_monitors() {
+    this.monitors.forEach((monitor) => {
+      monitor.selected = !monitor.selected;
     });
   }
 }

@@ -7,14 +7,14 @@
         Create
       </div>
     </div>
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2" (click)="delete_user_page()">
       <i class="fas fa-trash fa-sm text-red-600"></i>
       Delete
     </div>
-    <div *ngIf="one_page_selected" class="flex items-center gap-2">
+    <!-- <div *ngIf="one_page_selected" class="flex items-center gap-2">
       <i class="fas fa-pen fa-sm text-blue-600"></i>
       Edit
-    </div>
+    </div> -->
   </div>
   <div class="bg-white rounded-2xl py-5 flex flex-col border border-gray-300">
     <div class="pages_grid header">
@@ -194,6 +194,12 @@
         </div>
       </div>
     </div>
+    <span
+      class="inline-block text-blue-500 xl:cursor-pointer mb-4 mx-auto"
+      (click)="select_all_monitors()"
+    >
+      Select all
+    </span>
     <div class="flex gap-2">
       <button
         type="button"

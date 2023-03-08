@@ -146,7 +146,6 @@ def pause_monitor(req):
 
 def start_monitor(req):
         data = req.GET
-        print(data)
         monitor = Monitor.objects.filter(id=int(data.get("monitor")))
         if monitor:
                 monitor = monitor[0]
@@ -193,10 +192,31 @@ class Notifications(View):
                 req.res["status"] = 200
                 req.res["message"] = "success"
                 return JsonResponse(req.res)
-        
-@csrf_exempt
-def create_user_page(req):
-        if req.method == "POST":
+
+def get_pages(req):
+        try:
+                pages = Page.objects.all()
+                pages_serial = PagesData(pages, many=True)
+                req.res["pages"] = pages_serial.data
+                req.res["status"] = 200
+                req.res["message"] = "success"
+        except Exception as e:
+                logger.exception(e)
+        return JsonResponse(req.res)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class UserPages(View):
+        def get(self, req, *args, **kwargs):
+                try:
+                        pages = UserPage.objects.filter(user=req.user).annotate(monitors_nb=Count('monitors'))
+                        # pages_serial = UserPageData(pages, many=True)
+                        req.res["pages"] = list(pages.values('id', 'name', 'link', 'seen', 'title', 'monitors_nb'))
+                        req.res["status"] = 200
+                        req.res["message"] = "success"
+                except Exception as e:
+                        logger.exception(e)
+                return JsonResponse(req.res)
+        def post(self, req, *args, **kwargs):
                 try:
                         data = req.POST
                         files = req.FILES
@@ -208,8 +228,6 @@ def create_user_page(req):
                                 href_link=data.get('link'),
                         )
                         if files:
-                                # files['image'] = "ss.jpg"
-                                print(files.get('image'))
                                 user_page.icon_link = files.get('image')
                         user_page.save()
                         if data.get("monitors"):
@@ -223,32 +241,19 @@ def create_user_page(req):
                         req.res["status"] = 200
                 except Exception as e:
                         print(e)
-        return JsonResponse(req.res)
-
-
-def get_pages(req):
-        try:
-                pages = Page.objects.all()
-                pages_serial = PagesData(pages, many=True)
-                req.res["pages"] = pages_serial.data
-                req.res["status"] = 200
-                req.res["message"] = "success"
-        except Exception as e:
-                logger.exception(e)
-        return JsonResponse(req.res)
-
-def get_user_pages(req):
-        try:
-                pages = UserPage.objects.filter(user=req.user).annotate(monitors_nb=Count('monitors'))
-                # pages_serial = UserPageData(pages, many=True)
-                req.res["pages"] = list(pages.values('id', 'name', 'link', 'seen', 'title', 'monitors_nb'))
-                req.res["status"] = 200
-                req.res["message"] = "success"
-        except Exception as e:
-                logger.exception(e)
-        return JsonResponse(req.res)
-
-
+                return JsonResponse(req.res)
+        def delete(self, req, *args, **kwargs):
+                try:
+                        data = json.loads(req.body)
+                        page = UserPage.objects.filter(id=int(data.get("page")))
+                        if page:
+                                page = page[0]
+                                page.delete()
+                                req.res["status"] = 200
+                                req.res["message"] = "success"
+                except Exception as e:
+                        logger.exception(e)
+                return JsonResponse(req.res, status=req.res["status"])
 
 @csrf_exempt
 def monitor_page_stats(req):

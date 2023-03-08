@@ -40,7 +40,6 @@ export class AppComponent implements OnInit {
     //     this.shared.reset_all_popups();
     //   }
     // });
-    this.shared.refresh_user_data();
   }
   get_api_key(): string {
     let api_key: string = '';
