@@ -40,7 +40,11 @@
               }"
             ></div>
             <span
-              class="absolute left-0 right-0 mx-auto w-content text-xs top-1/2 -translate-y-1/2 font-semibold text-gray-600"
+              [ngClass]="{
+                'text-gray-200': user_details.usage > 55,
+                'text-gray-900': user_details.usage < 55
+              }"
+              class="absolute left-0 right-0 mx-auto w-content text-xs top-1/2 -translate-y-1/2 font-semibold"
             >
               {{ user_details.monitors }} / 5
             </span>

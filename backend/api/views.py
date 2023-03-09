@@ -12,7 +12,7 @@ from website.models import Notification
 from django.db.models import Q
 from django.db.models import Count
 from django.utils import timezone
-from django.conf import settings
+
 
 
 from logging import getLogger
