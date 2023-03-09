@@ -1,15 +1,14 @@
 {% extends 'offline/root.html' %} {% load static %} {% block content %}
-<div class="flex max-w-1400 mx-auto px-6 2xl:px-0">
-  <div class="w-8/12 py-16 flex flex-col gap-20">
-    <h1 class="text-primary text-6xl font-bold whitespace-nowrap"><span class="text-secondary font-semibold">Monitor</span> your websites</h1>
-    <p class="text-secondary text-2xl leading-medium">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis id quam non vulputate. Fusce rhoncus lectus a dapibus fermentum.
-      Suspendisse potenti.
+<div class="flex justify-around max-w-1400 mx-auto px-6 py-12 2xl:px-0 gap-4">
+  <div class="w-6/12 pt-6 pb-36 flex flex-col gap-12">
+    <h1 class="text-primary text-5xl font-bold whitespace-nowrap"><span class="text-secondary font-semibold">Monitor</span> your websites</h1>
+    <p class="text-secondary text-xl leading-medium">
+      Statuscheks is a monitoring service. You can create one or multiple monitors and get notified when something goes wrong.
     </p>
-    <a href="" class="bg-secondary text-button px-12 py-3 text-2xl block w-content rounded-full hover:bg-hover">Start right now</a>
+    <a href="" class="bg-secondary text-button px-12 py-3 text-xl block w-content rounded-full hover:bg-hover">Start right now</a>
   </div>
-  <div class="w-full">
-    <img class="w-8/12 ml-auto mr-0" src="{% static 'character_18.svg' %}" alt="" />
+  <div class="w-5/12">
+    <img class="w-full ml-auto mr-0 rounded-xl" src="{% static 'default.jpg' %}" alt="" />
   </div>
 </div>
 
@@ -19,7 +18,7 @@
       x-data="{ show_elements: false }"
       x-cloak
       @scroll.window="show_elements = (window.pageYOffset > 200) ? true : false"
-      class="w-content mx-auto text-center text-6xl font-bold leading-relaxed"
+      class="w-content mx-auto text-center text-5xl font-bold leading-relaxed"
     >
       <span x-transition.duration.500ms>Don't let your customers catch your</span>
       <br />
@@ -48,14 +47,14 @@
     @scroll.window="show_elements = (window.pageYOffset > 1200) ? true : false"
     class="w-full py-36 flex flex-col gap-16"
   >
-    <h2 x-transition.duration.500ms class="text-primary text-6xl font-bold">
+    <h2 x-transition.duration.500ms class="text-primary text-5xl font-bold">
       Lorem ipsum <span class="text-secondary font-semibold">dolor</span> Sit
     </h2>
-    <p x-transition.duration.1000ms class="text-secondary text-2xl leading-medium">
+    <p x-transition.duration.1000ms class="text-secondary text-xl leading-medium">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis id quam non vulputate. Fusce rhoncus lectus a dapibus fermentum.
       Suspendisse potenti.
     </p>
-    <a href="" class="bg-secondary text-button px-12 py-3 text-2xl block w-content rounded-full hover:bg-hover">Start right now</a>
+    <a href="" class="bg-secondary text-button px-12 py-3 text-xl block w-content rounded-full hover:bg-hover">Start right now</a>
   </div>
 </div>
 {% endblock %}

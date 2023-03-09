@@ -17,8 +17,10 @@
     </style>
   </head>
 
-  <body class="bg-primary text-primary mx-auto font-work">
-    {% include 'offline/navbar.html' %} {% block content %}{% endblock %} {% include 'offline/footer.html' %}
+  <body class="bg-primary text-primary mx-auto font-poppins">
+    {% include 'offline/navbar.html' %}
+    <div style="min-height: calc(100vh - 112px)">{% block content %}{% endblock %}</div>
+    {% include 'offline/footer.html' %}
     <div
       x-data="{show_message: false}"
       x-show="show_message"

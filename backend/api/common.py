@@ -3,7 +3,7 @@ from api.models import Monitor
 from task.models import Task
 from django.utils import timezone
 from datetime import timedelta as td
-from zoneinfo import ZoneInfo
+# from zoneinfo import ZoneInfo
 
 from logging import getLogger
 logger = getLogger(__name__)

@@ -1,33 +1,43 @@
 {% extends 'offline/root.html' %} {% load static %} {% block content %}
-<div class="flex flex-col lg:flex-row justify-between gap-12 w-11/12 lg:w-8/12 xl:w-6/12 mx-auto pb-16">
-  <div class="w-full text-center">
-    <div class="w-full h-1 bg-gray-400 rounded-t-lg"></div>
-    <div class="flex flex-col gap-12 justify-between border border-gray-400 py-12">
-      <h2 class="text-2xl font-bold">FREE Plan</h2>
-      <h3 class="font-bold text-3xl">0$</h3>
-      <ul class="leading-10 text-gray-300">
-        <li><i class="fas fa-check"></i> 5 Monitors</li>
-        <li><i class="fas fa-check"></i> 5 Minutes between checks</li>
-        <li>No support</li>
-      </ul>
-    </div>
-    <a href="" class="bg-gray-200 text-gray-900 px-12 py-4 text-lg font-semibold block w-full hover:bg-gray-300 rounded-b-xl">Start now</a>
+<h1 class="text-center text-4xl mb-10 font-semibold">Our Plans</h1>
+<div class="pricing_container" x-data="{annually_active:true}" x-cloak>
+  <div>
+    <h2 class="bg-green-500 text-gray-100">FREE</h2>
+    <h3>
+      <span>FREE</span>
+      <span class="per_month">FOREVER</span>
+    </h3>
+    <div class="h-6"></div>
+    <ul>
+      <li><i class="fas fa-check text-green-500"></i> 5 Monitors</li>
+      <li><i class="fas fa-check text-green-500"></i> 5 Minutes between checks</li>
+      <li><i class="fas fa-times text-red-500"></i> No support</li>
+    </ul>
+    <a href="" class="bg-green-500 text-gray-100">Sign Up For Free</a>
   </div>
-  <div class="w-full text-center">
-    <div class="w-full h-1 bg-secondary rounded-t-lg"></div>
-    <div class="flex flex-col gap-12 justify-between border border-primary py-12">
-      <h2 class="text-2xl font-bold">PRO Plan</h2>
-      <h3 class="font-bold text-3xl">
-        <div class="text-xl line-through">7$</div>
-        <div>5$/mo</div>
-      </h3>
-      <ul class="leading-10 text-gray-300">
-        <li><i class="fas fa-check"></i> 50 Monitors</li>
-        <li><i class="fas fa-check"></i> 1 Minute between checks</li>
-        <li><i class="fas fa-check"></i> Technical support</li>
-      </ul>
+  <div>
+    <h2 class="bg-secondary text-gray-100">PRO</h2>
+    <h3>
+      <span class="inline-flex mx-auto">
+        <span x-show="annually_active">6</span>
+        <span x-show="!annually_active">7</span>
+        <span class="text-gray-500 text-3xl">$</span>
+      </span>
+      <span class="per_month">PER MONTH</span>
+    </h3>
+    <div class="flex justify-center gap-4">
+      <span :class="annually_active ? 'text-gray-500': 'text-gray-800 font-semibold'">Monthly</span>
+      <div @click="annually_active=!annually_active" class="w-2/12 h-6 bg-gray-300 rounded-full relative xl:cursor-pointer">
+        <div :class="annually_active ? 'right-0':'left-0'" class="h-full w-6 bg-secondary rounded-full absolute top-0"></div>
+      </div>
+      <span :class="annually_active ? 'text-gray-800 font-semibold': 'text-gray-500'">Annually</span>
     </div>
-    <a href="" class="bg-secondary text-button px-12 py-4 text-lg font-semibold block w-full hover:bg-hover rounded-b-xl">Subscribe</a>
+    <ul>
+      <li><i class="fas fa-check text-green-500"></i> 50 Monitors</li>
+      <li><i class="fas fa-check text-green-500"></i> 1 Minute between checks</li>
+      <li><i class="fas fa-check text-green-500"></i> Full support</li>
+    </ul>
+    <a href="" class="bg-secondary text-gray-100">Start now</a>
   </div>
 </div>
 {%endblock %}
