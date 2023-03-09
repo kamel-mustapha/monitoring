@@ -63,7 +63,7 @@ class Register(View):
                 send_mail(
                     'Account Activation',
                     'Click on the link to activate your account.',
-                    'musk96.km@gmail.com',
+                    settings.EMAIL_HOST_USER,
                     [new_user.email],
                     fail_silently=False,
                     html_message=f'<a href = "{website}/activate-account/{new_user.id}/{activation_code.code}">Click here</a>'

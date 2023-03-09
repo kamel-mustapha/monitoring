@@ -2,7 +2,7 @@ import json, time, requests
 from api.models import *
 from background_task import background
 from django.core.mail import send_mail
-
+from django.conf import settings
 
 # logging
 from logging import getLogger
@@ -151,7 +151,7 @@ def send_alert_email(alert_emails, monitor_link, status, downtime=None, success=
             send_mail(
                 'MONITOR UP',
                 'Your monitor is up again',
-                'musk96.km@gmail.com',
+                settings.EMAIL_HOST_USER,
                 alert_emails,
                 fail_silently=False,
                 html_message=message
