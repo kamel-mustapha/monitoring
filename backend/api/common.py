@@ -53,7 +53,7 @@ def calculate_response(events):
     response_time = 0
     for event in events:
         response_time += event.time
-    response = response_time/events.count() if events else 0
+    response = round(response_time/events.count(), 2) if events else 0
     return response
 
 def calculate_uptime(events):
@@ -132,9 +132,9 @@ def round_monitor_results(data):
     data["uptime_week"] = round(data["uptime_week"], 2)
     data["uptime_month"] = round(data["uptime_month"], 2)
     data["uptime_ninty"] = round(data["uptime_ninty"], 2)
-    data["response_week"] = int(data["response_week"])
-    data["response_month"] = int(data["response_month"])
-    data["response_ninty"] = int(data["response_ninty"])
+    data["response_week"] = round(data["response_week"], 2)
+    data["response_month"] = round(data["response_month"], 2)
+    data["response_ninty"] = round(data["response_ninty"], 2)
 
 def create_monitor_data(monitor, events, events_time):
     today = timezone.datetime.now()
