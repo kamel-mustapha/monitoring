@@ -166,49 +166,48 @@ export class HomeComponent implements OnInit {
           .split(' ')
           .slice(0, this.user_data.max_alert_emails);
       }
-      console.log(form.value);
-      // if (this.create_word == 'Create') {
-      //   this.server.create_monitor(form.value).subscribe(
-      //     (response) => {
-      //       if (
-      //         response &&
-      //         response.status == 200 &&
-      //         response.message == 'success'
-      //       ) {
-      //         this.shared.show_alert('Monitor created successfully');
-      //         this.show_creation_window();
-      //         this.get_monitors();
-      //         this.shared.refresh_user_data();
-      //         this.build_monitor_creation_default();
-      //       } else if (
-      //         response &&
-      //         response.status == 200 &&
-      //         response.message != 'success'
-      //       ) {
-      //         this.shared.show_alert(response.message, 'alert');
-      //       }
-      //       this.creation_in_progress = false;
-      //     },
-      //     (error) => {
-      //       this.shared.show_alert(error.statusText, 'alarm');
-      //       this.creation_in_progress = false;
-      //     }
-      //   );
-      // } else {
-      //   form.value.monitor = this.monitor_to_edit.id;
-      //   this.server.update_monitor(form.value).subscribe((response) => {
-      //     if (response && response.status == 200) {
-      //       this.shared.show_alert('Monitor updated successfully');
-      //       this.show_creation_window();
-      //       this.get_monitors();
-      //       this.shared.refresh_user_data();
-      //       this.build_monitor_creation_default();
-      //     } else if (response.message) {
-      //       this.shared.show_alert(response.message, 'alert');
-      //     }
-      //     this.creation_in_progress = false;
-      //   });
-      // }
+      if (this.create_word == 'Create') {
+        this.server.create_monitor(form.value).subscribe(
+          (response) => {
+            if (
+              response &&
+              response.status == 200 &&
+              response.message == 'success'
+            ) {
+              this.shared.show_alert('Monitor created successfully');
+              this.show_creation_window();
+              this.get_monitors();
+              this.shared.refresh_user_data();
+              this.build_monitor_creation_default();
+            } else if (
+              response &&
+              response.status == 200 &&
+              response.message != 'success'
+            ) {
+              this.shared.show_alert(response.message, 'alert');
+            }
+            this.creation_in_progress = false;
+          },
+          (error) => {
+            this.shared.show_alert(error.statusText, 'alarm');
+            this.creation_in_progress = false;
+          }
+        );
+      } else {
+        form.value.monitor = this.monitor_to_edit.id;
+        this.server.update_monitor(form.value).subscribe((response) => {
+          if (response && response.status == 200) {
+            this.shared.show_alert('Monitor updated successfully');
+            this.show_creation_window();
+            this.get_monitors();
+            this.shared.refresh_user_data();
+            this.build_monitor_creation_default();
+          } else if (response.message) {
+            this.shared.show_alert(response.message, 'alert');
+          }
+          this.creation_in_progress = false;
+        });
+      }
     } else {
       console.log('sssssss');
       for (let i in form.value) {
