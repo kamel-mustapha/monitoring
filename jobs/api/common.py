@@ -161,7 +161,7 @@ def send_alert_email(alert_emails, monitor_link, status, downtime=None, success=
             send_mail(
                 'MONITOR DOWN',
                 'Your monitor went down',
-                'musk96.km@gmail.com',
+                settings.EMAIL_HOST_USER,
                 alert_emails,
                 fail_silently=False,
                 html_message=message
