@@ -15,7 +15,11 @@ export class PaymentComponent implements OnInit {
     this.plans_colors = this.shared.plans_colors;
     this.shared.user_data_subject.subscribe((res: any) => {
       this.user_details = res;
-      this.stripe = Stripe(res.stripe_public);
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+          this.stripe = Stripe(this.user_details.stripe_public);
+        }, 100);
+      });
     });
   }
   user_details: any;
