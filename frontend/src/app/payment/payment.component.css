@@ -1,0 +1,47 @@
+.payment_input {
+  @apply border-b border-gray-300  py-3 text-lg;
+}
+.pricing_container {
+  @apply w-content grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 mx-auto  mt-2;
+}
+.pricing_container > div {
+  @apply relative  grid text-center gap-6 bg-gray-100 text-gray-900 px-16 py-8 rounded-2xl border border-gray-300 shadow-sm;
+}
+
+.pricing_container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.pricing_container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.pricing_container .current_plan {
+  @apply absolute right-0 top-0 w-24 h-24 text-sm  overflow-hidden  rounded-lg;
+}
+
+.pricing_container .current_plan > span {
+  @apply absolute rotate-45 text-white px-24 pb-1 -right-20 top-5 text-sm shadow-lg;
+}
+
+.pricing_container > div h2 {
+  @apply text-xl font-medium shadow-md w-content mx-auto px-4 pb-1 rounded-md h-content;
+}
+
+.pricing_container > div h3 {
+  @apply grid text-5xl;
+}
+
+.pricing_container > div h3 .per_month {
+  @apply text-lg text-gray-500;
+}
+
+.pricing_container > div a {
+  @apply border py-3 shadow-md hover:shadow-lg rounded-lg h-content;
+}
+
+ul > li:not(ul > li:first-child) {
+  @apply mt-4;
+}

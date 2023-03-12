@@ -6,3 +6,4 @@ djangorestframework==3.14.0
 requests==2.28.1
 mysqlclient==2.1.1
 pillow==9.4.0
+stripe==5.2.0

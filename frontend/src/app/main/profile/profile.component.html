@@ -1,6 +1,6 @@
 <div id="main_content">
   <app-header title_="profile" icon="fa-user"></app-header>
-  <div class="overflow-auto relative">
+  <div *ngIf="user_details" class="no_overflow overflow-auto relative">
     <span
       class="absolute right-2 top-10 text-red-500 font-medium hover:underline xl:cursor-pointer text-sm"
     >
@@ -12,7 +12,10 @@
         <div>Subscription:</div>
         <div style="background: transparent; padding-left: 0; border: none">
           <div
-            class="bg-green-900 text-gray-100 px-3 pb-1 rounded-sm w-content font-semibold"
+            style="background: {{
+              plans_colors[user_details.sub.toLowerCase()]
+            }}"
+            class="text-gray-100 px-3 pb-1 rounded-md w-content font-semibold"
           >
             {{ user_details.sub | titlecase }}
           </div>
@@ -46,7 +49,7 @@
               }"
               class="absolute left-0 right-0 mx-auto w-content text-xs top-1/2 -translate-y-1/2 font-semibold"
             >
-              {{ user_details.monitors }} / 5
+              {{ user_details.monitors }} / {{ user_details.max_monitors }}
             </span>
           </div>
         </div>
@@ -74,12 +77,12 @@
       <div class="profile-grid">
         <div>Credit card:</div>
         <div
-          *ngIf="user_details.card"
+          *ngIf="user_details.payment_card"
           class="flex justify-between items-center"
         >
-          <span
-            >**** **** **** 5484
-            <i class="fab fa-xl fa-cc-visa text-blue-800 ml-4"></i>
+          <span>
+            <i class="fas fa-money-check-alt fa-xl text-blue-800 mr-2"></i>
+            {{ user_details.payment_card }}
           </span>
           <span class="flex gap-12 items-center">
             <span
@@ -91,7 +94,7 @@
           </span>
         </div>
         <div
-          *ngIf="!user_details.card"
+          *ngIf="!user_details.payment_card"
           class="flex justify-between items-center"
         >
           <span class="text-gray-500 font-medium"> No credit card </span>

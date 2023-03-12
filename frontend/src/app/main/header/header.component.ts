@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   constructor(private shared: SharedService, private server: ServerService) {}
 
   ngOnInit(): void {
+    this.plans_colors = this.shared.plans_colors;
     this.shared.shown_popups_subject.subscribe((value) => {
       this.shown_popups = value;
     });
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
     this.shared.emit_user_data();
   }
 
+  plans_colors: any = {};
   shown_popups: any = {};
   all_notifications_seen = true;
 

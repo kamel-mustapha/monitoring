@@ -11,9 +11,11 @@ export class ProfileComponent implements OnInit {
   constructor(private shared: SharedService) {}
 
   ngOnInit(): void {
+    this.plans_colors = this.shared.plans_colors;
     this.shared.user_data_subject.subscribe((res) => {
       this.user_details = res;
     });
   }
+  plans_colors: any = {};
   user_details: any;
 }

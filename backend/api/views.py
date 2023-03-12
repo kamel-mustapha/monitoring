@@ -12,7 +12,7 @@ from website.models import Notification
 from django.db.models import Q
 from django.db.models import Count
 from django.utils import timezone
-
+from payment.models import Plan
 
 
 from logging import getLogger
@@ -144,7 +144,7 @@ def pause_monitor(req):
                 monitor.save()
                 req.res["status"] = 200
                 req.res["message"] = "success"
-        return JsonResponse(req.res)
+        return JsonResponse(req.res, status=req.res["status"])
 
 def start_monitor(req):
         data = req.GET
@@ -156,7 +156,7 @@ def start_monitor(req):
                 monitor.save()
                 req.res["status"] = 200
                 req.res["message"] = "success"
-        return JsonResponse(req.res)
+        return JsonResponse(req.res, status=req.res["status"])
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -176,7 +176,7 @@ class Notifications(View):
                                 req.res["notifications"].append(notification_object)
                 req.res["status"] = 200
                 req.res["message"] = "success"
-                return JsonResponse(req.res)
+                return JsonResponse(req.res, status=req.res["status"])
         def put(self, req):
                 data = json.loads(req.body)
                 notifications = Notification.objects.filter(id__in=data.get("ids"))
@@ -184,7 +184,7 @@ class Notifications(View):
                         notification.seen_by.add(req.user)
                 req.res["status"] = 200
                 req.res["message"] = "success"
-                return JsonResponse(req.res)
+                return JsonResponse(req.res, status=req.res["status"])
 
         def delete(self, req):
                 data = json.loads(req.body)
@@ -193,7 +193,7 @@ class Notifications(View):
                         notification.deleted_by.add(req.user)
                 req.res["status"] = 200
                 req.res["message"] = "success"
-                return JsonResponse(req.res)
+                return JsonResponse(req.res, status=req.res["status"])
 
 def get_pages(req):
         try:
@@ -204,7 +204,7 @@ def get_pages(req):
                 req.res["message"] = "success"
         except Exception as e:
                 logger.exception(e)
-        return JsonResponse(req.res)
+        return JsonResponse(req.res, status=req.res["status"])
 
 @method_decorator(csrf_exempt, name='dispatch')
 class UserPages(View):
@@ -217,7 +217,7 @@ class UserPages(View):
                         req.res["message"] = "success"
                 except Exception as e:
                         logger.exception(e)
-                return JsonResponse(req.res)
+                return JsonResponse(req.res, status=req.res["status"])
         def post(self, req, *args, **kwargs):
                 try:
                         data = req.POST
@@ -243,7 +243,7 @@ class UserPages(View):
                         req.res["status"] = 200
                 except Exception as e:
                         print(e)
-                return JsonResponse(req.res)
+                return JsonResponse(req.res, status=req.res["status"])
         def delete(self, req, *args, **kwargs):
                 try:
                         data = json.loads(req.body)
@@ -276,21 +276,27 @@ def monitor_page_stats(req):
                         del req.res["message"]
         except Exception as e:
                 logger.exception(e)
-        return JsonResponse(req.res)
+        return JsonResponse(req.res, status=req.res["status"])
 
 
 
 def get_user_details(req):
-        if req.user.is_authenticated:
-                user_monitors = Monitor.objects.filter(user=req.user).count()
-                req.res["user"] = {
-                        "username": req.user.username,
-                        "email": req.user.email,
-                        "api_key": req.user.api_key,
-                        "sub": req.user.sub,
-                        "monitors": user_monitors,
-                        "usage": (user_monitors*100)/5
-                }
-                req.res["status"] = 200
-                req.res["message"] = "success"
-        return JsonResponse(req.res)
+        try:
+                if req.user.is_authenticated:
+                        user_monitors = Monitor.objects.filter(user=req.user).count()
+                        user_plan = Plan.objects.filter(name=req.user.sub, period=req.user.period)[0]
+                        req.res["user"] = {
+                                "username": req.user.username,
+                                "email": req.user.email,
+                                "api_key": req.user.api_key,
+                                "sub": req.user.sub,
+                                "monitors": user_monitors,
+                                "max_monitors": user_plan.monitors,
+                                "usage": (user_monitors*100)/user_plan.monitors,
+                                "payment_card": req.user.card_last_digit
+                        }
+                        req.res["status"] = 200
+                        req.res["message"] = "success"
+        except Exception as e:
+                logger.exception(e)
+        return JsonResponse(req.res, status=req.res["status"])

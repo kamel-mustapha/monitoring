@@ -7,7 +7,11 @@ import { ServerService } from './server.service';
 })
 export class SharedService {
   constructor(private server: ServerService) {}
-
+  plans_colors: any = {
+    free: '#22c55e',
+    pro: '#3730a3',
+    business: '#86198f',
+  };
   // toast
   types_popup: any = {
     success: false,

@@ -1,13 +1,27 @@
 import uuid, hashlib
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from payment.models import Plan
 
 class User(AbstractUser):
+    PLANS = (
+        ("Free", "Free"),
+        ("Pro", "Pro"),
+        ("Business", "Business")
+    )
+    PERIODS = (
+        ("monthly", "Monthly"),
+        ("annually", "Annually")
+    )
     email = models.EmailField(max_length=200, unique=True)
     api_key = models.CharField(max_length=200, unique=True, blank=True, null=True)
-    sub = models.CharField(max_length=50, blank=True, null=True, default="Free")
-
+    sub = models.CharField(max_length=50, blank=True, null=True, default="Free", choices=PLANS)
+    period = models.CharField(max_length=20, choices=PERIODS, default="monthly")
+    stripe_id = models.CharField(max_length=200, blank=True, null=True)
+    payment_method = models.CharField(max_length=200, blank=True, null=True)
+    card_last_digit = models.IntegerField(blank=True, null=True)
+    stripe_sub = models.CharField(max_length=200, blank=True, null=True)
+    
     def save(self, *args, **kwargs):
         if not self.api_key:
             self.api_key = hashlib.md5(f"{self.email}{self.username}{self.password}".encode()).hexdigest()

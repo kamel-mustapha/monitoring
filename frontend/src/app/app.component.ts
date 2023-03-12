@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     if (!isDevMode()) {
-      this.server.set_api(this.get_api_key(), '/api/');
+      this.server.set_api(this.get_api_key(), '/');
     }
 
     // this.router.navigate(['home']);

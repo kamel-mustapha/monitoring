@@ -1,0 +1,150 @@
+<div id="main_content">
+  <app-header title_="plans" icon="fa-money-check-alt"></app-header>
+  <div class="flex justify-center gap-4 mx-auto mt-2" (click)="change_sub()">
+    <span
+      [ngClass]="{
+        'text-gray-400': sub_annually,
+        'text-gray-800 font-semibold': !sub_annually
+      }"
+      >Monthly</span
+    >
+    <div class="w-12 h-6 bg-gray-300 rounded-full relative xl:cursor-pointer">
+      <div
+        [ngClass]="{
+          'right-0': sub_annually,
+          'left-0': !sub_annually
+        }"
+        class="h-full w-6 bg-secondary rounded-full absolute top-0"
+      ></div>
+    </div>
+    <span
+      [ngClass]="{
+        'text-gray-400': !sub_annually,
+        'text-gray-800 font-semibold': sub_annually
+      }"
+      >Annually</span
+    >
+  </div>
+  <div *ngIf="user_details" class="pricing_container no_overflow overflow-auto">
+    <div *ngFor="let plan of plans">
+      <h2
+        style="background-color: {{ plans_colors[plan.name] }}"
+        class="text-gray-100"
+      >
+        {{ plan.name | uppercase }}
+      </h2>
+      <h3>
+        <span *ngIf="plan.price_monthly == 0" style="font-size: 35px">
+          FREE
+        </span>
+        <span *ngIf="plan.price_monthly == 0" class="per_month">FOREVER</span>
+        <span *ngIf="plan.price_monthly != 0" class="inline-flex mx-auto">
+          <span *ngIf="!sub_annually">{{ plan.price_monthly }}</span>
+          <span *ngIf="sub_annually">{{ plan.price_annually }}</span>
+          <span class="text-3xl text-gray-400">$</span>
+        </span>
+        <span *ngIf="plan.price_monthly != 0" class="per_month">Per Month</span>
+      </h3>
+      <ul>
+        <li *ngFor="let feature of plan.features">
+          <i class="fas fa-check text-green-500" *ngIf="feature.included"></i>
+          <i class="fas fa-times text-red-500" *ngIf="!feature.included"></i>
+          {{ feature.value | titlecase }}
+        </li>
+      </ul>
+      <div class="w-full h-10" *ngIf="!plan.show_subscribe"></div>
+      <div *ngIf="plan.show_subscribe">
+        <a
+          *ngIf="user_details.sub.toLowerCase() != plan.name"
+          (click)="show_creation_window(plan.name)"
+          style="background-color: {{ plans_colors[plan.name] }}"
+          class="text-gray-100 xl:cursor-pointer block"
+        >
+          Subscribe
+        </a>
+        <a
+          *ngIf="user_details.sub.toLowerCase() == plan.name"
+          (click)="unsubscribe_user()"
+          style="background-color: {{ plans_colors[plan.name] }}"
+          class="text-gray-100 xl:cursor-pointer block"
+        >
+          <i
+            *ngIf="cancel_in_progress"
+            class="fa-solid fa-circle-notch fa-spin"
+          ></i>
+          <span *ngIf="!cancel_in_progress">Cancel</span>
+        </a>
+      </div>
+      <div
+        class="current_plan"
+        *ngIf="plan.name.toLowerCase() == user_details.sub.toLowerCase()"
+      >
+        <span style="background-color: {{ plans_colors[plan.name] }}">
+          Active
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<app-popup>
+  <form
+    *ngIf="show_card_creation"
+    (ngSubmit)="create_payment_method(f)"
+    #f="ngForm"
+    id="payment-form"
+    class="w-96 py-1 max-w-full grid gap-4"
+  >
+    <h2 class="text-center text-lg font-semibold">Add a payment card</h2>
+    <div>
+      <input
+        ngModel
+        required
+        name="name"
+        type="text"
+        placeholder="Name on the card"
+        class="w-full focus:outline-none py-3 border-b border-gray-300"
+      />
+    </div>
+    <div class="card_element payment_input min-h-[45px]"></div>
+
+    <button
+      *ngIf="plan_to_subscribe"
+      [disabled]="f.invalid"
+      type="submit"
+      style="background-color: {{ plans_colors[plan_to_subscribe.name] }}"
+      class="rounded-md text-white py-3 mt-3 xl:cursor-pointer"
+    >
+      <i
+        *ngIf="creation_in_progress"
+        class="fa-solid fa-circle-notch fa-spin"
+      ></i>
+      <span *ngIf="!creation_in_progress">Subscribe</span>
+    </button>
+  </form>
+  <div *ngIf="!show_card_creation" class="pt-2 px-2 grid gap-8">
+    <h2 class="text-center text-xl font-medium">Confirm Subscription</h2>
+    <p>
+      You are about to subscribe to
+      <span *ngIf="plan_to_subscribe" class="font-semibold">
+        {{ plan_to_subscribe.name | uppercase }}
+      </span>
+      -
+      <span *ngIf="sub_annually" class="font-semibold">Annually</span>
+      <span *ngIf="!sub_annually" class="font-semibold">Monthly</span>
+      subscription <br />
+      <span class="font-semibold">Total : {{ total_price }}$</span>
+    </p>
+    <button
+      *ngIf="plan_to_subscribe"
+      (click)="confirm_subscribe()"
+      style="background-color: {{ plans_colors[plan_to_subscribe.name] }}"
+      class="rounded-md text-white py-3"
+    >
+      <i
+        *ngIf="subscription_in_progress"
+        class="fa-solid fa-circle-notch fa-spin"
+      ></i>
+      <span *ngIf="!subscription_in_progress">Continue</span>
+    </button>
+  </div>
+</app-popup>

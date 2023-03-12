@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'theme',
     'website',
     'django_browser_reload',
-    'task'
+    'task',
+    'payment'
 ]
 
 MIDDLEWARE = [
@@ -62,24 +63,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / "db.sqlite3"
-        }
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / "db.sqlite3"
+#         }
+#     }
+# else:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': CREDS.get("DB_NAME"),
+        'USER': CREDS.get("DB_USER"),
+        'PASSWORD': CREDS.get("DB_PASSWORD"),
+        'HOST': 'db',
+        'PORT': '3306',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': CREDS.get("DB_NAME"),
-            'USER': CREDS.get("DB_USER"),
-            'PASSWORD': CREDS.get("DB_PASSWORD"),
-            'HOST': 'db',
-            'PORT': '3306',
-        }
-    }
+}
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -161,6 +162,11 @@ LOGGING = {
             'propagate': True,
         },
         'website': {
+            'handlers': ['main'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'payment': {
             'handlers': ['main'],
             'level': 'INFO',
             'propagate': True,

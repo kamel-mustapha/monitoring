@@ -34,7 +34,7 @@
 }
 
 .button {
-  @apply bg-secondary  text-gray-50 px-5 pt-2 pb-2 rounded-sm capitalize hover:shadow-md active:bg-hover;
+  @apply bg-secondary  text-gray-50 px-5 pt-2 pb-2 rounded-md capitalize hover:shadow-md active:bg-hover;
 }
 .toggle {
   @apply w-16 h-6 rounded-full relative cursor-pointer duration-500;
@@ -69,8 +69,8 @@ body {
   @apply flex flex-col h-full gap-2;
 }
 
-#main_content > div:last-child {
-  @apply h-full  overflow-hidden pb-2;
+#main_content > div:last-child:not(.no_overflow) {
+  @apply h-full  overflow-hidden;
 }
 
 .progress_bar {

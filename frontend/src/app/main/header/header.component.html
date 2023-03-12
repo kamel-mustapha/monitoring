@@ -3,9 +3,8 @@
     <span><i class="fas {{ icon }}"></i></span>
     <span>{{ title_ | titlecase }}</span>
   </h1>
-  <div>
-    <a href="" class="button">upgrade</a>
-
+  <div *ngIf="user_details">
+    <a href="" class="button" *ngIf="user_details.sub == 'Free'">upgrade</a>
     <div class="relative main_popup_activator">
       <span
         class="hoverable relative"
@@ -88,14 +87,21 @@
         </div>
         <div>
           <span class="text-gray-700 text-sm"> Current plan: </span>
-          <span class="bg-green-900 text-gray-100 px-2 pb-1 rounded-sm text-sm">
+          <span
+            style="background: {{
+              plans_colors[user_details.sub.toLowerCase()]
+            }}"
+            class="text-white px-2 pb-1 rounded-md text-sm"
+          >
             {{ user_details.sub | titlecase }}
           </span>
         </div>
         <div>
           <div>
             <span>Monitors</span>
-            <span>{{ user_details.monitors }}/5</span>
+            <span
+              >{{ user_details.monitors }}/{{ user_details.max_monitors }}</span
+            >
           </div>
           <!-- progress bar -->
           <div class="progress_bar">
@@ -103,7 +109,7 @@
           </div>
         </div>
         <div>
-          <a routerLink="">Plans</a>
+          <a routerLink="/plans">Plans</a>
           <a routerLink="">Contact us</a>
         </div>
       </div>

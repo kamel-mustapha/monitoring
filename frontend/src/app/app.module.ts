@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServerService } from './services/server.service';
 import { SharedService } from './services/shared.service';
 import { PopupComponent } from './popup/popup.component';
+import { PaymentComponent } from './payment/payment.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +30,7 @@ import { PopupComponent } from './popup/popup.component';
     HeaderComponent,
     PagesComponent,
     PopupComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
