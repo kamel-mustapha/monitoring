@@ -53,7 +53,7 @@ def calculate_response(events):
     response_time = 0
     for event in events:
         response_time += event.time
-    response = int(response_time/events.count()) if events else 0
+    response = response_time/events.count() if events else 0
     return response
 
 def calculate_uptime(events):
