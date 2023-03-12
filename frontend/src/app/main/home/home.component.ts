@@ -22,8 +22,16 @@ export class HomeComponent implements OnInit {
       this.user_data = res;
       this.build_monitor_creation_default();
     });
+    this.shared.user_data_subject.subscribe((res: any) => {
+      this.user_details = res;
+      setTimeout(() => {
+        this.monitor_creation_defaults.interval =
+          this.user_details.min_interval;
+      }, 100);
+    });
   }
 
+  user_details: any;
   monitors: any[] = [];
   monitor_to_edit: any;
   shown_popups: any = {};
@@ -138,6 +146,8 @@ export class HomeComponent implements OnInit {
       if (res && res.status && res.status == 200) {
         this.shared.show_alert('Monitor started successfully');
         this.get_monitors();
+      } else if (res.message) {
+        this.shared.show_alert(res.message, 'alert');
       }
     });
   }
@@ -152,41 +162,60 @@ export class HomeComponent implements OnInit {
     if (form.valid) {
       this.creation_in_progress = true;
       if (form.value.alert_emails.length > 0) {
-        form.value.alert_emails = form.value.alert_emails.split(' ');
+        form.value.alert_emails = form.value.alert_emails
+          .split(' ')
+          .slice(0, this.user_data.max_alert_emails);
       }
-      if (this.create_word == 'Create') {
-        this.server.create_monitor(form.value).subscribe((response) => {
-          if (response && response.status == 200) {
-            this.shared.show_alert('Monitor created successfully');
-            this.show_creation_window();
-            this.get_monitors();
-            this.shared.refresh_user_data();
-            this.build_monitor_creation_default();
-          } else {
-            console.log(response);
-          }
-          this.creation_in_progress = false;
-        });
-      } else {
-        form.value.monitor = this.monitor_to_edit.id;
-        this.server.update_monitor(form.value).subscribe((response) => {
-          if (response && response.status == 200) {
-            this.shared.show_alert('Monitor updated successfully');
-            this.show_creation_window();
-            this.get_monitors();
-            this.shared.refresh_user_data();
-            this.build_monitor_creation_default();
-          } else {
-            console.log(response);
-          }
-          this.creation_in_progress = false;
-        });
-      }
+      console.log(form.value);
+      // if (this.create_word == 'Create') {
+      //   this.server.create_monitor(form.value).subscribe(
+      //     (response) => {
+      //       if (
+      //         response &&
+      //         response.status == 200 &&
+      //         response.message == 'success'
+      //       ) {
+      //         this.shared.show_alert('Monitor created successfully');
+      //         this.show_creation_window();
+      //         this.get_monitors();
+      //         this.shared.refresh_user_data();
+      //         this.build_monitor_creation_default();
+      //       } else if (
+      //         response &&
+      //         response.status == 200 &&
+      //         response.message != 'success'
+      //       ) {
+      //         this.shared.show_alert(response.message, 'alert');
+      //       }
+      //       this.creation_in_progress = false;
+      //     },
+      //     (error) => {
+      //       this.shared.show_alert(error.statusText, 'alarm');
+      //       this.creation_in_progress = false;
+      //     }
+      //   );
+      // } else {
+      //   form.value.monitor = this.monitor_to_edit.id;
+      //   this.server.update_monitor(form.value).subscribe((response) => {
+      //     if (response && response.status == 200) {
+      //       this.shared.show_alert('Monitor updated successfully');
+      //       this.show_creation_window();
+      //       this.get_monitors();
+      //       this.shared.refresh_user_data();
+      //       this.build_monitor_creation_default();
+      //     } else if (response.message) {
+      //       this.shared.show_alert(response.message, 'alert');
+      //     }
+      //     this.creation_in_progress = false;
+      //   });
+      // }
     } else {
+      console.log('sssssss');
       for (let i in form.value) {
         if (form.value[i].length == 0) {
           this.monitor_form_validation[i] = true;
         }
+        console.log(this.monitor_form_validation);
       }
     }
   }

@@ -28,6 +28,7 @@ export class SharedService {
     type: string = 'success',
     duration: number = 10000
   ) {
+    this.reset_popup();
     this.types_popup[type] = true;
     this.message_popup_subject.next(message);
     this.types_popup_subject.next(this.types_popup);

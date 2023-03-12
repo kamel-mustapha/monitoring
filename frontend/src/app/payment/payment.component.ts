@@ -13,8 +13,9 @@ export class PaymentComponent implements OnInit {
   constructor(private shared: SharedService, private server: ServerService) {}
   ngOnInit(): void {
     this.plans_colors = this.shared.plans_colors;
-    this.shared.user_data_subject.subscribe((res) => {
+    this.shared.user_data_subject.subscribe((res: any) => {
       this.user_details = res;
+      this.stripe = Stripe(res.stripe_public);
     });
   }
   user_details: any;
@@ -27,9 +28,8 @@ export class PaymentComponent implements OnInit {
   sub_annually: boolean = true;
   total_price: number = 0;
 
-  stripe = Stripe(
-    'pk_test_51Mjq2LCuWNbxjYRyv6wFVeWF8dB7k0l6Y6bdwVHRQC4ELF5tx7QzhXFqyeAVNSQmd0olZvf7VUIjl96T3y9gppaX00tkKUbXGZ'
-  );
+  stripe: any;
+
   plans_colors: any = {};
   plans = [
     {

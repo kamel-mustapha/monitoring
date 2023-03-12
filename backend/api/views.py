@@ -12,8 +12,7 @@ from website.models import Notification
 from django.db.models import Q
 from django.db.models import Count
 from django.utils import timezone
-from payment.models import Plan
-
+from payment.models import Plan, APIKey
 
 from logging import getLogger
 logger = getLogger(__name__)
@@ -39,35 +38,41 @@ class Monitoring(View):
         def post(self, req, *args, **kwargs):
                 try:
                         if req.user.is_authenticated:
-                                data = json.loads(req.body)
-                                if validate_entry(
-                                        data, 
-                                        ["name", "link", "interval", "alert_emails", "success_status", "timeout"]
-                                        ):
-                                        monitor = Monitor.objects.create(
-                                                user=req.user,
-                                                name=data.get("name"),
-                                                type="http",
-                                                # type=data.get("type"),
-                                                link=data.get("link"),
-                                                interval=data.get("interval"), 
-                                                success_status=data.get("success_status"),
-                                                timeout=data.get("timeout"),
-                                                running=True
-                                        )
-                                        if data.get("alert_emails"):
-                                                for email in data.get("alert_emails"):
-                                                        alert_email = AlertEmail.objects.get_or_create(email=str(email).lower().strip())
+                                user_plan = Plan.objects.filter(name=req.user.sub)[0]
+                                user_monitors = Monitor.objects.filter(user=req.user)
+                                if user_monitors.count() >= user_plan.monitors:
+                                        req.res["status"] = 200
+                                        req.res["message"] = "you have reached the maximum monitors, upgrade to get more"
+                                else:
+                                        data = json.loads(req.body)
+                                        if validate_entry(
+                                                data, 
+                                                ["name", "link", "interval", "alert_emails", "success_status", "timeout"]
+                                                ):
+                                                monitor = Monitor.objects.create(
+                                                        user=req.user,
+                                                        name=data.get("name"),
+                                                        type="http",
+                                                        # type=data.get("type"),
+                                                        link=data.get("link"),
+                                                        interval=data.get("interval"), 
+                                                        success_status=data.get("success_status"),
+                                                        timeout=data.get("timeout"),
+                                                        running=True
+                                                )
+                                                if data.get("alert_emails"):
+                                                        for email in data.get("alert_emails"):
+                                                                alert_email = AlertEmail.objects.get_or_create(email=str(email).lower().strip())
+                                                                monitor.alert_emails.add(alert_email[0])
+                                                else:
+                                                        alert_email = AlertEmail.objects.get_or_create(email=req.user.email.lower().strip())
                                                         monitor.alert_emails.add(alert_email[0])
-                                        else:
-                                                alert_email = AlertEmail.objects.get_or_create(email=req.user.email.lower().strip())
-                                                monitor.alert_emails.add(alert_email[0])
-                                        if monitor:
-                                                monitor_data = MonitorData(monitor)
-                                                req.res["monitor"] = monitor_data.data
-                                                req.res["status"] = 200
-                                                req.res["message"] = "success"
-                                                start_task(monitor)
+                                                if monitor:
+                                                        monitor_data = MonitorData(monitor)
+                                                        req.res["monitor"] = monitor_data.data
+                                                        req.res["status"] = 200
+                                                        req.res["message"] = "success"
+                                                        start_task(monitor)
                 except Exception as e: 
                         logger.exception(e)
                 return JsonResponse(req.res, status=req.res["status"])
@@ -293,7 +298,10 @@ def get_user_details(req):
                                 "monitors": user_monitors,
                                 "max_monitors": user_plan.monitors,
                                 "usage": (user_monitors*100)/user_plan.monitors,
-                                "payment_card": req.user.card_last_digit
+                                "payment_card": req.user.card_last_digit,
+                                "min_interval": user_plan.interval,
+                                "max_alert_emails": user_plan.alert_emails,
+                                "stripe_public": APIKey.objects.filter(active=True)[0].public
                         }
                         req.res["status"] = 200
                         req.res["message"] = "success"

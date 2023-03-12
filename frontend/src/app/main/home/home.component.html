@@ -199,7 +199,12 @@
 </div>
 
 <app-popup>
-  <form id="monitor_creation_form" #f="ngForm" (ngSubmit)="submit_monitor(f)">
+  <form
+    *ngIf="user_details"
+    id="monitor_creation_form"
+    #f="ngForm"
+    (ngSubmit)="submit_monitor(f)"
+  >
     <h1 class="font-bold text-lg text-gray-700 text-center">Create Monitor</h1>
     <div class="property_box">
       <label>
@@ -280,7 +285,7 @@
           placeholder="60"
           name="interval"
           [ngModel]="monitor_creation_defaults.interval"
-          min="1"
+          [min]="user_details.min_interval"
         />
       </div>
       <div class="property_box">
