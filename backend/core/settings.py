@@ -70,17 +70,17 @@ DATABASES = {
         'NAME': BASE_DIR / "db.sqlite3"
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': CREDS.get("DB_NAME"),
-#         'USER': CREDS.get("DB_USER"),
-#         'PASSWORD': CREDS.get("DB_PASSWORD"),
-#         'HOST': 'db',
-#         'PORT': '3306',
-#     }
-# }
+if not DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': CREDS.get("DB_NAME"),
+            'USER': CREDS.get("DB_USER"),
+            'PASSWORD': CREDS.get("DB_PASSWORD"),
+            'HOST': 'db',
+            'PORT': '3306',
+        }
+    }
 
 
 AUTH_PASSWORD_VALIDATORS = [
