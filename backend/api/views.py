@@ -276,6 +276,7 @@ def monitor_page_stats(req):
                                 three_month_date = timezone.now() - datetime.timedelta(days=90)
                                 monitor_events = MonitorEvent.objects.filter(monitor=monitor, created_time__gte=three_month_date).order_by("id")
                                 t = threading.Thread(target=create_monitor_data, args=(monitor, monitor_events, 90, req.res["monitors"]))
+                                threads.append(t)
                         for t in threads:
                                 t.start()
                         for t in threads:
