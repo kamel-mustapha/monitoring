@@ -64,11 +64,8 @@
     >
       <h2 class="mb-6 flex gap-4 items-center">
         <span
-          [ngClass]="{
-            'bg-green-500 status_dot_up': !monitor.down,
-            'bg-orange-500 status_dot_down': monitor.down
-          }"
-          class="block w-3 h-3 rounded-full bg-green-500"
+          *ngIf="monitor.down"
+          class="bg-orange-500 status_dot_down block w-3 h-3 rounded-full"
         ></span>
         <span class="flex gap-2 items-center">
           <span class="capitalize font-medium">{{ monitor.name }}</span> -
