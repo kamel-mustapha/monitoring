@@ -89,7 +89,10 @@ def calculate_uptime(events):
         uptime = round(100-uptime, 2)
         return uptime
     else:
-        return 100
+        if events.count() == events.filter(is_success=False).count():
+            return 0
+        else:
+            return 100
 
 def filter_events_by_date(events, date):
     date_start = timezone.datetime(year=date.year, month=date.month, day=date.day, tzinfo=ZoneInfo("UTC"))
