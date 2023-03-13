@@ -17,6 +17,7 @@ class Monitor(models.Model):
     running = models.BooleanField(default=False)
     success_status = models.IntegerField(default=200)
     timeout = models.IntegerField(default=30)
+    down = models.BooleanField(default=False)
     
     def __str__(self):
         return self.name

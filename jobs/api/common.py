@@ -187,6 +187,10 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
         request_time = (end-start)*1000
         if status == success_status:
             is_success = True
+            monitor = Monitor.objects.get(id=monitor_id)
+            if monitor.down:
+                monitor.down = False
+                monitor.save()
             if last_event and not last_event[0].is_success:
                 failure_end = True
                 downtime_start = MonitorEvent.objects.filter(monitor_id=monitor_id, failure_start=True).order_by("-id")[0]
@@ -194,11 +198,18 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
         elif status != success_status and ((last_event and last_event[0].is_success) or not last_event):
             failure_start = True
             send_alert_email(alert_emails, monitor_link, status)
+            monitor = Monitor.objects.get(id=monitor_id)
+            monitor.down = True
+            monitor.save()
     except Exception as e:
         status = 404
         is_success = False
         end = time.time()
         request_time = (end-start)*1000
+        monitor = Monitor.objects.get(id=monitor_id)
+        if not monitor.down:
+            monitor.down = True
+            monitor.save()
         if (last_event and last_event[0].is_success) or not last_event:
             failure_start = True
             send_alert_email(alert_emails, monitor_link, status)
