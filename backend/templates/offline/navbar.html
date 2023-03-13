@@ -1,14 +1,13 @@
 <div style="height: 136px"></div>
 <header
-  x-data="{ fix_navbar : false }"
-  class="fixed top-0 w-full z-10 bg-primary px-6 py-8 duration-300"
+  x-cloak
+  x-data="{ fix_navbar : false, show_links_mobile:false }"
+  class="fixed top-0 w-full z-10 bg-primary px-6 py-8 duration-300 border-b border-gray-800"
   :class="{'py-5': fix_navbar}"
   @scroll.window="fix_navbar = (window.pageYOffset > 40) ? true : false"
 >
-  <div class="flex justify-between max-w-1400 mx-auto">
-    <a href="/" class="text-4xl font-bold bg-gradient-to-r from-orange-600 to-red-300 bg-clip-text text-transparent">
-      Statuscheks<span style="font-size: 14px">.net</span>
-    </a>
+  <div class="hidden xl:flex justify-between max-w-1400 mx-auto">
+    <a href="/" class="text-4xl font-bold bg-gradient-to-r from-orange-600 to-red-300 bg-clip-text text-transparent"> Statuscheks </a>
     <span class="py-2">
       <a href="{% url 'website:pricing' %}" class="mr-6 bg-primary rounded-md px-6 py-2 duration-300 hover:text-secondary hover:text-hover">
         Pricing
@@ -23,5 +22,27 @@
       </a>
       {% endif %}
     </span>
+  </div>
+  <div class="xl:hidden flex justify-between items-center">
+    <a href="/" class="text-3xl font-bold bg-gradient-to-r from-orange-600 to-red-300 bg-clip-text text-transparent"> Statuscheks </a>
+    <div @click="show_links_mobile=!show_links_mobile">
+      <i class="fas fa-bars fa-2xl"></i>
+    </div>
+    <div
+      x-transition.duration.500ms
+      x-show="show_links_mobile"
+      :class="{'top-[76px]': fix_navbar, 'top-[100px]': !fix_navbar}"
+      class="fixed left-0 h-screen w-screen bg-black bg-opacity-70 grid place-content-center"
+    >
+      <div class="bg-white w-content h-full rounded-lg py-6 px-8 text-gray-800 grid gap-12">
+        <a href="{% url 'website:pricing' %}" class="text-lg">Pricing</a>
+        {% if user.is_authenticated %}
+        <a href="/dashboard">Dashboard</a>
+        {% else %}
+        <a href="{% url 'website:login' %}">Login</a>
+        <a href="{% url 'website:register' %}"> Register </a>
+        {% endif %}
+      </div>
+    </div>
   </div>
 </header>

@@ -1,13 +1,15 @@
 {% extends 'offline/root.html' %} {% load static %} {% block content %}
-<div class="flex justify-around max-w-1400 mx-auto px-6 py-12 2xl:px-0 gap-4">
-  <div class="w-6/12 pt-6 pb-36 flex flex-col gap-12">
-    <h1 class="text-primary text-5xl font-bold whitespace-nowrap"><span class="text-secondary font-semibold">Monitor</span> your websites</h1>
+<div class="flex justify-around max-w-1400 mx-auto px-6 py-16 2xl:px-0 gap-4">
+  <div class="w-full xl:w-6/12 pt-6 pb-36 flex flex-col gap-12">
+    <h1 class="text-primary text-5xl font-bold xl:whitespace-nowrap leading-[85px]">
+      <span class="text-secondary font-semibold">Monitor</span> your websites
+    </h1>
     <p class="text-secondary text-xl leading-medium">
       Statuscheks is a monitoring service. You can create one or multiple monitors and get notified when something goes wrong.
     </p>
     <a href="" class="bg-secondary text-button px-12 py-3 text-xl block w-content rounded-full hover:bg-hover">Start right now</a>
   </div>
-  <div class="w-5/12">
+  <div class="hidden xl:block w-5/12">
     <img class="w-full ml-auto mr-0 rounded-xl" src="{% static 'default.jpg' %}" alt="" />
   </div>
 </div>
@@ -18,17 +20,17 @@
       x-data="{ show_elements: false }"
       x-cloak
       @scroll.window="show_elements = (window.pageYOffset > 200) ? true : false"
-      class="w-content mx-auto text-center text-5xl font-bold leading-relaxed"
+      class="w-content mx-auto text-center text-3xl xl:text-5xl font-bold leading-relaxed"
     >
-      <span x-transition.duration.500ms>Don't let your customers catch your</span>
+      <span x-transition.duration.500ms>Be the first to detect your</span>
       <br />
-      <span x-transition.duration.1500ms><span class="text-hover"> DOWNTIMES </span> before you.</span>
+      <span class="text-hover"> DOWNTIMES </span>
     </div>
     <div
       x-data="{ show_elements: false }"
       x-cloak
       @scroll.window="show_elements = (window.pageYOffset > 400) ? true : false"
-      class="grid grid-cols-3 gap-10 mt-16"
+      class="flex flex-col lg:grid grid-cols-3 gap-10 mt-16"
     >
       <div x-transition.duration.1000ms class="h-96 w-fullrounded-lg shadow-lg"></div>
       <div x-transition.duration.2000ms class="h-96 w-full rounded-lg shadow-lg"></div>
@@ -38,7 +40,7 @@
 </div>
 
 <div class="flex mx-auto max-w-1400 px-6 2xl:px-0">
-  <div class="w-full pt-4">
+  <div class="hidden xl:block w-full pt-14">
     <img class="w-8/12 mr-auto ml-0" src="{% static 'character_9.svg' %}" alt="" />
   </div>
   <div
