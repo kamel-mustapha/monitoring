@@ -147,6 +147,7 @@ def create_monitor_data(monitor, events, events_time, data_array):
         "check_interval": monitor.interval,
         "uptimes": uptimes,
         "responses": responses,
+        "down": monitor.down
     }
     # building stats
     for x in ["uptime", "response"]:
