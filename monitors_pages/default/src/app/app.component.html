@@ -2,6 +2,8 @@
   [page_icon]="page_icon"
   [page_link]="page_link"
   [page_name]="page_name"
+  [monitor_down]="monitor_down"
+  [checks_counter]="checks_counter"
 ></app-header>
 <main class="relative max-w-1000 mx-auto py-8 px-6 min-h-screen">
   <div *ngIf="!loading">
@@ -60,10 +62,20 @@
       *ngFor="let monitor of monitors"
       class="my-12 border-b border-gray-300 pb-4"
     >
-      <h2 class="mb-6">
-        <span class="capitalize">{{ monitor.name }}</span> - Checking every
-        {{ monitor.check_interval }}
-        seconds
+      <h2 class="mb-6 flex gap-4 items-center">
+        <span
+          [ngClass]="{
+            'bg-green-500 status_dot_up': !monitor.down,
+            'bg-orange-500 status_dot_down': monitor.down
+          }"
+          class="block w-3 h-3 rounded-full bg-green-500"
+        ></span>
+        <span class="flex gap-2 items-center">
+          <span class="capitalize font-medium">{{ monitor.name }}</span> -
+          <span class="text-sm text-gray-600"
+            >Checking every {{ monitor.check_interval }} seconds</span
+          >
+        </span>
       </h2>
       <div class="flex justify-between flex-col md:flex-row gap-4 items-center">
         <div

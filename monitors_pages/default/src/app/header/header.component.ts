@@ -12,4 +12,6 @@ export class HeaderComponent implements OnInit {
   @Input() page_icon: string = '';
   @Input() page_link: string = '';
   @Input() page_name: string = '';
+  @Input() monitor_down: boolean = false;
+  @Input() checks_counter: number = 60;
 }

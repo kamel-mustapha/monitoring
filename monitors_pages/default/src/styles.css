@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@keyframes shine_up {
+  from {
+    box-shadow: 0 0 5px 4px rgba(34, 197, 94, 0.5);
+  }
+  to {
+    box-shadow: 0 0 10px 5px rgba(34, 197, 94, 0.5);
+  }
+}
+
+@keyframes shine_down {
+  from {
+    box-shadow: 0 0 5px 4px rgba(234, 88, 12, 0.5);
+  }
+  to {
+    box-shadow: 0 0 10px 5px rgba(234, 88, 12, 0.5);
+  }
+}
+.status_dot_up {
+  animation: shine_up 1.5s infinite;
+}
+.status_dot_down {
+  animation: shine_down 1.5s infinite;
+}
