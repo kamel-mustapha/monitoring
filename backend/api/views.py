@@ -1,4 +1,4 @@
-import json, datetime
+import json, datetime, threading
 from django.shortcuts import render
 from django.views.generic import View
 from api.serializers import *
@@ -271,12 +271,15 @@ def monitor_page_stats(req):
                         page = page[0]
                         req.res["monitors"] = []
                         page_monitors = page.monitors.all()
+                        threads = []
                         for monitor in page_monitors:
                                 three_month_date = timezone.now() - datetime.timedelta(days=90)
                                 monitor_events = MonitorEvent.objects.filter(monitor=monitor, created_time__gte=three_month_date).order_by("id")
-                                monitor_data = create_monitor_data(monitor, monitor_events, 90)
-                                req.res["monitors"].append(monitor_data)
-                        print(req.res)
+                                t = threading.Thread(target=create_monitor_data, args=(monitor, monitor_events, 90, req.res["monitors"]))
+                        for t in threads:
+                                t.start()
+                        for t in threads:
+                                t.join()
                         req.res["status"] = 200
                         del req.res["message"]
         except Exception as e:

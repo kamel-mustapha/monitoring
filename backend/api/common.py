@@ -139,7 +139,7 @@ def round_monitor_results(data):
     data["response_month"] = round(data["response_month"], 2)
     data["response_ninty"] = round(data["response_ninty"], 2)
 
-def create_monitor_data(monitor, events, events_time):
+def create_monitor_data(monitor, events, events_time, data_array):
     today = timezone.datetime.now()
     responses, uptimes = build_responses_time(events, events_time, today)
     data = {
@@ -158,4 +158,4 @@ def create_monitor_data(monitor, events, events_time):
     data["uptimes"].reverse()
     # rounding results
     round_monitor_results(data)
-    return data
+    data_array.append(data)
