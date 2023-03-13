@@ -98,7 +98,7 @@ def filter_events_by_date(events, date):
     date_start = timezone.datetime(year=date.year, month=date.month, day=date.day, tzinfo=ZoneInfo("UTC"))
     date_end = date_start + td(days=1)
     events = events.filter(created_time__gte=date_start, created_time__lt=date_end)
-    response =  calculate_response(events)
+    response =  calculate_response(events) if events else None
     uptime = calculate_uptime(events) if events else None
     return response, uptime
 
@@ -112,12 +112,12 @@ def build_responses_time(events, event_time, today):
     uptimes = []
     for event_day in range(event_time):
         response, uptime = filter_events_by_date(events, today-td(days=event_day))
-        if response:
+        if response or response == 0:
             responses.append({
                 "date": get_verbose_date(today-td(days=event_day)),
                 "value": response
             })
-        if uptime:
+        if uptime or uptime == 0:
             uptimes.append({
                 "date": get_verbose_date(today-td(days=event_day)),
                 "value": uptime
