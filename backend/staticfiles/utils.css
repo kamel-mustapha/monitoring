@@ -3,6 +3,44 @@
 @tailwind utilities;
 
 @layer components {
+  body {
+    background-color: #fff7f7;
+    background-image: linear-gradient(225deg, #fff7f7 0%, #fceddb 46%, #ffffff 100%);
+  }
+
+  #landing_2 {
+    background-color: #fbab7e;
+    background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
+  }
+
+  #navbar {
+    @apply max-w-1400 items-center mx-auto hidden xl:flex justify-between py-8;
+  }
+  #logo,
+  #logo:hover,
+  #logo:visited {
+    @apply text-secondary text-xl font-medium flex items-center gap-2;
+  }
+
+  #navbar > div {
+    @apply flex items-center;
+  }
+  #navbar > div:first-child {
+    @apply gap-14;
+  }
+  #navbar > div:last-child {
+    @apply gap-12;
+  }
+
+  #navbar a:not(#logo) {
+    @apply text-gray-500 hover:text-gray-900;
+  }
+
+  a.main,
+  a.main:visited {
+    @apply bg-secondary !text-gray-100 py-2 px-6 rounded-full font-medium hover:opacity-80;
+  }
+
   .pricing_container {
     @apply w-content grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 mx-auto pb-16;
   }
@@ -28,5 +66,16 @@
 
   .pricing_container > div li {
     @apply my-4;
+  }
+
+  form {
+    @apply bg-white w-full mx-auto flex flex-col gap-10 py-12 border shadow-md text-center rounded-xl px-12;
+  }
+
+  form#registration > input {
+    @apply w-full h-12 text-gray-900 px-6 rounded-full border-gray-300 focus:outline-none focus:ring-transparent focus:border-secondary;
+  }
+  form#registration > button {
+    @apply bg-secondary text-button rounded-md px-6 py-2 text-lg hover:bg-hover;
   }
 }

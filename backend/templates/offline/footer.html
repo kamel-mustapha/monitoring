@@ -1,46 +1,48 @@
-<footer class="border-t border-gray-800 py-12 px-6 xl:px-32 text-paragraph text-md">
-  <div class="max-w-1400 mx-auto">
-    <div class="flex flex-col xl:flex-row gap-12 xl:gap-0 justify-between pb-12">
-      <div>
-        <a href="/" class="text-4xl font-bold bg-gradient-to-r from-orange-600 to-red-300 bg-clip-text text-transparent"> Statuscheks</a>
-        <p class="mt-6 text-gray-400 font-semibold">A monitoring service</p>
-        <div class="flex gap-6 mt-8">
-          <a href="" class="bg-secondary w-8 h-8 text-center rounded-full relative hover:bg-hover"
-            ><i class="fa fa-facebook fa-sm absolute left-0 right-0 mx-auto top-1/2 -translate-y-1/2"></i
-          ></a>
-          <a href="" class="bg-secondary w-8 h-8 text-center rounded-full relative hover:bg-hover"
-            ><i class="fa fa-twitter fa-sm absolute left-0 right-0 mx-auto top-1/2 -translate-y-1/2"></i
-          ></a>
-          <a href="" class="bg-secondary w-8 h-8 text-center rounded-full relative hover:bg-hover"
-            ><i class="fa fa-linkedin fa-sm absolute left-0 right-0 mx-auto top-1/2 -translate-y-1/2"></i
-          ></a>
-        </div>
-      </div>
-      <div>
-        <h2 class="text-2xl font-semibold">Services</h2>
-        <div class="text-gray-300 flex flex-col gap-4 mt-8">
-          <a href="" class="hover:underline">Website monitoring</a>
-          <a href="" class="hover:underline">Port monitoring</a>
-        </div>
-      </div>
-      <div>
-        <h2 class="text-2xl font-semibold">Company</h2>
-        <div class="text-gray-300 flex flex-col gap-4 mt-8">
-          <a href="" class="hover:underline">Pricing</a>
-          <a href="" class="hover:underline">Blog</a>
-          <a href="" class="hover:underline">Terms / Privacy</a>
-          <a href="" class="hover:underline">Contact us</a>
-        </div>
-      </div>
-      <div>
-        <h2 class="text-2xl font-semibold">Resources</h2>
-        <div class="text-gray-300 flex flex-col gap-4 mt-8">
-          <a href="" class="hover:underline">API</a>
-          <a href="" class="hover:underline">Integrations</a>
-          <a href="" class="hover:underline">FAQ</a>
-        </div>
+{% load static %}
+<footer class="border-t border-gray-300 py-8 mt-24">
+  <div class="max-w-1400 mx-auto flex flex-col xl:flex-row gap-12 xl:gap-0 justify-between pb-12 px-6">
+    <div>
+      <a id="logo" href="/">
+        <img src="{% static 'logo.png' %}" alt="" width="25" />
+        <span> StatusChecks </span>
+      </a>
+      <p class="mt-6 text-gray-700 font-medium">A monitoring service</p>
+      <div class="flex gap-6 mt-8">
+        <a href="" class="bg-secondary w-8 h-8 text-center rounded-full relative hover:bg-hover"
+          ><i class="fa fa-facebook fa-sm absolute left-0 right-0 mx-auto top-1/2 -translate-y-1/2 text-gray-100"></i
+        ></a>
+        <a href="" class="bg-secondary w-8 h-8 text-center rounded-full relative hover:bg-hover"
+          ><i class="fa fa-twitter fa-sm absolute left-0 right-0 mx-auto top-1/2 -translate-y-1/2 text-gray-100"></i
+        ></a>
+        <a href="" class="bg-secondary w-8 h-8 text-center rounded-full relative hover:bg-hover"
+          ><i class="fa fa-linkedin fa-sm absolute left-0 right-0 mx-auto top-1/2 -translate-y-1/2 text-gray-100"></i
+        ></a>
       </div>
     </div>
-    <div class="text-center text-gray-400 border-t border-gray-800 mx-auto py-8"><span class="text-sm">©</span> 2022 - All rights reserved</div>
+    <div>
+      <h2 class="text-2xl font-semibold">Services</h2>
+      <div class="text-gray-800 flex flex-col gap-4 mt-8">
+        <a href="" class="hover:underline">Website monitoring</a>
+        <a href="" class="hover:underline">Port monitoring</a>
+      </div>
+    </div>
+    <div>
+      <h2 class="text-2xl font-semibold">Company</h2>
+      <div class="text-gray-800 flex flex-col gap-4 mt-8">
+        <a href="" class="hover:underline">Pricing</a>
+        <a href="" class="hover:underline">Blog</a>
+        <a href="" class="hover:underline">Terms / Privacy</a>
+        <a href="" class="hover:underline">Contact us</a>
+      </div>
+    </div>
+    <div>
+      <h2 class="text-2xl font-semibold">Resources</h2>
+      <div class="text-gray-800 flex flex-col gap-4 mt-8">
+        <a href="" class="hover:underline">API</a>
+        <a href="" class="hover:underline">Integrations</a>
+        <a href="" class="hover:underline">FAQ</a>
+      </div>
+    </div>
   </div>
+  <div class="text-center text-gray-900 border-t border-gray-300 mx-auto pt-8"><span class="text-sm">©</span> 2022 - All rights reserved</div>
 </footer>

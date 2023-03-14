@@ -17,20 +17,20 @@
     </style>
   </head>
 
-  <body class="bg-primary text-primary mx-auto font-poppins">
-    {% include 'offline/navbar.html' %}
-    <div style="min-height: calc(100vh - 112px)">{% block content %}{% endblock %}</div>
-    {% include 'offline/footer.html' %}
+  <body class="mx-auto font-inter">
+    {% include 'offline/navbar.html' %} {% block content %}{% endblock %} {% include 'offline/footer.html' %}
     <div
       x-data="{show_message: false}"
       x-show="show_message"
       x-cloak
       x-transition.duration.500ms
-      class="fixed z-20 w-content h-content max-w-300 bottom-10 left-0 right-0 mx-auto rounded-xl bg-gray-100 text-gray-700 px-6 py-2 capitalize leading-relaxed select-none"
+      class="fixed z-20 w-content h-content max-w-300 bottom-10 left-0 right-0 mx-auto rounded-md bg-opacity-80 font-medium bg-gray-300 text-gray-600 px-6 py-3 capitalize leading-relaxed select-none"
       id="message_overlay"
     >
-      <ul></ul>
-      <span @click="show_message = false" class="hide absolute -right-3 -top-5 text-primary lg:cursor-pointer">×</span>
+      <ul>
+        <li>Logged in successfully</li>
+      </ul>
+      <span @click="show_message = false" class="hide"></span>
       <span @click="show_message = true" class="show"></span>
     </div>
     <script src="{% static 'script.js' %}" defer></script>

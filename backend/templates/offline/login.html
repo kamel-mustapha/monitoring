@@ -1,12 +1,12 @@
 {% extends 'offline/root.html' %} {% load static %} {% block content %}
-<div class="pb-24">
-  <form onsubmit="register_or_login(event, this)" class="w-full sm:w-400 mx-auto flex flex-col gap-10 py-12 border border-gray-800 text-center rounded-xl px-12 max-w-1400">
+<div style="min-height: calc(100vh - 104px)" class="grid place-content-center">
+  <form id="registration" onsubmit="register_or_login(event, this)" class="sm:w-400">
     <h1 class="text-headline text-2xl font-semibold">Login to your account</h1>
     <input type="hidden" value="{{csrf_token}}" name="csrfmiddlewaretoken" />
-    <input type="text" class="w-full h-12 text-gray-900 px-6 rounded-full border-none focus:outline-none focus:ring-transparent" placeholder="Username" name="username" />
-    <input type="password" class="w-full h-12 text-gray-900 px-6 rounded-full border-none focus:outline-none focus:ring-transparent" placeholder="Your password" name="password" />
+    <input type="text" placeholder="Username" name="username" />
+    <input type="password" placeholder="Your password" name="password" />
     <a href="" class="hover:underline">I forgot my password :(</a>
-    <button type="submit" class="bg-secondary text-button rounded-md px-6 py-2 text-lg hover:bg-hover">Login</button>
+    <button type="submit">Login</button>
   </form>
 </div>
 {%endblock %}

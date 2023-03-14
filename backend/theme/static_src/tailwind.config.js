@@ -16,7 +16,7 @@ module.exports = {
       },
       colors: {
         primary: "#fffffe",
-        secondary: "#a7a9be",
+        secondary: "#ff8906",
         button: "#fffffe",
         hover: "#ff8906",
       },
@@ -35,7 +35,7 @@ module.exports = {
       maxWidth: {
         1900: "1920px",
         300: "500px",
-        1400: "1400px",
+        1400: "1250px",
       },
       minHeight: {
         "85vh": "90vh",
@@ -52,6 +52,8 @@ module.exports = {
         Changa: ["Changa", "sans"],
         work: ["Work Sans", "arial", "sans"],
         poppins: ["Poppins", "arial", "sans"],
+        inter: ["Inter", "arial", "sans"],
+        lexend: ["Lexend", "arial", "sans"],
       },
       boxShadow: {
         button: "0 0 10px 1px rgba(0, 0, 0, 0.3)",

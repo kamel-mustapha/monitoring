@@ -1,34 +1,33 @@
-<div style="height: 136px"></div>
-<header
-  x-cloak
-  x-data="{ fix_navbar : false, show_links_mobile:false }"
-  class="fixed top-0 w-full z-10 bg-primary px-6 py-8 duration-300 border-b border-gray-800"
-  :class="{'py-5': fix_navbar}"
-  @scroll.window="fix_navbar = (window.pageYOffset > 40) ? true : false"
->
-  <div class="hidden xl:flex justify-between max-w-1400 mx-auto">
-    <a href="/" class="text-4xl font-bold bg-gradient-to-r from-orange-600 to-red-300 bg-clip-text text-transparent"> Statuscheks </a>
-    <span class="py-2">
-      <a href="{% url 'website:pricing' %}" class="mr-6 bg-primary rounded-md px-6 py-2 duration-300 hover:text-secondary hover:text-hover">
-        Pricing
+{% load static %}
+<header>
+  <div id="navbar">
+    <div>
+      <a id="logo" href="/">
+        <img src="{% static 'logo.png' %}" alt="" width="25" />
+        <span> StatusChecks </span>
       </a>
-      <a href="" class="mr-6 bg-primary rounded-md px-6 py-2 duration-300 hover:text-secondary hover:text-hover">Services</a>
-      {% if user.is_authenticated %}
-      <a href="/dashboard" class="bg-secondary text-button rounded-full px-8 py-3 font-semibold hover:bg-hover">Dashboard</a>
-      {% else %}
-      <a href="{% url 'website:login' %}" class="mr-6 bg-primary rounded-md px-6 py-2 duration-300 hover:text-secondary hover:text-hover">Login</a>
-      <a href="{% url 'website:register' %}" class="bg-secondary text-button rounded-full px-8 py-3 font-semibold hover:bg-hover">
-        Register for FREE
-      </a>
-      {% endif %}
-    </span>
-  </div>
-  <div class="xl:hidden flex justify-between items-center">
-    <a href="/" class="text-3xl font-bold bg-gradient-to-r from-orange-600 to-red-300 bg-clip-text text-transparent"> Statuscheks </a>
-    <div @click="show_links_mobile=!show_links_mobile">
-      <i class="fas fa-bars fa-2xl"></i>
+      <a href="{% url 'website:pricing' %}" class="">Pricing </a>
+      <a href="">Services</a>
+      <a href="">FAQ</a>
     </div>
-    <div
+    <div>
+      {% if user.is_authenticated %}
+      <a href="/dashboard">Dashboard</a>
+      {% else %}
+      <a href="{% url 'website:login' %}">Sign in</a>
+      <a href="{% url 'website:register' %}" class="main">Get started today</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="xl:hidden flex justify-between items-center px-6 py-6 fixed w-full bg-white">
+    <a id="logo" href="/">
+      <img src="{% static 'logo.png' %}" alt="" width="25" />
+      <span> StatusChecks </span>
+    </a>
+    <div @click="show_links_mobile=!show_links_mobile">
+      <i class="fas fa-bars fa-2xl text-secondary"></i>
+    </div>
+    <!-- <div
       x-transition.duration.500ms
       x-show="show_links_mobile"
       :class="{'top-[76px]': fix_navbar, 'top-[100px]': !fix_navbar}"
@@ -43,6 +42,6 @@
         <a href="{% url 'website:register' %}"> Register </a>
         {% endif %}
       </div>
-    </div>
+    </div> -->
   </div>
 </header>
