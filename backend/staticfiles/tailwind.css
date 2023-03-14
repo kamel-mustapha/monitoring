@@ -1074,10 +1074,6 @@ form#registration > button:hover {
   width: 2rem;
 }
 
-.w-7\/12 {
-  width: 58.333333%;
-}
-
 .w-10\/12 {
   width: 83.333333%;
 }
@@ -1175,16 +1171,16 @@ form#registration > button:hover {
   gap: 4rem;
 }
 
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
 .rounded-xl {
   border-radius: 0.75rem;
 }
 
 .rounded-full {
   border-radius: 9999px;
-}
-
-.rounded-3xl {
-  border-radius: 1.5rem;
 }
 
 .rounded-lg {
@@ -1247,25 +1243,6 @@ form#registration > button:hover {
   --tw-bg-opacity: 0.8;
 }
 
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.from-orange-600 {
-  --tw-gradient-from: #ea580c;
-  --tw-gradient-to: rgb(234 88 12 / 0);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.to-red-300 {
-  --tw-gradient-to: #fca5a5;
-}
-
-.bg-clip-text {
-  -webkit-background-clip: text;
-          background-clip: text;
-}
-
 .py-24 {
   padding-top: 6rem;
   padding-bottom: 6rem;
@@ -1279,6 +1256,11 @@ form#registration > button:hover {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .px-4 {
@@ -1296,11 +1278,6 @@ form#registration > button:hover {
   padding-bottom: 9rem;
 }
 
-.px-16 {
-  padding-left: 4rem;
-  padding-right: 4rem;
-}
-
 .py-6 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
@@ -1311,19 +1288,9 @@ form#registration > button:hover {
   padding-right: 2rem;
 }
 
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-}
-
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
 }
 
 .pb-12 {
@@ -1360,8 +1327,8 @@ form#registration > button:hover {
   line-height: 1.25rem;
 }
 
-.text-7xl {
-  font-size: 4.5rem;
+.text-5xl {
+  font-size: 3rem;
   line-height: 1;
 }
 
@@ -1370,19 +1337,9 @@ form#registration > button:hover {
   line-height: 1.75rem;
 }
 
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
-
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
 }
 
 .text-4xl {
@@ -1390,9 +1347,9 @@ form#registration > button:hover {
   line-height: 2.5rem;
 }
 
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .font-semibold {
@@ -1403,16 +1360,8 @@ form#registration > button:hover {
   font-weight: 500;
 }
 
-.font-bold {
-  font-weight: 700;
-}
-
 .capitalize {
   text-transform: capitalize;
-}
-
-.leading-\[85px\] {
-  line-height: 85px;
 }
 
 .leading-8 {
@@ -1446,10 +1395,6 @@ form#registration > button:hover {
 .text-gray-900 {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.text-transparent {
-  color: transparent;
 }
 
 .text-green-500 {
@@ -1500,12 +1445,12 @@ form#registration > button:hover {
 }
 
 @media (min-width: 640px) {
-  .sm\:w-550 {
-    width: 550px;
-  }
-
   .sm\:w-400 {
     width: 400px;
+  }
+
+  .sm\:w-550 {
+    width: 550px;
   }
 }
 
@@ -1535,6 +1480,10 @@ form#registration > button:hover {
     width: 58.333333%;
   }
 
+  .xl\:w-10\/12 {
+    width: 83.333333%;
+  }
+
   .xl\:cursor-pointer {
     cursor: pointer;
   }
@@ -1549,6 +1498,11 @@ form#registration > button:hover {
 
   .xl\:rounded-3xl {
     border-radius: 1.5rem;
+  }
+
+  .xl\:px-16 {
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 
   .xl\:text-7xl {
