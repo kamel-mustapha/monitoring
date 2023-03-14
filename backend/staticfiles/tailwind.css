@@ -1078,18 +1078,18 @@ form#registration > button:hover {
   width: 83.333333%;
 }
 
+.w-content {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .w-3\/4 {
   width: 75%;
 }
 
 .w-screen {
   width: 100vw;
-}
-
-.w-content {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
 }
 
 .w-2\/12 {
@@ -1293,6 +1293,11 @@ form#registration > button:hover {
   padding-bottom: 0.75rem;
 }
 
+.py-32 {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
 .pb-12 {
   padding-bottom: 3rem;
 }
@@ -1301,8 +1306,20 @@ form#registration > button:hover {
   padding-top: 2rem;
 }
 
+.pt-16 {
+  padding-top: 4rem;
+}
+
 .pb-24 {
   padding-bottom: 6rem;
+}
+
+.pt-24 {
+  padding-top: 6rem;
+}
+
+.pt-32 {
+  padding-top: 8rem;
 }
 
 .text-center {
@@ -1503,6 +1520,15 @@ form#registration > button:hover {
   .xl\:px-16 {
     padding-left: 4rem;
     padding-right: 4rem;
+  }
+
+  .xl\:py-0 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .xl\:pt-0 {
+    padding-top: 0px;
   }
 
   .xl\:text-7xl {
