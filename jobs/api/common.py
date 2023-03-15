@@ -72,7 +72,7 @@ status_messages_long = {
     507: "The method could not be performed on the resource because the server is unable to store the representation needed to successfully complete the request.",
     508: "The server detected an infinite loop while processing the request.",
     510: "Further extensions to the request are required for the server to fulfill it.",
-    511: "Indicates that the client needs to authenticate to gain network access."
+    511: "Indicates that the client needs to authenticate to gain network access.",
 }
 
 status_messages = {
@@ -157,7 +157,7 @@ def send_alert_email(alert_emails, monitor_link, status, downtime=None, success=
                 html_message=message
             )
         else:
-            message = f"<div>Your monitor {monitor_link} went down with a status of {status}.</div><div>{status_messages_long.get(status)}</div>"
+            message = f"<div>Your monitor {monitor_link} went down with a status of {status}.</div><div>{status_messages_long.get(status) if status_messages_long.get(status) else 'Unknown error' }</div>"
             send_mail(
                 'MONITOR DOWN',
                 'Your monitor went down',
@@ -219,7 +219,7 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
         monitor_id=monitor_id,
         status=status,
         time=request_time,
-        message=status_messages.get(status),
+        message=status_messages.get(status) if status_messages.get(status) else "unknown error",
         is_success=is_success,
         failure_start=failure_start,
         failure_end=failure_end
