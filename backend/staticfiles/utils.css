@@ -8,7 +8,8 @@
     background-image: linear-gradient(225deg, #fff7f7 0%, #fceddb 46%, #ffffff 100%);
   }
 
-  #landing_2 {
+  #landing_2,
+  #pricing {
     background-color: #fbab7e;
     background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
   }
@@ -41,11 +42,14 @@
     @apply bg-secondary !text-gray-100 py-2 px-6 rounded-full font-medium hover:opacity-80;
   }
 
+  .payment_input {
+    @apply border-b border-gray-300  py-3 text-lg;
+  }
   .pricing_container {
-    @apply w-content grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 mx-auto pb-16;
+    @apply w-full grid grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-16 mx-auto  mt-2;
   }
   .pricing_container > div {
-    @apply grid gap-4 text-center gap-10 bg-gray-100 text-gray-900 px-20 py-12 rounded-lg shadow-lg;
+    @apply relative grid text-center gap-6 bg-gray-100 text-gray-900 px-16 py-12 rounded-2xl shadow-xl;
   }
 
   .pricing_container > div h2 {
@@ -61,11 +65,11 @@
   }
 
   .pricing_container > div a {
-    @apply border py-3 shadow-lg hover:shadow-xl rounded-md h-content;
+    @apply border py-3 bg-secondary text-white font-medium shadow-md hover:shadow-lg rounded-lg h-content px-8;
   }
 
-  .pricing_container > div li {
-    @apply my-4;
+  .pricing_container ul > li:not(ul > li:first-child) {
+    @apply mt-4;
   }
 
   form {

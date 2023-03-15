@@ -17,10 +17,12 @@
   </div>
 </div>
 <div id="landing_2" class="py-36 px-6 xl:px-16 grid gap-16">
-  <div class="text-gray-900 text-center grid gap-4 xl:w-10/12 mx-auto">
-    <h2 class="text-5xl font-lexend">All your services monitored in a single place.</h2>
-    <!-- <h3 class="text-xl w-3/4 mx-auto">Well everything you need if you aren’t that picky about minor details like tax compliance.</h3> -->
+  <div class="text-gray-800 text-center grid gap-4 xl:w-10/12 mx-auto">
+    <h2 class="text-5xl font-lexend font-semibold">All your services monitored in a single place.</h2>
   </div>
   <img class="mx-auto xl:rounded-3xl max-w-full" src="{% static 'dashboard.jpg' %}" alt="" />
 </div>
+<div id="services" class="h-[1200px]"></div>
+{% include 'offline/pricing.html' %}
+<div id="faq" class="h-[1200px]"></div>
 {% endblock %}

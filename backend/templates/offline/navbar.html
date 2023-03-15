@@ -6,9 +6,9 @@
         <img src="{% static 'logo.svg' %}" alt="" width="25" />
         <span> StatusChecks </span>
       </a>
-      <a href="{% url 'website:pricing' %}" class="">Pricing </a>
-      <a href="">Services</a>
-      <a href="">FAQ</a>
+      <a href="#pricing" class="">Pricing </a>
+      <a href="#services">Services</a>
+      <a href="#faq">FAQ</a>
     </div>
     <div>
       {% if user.is_authenticated %}
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="xl:hidden h-[76px]"></div>
-  <div x-cloak x-data="{show_links_mobile:false}" class="xl:hidden top-0 left-0 fixed w-full bg-white">
+  <div x-cloak x-data="{show_links_mobile:false}" class="xl:hidden top-0 left-0 fixed z-50 w-full bg-white">
     <div class="px-6 py-6 flex justify-between items-center">
       <a id="logo" href="/">
         <img src="{% static 'logo.svg' %}" alt="" width="25" />
@@ -36,7 +36,7 @@
       :class="{'top-[76px]': fix_navbar, 'top-[100px]': !fix_navbar}"
       class="grid gap-12 px-8 py-6 shadow-lg"
     >
-      <a href="{% url 'website:pricing' %}">Pricing</a>
+      <a href="#pricing">Pricing</a>
       {% if user.is_authenticated %}
       <a href="/dashboard" class="main">Dashboard</a>
       {% else %}
