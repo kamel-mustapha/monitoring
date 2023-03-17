@@ -1,6 +1,6 @@
 {% extends 'offline/root.html' %} {% load static %} {% block content %}
 <div class="pb-24">
-  <form id="registration" onsubmit="register_or_login(event, this, register=true)" class="sm:w-550">
+  <form id="registration" onsubmit="register_or_login(event, this, register=true)" class="main_form sm:w-550">
     <h1 class="text-headline text-2xl font-semibold">Create a FREE Account</h1>
     <input type="hidden" value="{{csrf_token}}" name="csrfmiddlewaretoken" />
     <input required type="text" placeholder="Username" name="username" />

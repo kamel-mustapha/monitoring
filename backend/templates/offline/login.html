@@ -1,6 +1,6 @@
 {% extends 'offline/root.html' %} {% load static %} {% block content %}
 <div style="min-height: calc(100vh - 104px)" class="grid place-content-center">
-  <form id="registration" onsubmit="register_or_login(event, this)" class="sm:w-400">
+  <form id="registration" onsubmit="register_or_login(event, this)" class="main_form sm:w-400">
     <h1 class="text-headline text-2xl font-semibold">Login to your account</h1>
     <input type="hidden" value="{{csrf_token}}" name="csrfmiddlewaretoken" />
     <input type="text" placeholder="Username" name="username" />

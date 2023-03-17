@@ -1,48 +1,35 @@
 {% load static %}
-<footer class="border-t border-gray-300 py-8">
-  <div class="max-w-1400 mx-auto flex flex-col xl:flex-row gap-12 xl:gap-0 justify-between pb-12 px-6">
-    <div>
+<footer class="text-center lg:py-16 flex flex-col lg:grid gap-8 max-w-[1000px] mx-auto px-6">
+  <div class="flex flex-col lg:flex-row gap-8 lg:gap-0 justify-between items-center">
+    <div class="flex flex-col items-cneter">
       <a id="logo" href="/">
         <img src="{% static 'logo.svg' %}" alt="" width="25" />
         <span> StatusChecks </span>
       </a>
-      <p class="mt-6 text-gray-700 font-medium">A monitoring service</p>
-      <div class="flex gap-6 mt-8">
-        <a href="" class="bg-secondary w-8 h-8 text-center rounded-full relative hover:bg-hover"
-          ><i class="fa fa-facebook fa-sm absolute left-0 right-0 mx-auto top-1/2 -translate-y-1/2 text-gray-100"></i
-        ></a>
-        <a href="" class="bg-secondary w-8 h-8 text-center rounded-full relative hover:bg-hover"
-          ><i class="fa fa-twitter fa-sm absolute left-0 right-0 mx-auto top-1/2 -translate-y-1/2 text-gray-100"></i
-        ></a>
-        <a href="" class="bg-secondary w-8 h-8 text-center rounded-full relative hover:bg-hover"
-          ><i class="fa fa-linkedin fa-sm absolute left-0 right-0 mx-auto top-1/2 -translate-y-1/2 text-gray-100"></i
-        ></a>
-      </div>
     </div>
-    <div>
-      <h2 class="text-2xl font-semibold">Services</h2>
-      <div class="text-gray-800 flex flex-col gap-4 mt-8">
-        <a href="" class="hover:underline">Website monitoring</a>
-        <a href="" class="hover:underline">Port monitoring</a>
-      </div>
-    </div>
-    <div>
-      <h2 class="text-2xl font-semibold">Company</h2>
-      <div class="text-gray-800 flex flex-col gap-4 mt-8">
-        <a href="" class="hover:underline">Pricing</a>
-        <a href="" class="hover:underline">Blog</a>
-        <a href="" class="hover:underline">Terms / Privacy</a>
-        <a href="" class="hover:underline">Contact us</a>
-      </div>
-    </div>
-    <div>
-      <h2 class="text-2xl font-semibold">Resources</h2>
-      <div class="text-gray-800 flex flex-col gap-4 mt-8">
-        <a href="" class="hover:underline">API</a>
-        <a href="" class="hover:underline">Integrations</a>
-        <a href="" class="hover:underline">FAQ</a>
-      </div>
+    <div class="flex gap-6">
+      <a href="" class="bg-secondary grid place-content-center w-7 h-7 text-center rounded-full hover:bg-hover"
+        ><i class="fa fa-facebook fa-sm text-gray-100"></i
+      ></a>
+      <a href="" class="bg-secondary grid place-content-center w-7 h-7 text-center rounded-full hover:bg-hover"
+        ><i class="fa fa-twitter fa-sm text-gray-100"></i
+      ></a>
+      <a href="" class="bg-secondary grid place-content-center w-7 h-7 text-center rounded-full hover:bg-hover"
+        ><i class="fa fa-linkedin fa-sm text-gray-100"></i
+      ></a>
     </div>
   </div>
-  <div class="text-center text-gray-900 border-t border-gray-300 mx-auto pt-8"><span class="text-sm">©</span> 2022 - All rights reserved</div>
+  <div class="flex flex-col-reverse lg:flex-row gap-6 lg:gap-0 justify-between items-center border-t lg:border-b-0 border-gray-300 py-6">
+    <div class="text-sm text-gray-600 text-left mx-auto w-content whitespace-nowrap"><span>©</span> 2022 - All rights reserved</div>
+    <div class="flex flex-col lg:flex-row justify-end w-full mx-auto gap-6 lg:gap-12 text-sm">
+      <a href="#pricing" class="text-gray-600 hover:text-gray-900 duration-300">Pricing</a>
+      <a href="#services" class="text-gray-600 hover:text-gray-900 duration-300">Services</a>
+      <a href="#faq" class="text-gray-600 hover:text-gray-900 duration-300">FAQ</a>
+      <a href="{% url 'website:login' %}" class="text-gray-600 hover:text-gray-900 duration-300">Login</a>
+      <a href="{% url 'website:register' %}" class="text-gray-600 hover:text-gray-900 duration-300">Register</a>
+      <!-- <a href="#faq" class="text-gray-600 hover:text-gray-900 duration-300">Blog</a> -->
+    </div>
+  </div>
 </footer>
+
+<!-- <span class="text-sm">©</span> 2022 - All rights reserved -->

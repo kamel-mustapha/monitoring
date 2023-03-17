@@ -731,6 +731,11 @@ body {
   background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
 }
 
+#image_slider {
+  background-color: #e5e3d1;
+  background-image: linear-gradient(177deg, #e5e3d1 0%, #e7e4b6 100%);
+}
+
 #navbar {
   margin-left: auto;
   margin-right: auto;
@@ -784,8 +789,8 @@ body {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-a.main, 
-  a.main:visited {
+.main, 
+  .main:visited {
   border-radius: 9999px;
   --tw-bg-opacity: 1;
   background-color: rgb(255 137 6 / var(--tw-bg-opacity));
@@ -796,10 +801,13 @@ a.main,
   font-weight: 500;
   --tw-text-opacity: 1 !important;
   color: rgb(243 244 246 / var(--tw-text-opacity)) !important;
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-a.main:hover, 
-  a.main:visited:hover {
+.main:hover, 
+  .main:visited:hover {
   opacity: 0.8;
 }
 
@@ -824,7 +832,7 @@ a.main:hover,
   position: relative;
   display: grid;
   gap: 1.5rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
   padding-left: 4rem;
@@ -834,8 +842,8 @@ a.main:hover,
   text-align: center;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
-  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -910,7 +918,7 @@ form {
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 3rem;
   border-radius: 0.75rem;
   border-width: 1px;
   --tw-bg-opacity: 1;
@@ -925,19 +933,22 @@ form {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-form#registration > input {
-  height: 3rem;
+form.main_form input, 
+  form.main_form textarea {
   width: 100%;
   border-radius: 9999px;
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-form#registration > input:focus {
+form.main_form input:focus, 
+  form.main_form textarea:focus {
   --tw-border-opacity: 1;
   border-color: rgb(255 137 6 / var(--tw-border-opacity));
   outline: 2px solid transparent;
@@ -945,21 +956,21 @@ form#registration > input:focus {
   --tw-ring-color: transparent;
 }
 
-form#registration > button {
+form.main_form button {
   border-radius: 0.375rem;
   --tw-bg-opacity: 1;
   background-color: rgb(255 137 6 / var(--tw-bg-opacity));
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
   font-size: 1.125rem;
   line-height: 1.75rem;
   --tw-text-opacity: 1;
   color: rgb(255 255 254 / var(--tw-text-opacity));
 }
 
-form#registration > button:hover {
+form.main_form button:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(211 111 4 / var(--tw-bg-opacity));
 }
@@ -1008,12 +1019,12 @@ form#registration > button:hover {
   bottom: 2.5rem;
 }
 
-.z-20 {
-  z-index: 20;
-}
-
 .z-50 {
   z-index: 50;
+}
+
+.z-20 {
+  z-index: 20;
 }
 
 .mx-auto {
@@ -1021,24 +1032,28 @@ form#registration > button:hover {
   margin-right: auto;
 }
 
+.mb-12 {
+  margin-bottom: 3rem;
+}
+
 .mt-6 {
   margin-top: 1.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
 }
 
 .mt-8 {
   margin-top: 2rem;
 }
 
-.mb-16 {
-  margin-bottom: 4rem;
-}
-
-.mt-12 {
-  margin-top: 3rem;
-}
-
 .mt-16 {
   margin-top: 4rem;
+}
+
+.mb-16 {
+  margin-bottom: 4rem;
 }
 
 .block {
@@ -1065,10 +1080,6 @@ form#registration > button:hover {
   height: 2rem;
 }
 
-.h-\[1200px\] {
-  height: 1200px;
-}
-
 .h-\[76px\] {
   height: 76px;
 }
@@ -1091,8 +1102,32 @@ form#registration > button:hover {
   height: fit-content;
 }
 
+.h-\[700px\] {
+  height: 700px;
+}
+
+.h-\[550px\] {
+  height: 550px;
+}
+
+.h-\[400px\] {
+  height: 400px;
+}
+
+.h-\[250px\] {
+  height: 250px;
+}
+
+.h-7 {
+  height: 1.75rem;
+}
+
 .w-full {
   width: 100%;
+}
+
+.w-1\/2 {
+  width: 50%;
 }
 
 .w-8 {
@@ -1117,6 +1152,26 @@ form#registration > button:hover {
   width: 1.5rem;
 }
 
+.w-7\/12 {
+  width: 58.333333%;
+}
+
+.w-\[1000px\] {
+  width: 1000px;
+}
+
+.w-\[500px\] {
+  width: 500px;
+}
+
+.w-\[350px\] {
+  width: 350px;
+}
+
+.w-7 {
+  width: 1.75rem;
+}
+
 .max-w-1400 {
   max-width: 1250px;
 }
@@ -1127,6 +1182,26 @@ form#registration > button:hover {
 
 .max-w-300 {
   max-width: 500px;
+}
+
+.max-w-\[1000px\] {
+  max-width: 1000px;
+}
+
+.max-w-\[800px\] {
+  max-width: 800px;
+}
+
+.max-w-\[500px\] {
+  max-width: 500px;
+}
+
+.max-w-\[900px\] {
+  max-width: 900px;
+}
+
+.max-w-\[1200px\] {
+  max-width: 1200px;
 }
 
 .-translate-y-1\/2 {
@@ -1140,8 +1215,20 @@ form#registration > button:hover {
           user-select: none;
 }
 
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
 .flex-col {
   flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
 }
 
 .place-content-center {
@@ -1152,20 +1239,16 @@ form#registration > button:hover {
   align-items: center;
 }
 
+.justify-end {
+  justify-content: flex-end;
+}
+
 .justify-center {
   justify-content: center;
 }
 
 .justify-between {
   justify-content: space-between;
-}
-
-.gap-10 {
-  gap: 2.5rem;
-}
-
-.gap-12 {
-  gap: 3rem;
 }
 
 .gap-6 {
@@ -1176,6 +1259,14 @@ form#registration > button:hover {
   gap: 1rem;
 }
 
+.gap-16 {
+  gap: 4rem;
+}
+
+.gap-12 {
+  gap: 3rem;
+}
+
 .gap-8 {
   gap: 2rem;
 }
@@ -1184,8 +1275,16 @@ form#registration > button:hover {
   gap: 0.5rem;
 }
 
-.gap-16 {
-  gap: 4rem;
+.gap-10 {
+  gap: 2.5rem;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .whitespace-nowrap {
@@ -1196,6 +1295,10 @@ form#registration > button:hover {
   border-radius: 0.75rem;
 }
 
+.\!rounded-md {
+  border-radius: 0.375rem !important;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }
@@ -1204,8 +1307,24 @@ form#registration > button:hover {
   border-radius: 0.375rem;
 }
 
+.rounded-3xl {
+  border-radius: 1.5rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
 .border-t {
   border-top-width: 1px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-none {
+  border-style: none;
 }
 
 .border-gray-300 {
@@ -1242,6 +1361,10 @@ form#registration > button:hover {
   --tw-bg-opacity: 0.8;
 }
 
+.bg-none {
+  background-image: none;
+}
+
 .py-24 {
   padding-top: 6rem;
   padding-bottom: 6rem;
@@ -1250,6 +1373,21 @@ form#registration > button:hover {
 .px-12 {
   padding-left: 3rem;
   padding-right: 3rem;
+}
+
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.py-32 {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
 }
 
 .py-8 {
@@ -1265,6 +1403,11 @@ form#registration > button:hover {
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 .py-2 {
@@ -1292,6 +1435,15 @@ form#registration > button:hover {
   padding-bottom: 0.75rem;
 }
 
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.pb-16 {
+  padding-bottom: 4rem;
+}
+
 .pb-12 {
   padding-bottom: 3rem;
 }
@@ -1304,8 +1456,24 @@ form#registration > button:hover {
   padding-bottom: 6rem;
 }
 
+.pt-36 {
+  padding-top: 9rem;
+}
+
+.pb-52 {
+  padding-bottom: 13rem;
+}
+
+.text-left {
+  text-align: left;
+}
+
 .text-center {
   text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .font-lexend {
@@ -1321,6 +1489,16 @@ form#registration > button:hover {
   line-height: 2rem;
 }
 
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1329,11 +1507,6 @@ form#registration > button:hover {
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
-}
-
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
 }
 
 .text-3xl {
@@ -1357,6 +1530,10 @@ form#registration > button:hover {
   text-transform: capitalize;
 }
 
+.leading-\[60px\] {
+  line-height: 60px;
+}
+
 .leading-8 {
   line-height: 2rem;
 }
@@ -1365,14 +1542,14 @@ form#registration > button:hover {
   line-height: 1.625;
 }
 
-.text-secondary {
-  --tw-text-opacity: 1;
-  color: rgb(255 137 6 / var(--tw-text-opacity));
-}
-
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
 .text-gray-100 {
@@ -1385,9 +1562,9 @@ form#registration > button:hover {
   color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
-.text-gray-900 {
+.text-secondary {
   --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
+  color: rgb(255 137 6 / var(--tw-text-opacity));
 }
 
 .\!text-black {
@@ -1420,6 +1597,29 @@ form#registration > button:hover {
   color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+
+.opacity-80 {
+  opacity: 0.8;
+}
+
+.opacity-25 {
+  opacity: 0.25;
+}
+
+.shadow-none {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
@@ -1432,14 +1632,35 @@ form#registration > button:hover {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.duration-500 {
+  transition-duration: 500ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
 .hover\:bg-hover:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(211 111 4 / var(--tw-bg-opacity));
 }
 
+.hover\:text-gray-900:hover {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
 .hover\:underline:hover {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
+}
+
+.hover\:opacity-100:hover {
+  opacity: 1;
 }
 
 .hover\:shadow-lg:hover {
@@ -1462,6 +1683,10 @@ form#registration > button:hover {
   .md\:w-2\/4 {
     width: 50%;
   }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 1024px) {
@@ -1469,9 +1694,78 @@ form#registration > button:hover {
     margin-top: 0px;
   }
 
+  .lg\:flex {
+    display: flex;
+  }
+
+  .lg\:grid {
+    display: grid;
+  }
+
+  .lg\:h-\[700px\] {
+    height: 700px;
+  }
+
+  .lg\:h-\[550px\] {
+    height: 550px;
+  }
+
+  .lg\:w-\[600px\] {
+    width: 600px;
+  }
+
+  .lg\:w-7\/12 {
+    width: 58.333333%;
+  }
+
+  .lg\:w-1\/2 {
+    width: 50%;
+  }
+
+  .lg\:w-\[1000px\] {
+    width: 1000px;
+  }
+
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+
+  .lg\:items-center {
+    align-items: center;
+  }
+
+  .lg\:gap-12 {
+    gap: 3rem;
+  }
+
+  .lg\:gap-0 {
+    gap: 0px;
+  }
+
+  .lg\:overflow-hidden {
+    overflow: hidden;
+  }
+
+  .lg\:border-t {
+    border-top-width: 1px;
+  }
+
+  .lg\:border-b-0 {
+    border-bottom-width: 0px;
+  }
+
   .lg\:px-0 {
     padding-left: 0px;
     padding-right: 0px;
+  }
+
+  .lg\:py-16 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .lg\:opacity-25 {
+    opacity: 0.25;
   }
 }
 
@@ -1488,20 +1782,29 @@ form#registration > button:hover {
     width: 50%;
   }
 
-  .xl\:w-7\/12 {
-    width: 58.333333%;
-  }
-
   .xl\:w-10\/12 {
     width: 83.333333%;
+  }
+
+  .xl\:-translate-y-8 {
+    --tw-translate-y: -2rem;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
 
   .xl\:cursor-pointer {
     cursor: pointer;
   }
 
+  .xl\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .xl\:flex-row {
     flex-direction: row;
+  }
+
+  .xl\:place-content-center {
+    place-content: center;
   }
 
   .xl\:gap-0 {
@@ -1510,6 +1813,16 @@ form#registration > button:hover {
 
   .xl\:rounded-3xl {
     border-radius: 1.5rem;
+  }
+
+  .xl\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .xl\:py-0 {
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 
   .xl\:px-16 {
@@ -1528,5 +1841,11 @@ form#registration > button:hover {
 
   .xl\:leading-\[85px\] {
     line-height: 85px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .\32xl\:w-7\/12 {
+    width: 58.333333%;
   }
 }

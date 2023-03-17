@@ -1,7 +1,7 @@
 {% extends 'offline/root.html' %} {% load static %} {% block content %}
-<div id="hero" style="min-height: calc(100vh - 104px)" class="px-4 lg:px-0 grid place-content-center">
-  <div class="xl:w-7/12 mx-auto text-center grid gap-8">
-    <h1 class="text-5xl xl:text-7xl font-lexend font-medium xl:leading-[85px]">
+<div id="hero" style="min-height: calc(100vh - 104px)" class="px-6 lg:px-0 grid xl:place-content-center xl:-translate-y-8">
+  <div class="2xl:w-7/12 mx-auto text-center grid gap-8 py-16 xl:py-0">
+    <h1 class="text-5xl xl:text-7xl font-lexend font-medium leading-[60px] xl:leading-[85px]">
       Monitoring <span class="text-secondary">made simple</span> for small businesses.
     </h1>
     <p class="w-10/12 mx-auto leading-8 text-lg">
@@ -20,9 +20,7 @@
   <div class="text-gray-800 text-center grid gap-4 xl:w-10/12 mx-auto">
     <h2 class="text-5xl font-lexend font-semibold">All your services monitored in a single place.</h2>
   </div>
-  <img class="mx-auto xl:rounded-3xl max-w-full" src="{% static 'dashboard.jpg' %}" alt="" />
+  <img class="mx-auto rounded-md xl:rounded-3xl max-w-full" src="{% static 'dashboard.jpg' %}" alt="" />
 </div>
-<div id="services" class="h-[1200px]"></div>
-{% include 'offline/pricing.html' %}
-<div id="faq" class="h-[1200px]"></div>
-{% endblock %}
+<!-- prettier-ignore -->
+{% include 'offline/services.html' %} {% include 'offline/pricing.html' %} {% include 'offline/faq.html' %} {% include 'offline/contact.html' %} {%endblock %}

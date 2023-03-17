@@ -13,6 +13,10 @@
     background-color: #fbab7e;
     background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
   }
+  #image_slider {
+    background-color: #e5e3d1;
+    background-image: linear-gradient(177deg, #e5e3d1 0%, #e7e4b6 100%);
+  }
 
   #navbar {
     @apply max-w-1400 items-center mx-auto hidden xl:flex justify-between py-8;
@@ -37,9 +41,9 @@
     @apply text-gray-500 hover:text-gray-900;
   }
 
-  a.main,
-  a.main:visited {
-    @apply bg-secondary !text-gray-100 py-2 px-6 rounded-full font-medium hover:opacity-80;
+  .main,
+  .main:visited {
+    @apply bg-secondary !text-gray-100 py-2 px-6 rounded-full font-medium hover:opacity-80 shadow-md;
   }
 
   .payment_input {
@@ -49,7 +53,7 @@
     @apply w-full grid grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-16 mx-auto  mt-2;
   }
   .pricing_container > div {
-    @apply relative grid text-center gap-6 bg-gray-100 text-gray-900 px-16 py-12 rounded-2xl shadow-xl;
+    @apply relative grid text-center gap-6 bg-gray-100 text-gray-900 px-16 py-12 rounded-lg shadow-md;
   }
 
   .pricing_container > div h2 {
@@ -73,13 +77,14 @@
   }
 
   form {
-    @apply bg-white w-full mx-auto flex flex-col gap-10 py-12 border shadow-md text-center rounded-xl px-12;
+    @apply bg-white w-full mx-auto flex flex-col gap-12 py-12 border shadow-md text-center rounded-xl px-12;
   }
 
-  form#registration > input {
-    @apply w-full h-12 text-gray-900 px-6 rounded-full border-gray-300 focus:outline-none focus:ring-transparent focus:border-secondary;
+  form.main_form input,
+  form.main_form textarea {
+    @apply w-full py-4 text-gray-900 px-6 rounded-full border-gray-300 focus:outline-none focus:ring-transparent focus:border-secondary;
   }
-  form#registration > button {
-    @apply bg-secondary text-button rounded-md px-6 py-2 text-lg hover:bg-hover;
+  form.main_form button {
+    @apply bg-secondary text-button rounded-md px-6 py-3 text-lg hover:bg-hover;
   }
 }
