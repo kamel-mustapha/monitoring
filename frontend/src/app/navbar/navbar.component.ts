@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
     },
     {
       link: '/pages',
-      icon: 'fas fa-file-code',
+      icon: 'fas fa-file-alt',
       name: 'pages',
     },
     {

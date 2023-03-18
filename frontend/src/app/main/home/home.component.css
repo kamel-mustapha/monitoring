@@ -1,5 +1,5 @@
 .events_list {
-  @apply mt-6 h-full overflow-y-auto overflow-auto;
+  @apply h-full overflow-y-auto overflow-auto mt-4;
 }
 
 .events_list div.monitor_element {
@@ -60,20 +60,16 @@
 }
 
 .monitor_events_select > div {
-  @apply overflow-hidden bg-white cursor-pointer rounded-md;
   width: 200px;
-}
-.monitor_events_select > div:first-child {
-  @apply py-2 px-4 hover:bg-gray-200 active:bg-gray-300;
 }
 
 .monitors_select {
-  @apply mt-2 overflow-y-auto absolute top-8 flex flex-col gap-1 shadow-lg z-10;
+  @apply mt-2 overflow-y-auto absolute top-10 flex flex-col gap-1 shadow-lg z-10 border border-gray-300 rounded-lg;
   max-height: 300px;
 }
 
 .monitors_select > span {
-  @apply py-2 px-4 rounded-md hover:bg-gray-200 active:bg-gray-300;
+  @apply py-2 px-4 rounded-md hover:bg-gray-200 active:bg-gray-300 xl:cursor-pointer;
 }
 
 .monitor_events_select span {

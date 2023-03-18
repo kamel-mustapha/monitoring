@@ -2,20 +2,20 @@
   <app-header title_="profile" icon="fa-user"></app-header>
   <div *ngIf="user_details" class="no_overflow overflow-auto relative">
     <span
-      class="absolute right-2 top-10 text-red-500 font-medium hover:underline xl:cursor-pointer text-sm"
+      class="hoverable absolute right-2 top-10 text-red-500 font-medium text-sm"
     >
       <i class="fas fa-trash"></i>
       Delete my account
     </span>
-    <div class="grid gap-3 mt-5 px-6">
+    <div class="grid gap-3 mt-5">
       <div class="profile-grid">
         <div>Subscription:</div>
-        <div style="background: transparent; padding-left: 0; border: none">
+        <div class="!shadow-none !bg-transparent !pl-0">
           <div
             style="background: {{
               plans_colors[user_details.sub.toLowerCase()]
             }}"
-            class="text-gray-100 px-3 pb-1 rounded-md w-content font-semibold"
+            class="text-gray-100 px-3 py-1 rounded-md w-content font-semibold"
           >
             {{ user_details.sub | titlecase }}
           </div>
@@ -24,15 +24,10 @@
       <div class="profile-grid">
         <div>Monitors:</div>
         <div
-          style="
-            background: transparent;
-            padding-left: 0;
-            padding-right: 0;
-            border: none;
-          "
+        class="!shadow-none !bg-transparent !pl-0"
         >
           <div
-            class="relative bg-secondary bg-opacity-20 h-full w-1/4 shadow-sm border border-gray-300 py-4 rounded-md"
+            class="relative bg-secondary bg-opacity-20 h-full w-1/4 shadow-lg py-4 rounded-md"
           >
             <div
               class="bg-secondary absolute top-0 left-0 h-full"

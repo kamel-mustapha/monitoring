@@ -15,8 +15,8 @@
 }
 
 .profile-grid {
-  grid-template-columns: 8% 92%;
-  @apply grid  gap-4;
+  grid-template-columns: 10%  90%;
+  @apply grid;
 }
 
 .profile-grid > div {
@@ -28,9 +28,5 @@
 }
 
 .profile-grid > div:last-child {
-  @apply px-6 rounded-lg bg-white border border-gray-300;
+  @apply px-6 rounded-lg bg-white bg-gray-200 shadow-lg;
 }
-
-/* .information_section > div:last-child {
-  @apply py-4;
-} */

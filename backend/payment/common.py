@@ -1,10 +1,11 @@
 import stripe
 from payment.models import APIKey
 
-
-api_key = APIKey.objects.filter(active=True)
-if api_key:
-    stripe.api_key = api_key[0].private
+try:
+    api_key = APIKey.objects.filter(active=True)
+    if api_key:
+        stripe.api_key = api_key[0].private
+except:pass
 
 def create_customer(user:object) -> object:
     customer = stripe.Customer.create(

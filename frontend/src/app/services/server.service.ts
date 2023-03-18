@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ServerService {
   constructor(private server: HttpClient) {}
-  api_key: string = '417fe54b852719f87777f44f2a283e14';
+  api_key: string = 'e405f8e4d5d2ab0bb355c79af35e14db';
   api_link: string = 'http://localhost:8000/';
 
   set_api(key: string, link: string) {

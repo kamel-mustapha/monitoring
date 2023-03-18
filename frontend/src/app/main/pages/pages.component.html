@@ -1,13 +1,13 @@
 <div id="main_content">
   <app-header title_="pages" icon="fa-file-code"></app-header>
   <div class="pages_toolbar">
-    <div class="main_popup_activator">
+    <div class="main_popup_activator hoverable">
       <div class="flex items-center gap-2" (click)="show_creation_window()">
         <i class="fas fa-plus fa-sm text-green-600"></i>
         Create
       </div>
     </div>
-    <div class="flex items-center gap-2" (click)="delete_user_page()">
+    <div class="flex items-center gap-2 hoverable" (click)="delete_user_page()">
       <i class="fas fa-trash fa-sm text-red-600"></i>
       Delete
     </div>
@@ -16,7 +16,7 @@
       Edit
     </div> -->
   </div>
-  <div class="bg-white rounded-2xl py-5 flex flex-col border border-gray-300">
+  <div class="bg-white flex flex-col">
     <div class="pages_grid header">
       <div
         *ngIf="pages.length > 0"

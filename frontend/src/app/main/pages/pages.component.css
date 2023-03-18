@@ -11,7 +11,7 @@
 }
 
 .pages_grid {
-  @apply grid  px-12  items-center border-b;
+  @apply grid  items-center border-b border-gray-300 pl-12 pr-4;
   grid-template-columns: 10% 20% 15% 15% 20% 20%;
 }
 
@@ -24,19 +24,19 @@
 }
 
 .pages_grid.header {
-  @apply border-b border-gray-200 font-medium py-3;
+  @apply font-medium py-3 bg-gray-200;
 }
 
 .pages_grid.item {
-  @apply py-3 hover:bg-gray-200;
+  @apply py-3;
 }
 
 .pages_toolbar {
-  @apply flex items-center gap-8 px-2;
+  @apply flex items-center gap-8;
 }
 
 .pages_toolbar > div {
-  @apply lg:cursor-pointer hover:text-gray-600;
+  @apply lg:cursor-pointer;
 }
 #monitor_creation_form {
   @apply flex flex-col gap-1;

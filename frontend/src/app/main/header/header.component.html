@@ -4,7 +4,7 @@
     <span>{{ title_ | titlecase }}</span>
   </h1>
   <div *ngIf="user_details">
-    <a href="" class="button" *ngIf="user_details.sub == 'Free'">upgrade</a>
+    <a routerLink="/plans" class="button !rounded-sm" *ngIf="user_details.sub == 'Free'">upgrade</a>
     <div class="relative main_popup_activator">
       <span
         class="hoverable relative"
@@ -91,7 +91,7 @@
             style="background: {{
               plans_colors[user_details.sub.toLowerCase()]
             }}"
-            class="text-white px-2 pb-1 rounded-md text-sm"
+            class="text-white px-2 py-1 rounded-md text-sm"
           >
             {{ user_details.sub | titlecase }}
           </span>

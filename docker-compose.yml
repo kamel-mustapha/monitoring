@@ -8,14 +8,14 @@ services:
       - 8000:8000
     volumes:
       - ./backend/:/code/
-      - ./creds.json:/code/creds.json
+      # - ./creds.json:/code/creds.json
   jobs:
     container_name: jobs
     build: ./jobs/
     restart: always
     volumes:
       - ./jobs/:/code/
-      - ./creds.json:/code/creds.json
+      # - ./creds.json:/code/creds.json
   db:
     container_name: database
     image: mysql:8.0.31
