@@ -66,21 +66,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / "db.sqlite3"
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': CREDS.get("DB_NAME"),
+        'USER': CREDS.get("DB_USER"),
+        'PASSWORD': CREDS.get("DB_PASSWORD"),
+        'HOST': 'db',
+        'PORT': '3306',
     }
 }
-if not DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': CREDS.get("DB_NAME"),
-            'USER': CREDS.get("DB_USER"),
-            'PASSWORD': CREDS.get("DB_PASSWORD"),
-            'HOST': 'db',
-            'PORT': '3306',
-        }
-    }
 
 
 AUTH_PASSWORD_VALIDATORS = [
