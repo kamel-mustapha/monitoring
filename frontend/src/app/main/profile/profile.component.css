@@ -28,5 +28,5 @@
 }
 
 .profile-grid > div:last-child {
-  @apply px-6 rounded-lg bg-white bg-gray-200 shadow-lg;
+  @apply px-6 rounded-lg bg-white bg-gray-50;
 }

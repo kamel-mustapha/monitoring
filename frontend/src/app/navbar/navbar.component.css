@@ -1,5 +1,5 @@
 nav {
-  @apply h-full py-4 shadow-xl flex flex-col justify-between gap-10 text-center bg-primary rounded-2xl;
+  @apply h-full pt-12 pb-8 shadow-xl flex flex-col justify-between gap-10 text-center bg-primary ;
 }
 
 a.website_link {

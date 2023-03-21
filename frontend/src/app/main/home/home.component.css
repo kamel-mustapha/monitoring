@@ -78,7 +78,7 @@
 
 .campaign_element_popup {
   @apply absolute flex flex-col bg-white shadow-lg top-0 text-sm font-normal rounded-md;
-  left: -70px;
+  left: -58px;
 }
 
 .campaign_element_popup > div {

@@ -5,7 +5,7 @@
   @apply w-content grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 mx-auto  mt-2;
 }
 .pricing_container > div {
-  @apply relative  grid text-center gap-6 bg-gray-100 text-gray-900 px-8 py-8 rounded-2xl border border-gray-300 shadow-sm;
+  @apply relative  grid text-center gap-6 text-gray-900 px-8 py-8 rounded-2xl border border-gray-300 shadow-sm;
 }
 
 .pricing_container::-webkit-scrollbar {
@@ -23,11 +23,11 @@
 }
 
 .pricing_container .current_plan > span {
-  @apply absolute rotate-45 text-white px-24 pb-1 -right-20 top-5 text-sm shadow-lg;
+  @apply absolute rotate-45 text-white px-24 py-1 -right-20 top-5 text-sm shadow-lg;
 }
 
 .pricing_container > div h2 {
-  @apply text-xl font-medium shadow-md w-content mx-auto px-4 pb-1 rounded-md h-content;
+  @apply text-xl font-medium shadow-md w-content mx-auto px-4 py-1 rounded-md h-content;
 }
 
 .pricing_container > div h3 {
