@@ -19,7 +19,7 @@
   }
 
   #navbar {
-    @apply max-w-1400 items-center mx-auto hidden xl:flex justify-between py-8;
+    @apply max-w-1400 items-center mx-auto hidden xl:flex justify-between py-8 px-6 lg:px-24;
   }
   #logo,
   #logo:hover,
@@ -43,7 +43,7 @@
 
   .main,
   .main:visited {
-    @apply bg-secondary !text-gray-100 py-2 px-6 rounded-full font-medium hover:opacity-80 shadow-md;
+    @apply bg-secondary !text-white py-2 px-6 rounded-full font-medium hover:opacity-80 shadow-md;
   }
 
   .payment_input {

@@ -745,6 +745,15 @@ body {
   justify-content: space-between;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  #navbar {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -800,7 +809,7 @@ body {
   padding-right: 1.5rem;
   font-weight: 500;
   --tw-text-opacity: 1 !important;
-  color: rgb(243 244 246 / var(--tw-text-opacity)) !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -1603,6 +1612,10 @@ form.main_form button:hover {
 }
 
 @media (min-width: 1024px) {
+  .lg\:mb-16 {
+    margin-bottom: 4rem;
+  }
+
   .lg\:mt-0 {
     margin-top: 0px;
   }
@@ -1664,9 +1677,19 @@ form.main_form button:hover {
     padding-right: 0px;
   }
 
+  .lg\:px-16 {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
   .lg\:py-16 {
     padding-top: 4rem;
     padding-bottom: 4rem;
+  }
+
+  .lg\:px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 
   .lg\:opacity-25 {
@@ -1675,10 +1698,6 @@ form.main_form button:hover {
 }
 
 @media (min-width: 1280px) {
-  .xl\:mb-16 {
-    margin-bottom: 4rem;
-  }
-
   .xl\:hidden {
     display: none;
   }
@@ -1721,11 +1740,6 @@ form.main_form button:hover {
     padding-bottom: 0px;
   }
 
-  .xl\:px-16 {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-
   .xl\:pt-0 {
     padding-top: 0px;
   }
@@ -1743,5 +1757,10 @@ form.main_form button:hover {
 @media (min-width: 1536px) {
   .\32xl\:w-7\/12 {
     width: 58.333333%;
+  }
+
+  .\32xl\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }

@@ -16,7 +16,7 @@
       Edit
     </div> -->
   </div>
-  <div class="bg-white flex flex-col">
+  <div class="bg-white flex flex-col overflow-hidden">
     <div class="pages_grid header">
       <div
         *ngIf="pages.length > 0"
@@ -165,14 +165,11 @@
       }"
     >
       <div
-        [ngClass]="{
-          'w-48': monitors.length > 2,
-          'w-60': monitors.length <= 2
-        }"
+       
         *ngFor="let monitor of monitors; let i = index"
         (click)="select_monitor(i)"
         [title]="monitor.name"
-        class="w-72 flex items-center gap-4 lg:cursor-pointer bg-gray-200 px-4 py-2 rounded-md shadow-md hover:bg-gray-300"
+        class="w-full flex items-center gap-4 lg:cursor-pointer bg-gray-100 px-4 py-2 rounded-md  hover:bg-gray-200"
       >
         <div
           class="checkbox"
@@ -204,13 +201,13 @@
       <button
         type="button"
         (click)="submit_page(f1, 0)"
-        class="w-full bg-gray-500 active:bg-gray-700 pb-2 pt-1 px-4 text-gray-100 font-semibold rounded-md hover:bg-gray-600 duration-300"
+        class="w-full bg-gray-500 active:bg-gray-700 py-2 px-4 text-gray-100 font-semibold rounded-md hover:bg-gray-600 duration-300"
       >
         Previous
       </button>
       <button
         type="submit"
-        class="w-full bg-green-500 active:bg-green-700 pb-2 pt-1 px-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
+        class="w-full bg-green-500 active:bg-green-700 py-2 px-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
       >
         Next
       </button>
@@ -307,13 +304,13 @@
       <button
         type="button"
         (click)="submit_page(f2, 1)"
-        class="w-full bg-gray-500 active:bg-gray-700 pb-2 pt-1 px-4 text-gray-100 font-semibold rounded-md hover:bg-gray-600 duration-300"
+        class="w-full bg-gray-500 active:bg-gray-700 py-2 px-4 text-gray-100 font-semibold rounded-md hover:bg-gray-600 duration-300"
       >
         Previous
       </button>
       <button
         type="submit"
-        class="w-full bg-green-500 active:bg-green-700 pb-2 pt-1 px-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
+        class="w-full bg-green-500 active:bg-green-700 py-2 px-4 text-gray-100 font-semibold rounded-md hover:bg-green-600 duration-300"
       >
         <i
           *ngIf="creation_in_progress"

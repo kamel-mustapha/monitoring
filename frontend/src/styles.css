@@ -82,14 +82,14 @@
 }
 
 .loading_animation {
-  @apply relative overflow-hidden bg-gradient-to-l from-gray-200 to-gray-300;
+  @apply relative overflow-hidden bg-gradient-to-l from-gray-100 to-gray-200;
   animation: loading_animation 1s infinite linear alternate;
 }
 
 .loading_animation > div {
-  @apply h-3/4 w-4 bg-gray-100 absolute left-0 top-1/2 -translate-y-1/2;
-  box-shadow: 0 0 100px 10px rgba(255, 255, 255, 1);
-  animation: loading_slide 1.5s infinite alternate-reverse;
+  @apply h-[50px] w-[5px] bg-white absolute left-0 top-1/2 -translate-y-1/2 rounded-full;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 1);
+  animation: loading_slide 2s infinite alternate-reverse;
 }
 
 .creation_window {
@@ -99,7 +99,7 @@
 .creation_window > div {
   @apply w-content flex flex-col absolute bg-white left-0 right-0 top-1/2 -translate-y-1/2 mx-auto h-content rounded-lg shadow-xl;
   max-height: 100%;
-  max-width: 95%;
+  max-width: 450px;
   /* width: 500px; */
   /* min-height: 400px; */
 }
