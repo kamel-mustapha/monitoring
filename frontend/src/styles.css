@@ -86,11 +86,11 @@
   animation: loading_animation 1s infinite linear alternate;
 }
 
-.loading_animation > div {
+/* .loading_animation > div {
   @apply h-[50px] w-[5px] bg-white absolute left-0 top-1/2 -translate-y-1/2 rounded-full;
   box-shadow: 0 0 8px rgba(255, 255, 255, 1);
   animation: loading_slide 2s infinite alternate-reverse;
-}
+} */
 
 .creation_window {
   @apply fixed top-0 left-0 w-full h-full bg-black bg-opacity-40;
