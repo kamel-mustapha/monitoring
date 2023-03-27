@@ -1,28 +1,27 @@
-<div class="page_header">
+<div class="page_header text-gray-900 dark:text-gray-300">
   <h1 class="page_title">
-    <span><i class="fas {{ icon }}"></i></span>
+    <span><i class="fas {{ icon }} fa-xs"></i></span>
     <span>{{ title_ | titlecase }}</span>
   </h1>
   <div *ngIf="user_details">
-    <a routerLink="/plans" class="button !rounded-sm" *ngIf="user_details.sub == 'Free'">upgrade</a>
     <div class="relative main_popup_activator">
       <span
         class="hoverable relative"
         (click)="show_hide_element('header_notification_popup')"
       >
-        <i class="fas fa-bell fa-lg text-gray-700"></i>
+        <i class="fas fa-bell fa-lg"></i>
         <span [ngClass]="{ notification_ring: !all_notifications_seen }"></span>
       </span>
       <!-- notification popup -->
       <div
         *ngIf="shown_popups['header_notification_popup']"
         @slideTopShort
-        class="notification_container"
+        class="notification_container border-gray-300 dark:border-gray-700"
       >
         <div *ngIf="notifications.length > 0" class="notification_list">
           <div
             *ngFor="let notification of notifications"
-            [ngClass]="{ 'bg-gray-200': !notification.seen }"
+            class="border-gray-300 dark:border-gray-700"
           >
             <img
               src="{{ notification.image }}"
@@ -32,7 +31,9 @@
             />
             <div>
               <h1>{{ notification.title }}</h1>
-              <p>{{ notification.text }}</p>
+              <p class="text-gray-600 dark:text-gray-300">
+                {{ notification.text }}
+              </p>
             </div>
             <!-- <span>
               <i class="fas fa-times fa-lg"></i>
@@ -46,7 +47,7 @@
         </div>
         <p
           *ngIf="notifications.length <= 0"
-          class="inline-block text-center p-2 mx-auto w-52 text-gray-700"
+          class="inline-block text-center p-2 mx-auto w-52 dark:text-gray-300"
         >
           You have no notification
         </p>
@@ -70,23 +71,23 @@
       <div
         *ngIf="shown_popups['header_profile_popup']"
         @slideTopShort
-        class="profile_popup"
+        class="profile_popup border-gray-300 dark:border-gray-700"
       >
-        <div>
+        <div class="border-gray-300 dark:border-gray-700">
           <div class="flex flex-col gap-2 py-4">
-            <span>{{ user_details.username }}</span>
+            <span class="font-medium">{{ user_details.username }}</span>
             <span
-              class="max-w-[150px] text-gray-500 overflow-hidden text-ellipsis"
+              class="max-w-[150px] dark:text-gray-300 overflow-hidden text-ellipsis"
             >
               {{ user_details.email }}
             </span>
           </div>
           <a routerLink="/profile"
-            ><i class="fas fa-cog text-gray-600 hoverable"></i
+            ><i class="fas fa-cog dark:text-gray-300"></i
           ></a>
         </div>
         <div>
-          <span class="text-gray-700 text-sm"> Current plan: </span>
+          <span class="dark:text-gray-300 text-sm"> Current plan: </span>
           <span
             style="background: {{
               plans_colors[user_details.sub.toLowerCase()]
@@ -96,7 +97,7 @@
             {{ user_details.sub | titlecase }}
           </span>
         </div>
-        <div>
+        <div class="dark:text-gray-300">
           <div>
             <span>Monitors</span>
             <span
@@ -108,8 +109,10 @@
             <div [ngStyle]="{ 'width.%': user_details.usage }"></div>
           </div>
         </div>
-        <div>
-          <a routerLink="/plans">Plans</a>
+        <div
+          class="dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-100"
+        >
+          <!-- <a routerLink="/plans">Plans</a> -->
           <a routerLink="">Contact us</a>
         </div>
       </div>

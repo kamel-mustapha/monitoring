@@ -1,8 +1,11 @@
-<div class="flex h-screen overflow-hidden">
-  <div>
+<div
+  class="flex h-screen overflow-hidden"
+  [ngClass]="{ 'bg_dark dark': dark_mode, bg_light: !dark_mode }"
+>
+  <div class="p-2">
     <app-navbar></app-navbar>
   </div>
-  <div class="bg-primary w-full py-4 pr-4">
+  <div class="w-full">
     <app-main></app-main>
   </div>
 </div>

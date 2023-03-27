@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: ["./src/**/*.{html,ts}"],
   theme: {
     extend: {
@@ -10,7 +11,7 @@ module.exports = {
       },
       colors: {
         primary: "#fffffe",
-        secondary: "#a7a9be",
+        secondary: "#ff8906",
         button: "#fffffe",
         hover: "#ff8906",
       },
@@ -43,15 +44,15 @@ module.exports = {
         11: "11",
       },
       fontFamily: {
-        Changa: ["Changa", "sans"],
+        changa: ["Changa", "sans"],
         work: ["Work Sans", "arial", "sans"],
         inter: ["Inter", "arial", "sans"],
         poppins: ["Poppins", "arial", "sans"],
         lexend: ["Lexend", "arial", "sans"],
-
       },
       boxShadow: {
         button: "0 0 10px 1px rgba(0, 0, 0, 0.3)",
+        "navbar-light": "3px 3px 0 #ff8906",
       },
       screens: {
         1600: "1600px",

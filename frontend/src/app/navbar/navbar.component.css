@@ -1,20 +1,22 @@
 nav {
-  @apply h-full pt-12 pb-8 shadow-xl flex flex-col justify-between gap-10 text-center bg-primary ;
+  @apply h-full py-11 px-6 flex flex-col justify-between gap-6 text-center  border rounded-xl bg-gradient-to-t;
+  /* background-color: #2b4162;
+    background-image: linear-gradient(315deg, #090d13 0%, #12100e 74%); */
+
+  /* background-color: #fceddb; */
+  /* background-image: linear-gradient(
+    225deg,
+    #fff7f7 0%,
+    #fceddb 46%,
+    #ffffff 100%
+  ); */
+}
+
+nav > a:first-child {
+  @apply flex items-center justify-center gap-2 cursor-pointer text-secondary text-lg;
 }
 
 a.website_link {
-  @apply relative px-6 py-4 text-gray-100 rounded-lg hover:bg-gray-800 hover:bg-opacity-50 active:translate-y-1px duration-100;
-}
-
-a.website_link > div {
-  @apply absolute w-1 rounded-full left-0 top-1/2 -translate-y-1/2 duration-700 bg-secondary;
-}
-
-#logo {
-  @apply block w-10 h-10 mx-auto relative;
-}
-
-#logo > span {
-  @apply block bg-secondary rounded-full absolute duration-300;
-  width: 5px;
+  @apply grid items-center gap-4 text-sm font-medium relative rounded-lg duration-300 text-gray-500;
+  grid-template-columns: 20% 80%;
 }

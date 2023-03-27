@@ -8,8 +8,11 @@
 @tailwind utilities;
 
 @keyframes loading_animation {
+  from {
+    opacity: 30%;
+  }
   to {
-    opacity: 10%;
+    opacity: 5%;
   }
 }
 
@@ -19,9 +22,24 @@
   }
 }
 
+.bg_dark {
+  background-color: #2b4162;
+  background-image: linear-gradient(315deg, #090d13 0%, #12100e 74%);
+}
+
+.bg_light {
+  background-color: #fff7f7;
+  background-image: linear-gradient(
+    225deg,
+    #fff7f7 0%,
+    #fceddb 46%,
+    #ffffff 100%
+  );
+}
+
 /* utils class */
 .hoverable {
-  @apply cursor-pointer px-4 py-3 rounded-lg duration-500 hover:bg-gray-200 active:bg-gray-300;
+  @apply cursor-pointer px-4 py-3 rounded-lg duration-500 bg-opacity-10;
 }
 
 .st0 {
@@ -37,7 +55,7 @@
 }
 
 .button {
-  @apply bg-secondary  text-gray-50 px-5 pt-2 pb-2 rounded-md capitalize hover:shadow-md active:bg-hover;
+  @apply bg-secondary  text-white px-5 pt-2 pb-2 rounded-md capitalize hover:shadow-md active:bg-hover;
 }
 .toggle {
   @apply w-16 h-6 rounded-full relative cursor-pointer duration-500;
@@ -82,7 +100,7 @@
 }
 
 .loading_animation {
-  @apply relative overflow-hidden bg-gradient-to-l from-gray-100 to-gray-200;
+  @apply relative overflow-hidden bg-gradient-to-l from-gray-300 to-gray-400 dark:from-[#090d13] dark:to-[#2b4162];
   animation: loading_animation 1s infinite linear alternate;
 }
 
@@ -93,11 +111,11 @@
 } */
 
 .creation_window {
-  @apply fixed top-0 left-0 w-full h-full bg-black bg-opacity-40;
+  @apply fixed top-0 left-0 w-full h-full backdrop-blur-sm dark:backdrop-blur-md bg-black bg-opacity-50;
 }
 
 .creation_window > div {
-  @apply w-content flex flex-col absolute bg-white left-0 right-0 top-1/2 -translate-y-1/2 mx-auto h-content rounded-lg shadow-xl;
+  @apply w-content flex flex-col absolute dark:border bg-[#fceddb] dark:bg-transparent  dark:border-gray-700 left-0 right-0 top-1/2 -translate-y-1/2 mx-auto h-content rounded-lg shadow-xl;
   max-height: 100%;
   max-width: 450px;
   /* width: 500px; */

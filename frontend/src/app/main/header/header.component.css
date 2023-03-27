@@ -8,7 +8,7 @@
 }
 
 .page_header {
-  @apply flex justify-between items-center text-gray-900 font-semibold border-b border-gray-300 pb-3;
+  @apply px-12 py-8 flex justify-between items-center;
 }
 
 .page_header > div {
@@ -24,11 +24,11 @@
 }
 
 h1.page_title {
-  @apply w-content flex gap-4 items-center text-xl;
+  @apply w-content flex gap-4 items-center text-lg;
 }
 
 h1.page_title > span:first-child {
-  @apply relative h-10 w-10 rounded-md text-center bg-secondary text-gray-100;
+  @apply relative h-8 w-8 rounded-lg text-center bg-secondary text-gray-100;
 }
 
 h1.page_title > span:first-child > i {
@@ -43,12 +43,12 @@ h1.page_title > span:first-child > i {
 }
 
 .notification_container {
-  top: 53px;
-  @apply z-40 absolute right-0 h-content max-h-96 bg-white rounded-lg shadow-md flex flex-col justify-between text-sm overflow-hidden border border-gray-300;
+  top: 40px;
+  @apply z-40 absolute right-0 h-content max-h-96 backdrop-blur-lg rounded-lg shadow-sm flex flex-col justify-between text-sm overflow-hidden border;
 }
 
 .notification_container > div:last-child {
-  @apply py-2 border-t border-gray-200 text-center text-xs font-normal text-blue-600;
+  @apply py-2 text-center text-xs font-normal text-secondary;
 }
 
 .notification_list {
@@ -56,7 +56,7 @@ h1.page_title > span:first-child > i {
 }
 
 .notification_list > div {
-  @apply relative w-72 flex gap-4 items-center border-b border-gray-200 px-4 py-6 duration-500;
+  @apply relative w-72 flex gap-4 items-center border-b px-4 py-6 duration-500;
 }
 
 .notification_list > div > div {
@@ -64,7 +64,7 @@ h1.page_title > span:first-child > i {
 }
 
 .notification_list i {
-  @apply absolute right-3 top-4 hover:text-gray-400 active:text-gray-500 cursor-pointer;
+  @apply absolute right-3 top-4 hover:text-gray-300 cursor-pointer;
 }
 
 .notification_list img {
@@ -72,7 +72,7 @@ h1.page_title > span:first-child > i {
 }
 
 .notification_list h1 {
-  @apply font-bold;
+  @apply font-medium;
 }
 
 .notification_list h2 {
@@ -80,20 +80,20 @@ h1.page_title > span:first-child > i {
 }
 
 .notification_list p {
-  @apply text-xs text-gray-700;
+  @apply text-xs;
 }
 
 .profile_popup {
-  top: 65px;
-  @apply z-40 absolute right-0 w-content max-w-[280px] bg-white rounded-lg shadow-md flex flex-col gap-2 text-sm border border-gray-300;
+  top: 50px;
+  @apply z-40 absolute right-0 w-content max-w-[280px] backdrop-blur-lg rounded-lg shadow-sm flex flex-col gap-2 text-sm border;
 }
 
 .profile_popup > div:first-child {
-  @apply pl-6 pr-6 flex items-center gap-4 justify-between border-b;
+  @apply pl-6 pr-6 flex items-center gap-8 justify-between border-b;
 }
 
 .profile_popup > div:nth-child(2) {
-  @apply flex justify-center gap-4 px-4 py-4;
+  @apply flex justify-center items-center gap-6 px-4 py-4;
 }
 
 .profile_popup > div:nth-child(3) {
@@ -101,17 +101,17 @@ h1.page_title > span:first-child > i {
 }
 
 .profile_popup > div:nth-child(3) > div:first-child {
-  @apply flex justify-between items-center mb-1 text-gray-500;
+  @apply flex justify-between items-center mb-1;
 }
 
 .profile_popup > div:nth-child(4) {
-  @apply flex flex-col pt-1 text-gray-600;
+  @apply flex flex-col pt-1;
 }
 
 .profile_popup > div:nth-child(4) > a {
-  @apply py-3 px-6 rounded-md hover:bg-gray-200 active:bg-gray-300;
+  @apply py-3 px-6 rounded-md;
 }
 
 .profile_popup > a {
-  @apply px-6 py-3 border-t text-gray-600 hover:bg-gray-200 active:bg-gray-300;
+  @apply px-6 py-3 border-t text-gray-200;
 }

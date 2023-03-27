@@ -1,37 +1,106 @@
-<nav>
-  <div>
-    <a
-      (mouseenter)="animate_logo = true"
-      (mouseleave)="animate_logo = false"
-      href="/"
-      id="logo"
+<nav
+  class="border-orange-200 dark:border-gray-700 from-[#fff7f7] to-[#fceddb] dark:from-transparent dark:to-transparent"
+>
+  <a href="/">
+    <svg
+      width="25"
+      id="Calque_1"
+      data-name="Calque 1"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 800 800"
     >
-      <span
-        [ngClass]="{ 'h-4': animate_logo, 'h-3': !animate_logo }"
-        class="left-[7px] bottom-[10px]"
-      ></span>
-      <span
-        [ngClass]="{ 'h-5': animate_logo, 'h-4': !animate_logo }"
-        class="left-0 right-0 bottom-[10px] mx-auto"
-      ></span>
-      <span
-        [ngClass]="{ 'h-4': animate_logo, 'h-5': !animate_logo }"
-        class="right-[7px] bottom-[10px]"
-      ></span>
-    </a>
-  </div>
-  <div class="flex flex-col gap-12">
+      <defs>
+        <style>
+          .cls-1 {
+            fill: none;
+          }
+          .cls-2 {
+            fill: #ff8906;
+            fill-rule: evenodd;
+          }
+        </style>
+      </defs>
+      <title>chart-bar-square-svgrepo-com</title>
+      <rect class="cls-1" width="800" height="800" />
+      <path
+        class="cls-2"
+        d="M533.3,233.3a33.29,33.29,0,0,1,33.3,33.3V533.3a33.3,33.3,0,0,1-66.6,0V266.7A33.37,33.37,0,0,1,533.3,233.3ZM400,300a33.29,33.29,0,0,1,33.3,33.3v200a33.3,33.3,0,1,1-66.6,0v-200A33.29,33.29,0,0,1,400,300ZM300,366.7a33.3,33.3,0,0,0-66.6,0V533.4a33.3,33.3,0,0,0,66.6,0ZM241.7,79.6C285,70,337.5,66.7,400,66.7S515,70,558.3,79.6c43.7,9.7,80,26.3,107.9,54.2s44.5,64.2,54.2,107.9C730,285,733.3,337.5,733.3,400S730,515,720.4,558.3c-9.7,43.7-26.3,80-54.2,107.9S602,710.7,558.3,720.4C515,730,462.5,733.3,400,733.3S285,730,241.7,720.4c-43.7-9.7-80-26.3-107.9-54.2S89.3,602,79.6,558.3C70,515,66.7,462.5,66.7,400S70,285,79.6,241.7c9.7-43.7,26.3-80,54.2-107.9S198,89.3,241.7,79.6Z"
+      />
+    </svg>
+    <span class="font-medium">Statuschecks</span>
+  </a>
+  <div class="flex flex-col gap-10">
     <a
-     
       *ngFor="let link of navbar_links"
       routerLink="{{ link.link }}"
       class="website_link"
     >
-      <i class="{{ link.icon }} fa-xl"></i>
-      <div routerLinkActive="h-1/2"></div>
+      <span
+        class="w-8 h-8 bg-orange-200 dark:bg-gray-100 dark:bg-opacity-10 grid place-content-center rounded-lg duration-300"
+        routerLinkActive="!bg-secondary "
+      >
+        <i
+          class="{{ link.icon }} text-gray-800 dark:text-gray-300"
+          routerLinkActive="!text-white"
+        ></i>
+      </span>
+      <span
+        class="text-left text-gray-700 dark:text-gray-500"
+        routerLinkActive="text-gray-900 dark:text-white"
+      >
+        {{ link.name | titlecase }}
+      </span>
+    </a>
+    <div class="h-px w-full bg-orange-200 dark:bg-gray-700"></div>
+    <a
+      *ngFor="let link of navbar_secondary_links"
+      routerLink="{{ link.link }}"
+      class="website_link"
+    >
+      <span
+        class="w-8 h-8 bg-orange-200 dark:bg-gray-100 dark:bg-opacity-10 grid place-content-center rounded-lg duration-300"
+        routerLinkActive="!bg-secondary text-white"
+      >
+        <i
+          class="{{ link.icon }} text-gray-800 dark:text-gray-300"
+          routerLinkActive="!text-white"
+        ></i>
+      </span>
+      <span
+        class="text-left text-gray-700 dark:text-gray-500"
+        routerLinkActive="text-gray-900 dark:text-white"
+      >
+        {{ link.name | titlecase }}
+      </span>
     </a>
   </div>
-  <a href="" class="website_link"
-    ><i class="fas fa-sign-out-alt fa-xl"></i
-  ></a>
+  <div class="grid gap-2">
+    <div class="flex justify-center gap-4 mx-auto mt-6 mb-4">
+      <span class="text-gray-700 dark:text-gray-500"
+        ><i class="fas fa-sun"></i
+      ></span>
+      <div
+        (click)="enable_dark()"
+        class="w-12 h-6 bg-orange-200 dark:bg-gray-800 rounded-full relative xl:cursor-pointer"
+      >
+        <div
+          [ngClass]="{
+            'right-0': dark_mode,
+            'left-0': !dark_mode
+          }"
+          class="h-full w-6 bg-secondary rounded-full absolute top-0"
+        ></div>
+      </div>
+      <span class="text-gray-700 dark:text-gray-500"
+        ><i class="fas fa-moon"></i
+      ></span>
+    </div>
+    <a
+      *ngIf="user_details.sub == 'Free'"
+      routerLink="/plans"
+      class="button !rounded-sm justify-end text-sm font-semibold"
+    >
+      Upgrade
+    </a>
+  </div>
 </nav>

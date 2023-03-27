@@ -1,13 +1,10 @@
 <div id="main_content">
   <app-header title_="profile" icon="fa-user"></app-header>
-  <div *ngIf="user_details" class="no_overflow overflow-auto relative">
-    <span
-      class="hoverable absolute right-2 top-10 text-red-500 font-medium text-sm"
-    >
-      <i class="fas fa-trash"></i>
-      Delete my account
-    </span>
-    <div class="grid gap-3 mt-5">
+  <div
+    *ngIf="user_details"
+    class="no_overflow overflow-auto relative px-12 py-2 text-gray-700 dark:text-gray-400"
+  >
+    <div class="grid gap-16">
       <div class="profile-grid">
         <div>Subscription:</div>
         <div class="!shadow-none !bg-transparent !pl-0">
@@ -23,11 +20,9 @@
       </div>
       <div class="profile-grid">
         <div>Monitors:</div>
-        <div
-        class="!shadow-none !bg-transparent !pl-0"
-        >
+        <div class="!shadow-none !bg-transparent !pl-0">
           <div
-            class="relative bg-secondary bg-opacity-20 h-full w-1/4  py-4 rounded-md"
+            class="relative bg-secondary bg-opacity-20 h-full w-[200px] py-4 rounded-md"
           >
             <div
               class="bg-secondary absolute top-0 left-0 h-full"
@@ -38,11 +33,7 @@
               }"
             ></div>
             <span
-              [ngClass]="{
-                'text-gray-200': user_details.usage > 55,
-                'text-gray-900': user_details.usage < 55
-              }"
-              class="absolute left-0 right-0 mx-auto w-content text-xs top-1/2 -translate-y-1/2 font-semibold"
+              class="text-gray-900 dark:text-gray-200 absolute left-0 right-0 mx-auto w-content text-xs top-1/2 -translate-y-1/2"
             >
               {{ user_details.monitors }} / {{ user_details.max_monitors }}
             </span>
@@ -62,47 +53,19 @@
         <div class="flex justify-between">
           <span>{{ user_details.api_key }}</span>
           <span
-            class="flex gap-2 text-blue-600 items-center xl:cursor-pointer hover:underline font-medium text-sm"
+            class="flex gap-2 text-secondary items-center xl:cursor-pointer hover:underline font-medium text-sm"
           >
             <i class="fas fa-copy"></i>
             Copy
           </span>
         </div>
       </div>
-      <!-- <div class="profile-grid">
-        <div>Credit card:</div>
-        <div
-          *ngIf="user_details.payment_card"
-          class="flex justify-between items-center"
-        >
-          <span>
-            <i class="fas fa-money-check-alt fa-xl text-blue-800 mr-2"></i>
-            {{ user_details.payment_card }}
-          </span>
-          <span class="flex gap-12 items-center">
-            <span
-              class="flex gap-2 items-center text-red-500 xl:cursor-pointer hover:underline font-medium text-sm"
-            >
-              <i class="fas fa-trash"></i>
-              Delete
-            </span>
-          </span>
-        </div>
-        <div
-          *ngIf="!user_details.payment_card"
-          class="flex justify-between items-center"
-        >
-          <span class="text-gray-500 font-medium"> No credit card </span>
-          <span class="flex gap-12 items-center">
-            <span
-              class="flex gap-2 items-center text-green-600 xl:cursor-pointer hover:underline font-medium text-sm"
-            >
-              <i class="fas fa-plus"></i>
-              Add
-            </span>
-          </span>
-        </div>
-      </div> -->
     </div>
+    <span
+      class="absolute right-12 top-4 text-red-500 font-medium text-sm xl:cursor-pointer"
+    >
+      <i class="fas fa-trash"></i>
+      Delete my account
+    </span>
   </div>
 </div>

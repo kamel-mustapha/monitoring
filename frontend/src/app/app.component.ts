@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
     private shared: SharedService,
     private server: ServerService
   ) {}
+  dark_mode: boolean = false;
   ngOnInit(): void {
     if (!isDevMode()) {
       this.server.set_api(this.get_api_key(), '/');
@@ -41,6 +42,9 @@ export class AppComponent implements OnInit {
     //   }
     // });
     this.shared.refresh_user_data();
+    this.shared.dark_mode_subject.subscribe((res) => {
+      this.dark_mode = res;
+    });
   }
   get_api_key(): string {
     let api_key: string = '';

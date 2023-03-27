@@ -1,14 +1,19 @@
 <div id="main_content">
   <app-header title_="plans" icon="fa-money-check-alt"></app-header>
-  <div class="flex justify-center gap-4 mx-auto mt-6 mb-4" (click)="change_sub()">
+  <div
+    class="flex justify-center gap-4 mx-auto mt-6 mb-4"
+    (click)="change_sub()"
+  >
     <span
       [ngClass]="{
-        'text-gray-400': sub_annually,
-        'text-gray-800 font-semibold': !sub_annually
+        'text-gray-900 dark:text-gray-400': sub_annually,
+        'text-gray-300 dark:text-gray-200 font-semibold': !sub_annually
       }"
       >Monthly</span
     >
-    <div class="w-12 h-6 bg-gray-200 rounded-full relative xl:cursor-pointer">
+    <div
+      class="w-12 h-6 bg-orange-200 dark:bg-gray-800 rounded-full relative xl:cursor-pointer"
+    >
       <div
         [ngClass]="{
           'right-0': sub_annually,
@@ -19,14 +24,17 @@
     </div>
     <span
       [ngClass]="{
-        'text-gray-400': !sub_annually,
-        'text-gray-800 font-semibold': sub_annually
+        'text-gray-900 dark:text-gray-400': !sub_annually,
+        'text-gray-900 dark:text-gray-400 font-semibold': sub_annually
       }"
       >Annually</span
     >
   </div>
   <div *ngIf="user_details" class="pricing_container no_overflow overflow-auto">
-    <div *ngFor="let plan of plans">
+    <div
+      *ngFor="let plan of plans"
+      class="border-gray-300 dark:border-gray-700 dark:text-gray-300"
+    >
       <h2
         style="background-color: {{ plans_colors[plan.name] }}"
         class="text-gray-100"
@@ -41,7 +49,7 @@
         <span *ngIf="plan.price_monthly != 0" class="inline-flex mx-auto">
           <span *ngIf="!sub_annually">{{ plan.price_monthly }}</span>
           <span *ngIf="sub_annually">{{ plan.price_annually }}</span>
-          <span class="text-3xl text-gray-400">$</span>
+          <span class="text-3xl text-gray-600 dark:text-gray-400">$</span>
         </span>
         <span *ngIf="plan.price_monthly != 0" class="per_month">Per Month</span>
       </h3>
@@ -94,7 +102,9 @@
     id="payment-form"
     class="w-96 py-1 max-w-full grid gap-4"
   >
-    <h2 class="text-center text-lg font-semibold">Add a payment card</h2>
+    <h2 class="text-center text-lg font-semibold text-gray-200">
+      Add a payment card
+    </h2>
     <div>
       <input
         ngModel
@@ -122,8 +132,10 @@
     </button>
   </form>
   <div *ngIf="!show_card_creation" class="pt-2 px-2 grid gap-8">
-    <h2 class="text-center text-xl font-medium">Confirm Subscription</h2>
-    <p>
+    <h2 class="text-center text-xl font-medium text-gray-200">
+      Confirm Subscription
+    </h2>
+    <p class="text-gray-300">
       You are about to subscribe to
       <span *ngIf="plan_to_subscribe" class="font-semibold">
         {{ plan_to_subscribe.name | uppercase }}

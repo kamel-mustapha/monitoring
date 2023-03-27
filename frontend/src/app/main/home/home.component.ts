@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
   user_details: any;
   monitors: any[] = [];
   monitor_to_edit: any;
+  alert_emails: string[] = [];
   shown_popups: any = {};
   loading_monitors: boolean = true;
   loading_events: boolean = true;
@@ -59,9 +60,7 @@ export class HomeComponent implements OnInit {
       success: 200,
       timeout: 30,
     };
-    setTimeout(() => {
-      this.monitor_creation_defaults.alert_emails = this.user_data.email;
-    }, 300);
+    this.alert_emails = [this.user_data.email];
   }
   get_monitors() {
     this.server.get_monitors().subscribe((value) => {
@@ -83,19 +82,15 @@ export class HomeComponent implements OnInit {
       this.monitor_to_edit = this.monitors.find(
         (monitor) => monitor.id == monitor_id
       );
-      let alert_emails = '';
-      alert_emails += `${this.monitor_to_edit.alert_emails.map(
+      this.alert_emails = this.monitor_to_edit.alert_emails.map(
         (email: any) => email.email
-      )} `;
-      alert_emails = alert_emails.trim();
-      this.monitor_creation_defaults.alert_emails = alert_emails;
+      );
       this.monitor_creation_defaults.interval = this.monitor_to_edit.interval;
       this.monitor_creation_defaults.link = this.monitor_to_edit.link;
       this.monitor_creation_defaults.name = this.monitor_to_edit.name;
       this.monitor_creation_defaults.success =
         this.monitor_to_edit.success_status;
       this.monitor_creation_defaults.timeout = this.monitor_to_edit.timeout;
-      console.log(this.monitor_creation_defaults);
     }
   }
 
@@ -161,11 +156,10 @@ export class HomeComponent implements OnInit {
     this.reset_validation();
     if (form.valid) {
       this.creation_in_progress = true;
-      if (form.value.alert_emails.length > 0) {
-        form.value.alert_emails = form.value.alert_emails
-          .split(' ')
-          .slice(0, this.user_data.max_alert_emails);
-      }
+      form.value.alert_emails = this.alert_emails.slice(
+        0,
+        this.user_data.max_alert_emails
+      );
       if (this.create_word == 'Create') {
         this.server.create_monitor(form.value).subscribe(
           (response) => {
@@ -209,12 +203,42 @@ export class HomeComponent implements OnInit {
         });
       }
     } else {
-      console.log('sssssss');
       for (let i in form.value) {
         if (form.value[i].length == 0) {
           this.monitor_form_validation[i] = true;
         }
-        console.log(this.monitor_form_validation);
+      }
+    }
+  }
+  remove_alert_email(email: string) {
+    if (this.alert_emails.length > 1) {
+      this.alert_emails = this.alert_emails.filter((mail) => mail != email);
+    } else {
+      this.shared.show_alert('At least one email should be included', 'alert');
+    }
+  }
+  add_alert_email(email: string) {
+    if (this.alert_emails.includes(email.toLocaleLowerCase())) {
+      this.shared.show_alert('Email already in the list', 'alert');
+    } else {
+      if (this.alert_email_input.length == this.user_data.max_alert_emails) {
+        this.shared.show_alert('Upgrade to get more alert emails', 'alert');
+        return;
+      }
+      this.alert_emails.push(email.toLocaleLowerCase());
+    }
+  }
+  alert_email_input(event: any) {
+    if (event.which == 32) {
+      if (
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          event.target.value.trim()
+        )
+      ) {
+        this.add_alert_email(event.target.value);
+        event.target.value = '';
+      } else {
+        this.shared.show_alert('Invalid email', 'alert');
       }
     }
   }

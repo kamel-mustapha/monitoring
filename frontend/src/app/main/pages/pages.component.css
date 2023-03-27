@@ -11,8 +11,13 @@
 }
 
 .pages_grid {
-  @apply grid  items-center border-b border-gray-200 pl-12 pr-4;
-  grid-template-columns: 10% 20% 15% 15% 20% 20%;
+  @apply grid  items-center border-b pl-12 pr-4;
+  grid-template-columns: 10% 20% 20% 15% 35%;
+}
+
+.pages_grid > div,
+.pages_grid > a {
+  @apply overflow-hidden text-ellipsis;
 }
 
 .pages_grid > div:last-child {
@@ -20,11 +25,11 @@
 }
 
 .pages_grid > div:last-child > a {
-  @apply text-blue-700 lg:cursor-pointer lg:hover:underline;
+  @apply text-secondary text-2xl;
 }
 
 .pages_grid.header {
-  @apply font-medium py-3 bg-gray-100 rounded-t-md;
+  @apply py-3 rounded-t-md;
 }
 
 .pages_grid.item {
@@ -36,7 +41,7 @@
 }
 
 .pages_toolbar > div {
-  @apply lg:cursor-pointer;
+  @apply lg:cursor-pointer font-light text-sm;
 }
 #monitor_creation_form {
   @apply flex flex-col gap-1;
@@ -47,14 +52,14 @@
 }
 
 #monitor_creation_form label {
-  @apply text-gray-600 font-semibold text-sm w-content py-1 flex items-center gap-2;
+  @apply text-sm w-content py-1 flex items-center gap-2;
 }
 
 #monitor_creation_form label i {
-  @apply sm:cursor-pointer text-gray-500 hover:text-gray-900 mt-1;
+  @apply sm:cursor-pointer;
 }
 
 #monitor_creation_form input,
 #monitor_creation_form select {
-  @apply border  rounded-md px-4 py-2 bg-white outline-none focus:border-primary;
+  @apply border  rounded-md px-4 py-2  outline-none focus:border-primary;
 }
