@@ -265,6 +265,7 @@ class UserPages(View):
                 return JsonResponse(req.res, status=req.res["status"])
 
 def monitor_page_stats(req):
+        data = req.GET
         page = UserPage.objects.filter(id=int(data.get("id")))
         if page:
                 page = page[0]
