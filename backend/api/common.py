@@ -1,9 +1,10 @@
 import requests, threading, time, multiprocessing
-from api.models import Monitor
 from task.models import Task
 from django.utils import timezone
 from datetime import timedelta as td
 from zoneinfo import ZoneInfo
+from api.models import *
+
 
 from logging import getLogger
 logger = getLogger(__name__)
@@ -94,36 +95,34 @@ def calculate_uptime(events):
         else:
             return 100
 
-def filter_events_by_date(events, date):
-    date_start = timezone.datetime(year=date.year, month=date.month, day=date.day, tzinfo=ZoneInfo("UTC"))
-    date_end = date_start + td(days=1)
-    events = events.filter(created_time__gte=date_start, created_time__lt=date_end)
-    response =  calculate_response(events) if events else None
-    uptime = calculate_uptime(events) if events else None
-    return response, uptime
+# def filter_events_by_date(events, date):
+#     date_start = timezone.datetime(year=date.year, month=date.month, day=date.day, tzinfo=ZoneInfo("UTC"))
+#     date_end = date_start + td(days=1)
+#     events = events.filter(created_time__gte=date_start, created_time__lt=date_end)
+#     response =  calculate_response(events) if events else None
+#     uptime = calculate_uptime(events) if events else None
+#     return response, uptime
 
 def calculate_response_percentage(responses):
     max_response = max(map(lambda x: x["value"], responses))
     for response in responses:
         response["percentage"] = calculate_percentage(response["value"], max_response)
 
-def build_responses_time(events, event_time, today):
-    responses = []
-    uptimes = []
-    for event_day in range(event_time):
-        response, uptime = filter_events_by_date(events, today-td(days=event_day))
-        if response or response == 0:
-            responses.append({
-                "date": get_verbose_date(today-td(days=event_day)),
-                "value": response
-            })
-        if uptime or uptime == 0:
-            uptimes.append({
-                "date": get_verbose_date(today-td(days=event_day)),
-                "value": uptime
-            })
-    calculate_response_percentage(responses)
-    return responses, uptimes
+def build_responses_time(events, date):
+    response = calculate_response(events)
+    if response or response == 0:
+        response = {
+            "date": get_verbose_date(date),
+            "value": response
+        }
+    uptime = calculate_uptime(events)
+    if uptime or uptime == 0:
+        uptime = {
+            "date": get_verbose_date(date),
+            "value": uptime
+        }
+    # calculate_response_percentage(response)
+    return response, uptime
 
 def calculate_mean(array):
     total = 0
@@ -139,24 +138,9 @@ def round_monitor_results(data):
     data["response_month"] = round(data["response_month"], 2)
     data["response_ninty"] = round(data["response_ninty"], 2)
 
-def create_monitor_data(monitor, events, events_time, data_array):
-    today = timezone.datetime.now()
-    responses, uptimes = build_responses_time(events, events_time, today)
-    data = {
-        "name": monitor.name,
-        "check_interval": monitor.interval,
-        "uptimes": uptimes,
-        "responses": responses,
-        "down": monitor.down
-    }
-    # building stats
-    for x in ["uptime", "response"]:
-        data[f"{x}_week"] = calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"][:7]))) if len(data[f"{x}s"]) >= 7 else calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"])))
-        data[f"{x}_month"] = calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"][:30]))) if len(data[f"{x}s"]) >= 30 else calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"])))
-        data[f"{x}_ninty"] = calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"][:90]))) if len(data[f"{x}s"]) >= 90 else calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"])))
-    # reversing data for display
-    data["responses"].reverse()
-    data["uptimes"].reverse()
-    # rounding results
-    round_monitor_results(data)
-    data_array.append(data)
+def create_monitor_data(monitor, date):
+    today_start_date = timezone.datetime(year=date.year, day=date.day, month=date.month, tzinfo=ZoneInfo("UTC"))
+    today_end_date = today_start_date + td(days=1)
+    monitor_events = MonitorEvent.objects.filter(monitor=monitor, created_time__gte=today_start_date, created_time__lt=today_end_date)
+    response, uptime = build_responses_time(monitor_events, date)
+    return response, uptime

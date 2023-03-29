@@ -13,6 +13,8 @@ from django.db.models import Q
 from django.db.models import Count
 from django.utils import timezone
 from payment.models import Plan, APIKey
+from zoneinfo import ZoneInfo
+
 
 from logging import getLogger
 logger = getLogger(__name__)
@@ -262,32 +264,52 @@ class UserPages(View):
                         logger.exception(e)
                 return JsonResponse(req.res, status=req.res["status"])
 
-@csrf_exempt
 def monitor_page_stats(req):
-        try:
-                data = req.GET
-                page = UserPage.objects.filter(id=int(data.get("id")))
-                if page:
-                        page = page[0]
-                        req.res["monitors"] = []
-                        page_monitors = page.monitors.all()
-                        threads = []
-                        for monitor in page_monitors:
-                                three_month_date = timezone.now() - datetime.timedelta(days=90)
-                                monitor_events = MonitorEvent.objects.filter(monitor=monitor, created_time__gte=three_month_date).order_by("id")
-                                t = threading.Thread(target=create_monitor_data, args=(monitor, monitor_events, 90, req.res["monitors"]))
-                                threads.append(t)
-                        for t in threads:
-                                t.start()
-                        for t in threads:
-                                t.join()
-                        req.res["status"] = 200
-                        del req.res["message"]
-        except Exception as e:
-                logger.exception(e)
+        page = UserPage.objects.filter(id=int(data.get("id")))
+        if page:
+                page = page[0]
+                req.res["monitors"] = []
+                page_monitors = page.monitors.all()
+                now = timezone.now()
+                for monitor in page_monitors:
+                        response, uptime = create_monitor_data(monitor, now)
+                        # add today stats
+                        data = {
+                                "name": monitor.name,
+                                "check_interval": monitor.interval,
+                                "uptimes": [
+                                        uptime
+                                ],
+                                "responses": [
+                                        response
+                                ],
+                                "down": monitor.down
+                        }
+                        # add old stats
+                        event_stats = EventStats.objects.filter(monitor=monitor).order_by("-date")
+                        for stat in event_stats:
+                                verbose_date = get_verbose_date(stat.date)
+                                uptime = {
+                                        "date": verbose_date,
+                                        "value": stat.uptime
+                                }
+                                response = {
+                                        "date": verbose_date,
+                                        "value": stat.response
+                                }
+                                data["uptimes"].append(uptime)
+                                data["responses"].append(response)
+                         # # building stats
+                        for x in ["uptime", "response"]:
+                                data[f"{x}_week"] = calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"][:7]))) if len(data[f"{x}s"]) >= 7 else calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"])))
+                                data[f"{x}_month"] = calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"][:30]))) if len(data[f"{x}s"]) >= 30 else calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"])))
+                                data[f"{x}_ninty"] = calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"][:90]))) if len(data[f"{x}s"]) >= 90 else calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"])))
+                        # # rounding results
+                        round_monitor_results(data)
+                        req.res["monitors"].append(data)
+                req.res["status"] = 200
+                del req.res["message"]
         return JsonResponse(req.res, status=req.res["status"])
-
-
 
 def get_user_details(req):
         try:

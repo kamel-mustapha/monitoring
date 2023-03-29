@@ -106,3 +106,13 @@ class PageMonitors(models.Model):
     
     class Meta:
         db_table = "MTM_UserPageMonitors"
+
+
+class EventStats(models.Model):
+    monitor = models.ForeignKey(Monitor, on_delete=models.CASCADE)
+    date = models.DateField()
+    uptime = models.FloatField(default=0)
+    response = models.FloatField(default=0)
+    
+    class Meta:
+        db_table = "EventStats"
