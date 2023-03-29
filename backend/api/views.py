@@ -307,6 +307,11 @@ def monitor_page_stats(req):
                                 data[f"{x}_ninty"] = calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"][:90]))) if len(data[f"{x}s"]) >= 90 else calculate_mean(list(map(lambda k: k['value'], data[f"{x}s"])))
                         # # rounding results
                         round_monitor_results(data)
+                        # calculating percentage of responses for frontend
+                        calculate_response_percentage(data["responses"])
+                        # reversing data for display
+                        data["responses"].reverse()
+                        data["uptimes"].reverse()
                         req.res["monitors"].append(data)
                 req.res["status"] = 200
                 del req.res["message"]
