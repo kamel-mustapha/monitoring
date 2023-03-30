@@ -1,6 +1,4 @@
-<nav
-  class="border-orange-200 dark:border-gray-700 from-[#fff7f7] to-[#fceddb] dark:from-transparent dark:to-transparent"
->
+<nav>
   <a href="/">
     <svg
       width="25"
@@ -29,7 +27,7 @@
     </svg>
     <span class="font-medium">Statuschecks</span>
   </a>
-  <div class="flex flex-col gap-10">
+  <div class="flex flex-col gap-12">
     <a
       *ngFor="let link of navbar_links"
       routerLink="{{ link.link }}"
@@ -98,7 +96,7 @@
     <a
       *ngIf="user_details.sub == 'Free'"
       routerLink="/plans"
-      class="button !rounded-sm justify-end text-sm font-semibold"
+      class="button !rounded-md justify-end text-sm font-semibold"
     >
       Upgrade
     </a>

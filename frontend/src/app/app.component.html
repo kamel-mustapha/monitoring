@@ -1,11 +1,14 @@
 <div
   class="flex h-screen overflow-hidden"
-  [ngClass]="{ 'bg_dark dark': dark_mode, bg_light: !dark_mode }"
+  [ngClass]="{
+    'bg-[#18191A] dark': dark_mode,
+    'bg-orange-100': !dark_mode
+  }"
 >
-  <div class="p-2">
+  <div class="">
     <app-navbar></app-navbar>
   </div>
-  <div class="w-full">
+  <div class="w-full p-4">
     <app-main></app-main>
   </div>
 </div>

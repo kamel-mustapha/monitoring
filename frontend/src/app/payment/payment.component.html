@@ -7,7 +7,7 @@
     <span
       [ngClass]="{
         'text-gray-900 dark:text-gray-400': sub_annually,
-        'text-gray-300 dark:text-gray-200 font-semibold': !sub_annually
+        'text-gray-800 dark:text-gray-100 font-semibold': !sub_annually
       }"
       >Monthly</span
     >
@@ -24,8 +24,8 @@
     </div>
     <span
       [ngClass]="{
-        'text-gray-900 dark:text-gray-400': !sub_annually,
-        'text-gray-900 dark:text-gray-400 font-semibold': sub_annually
+        'text-gray-400 dark:text-gray-400': !sub_annually,
+        'text-gray-900 dark:text-gray-100 font-semibold': sub_annually
       }"
       >Annually</span
     >
@@ -102,7 +102,7 @@
     id="payment-form"
     class="w-96 py-1 max-w-full grid gap-4"
   >
-    <h2 class="text-center text-lg font-semibold text-gray-200">
+    <h2 class="text-center text-lg font-semibold dark:text-gray-200">
       Add a payment card
     </h2>
     <div>
@@ -112,7 +112,7 @@
         name="name"
         type="text"
         placeholder="Name on the card"
-        class="w-full focus:outline-none py-3 border-b border-gray-300"
+        class="w-full focus:outline-none py-3 border-b border-gray-300 text-gray-900 dark:text-gray-200"
       />
     </div>
     <div class="card_element payment_input min-h-[45px]"></div>
@@ -132,10 +132,10 @@
     </button>
   </form>
   <div *ngIf="!show_card_creation" class="pt-2 px-2 grid gap-8">
-    <h2 class="text-center text-xl font-medium text-gray-200">
+    <h2 class="text-center text-xl font-medium dark:text-gray-200">
       Confirm Subscription
     </h2>
-    <p class="text-gray-300">
+    <p class="dark:text-gray-300">
       You are about to subscribe to
       <span *ngIf="plan_to_subscribe" class="font-semibold">
         {{ plan_to_subscribe.name | uppercase }}
