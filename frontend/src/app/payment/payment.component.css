@@ -1,5 +1,5 @@
 .payment_input {
-  @apply border-b border-gray-300  py-3 text-lg;
+  @apply border-b py-3 text-lg;
 }
 .pricing_container {
   @apply w-content grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 mx-auto  mt-2;
@@ -35,7 +35,7 @@
 }
 
 .pricing_container > div h3 .per_month {
-  @apply text-lg text-gray-500;
+  @apply text-lg;
 }
 
 .pricing_container > div a {

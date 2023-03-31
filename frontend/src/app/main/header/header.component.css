@@ -12,7 +12,7 @@
 }
 
 .page_header > div {
-  @apply flex items-center gap-6;
+  @apply flex items-center gap-12;
 }
 
 .page_header > div > span.username {

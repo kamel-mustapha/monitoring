@@ -6,7 +6,27 @@ nav > a:first-child {
   @apply flex items-center justify-center gap-2 cursor-pointer text-secondary text-lg;
 }
 
+nav > div:nth-child(2) {
+  @apply flex flex-col gap-10;
+}
+
+nav > div:last-child {
+  @apply grid gap-2;
+}
+
+nav > div:last-child > div {
+  @apply flex justify-center gap-4 mx-auto mt-6 mb-4;
+}
+
 a.website_link {
-  @apply grid items-center gap-4 text-sm font-medium relative rounded-lg duration-300 text-gray-500;
+  @apply grid items-center gap-4 text-sm font-medium relative rounded-lg duration-300;
   grid-template-columns: 20% 80%;
+}
+
+a.website_link > span:first-child {
+  @apply w-8 h-8 grid place-content-center rounded-lg duration-300;
+}
+
+a.website_link > span:last-child {
+  @apply text-left;
 }

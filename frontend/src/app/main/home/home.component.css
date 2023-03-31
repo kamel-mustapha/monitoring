@@ -68,7 +68,7 @@
 }
 
 .monitors_select {
-  @apply mt-2 overflow-y-auto absolute top-10 flex flex-col gap-1 shadow-lg z-10 border rounded-lg backdrop-blur-md;
+  @apply mt-2 overflow-y-auto absolute top-10 flex flex-col gap-1 shadow-sm z-10 border rounded-lg backdrop-blur-md;
   max-height: 300px;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .campaign_element_popup {
-  @apply absolute flex flex-col backdrop-blur-lg shadow-lg top-0 text-sm font-normal rounded-md z-50 -top-2 -left-[90px] border;
+  @apply absolute flex flex-col backdrop-blur-lg shadow-sm top-0 text-sm font-normal rounded-md z-50 -top-2 -left-[90px] border;
 }
 
 .campaign_element_popup > div {

@@ -1,6 +1,8 @@
 <div id="main_content">
   <app-header title_="pages" icon="fa-file-alt"></app-header>
-  <div class="pages_toolbar px-12 py-4 dark:text-gray-100">
+  <div
+    class="pages_toolbar px-12 py-4 text-light-primary dark:text-dark-primary"
+  >
     <div class="main_popup_activator">
       <div class="flex items-center gap-2" (click)="show_creation_window()">
         <i class="fas fa-plus fa-sm text-green-500"></i>
@@ -18,15 +20,15 @@
   </div>
   <div class="flex flex-col overflow-hidden px-12 py-5">
     <div
-      class="pages_grid header border-gray-100 dark:border-gray-700 text-gray-800 dark:text-gray-300"
+      class="pages_grid header border-primary dark:border-secondary text-light-primary dark:text-dark-primary"
     >
       <div
         *ngIf="pages.length > 0"
         (click)="select_all_pages()"
         class="checkbox"
         [ngClass]="{
-          'bg-secondary border-secondary': all_pages_selected,
-          'border-gray-100 dark:border-gray-400 bg-white': !all_pages_selected
+          'bg-secondary border-transparent': all_pages_selected,
+          'border-primary dark:border-secondary bg-white': !all_pages_selected
         }"
       >
         <i
@@ -49,14 +51,14 @@
         <div *ngIf="pages.length > 0">
           <div
             *ngFor="let page of pages; let i = index"
-            class="pages_grid item border-gray-100 dark:border-gray-700 text-gray-800 dark:text-gray-100"
+            class="pages_grid item border-primary dark:border-secondary text-light-secondary dark:text-dark-secondary"
           >
             <div
               (click)="select_page(i)"
               class="checkbox"
               [ngClass]="{
-                'bg-secondary border-secondary': page.selected,
-                'border-gray-100 dark:border-gray-400 bg-white': !page.selected
+                'bg-secondary border-transparent': page.selected,
+                'border-primary dark:border-secondary bg-white': !page.selected
               }"
             >
               <i
@@ -103,7 +105,9 @@
     #f="ngForm"
     (ngSubmit)="submit_page(f, 1)"
   >
-    <h1 class="dark:text-gray-300 text-center">Select page</h1>
+    <h1 class="text-light-primary dark:text-dark-primary text-center">
+      Select page
+    </h1>
     <div *ngIf="pages_marketplace.length > 0" class="flex flex-col gap-2 mt-4">
       <div class="relative overflow-hidden">
         <img
@@ -126,7 +130,9 @@
           class="active:translate-y-px duration-200"
           (click)="change_active_page(1)"
         >
-          <i class="fas fa-arrow-left text-gray-600"></i>
+          <i
+            class="fas fa-arrow-left text-light-primary dark:text-dark-primary"
+          ></i>
         </button>
         <span class="text-secondary">
           {{ pages_marketplace[page_creation_active_index].name }}
@@ -136,7 +142,9 @@
           class="active:translate-y-px duration-200"
           (click)="change_active_page(0)"
         >
-          <i class="fas fa-arrow-right text-gray-600"></i>
+          <i
+            class="fas fa-arrow-right text-light-primary dark:text-dark-primary"
+          ></i>
         </button>
         <input
           type="hidden"
@@ -153,7 +161,9 @@
     (ngSubmit)="submit_page(f1, 2)"
     class="flex flex-col h-full justify-between"
   >
-    <h1 class="dark:text-gray-300 text-center px-16">Associate monitors</h1>
+    <h1 class="text-light-primary dark:text-dark-primary text-center px-16">
+      Associate monitors
+    </h1>
     <div
       class="max-w-full max-h-52 my-8 overflow-y-auto grid gap-4 lg:gap-2"
       [ngClass]="{
@@ -165,13 +175,13 @@
         *ngFor="let monitor of monitors; let i = index"
         (click)="select_monitor(i)"
         [title]="monitor.name"
-        class="w-full flex items-center gap-4 lg:cursor-pointer px-4 py-2 rounded-md bg-white dark:bg-transparent text-gray-700 dark:text-gray-400 border border-gray-100 dark:border-gray-700"
+        class="w-full flex items-center gap-4 lg:cursor-pointer px-4 py-2 rounded-md bg-white dark:bg-transparent text-light-secondary dark:text-dark-secondary border border-primary dark:border-secondary"
       >
         <div
           class="checkbox"
           [ngClass]="{
-            'bg-secondary border-secondary': monitor.selected,
-            'border-gray-100 dark:border-gray-400 bg-white': !monitor.selected
+            'bg-secondary border-transparent': monitor.selected,
+            'border-primary dark:border-secondary bg-white': !monitor.selected
           }"
         >
           <i
@@ -197,7 +207,7 @@
       <button
         type="button"
         (click)="submit_page(f1, 0)"
-        class="w-full button !bg-gray-500 dark:!bg-gray-800"
+        class="w-full button !bg-gray-400 dark:!bg-gray-800"
       >
         Previous
       </button>
@@ -209,9 +219,9 @@
     #f2="ngForm"
     (ngSubmit)="submit_page(f2, 3)"
     id="monitor_creation_form"
-    class="flex flex-col h-full justify-between text-center text-gray-700 dark:text-gray-200"
+    class="flex flex-col h-full justify-between text-center text-light-secondary dark:text-dark-secondary"
   >
-    <h1>Add details</h1>
+    <h1 class="text-light-primary dark:text-dark-primary">Add details</h1>
     <div class="property_box w-96 max-w-full mt-4">
       <label>
         Friendly name
@@ -223,7 +233,7 @@
       <input
         [ngClass]="{
           'border-red-400': monitor_form_validation['name'],
-          'dark:border-gray-700 focus:border-primary':
+          'border-primary dark:border-secondary focus:border-primary':
             !monitor_form_validation['name']
         }"
         type="text"
@@ -245,7 +255,7 @@
       <input
         [ngClass]="{
           'border-red-400': monitor_form_validation['title'],
-          'dark:border-gray-700 focus:border-primary':
+          'border-primary dark:border-secondary focus:border-primary':
             !monitor_form_validation['title']
         }"
         type="text"
@@ -267,7 +277,7 @@
       <input
         [ngClass]="{
           'border-red-400': monitor_form_validation['link'],
-          'dark:border-gray-700 focus:border-primary':
+          'border-primary dark:border-secondary focus:border-primary':
             !monitor_form_validation['link']
         }"
         type="text"
@@ -291,7 +301,7 @@
         placeholder="Status | My website"
         name="image"
         ngModel
-        class="dark:border-gray-700 bg-white dark:bg-transparent"
+        class="border-primary dark:border-secondary bg-white dark:bg-transparent"
         (input)="load_icon_file($event)"
       />
     </div>
@@ -299,7 +309,7 @@
       <button
         type="button"
         (click)="submit_page(f2, 1)"
-        class="w-full button !bg-gray-500 dark:!bg-gray-800"
+        class="w-full button !bg-gray-400 dark:!bg-gray-800"
       >
         Previous
       </button>

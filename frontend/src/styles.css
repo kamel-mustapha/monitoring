@@ -47,7 +47,7 @@
 }
 
 .content_title {
-  @apply font-bold text-xl text-gray-800;
+  @apply font-bold text-xl text-light-primary dark:text-dark-primary;
 }
 
 .text_overflow_ellipsis {
@@ -61,25 +61,25 @@
   @apply w-16 h-6 rounded-full relative cursor-pointer duration-500;
 }
 
-.toggle_on {
+/* .toggle_on {
   @apply bg-secondary;
 }
 
 .toggle_off {
   @apply bg-gray-400;
-}
+} */
 
 .toggle > span {
   @apply absolute w-8 h-8 bg-white rounded-full border -top-1 duration-500;
 }
 
-.toggle_span_on {
+/* .toggle_span_on {
   @apply right-0 border-primary;
 }
 
 .toggle_span_off {
   @apply left-0 border-gray-300;
-}
+} */
 
 /* global css */
 #main_content {
@@ -92,7 +92,7 @@
 
 .progress_bar {
   height: 8px;
-  @apply relative w-full bg-secondary bg-opacity-20 border border-primary;
+  @apply relative w-full bg-secondary bg-opacity-20 border border-primary dark:border-secondary rounded-sm;
 }
 
 .progress_bar > div {
@@ -111,15 +111,13 @@
 } */
 
 .creation_window {
-  @apply fixed top-0 left-0 w-full h-full backdrop-blur-sm dark:backdrop-blur-md bg-black bg-opacity-50;
+  @apply fixed top-0 left-0 w-full h-full backdrop-blur-sm bg-black bg-opacity-50;
 }
 
 .creation_window > div {
-  @apply w-content flex flex-col absolute dark:border bg-[#fceddb] dark:bg-transparent  dark:border-gray-700 left-0 right-0 top-1/2 -translate-y-1/2 mx-auto h-content rounded-lg shadow-xl;
+  @apply w-content flex flex-col absolute border border-primary dark:border-secondary bg-light-primary dark:bg-dark-primary left-0 right-0 top-1/2 -translate-y-1/2 mx-auto h-content rounded-lg shadow-xl;
   max-height: 100%;
   max-width: 450px;
-  /* width: 500px; */
-  /* min-height: 400px; */
 }
 
 .creation_window > div > .creation_mode {

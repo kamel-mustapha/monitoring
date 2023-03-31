@@ -1,4 +1,4 @@
-<div class="page_header text-gray-900 dark:text-gray-300">
+<div class="page_header text-light-primary dark:text-dark-primary">
   <h1 class="page_title">
     <span><i class="fas {{ icon }} fa-xs"></i></span>
     <span>{{ title_ | titlecase }}</span>
@@ -6,22 +6,24 @@
   <div *ngIf="user_details">
     <div class="relative main_popup_activator">
       <span
-        class="hoverable relative"
+        class="relative cursor-pointer"
         (click)="show_hide_element('header_notification_popup')"
       >
-        <i class="fas fa-bell fa-lg"></i>
+        <i
+          class="fas fa-bell fa-lg text-light-secondary dark:text-dark-secondary"
+        ></i>
         <span [ngClass]="{ notification_ring: !all_notifications_seen }"></span>
       </span>
       <!-- notification popup -->
       <div
         *ngIf="shown_popups['header_notification_popup']"
         @slideTopShort
-        class="notification_container border-gray-300 dark:border-gray-700"
+        class="notification_container border-primary dark:border-secondary"
       >
         <div *ngIf="notifications.length > 0" class="notification_list">
           <div
             *ngFor="let notification of notifications"
-            class="border-gray-300 dark:border-gray-700"
+            class="border-primary dark:border-secondary"
           >
             <img
               src="{{ notification.image }}"
@@ -31,13 +33,10 @@
             />
             <div>
               <h1>{{ notification.title }}</h1>
-              <p class="text-gray-600 dark:text-gray-300">
+              <p class="text-light-secondary dark:text-dark-secondary">
                 {{ notification.text }}
               </p>
             </div>
-            <!-- <span>
-              <i class="fas fa-times fa-lg"></i>
-            </span> -->
           </div>
         </div>
         <div *ngIf="notifications.length > 0">
@@ -47,7 +46,7 @@
         </div>
         <p
           *ngIf="notifications.length <= 0"
-          class="inline-block text-center p-2 mx-auto w-52 dark:text-gray-300"
+          class="inline-block text-center p-2 mx-auto w-52 text-light-secondary dark:text-dark-secondary"
         >
           You have no notification
         </p>
@@ -56,7 +55,7 @@
 
     <div class="relative main_popup_activator">
       <span
-        class="hoverable flex items-center gap-2"
+        class="cursor-pointer flex items-center gap-2"
         (click)="show_hide_element('header_profile_popup')"
       >
         <span
@@ -65,29 +64,41 @@
         >
           {{ user_details.username }}
         </span>
-        <span><i class="fas fa-chevron-down"></i></span>
+        <span
+          ><i
+            [ngClass]="{
+              'fa-chevron-down': !shown_popups['header_profile_popup'],
+              'fa-chevron-up': shown_popups['header_profile_popup']
+            }"
+            class="fas fa-chevron-down"
+          ></i
+        ></span>
       </span>
       <!-- profile popup -->
       <div
         *ngIf="shown_popups['header_profile_popup']"
         @slideTopShort
-        class="profile_popup border-gray-300 dark:border-gray-700"
+        class="profile_popup border-primary dark:border-secondary"
       >
-        <div class="border-gray-300 dark:border-gray-700">
+        <div class="border-primary dark:border-secondary">
           <div class="flex flex-col gap-2 py-4">
             <span class="font-medium">{{ user_details.username }}</span>
             <span
-              class="max-w-[150px] dark:text-gray-300 overflow-hidden text-ellipsis"
+              class="max-w-[150px] text-light-secondary dark:text-dark-secondary overflow-hidden text-ellipsis"
             >
               {{ user_details.email }}
             </span>
           </div>
           <a routerLink="/profile"
-            ><i class="fas fa-cog dark:text-gray-300"></i
+            ><i
+              class="fas fa-cog text-light-secondary dark:text-dark-secondary"
+            ></i
           ></a>
         </div>
         <div>
-          <span class="dark:text-gray-300 text-sm"> Current plan: </span>
+          <span class="text-light-primary dark:text-dark-primary text-sm">
+            Current plan:
+          </span>
           <span
             style="background: {{
               plans_colors[user_details.sub.toLowerCase()]
@@ -97,22 +108,19 @@
             {{ user_details.sub | titlecase }}
           </span>
         </div>
-        <div class="dark:text-gray-300">
+        <div class="text-light-primary dark:text-dark-primary">
           <div>
             <span>Monitors</span>
-            <span
-              >{{ user_details.monitors }}/{{ user_details.max_monitors }}</span
-            >
+            <span>
+              {{ user_details.monitors }}/{{ user_details.max_monitors }}
+            </span>
           </div>
           <!-- progress bar -->
           <div class="progress_bar">
             <div [ngStyle]="{ 'width.%': user_details.usage }"></div>
           </div>
         </div>
-        <div
-          class="dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-100"
-        >
-          <!-- <a routerLink="/plans">Plans</a> -->
+        <div class="text-light-primary dark:text-dark-primary">
           <a routerLink="">Contact us</a>
         </div>
       </div>

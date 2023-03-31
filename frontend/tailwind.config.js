@@ -5,18 +5,28 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
+        "dark-primary": "#18191A",
+        "dark-secondary": "#3E4042",
+        "light-primary": "#ffedd5", //orange-100
+        "light-primary-dark": "#fed7aa", //orange-200
+        "light-secondary": "#FFF8EE",
         primary: "#0f0e17",
         secondary: "#ff8906",
         hover: "#d36f04",
       },
       colors: {
+        "dark-primary": "#fff",
+        "dark-secondary": "#9ca3af", //gray-400
+        "light-primary": "#030712", //gray-950
+        "light-secondary": "#374151", //gray-700
         primary: "#fffffe",
         secondary: "#ff8906",
         button: "#fffffe",
         hover: "#ff8906",
       },
       borderColor: {
-        primary: "#ff8906",
+        primary: "#e5e7eb", //gray-100
+        secondary: "#1f2937", //gray-800
       },
       width: {
         content: "fit-content",

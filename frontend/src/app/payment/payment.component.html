@@ -6,13 +6,13 @@
   >
     <span
       [ngClass]="{
-        'text-gray-900 dark:text-gray-400': sub_annually,
-        'text-gray-800 dark:text-gray-100 font-semibold': !sub_annually
+        'text-light-seoncdary dark:text-dark-secondary': sub_annually,
+        'text-light-primary dark:text-dark-primary font-semibold': !sub_annually
       }"
       >Monthly</span
     >
     <div
-      class="w-12 h-6 bg-orange-200 dark:bg-gray-800 rounded-full relative xl:cursor-pointer"
+      class="w-12 h-6 bg-orange-200 bg-light-secondary dark:bg-dark-secondary rounded-full relative xl:cursor-pointer"
     >
       <div
         [ngClass]="{
@@ -24,8 +24,8 @@
     </div>
     <span
       [ngClass]="{
-        'text-gray-400 dark:text-gray-400': !sub_annually,
-        'text-gray-900 dark:text-gray-100 font-semibold': sub_annually
+        'text-light-seoncdary dark:text-dark-secondary': !sub_annually,
+        'text-light-primary dark:text-dark-primary font-semibold': sub_annually
       }"
       >Annually</span
     >
@@ -33,7 +33,7 @@
   <div *ngIf="user_details" class="pricing_container no_overflow overflow-auto">
     <div
       *ngFor="let plan of plans"
-      class="border-gray-300 dark:border-gray-700 dark:text-gray-300"
+      class="border-primary dark:border-secondary text-light-seoncdary dark:text-dark-secondary"
     >
       <h2
         style="background-color: {{ plans_colors[plan.name] }}"
@@ -42,14 +42,26 @@
         {{ plan.name | uppercase }}
       </h2>
       <h3>
-        <span *ngIf="plan.price_monthly == 0" style="font-size: 35px">
+        <span
+          *ngIf="plan.price_monthly == 0"
+          style="font-size: 35px"
+          class="text-light-primary dark:text-dark-primary"
+        >
           FREE
         </span>
         <span *ngIf="plan.price_monthly == 0" class="per_month">FOREVER</span>
         <span *ngIf="plan.price_monthly != 0" class="inline-flex mx-auto">
-          <span *ngIf="!sub_annually">{{ plan.price_monthly }}</span>
-          <span *ngIf="sub_annually">{{ plan.price_annually }}</span>
-          <span class="text-3xl text-gray-600 dark:text-gray-400">$</span>
+          <span
+            *ngIf="!sub_annually"
+            class="text-light-primary dark:text-dark-primary"
+            >{{ plan.price_monthly }}</span
+          >
+          <span
+            *ngIf="sub_annually"
+            class="text-light-primary dark:text-dark-primary"
+            >{{ plan.price_annually }}</span
+          >
+          <span class="text-3xl">$</span>
         </span>
         <span *ngIf="plan.price_monthly != 0" class="per_month">Per Month</span>
       </h3>
@@ -102,7 +114,9 @@
     id="payment-form"
     class="w-96 py-1 max-w-full grid gap-4"
   >
-    <h2 class="text-center text-lg font-semibold dark:text-gray-200">
+    <h2
+      class="text-center text-lg font-semibold text-light-primary dark:text-dark-primary"
+    >
       Add a payment card
     </h2>
     <div>
@@ -112,10 +126,12 @@
         name="name"
         type="text"
         placeholder="Name on the card"
-        class="w-full focus:outline-none py-3 border-b border-gray-300 text-gray-900 dark:text-gray-200"
+        class="w-full focus:outline-none py-3 border-b border-primary dark:border-secondary text-light-primary dark:text-dark-primary"
       />
     </div>
-    <div class="card_element payment_input min-h-[45px]"></div>
+    <div
+      class="card_element payment_input min-h-[45px] border-primary dark:border-secondary"
+    ></div>
 
     <button
       *ngIf="plan_to_subscribe"
@@ -131,11 +147,16 @@
       <span *ngIf="!creation_in_progress">Subscribe</span>
     </button>
   </form>
-  <div *ngIf="!show_card_creation" class="pt-2 px-2 grid gap-8">
-    <h2 class="text-center text-xl font-medium dark:text-gray-200">
+  <div
+    *ngIf="!show_card_creation"
+    class="pt-2 px-2 grid gap-8 text-light-primary dark:text-dark-secondary"
+  >
+    <h2
+      class="text-center text-xl font-medium text-light-primary dark:text-dark-primary"
+    >
       Confirm Subscription
     </h2>
-    <p class="dark:text-gray-300">
+    <p>
       You are about to subscribe to
       <span *ngIf="plan_to_subscribe" class="font-semibold">
         {{ plan_to_subscribe.name | uppercase }}

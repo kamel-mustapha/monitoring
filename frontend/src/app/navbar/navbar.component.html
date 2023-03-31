@@ -25,61 +25,62 @@
         d="M533.3,233.3a33.29,33.29,0,0,1,33.3,33.3V533.3a33.3,33.3,0,0,1-66.6,0V266.7A33.37,33.37,0,0,1,533.3,233.3ZM400,300a33.29,33.29,0,0,1,33.3,33.3v200a33.3,33.3,0,1,1-66.6,0v-200A33.29,33.29,0,0,1,400,300ZM300,366.7a33.3,33.3,0,0,0-66.6,0V533.4a33.3,33.3,0,0,0,66.6,0ZM241.7,79.6C285,70,337.5,66.7,400,66.7S515,70,558.3,79.6c43.7,9.7,80,26.3,107.9,54.2s44.5,64.2,54.2,107.9C730,285,733.3,337.5,733.3,400S730,515,720.4,558.3c-9.7,43.7-26.3,80-54.2,107.9S602,710.7,558.3,720.4C515,730,462.5,733.3,400,733.3S285,730,241.7,720.4c-43.7-9.7-80-26.3-107.9-54.2S89.3,602,79.6,558.3C70,515,66.7,462.5,66.7,400S70,285,79.6,241.7c9.7-43.7,26.3-80,54.2-107.9S198,89.3,241.7,79.6Z"
       />
     </svg>
-    <span class="font-medium">Statuschecks</span>
+    <span>Statuschecks</span>
   </a>
-  <div class="flex flex-col gap-12">
+  <div>
     <a
       *ngFor="let link of navbar_links"
       routerLink="{{ link.link }}"
       class="website_link"
     >
       <span
-        class="w-8 h-8 bg-orange-200 dark:bg-gray-100 dark:bg-opacity-10 grid place-content-center rounded-lg duration-300"
+        class="bg-light-primary-dark dark:bg-dark-secondary"
         routerLinkActive="!bg-secondary "
       >
         <i
-          class="{{ link.icon }} text-gray-800 dark:text-gray-300"
+          class="{{ link.icon }} text-light-secondary dark:text-dark-secondary"
           routerLinkActive="!text-white"
-        ></i>
+        >
+        </i>
       </span>
       <span
-        class="text-left text-gray-700 dark:text-gray-500"
-        routerLinkActive="text-gray-900 dark:text-white"
+        class="text-light-secondary dark:text-dark-secondary"
+        routerLinkActive="text-light-primary dark:text-dark-primary"
       >
         {{ link.name | titlecase }}
       </span>
     </a>
-    <div class="h-px w-full bg-orange-200 dark:bg-gray-700"></div>
+    <div class="h-px w-full bg-light-primary-dark dark:bg-dark-secondary"></div>
     <a
       *ngFor="let link of navbar_secondary_links"
       routerLink="{{ link.link }}"
       class="website_link"
     >
       <span
-        class="w-8 h-8 bg-orange-200 dark:bg-gray-100 dark:bg-opacity-10 grid place-content-center rounded-lg duration-300"
-        routerLinkActive="!bg-secondary text-white"
+        class="bg-light-primary-dark dark:bg-dark-secondary"
+        routerLinkActive="!bg-secondary "
       >
         <i
-          class="{{ link.icon }} text-gray-800 dark:text-gray-300"
+          class="{{ link.icon }} text-light-secondary dark:text-dark-secondary"
           routerLinkActive="!text-white"
         ></i>
       </span>
       <span
-        class="text-left text-gray-700 dark:text-gray-500"
-        routerLinkActive="text-gray-900 dark:text-white"
+        class="text-light-secondary dark:text-dark-secondary"
+        routerLinkActive="text-light-primary dark:text-dark-primary"
       >
         {{ link.name | titlecase }}
       </span>
     </a>
   </div>
-  <div class="grid gap-2">
-    <div class="flex justify-center gap-4 mx-auto mt-6 mb-4">
-      <span class="text-gray-700 dark:text-gray-500"
-        ><i class="fas fa-sun"></i
+  <div>
+    <div>
+      <span class="text-light-secondary dark:text-dark-secondary">
+        <i class="fas fa-sun"> </i
       ></span>
       <div
         (click)="enable_dark()"
-        class="w-12 h-6 bg-orange-200 dark:bg-gray-800 rounded-full relative xl:cursor-pointer"
+        class="w-12 h-6 bg-light-primary-dark dark:bg-dark-secondary rounded-full relative xl:cursor-pointer"
       >
         <div
           [ngClass]="{
@@ -89,15 +90,11 @@
           class="h-full w-6 bg-secondary rounded-full absolute top-0"
         ></div>
       </div>
-      <span class="text-gray-700 dark:text-gray-500"
-        ><i class="fas fa-moon"></i
-      ></span>
+      <span class="text-light-secondary dark:text-dark-secondary">
+        <i class="fas fa-moon"></i>
+      </span>
     </div>
-    <a
-      *ngIf="user_details.sub == 'Free'"
-      routerLink="/plans"
-      class="button !rounded-md justify-end text-sm font-semibold"
-    >
+    <a *ngIf="user_details.sub == 'Free'" routerLink="/plans" class="button">
       Upgrade
     </a>
   </div>
