@@ -37,7 +37,7 @@
 }
 
 .pages_toolbar {
-  @apply flex items-center gap-8;
+  @apply flex items-center gap-2;
 }
 
 .pages_toolbar > div {
