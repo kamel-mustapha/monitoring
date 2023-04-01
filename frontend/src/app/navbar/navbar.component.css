@@ -1,30 +1,30 @@
-nav {
-  @apply h-full px-6 pb-6 pt-10 flex flex-col justify-between gap-6 text-center;
+nav.screen {
+  @apply h-full px-6 pb-6 pt-16 flex-col justify-between gap-6 text-center;
 }
 
-nav > a:first-child {
+nav.screen > a:first-child {
   @apply flex items-center justify-center gap-2 cursor-pointer text-secondary text-lg;
 }
 
-nav > div:nth-child(2) {
+nav.screen > div:nth-child(2) {
   @apply flex flex-col gap-10;
 }
 
-nav > div:last-child {
+nav.screen > div:last-child {
   @apply grid gap-2;
 }
 
-nav > div:last-child > div {
+nav.screen > div:last-child > div {
   @apply flex justify-center gap-4 mx-auto mt-6 mb-4;
 }
 
 a.website_link {
-  @apply grid items-center gap-4 text-sm font-medium relative rounded-lg duration-300;
-  grid-template-columns: 20% 80%;
+  @apply flex flex-col items-center items-center gap-1 text-xs font-medium relative rounded-lg duration-300;
+  /* grid-template-columns: 20% 80%; */
 }
 
 a.website_link > span:first-child {
-  @apply w-8 h-8 grid place-content-center rounded-lg duration-300;
+  @apply w-9 h-9 grid place-content-center rounded-xl duration-300 hover:opacity-80;
 }
 
 a.website_link > span:last-child {

@@ -11,13 +11,13 @@
 }
 
 .pages_grid {
-  @apply grid  items-center border-b pl-12 pr-4;
+  @apply grid  items-center border-b xl:pl-12 xl:pr-4;
   grid-template-columns: 10% 20% 20% 15% 35%;
 }
 
 .pages_grid > div,
 .pages_grid > a {
-  @apply overflow-hidden text-ellipsis;
+  @apply overflow-hidden text-ellipsis whitespace-nowrap;
 }
 
 .pages_grid > div:last-child {

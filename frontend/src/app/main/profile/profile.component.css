@@ -20,7 +20,7 @@
 }
 
 .profile-grid > div:last-child {
-  @apply rounded-lg  bg-opacity-10;
+  @apply rounded-lg flex items-center py-4 px-6;
 }
 
 .profile-grid > div:first-child {

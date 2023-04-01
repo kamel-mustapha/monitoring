@@ -1,16 +1,22 @@
 <div id="main_content">
   <app-header title_="pages" icon="fa-file-alt"></app-header>
   <div
-    class="pages_toolbar px-12 py-4 text-light-primary dark:text-dark-primary"
+    class="pages_toolbar px-4 xl:px-6 py-4 text-light-primary dark:text-dark-primary"
   >
     <div class="main_popup_activator">
-      <div class="flex items-center gap-2" (click)="show_creation_window()">
-        <i class="fas fa-plus fa-sm text-green-500"></i>
+      <div
+        class="button flex items-center gap-2"
+        (click)="show_creation_window()"
+      >
+        <i class="fas fa-plus fa-sm"></i>
         Create
       </div>
     </div>
-    <div class="flex items-center gap-2" (click)="delete_user_page()">
-      <i class="fas fa-trash fa-sm text-red-600"></i>
+    <div
+      class="button flex items-center gap-2 !bg-red-500"
+      (click)="delete_user_page()"
+    >
+      <i class="fas fa-trash fa-sm"></i>
       Delete
     </div>
     <!-- <div *ngIf="one_page_selected" class="flex items-center gap-2">
@@ -18,7 +24,9 @@
       Edit
     </div> -->
   </div>
-  <div class="flex flex-col overflow-hidden px-12 py-5">
+  <div
+    class="flex flex-col overflow-hidden xl:px-8 xl:py-5 mx-2 xl:mx-0 mb-8 xl:mb-0 bg-light-secondary dark:bg-dark-secondary xl:!bg-transparent dark:bg-opacity-20 xl:mx-0 px-8 py-2 xl-py-0 xl:px-0 rounded-2xl xl:rounded-none"
+  >
     <div
       class="pages_grid header border-primary dark:border-secondary text-light-primary dark:text-dark-primary"
     >
@@ -41,7 +49,7 @@
       </div>
       <div *ngIf="pages.length == 0"></div>
       <div>Title</div>
-      <div>Total seen</div>
+      <div>Seen</div>
       <div>Monitors</div>
       <div>Link</div>
       <div></div>

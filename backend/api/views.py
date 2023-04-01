@@ -329,11 +329,12 @@ def get_user_details(req):
                                 "sub": req.user.sub,
                                 "monitors": user_monitors,
                                 "max_monitors": user_plan.monitors,
-                                "usage": (user_monitors*100)/user_plan.monitors,
+                                # "usage": (user_monitors*100)/user_plan.monitors,
+                                "usage": 20,
                                 "payment_card": req.user.card_last_digit,
                                 "min_interval": user_plan.interval,
                                 "max_alert_emails": user_plan.alert_emails,
-                                "stripe_public": APIKey.objects.filter(active=True)[0].public
+                                # "stripe_public": APIKey.objects.filter(active=True)[0].public
                         }
                         req.res["status"] = 200
                         req.res["message"] = "success"

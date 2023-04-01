@@ -15,9 +15,9 @@ export class PaymentComponent implements OnInit {
     this.plans_colors = this.shared.plans_colors;
     this.shared.user_data_subject.subscribe((res: any) => {
       this.user_details = res;
-      setTimeout(() => {
-        this.stripe = Stripe(this.user_details.stripe_public);
-      }, 100);
+      // setTimeout(() => {
+      //   this.stripe = Stripe(this.user_details.stripe_public);
+      // }, 100);
     });
   }
   user_details: any;
@@ -42,35 +42,42 @@ export class PaymentComponent implements OnInit {
         { value: '5 minutes between checks', included: true },
         { value: '1 monitor page', included: true },
         { value: '1 alert email', included: true },
-        { value: 'no extra seats', included: false },
+        // { value: 'no extra seats', included: false },
       ],
       show_subscribe: false,
     },
     {
       name: 'pro',
-      price_monthly: 6,
-      price_annually: 5,
+      price_monthly: 5,
+      price_annually: 4,
       features: [
         { value: '50 monitors', included: true },
         { value: '1 minute between checks', included: true },
         { value: '5 monitor pages', included: true },
         { value: '3 alert emails', included: true },
-        { value: 'no extra seats', included: false },
+        // { value: 'no extra seats', included: false },
       ],
       show_subscribe: true,
+      link_monthly: 'https://statuschecksnet.recurly.com/subscribe/pro-monthly',
+      link_annually:
+        'https://statuschecksnet.recurly.com/subscribe/pro-annually',
     },
     {
       name: 'business',
-      price_monthly: 19,
-      price_annually: 15,
+      price_monthly: 10,
+      price_annually: 8,
       features: [
         { value: '100 monitors', included: true },
         { value: '30 seconds between checks', included: true },
         { value: '10 monitor pages', included: true },
         { value: '10 alert emails', included: true },
-        { value: '3 extra seats', included: true },
+        // { value: '3 extra seats', included: true },
       ],
       show_subscribe: true,
+      link_monthly:
+        'https://statuschecksnet.recurly.com/subscribe/business-monthly',
+      link_annually:
+        'https://statuschecksnet.recurly.com/subscribe/business-annually',
     },
   ];
   mount_card() {

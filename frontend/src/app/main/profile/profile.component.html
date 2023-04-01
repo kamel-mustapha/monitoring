@@ -2,9 +2,9 @@
   <app-header title_="profile" icon="fa-user"></app-header>
   <div
     *ngIf="user_details"
-    class="mt-12 !overflow-auto relative px-12 py-2 text-light-primary dark:text-dark-primary"
+    class="mt-12 !overflow-auto relative px-8 py-2 text-light-primary dark:text-dark-primary"
   >
-    <div class="grid gap-16">
+    <div class="grid gap-8">
       <div class="profile-grid">
         <div>Subscription:</div>
         <div class="!shadow-none !bg-transparent !pl-0">
@@ -22,7 +22,7 @@
         <div>Monitors:</div>
         <div class="!shadow-none !bg-transparent !pl-0">
           <div
-            class="relative bg-secondary bg-opacity-20 h-full w-[200px] py-4 rounded-md"
+            class="relative bg-secondary bg-opacity-40 dark:bg-opacity-20 h-[40px] w-[200px] py-4 rounded-md"
           >
             <div
               class="bg-secondary absolute top-0 left-0 h-full"
@@ -33,7 +33,7 @@
               }"
             ></div>
             <span
-              class="text-gray-900 dark:text-gray-200 absolute left-0 right-0 mx-auto w-content text-xs top-1/2 -translate-y-1/2"
+              class="text-gray-100 absolute left-0 right-0 mx-auto w-content text-xs top-1/2 -translate-y-1/2"
             >
               {{ user_details.monitors }} / {{ user_details.max_monitors }}
             </span>
@@ -42,15 +42,19 @@
       </div>
       <div class="profile-grid">
         <div>Username:</div>
-        <div>{{ user_details.username }}</div>
+        <div class="bg-light-primary dark:bg-dark-primary">
+          {{ user_details.username }}
+        </div>
       </div>
       <div class="profile-grid">
         <div>Email:</div>
-        <div>{{ user_details.email }}</div>
+        <div class="bg-light-primary dark:bg-dark-primary">
+          {{ user_details.email }}
+        </div>
       </div>
       <div class="profile-grid">
         <div>API Key:</div>
-        <div class="flex justify-between">
+        <div class="flex justify-between bg-light-primary dark:bg-dark-primary">
           <span>{{ user_details.api_key }}</span>
           <span
             class="flex gap-2 text-secondary items-center xl:cursor-pointer hover:underline font-medium text-sm"
@@ -62,7 +66,7 @@
       </div>
     </div>
     <span
-      class="absolute right-12 top-4 text-red-500 font-medium text-sm xl:cursor-pointer"
+      class="button !bg-red-500 absolute right-8 top-4 text-red-500 font-medium text-sm xl:cursor-pointer flex items-center gap-2 !py-3"
     >
       <i class="fas fa-trash"></i>
       Delete my account

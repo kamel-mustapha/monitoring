@@ -23,13 +23,19 @@ export class HeaderComponent implements OnInit {
     this.shared.user_data_subject.subscribe((res) => {
       this.user_details = res;
     });
+    this.shared.dark_mode_subject.subscribe((res) => {
+      this.dark_mode = res;
+    });
+    if (localStorage.getItem('dark_mode')) {
+      this.shared.enable_dark_mode();
+    }
     this.shared.emit_user_data();
   }
 
   plans_colors: any = {};
   shown_popups: any = {};
   all_notifications_seen = true;
-
+  dark_mode: boolean = false;
   notifications: any[] = [];
   user_details: any;
   show_hide_element(elem: string) {
@@ -74,5 +80,15 @@ export class HeaderComponent implements OnInit {
           this.notifications = [];
         }
       });
+  }
+
+  enable_dark() {
+    if (this.dark_mode) {
+      this.shared.disable_dark_mode();
+      localStorage.removeItem('dark_mode');
+    } else {
+      this.shared.enable_dark_mode();
+      localStorage.setItem('dark_mode', 'true');
+    }
   }
 }

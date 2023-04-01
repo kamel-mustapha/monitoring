@@ -1,5 +1,5 @@
 .events_list {
-  @apply h-full overflow-y-auto overflow-auto mt-4;
+  @apply h-full max-h-96 pr-2  xl:max-h-full overflow-y-auto overflow-auto mt-4;
 }
 
 .events_list div.monitor_element {

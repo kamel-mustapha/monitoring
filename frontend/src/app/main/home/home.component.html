@@ -1,19 +1,22 @@
 <div id="main_content">
   <app-header></app-header>
-  <div class="h-full flex gap-12 px-12 overflow-hidden">
+  <div
+    class="overflow-auto h-full w-full xl:flex xl:gap-12 mt-2 xl:mt-6 xl:mt-0 px-2 pb-8 xl:pb-0 xl:px-6 xl:overflow-hidden"
+  >
     <div
-      class="relative w-full h-full flex flex-col text-light-secondary dark:text-dark-secondary"
+      class="relative w-full h-[500px] xl:h-full flex flex-col text-light-secondary dark:text-dark-secondary xl:!bg-transparent bg-light-secondary dark:bg-dark-secondary dark:bg-opacity-20 xl:mx-0 px-8 py-2 xl-py-0 xl:px-0 rounded-2xl xl:rounded-none"
     >
       <div
-        class="flex justify-between items-center border-b border-primary dark:border-secondary py-4"
+        class="flex justify-between items-center border-b border-primary dark:border-secondary py-2"
       >
         <div class="text-light-primary dark:text-dark-primary">Monitors</div>
         <div class="main_popup_activator">
           <div
             (click)="show_creation_window()"
-            class="main_popup_activator xl:cursor-pointer"
+            class="button main_popup_activator xl:cursor-pointer text-sm gap-2 !px-3 flex items-center"
           >
-            <i class="fas fa-plus text-green-400"></i>
+            <i class="fas fa-plus text-gray-100"></i>
+            <span>Create</span>
           </div>
         </div>
       </div>
@@ -101,12 +104,14 @@
       </div>
     </div>
     <div
-      class="relative w-8/12 flex flex-col text-light-secondary dark:text-dark-secondary"
+      class="relative h-[500px] xl:h-full w-full mt-2 xl:mt-0 xl:w-8/12 flex flex-col text-light-secondary dark:text-dark-secondary bg-light-secondary dark:bg-dark-secondary xl:!bg-transparent dark:bg-opacity-20 xl:mx-0 px-8 py-2 xl-py-0 xl:px-0 rounded-2xl xl:rounded-none"
     >
       <div
-        class="flex justify-between items-center border-b border-primary dark:border-secondary py-4"
+        class="flex w-full justify-between items-center border-b border-primary dark:border-secondary py-2"
       >
-        <div class="text-light-primary dark:text-dark-primary">Events</div>
+        <div class="text-light-primary dark:text-dark-primary py-[6px]">
+          Events
+        </div>
         <!-- <div *ngIf="loading_events" class="w-12 h-12"></div> -->
         <div *ngIf="!loading_events">
           <span *ngIf="monitors.length == 0" class="block">
@@ -258,7 +263,7 @@
         required
       />
     </div>
-    <div class="grid grid-cols-3 gap-2">
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-2">
       <div class="property_box">
         <label>
           Check interval
@@ -310,39 +315,39 @@
           min="5"
         />
       </div>
-      <div class="property_box col-span-3">
-        <label for="">
-          Alert Emails
-          <i
-            title="Emails to alert when failure. Write emails separated by a space. If not set only your account email will be notified."
-            class="fa-solid fa-circle-exclamation fa-sm"
-          ></i>
-        </label>
-        <div
-          class="w-full h-32 p-2 bg-white dark:bg-transparent rounded-md flex flex-col items-center gap-2 overflow-auto border border-primary dark:border-secondary"
+    </div>
+    <div class="property_box col-span-3">
+      <label for="">
+        Alert Emails
+        <i
+          title="Emails to alert when failure. Write emails separated by a space. If not set only your account email will be notified."
+          class="fa-solid fa-circle-exclamation fa-sm"
+        ></i>
+      </label>
+      <div
+        class="w-full h-32 p-2 bg-white dark:bg-transparent rounded-md flex flex-col items-center gap-2 overflow-auto border border-primary dark:border-secondary"
+      >
+        <span
+          *ngFor="let email of alert_emails"
+          class="mx-auto h-content w-full bg-light-primary dark:bg-dark-primary flex items-center gap-2 justify-between px-4 rounded-full"
         >
           <span
-            *ngFor="let email of alert_emails"
-            class="mx-auto h-content w-full bg-light-primary dark:bg-dark-primary flex items-center gap-2 justify-between px-4 rounded-full"
+            class="text-light-secondary dark:text-dark-secondary text-sm font-medium pl-2"
           >
-            <span
-              class="text-light-secondary dark:text-dark-secondary text-sm font-medium pl-2"
-            >
-              {{ email }}
-            </span>
-            <span class="xl:cursor-pointer" (click)="remove_alert_email(email)">
-              <i class="fas fa-times text-red-500"></i>
-            </span>
+            {{ email }}
           </span>
-        </div>
-        <input
-          type="text"
-          name="alert_emails"
-          class="border-primary dark:border-secondary w-full bg-white dark:bg-transparent"
-          (keyup)="alert_email_input($event)"
-          placeholder="example@youremail.com"
-        />
+          <span class="xl:cursor-pointer" (click)="remove_alert_email(email)">
+            <i class="fas fa-times text-red-500"></i>
+          </span>
+        </span>
       </div>
+      <input
+        type="text"
+        name="alert_emails"
+        class="border-primary dark:border-secondary w-full bg-white dark:bg-transparent"
+        (keyup)="alert_email_input($event)"
+        placeholder="example@youremail.com"
+      />
     </div>
     <button type="submit" class="button mt-4 font-semibold rounded-md">
       <i

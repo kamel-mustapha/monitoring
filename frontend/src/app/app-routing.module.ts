@@ -7,7 +7,7 @@ import { SettingsComponent } from './main/settings/settings.component';
 import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'pages', component: PagesComponent },

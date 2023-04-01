@@ -14,20 +14,20 @@ export const animations = [
   trigger('slideInOut', [
     transition('void <=> *', [
       style({ transform: 'translateY(-20%)' }),
-      animate(300),
+      animate(200),
     ]),
   ]),
   trigger('slideRight', [
     transition('void => *', [
       style({ transform: 'translateX(10%)' }),
-      animate(500),
+      animate(200),
     ]),
   ]),
   trigger('slideTop', [
-    transition('void => *', [style({ top: '-400px' }), animate(300)]),
+    transition('void => *', [style({ top: '-400px' }), animate(200)]),
   ]),
   trigger('scaleY', [
-    transition('void <=> *', [style({ transform: 'scaleY(0)' }), animate(300)]),
+    transition('void <=> *', [style({ transform: 'scaleY(0)' }), animate(200)]),
   ]),
   trigger('slideTopShort', [
     transition('void => *', [

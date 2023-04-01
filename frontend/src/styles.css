@@ -115,9 +115,7 @@
 }
 
 .creation_window > div {
-  @apply w-content flex flex-col absolute border border-primary dark:border-secondary bg-light-primary dark:bg-dark-primary left-0 right-0 top-1/2 -translate-y-1/2 mx-auto h-content rounded-lg shadow-xl;
-  max-height: 100%;
-  max-width: 450px;
+  @apply w-content w-[96%] max-w-[450px] max-h-full flex flex-col absolute border border-primary dark:border-secondary bg-light-primary dark:bg-dark-primary left-0 right-0 top-1/2 -translate-y-1/2 mx-auto h-content rounded-lg shadow-xl;
 }
 
 .creation_window > div > .creation_mode {

@@ -9,8 +9,9 @@
         'text-light-seoncdary dark:text-dark-secondary': sub_annually,
         'text-light-primary dark:text-dark-primary font-semibold': !sub_annually
       }"
-      >Monthly</span
     >
+      Monthly
+    </span>
     <div
       class="w-12 h-6 bg-orange-200 bg-light-secondary dark:bg-dark-secondary rounded-full relative xl:cursor-pointer"
     >
@@ -27,13 +28,14 @@
         'text-light-seoncdary dark:text-dark-secondary': !sub_annually,
         'text-light-primary dark:text-dark-primary font-semibold': sub_annually
       }"
-      >Annually</span
     >
+      Annually
+    </span>
   </div>
   <div *ngIf="user_details" class="pricing_container no_overflow overflow-auto">
     <div
       *ngFor="let plan of plans"
-      class="border-primary dark:border-secondary text-light-seoncdary dark:text-dark-secondary"
+      class="text-light-seoncdary dark:text-dark-secondary bg-light-secondary dark:bg-dark-primary border-primary dark:border-secondary"
     >
       <h2
         style="background-color: {{ plans_colors[plan.name] }}"
@@ -75,10 +77,14 @@
       <div class="w-full h-10" *ngIf="!plan.show_subscribe"></div>
       <div *ngIf="plan.show_subscribe">
         <a
-          *ngIf="user_details.sub.toLowerCase() != plan.name"
-          (click)="show_creation_window(plan.name)"
+          *ngIf="
+            user_details.sub.toLowerCase() != plan.name &&
+            user_details.sub.toLowerCase() != 'business'
+          "
           style="background-color: {{ plans_colors[plan.name] }}"
           class="text-gray-100 xl:cursor-pointer block"
+          [href]="sub_annually ? plan.link_annually : plan.link_monthly"
+          target="_blank"
         >
           Subscribe
         </a>

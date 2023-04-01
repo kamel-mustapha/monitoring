@@ -4,6 +4,9 @@
     <span>{{ title_ | titlecase }}</span>
   </h1>
   <div *ngIf="user_details">
+    <a *ngIf="user_details.sub == 'Free'" routerLink="/plans" class="button">
+      Upgrade
+    </a>
     <div class="relative main_popup_activator">
       <span
         class="relative cursor-pointer"
@@ -97,7 +100,7 @@
         </div>
         <div>
           <span class="text-light-primary dark:text-dark-primary text-sm">
-            Current plan:
+            Plan:
           </span>
           <span
             style="background: {{
@@ -122,6 +125,26 @@
         </div>
         <div class="text-light-primary dark:text-dark-primary">
           <a routerLink="">Contact us</a>
+        </div>
+        <div class="flex items-center gap-4 justify-center mb-4">
+          <span class="text-light-secondary dark:text-dark-secondary">
+            <i class="fas fa-sun"> </i
+          ></span>
+          <div
+            (click)="enable_dark()"
+            class="w-12 h-6 bg-light-primary-dark dark:bg-dark-secondary rounded-full relative xl:cursor-pointer"
+          >
+            <div
+              [ngClass]="{
+                'right-0': dark_mode,
+                'left-0': !dark_mode
+              }"
+              class="h-full w-6 bg-secondary rounded-full absolute top-0"
+            ></div>
+          </div>
+          <span class="text-light-secondary dark:text-dark-secondary">
+            <i class="fas fa-moon"></i>
+          </span>
         </div>
       </div>
     </div>
