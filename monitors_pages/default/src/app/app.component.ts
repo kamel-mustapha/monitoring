@@ -86,4 +86,13 @@ export class AppComponent implements OnInit {
       this.loading = false;
     });
   }
+  paused_monitors() {
+    return this.monitors.filter((m: any) => m.paused == true).length;
+  }
+  up_monitors() {
+    return this.monitors.filter((m: any) => m.down == false).length;
+  }
+  down_monitors() {
+    return this.monitors.filter((m: any) => m.down == true).length;
+  }
 }

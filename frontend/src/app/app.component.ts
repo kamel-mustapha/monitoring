@@ -45,6 +45,9 @@ export class AppComponent implements OnInit {
     this.shared.dark_mode_subject.subscribe((res) => {
       this.dark_mode = res;
     });
+    if (localStorage.getItem('dark_mode')) {
+      this.shared.enable_dark_mode();
+    }
   }
   get_api_key(): string {
     let api_key: string = '';

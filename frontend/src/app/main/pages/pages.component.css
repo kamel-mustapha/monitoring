@@ -41,7 +41,7 @@
 }
 
 .pages_toolbar > div {
-  @apply lg:cursor-pointer font-light text-sm;
+  @apply lg:cursor-pointer text-sm;
 }
 #monitor_creation_form {
   @apply flex flex-col gap-1;

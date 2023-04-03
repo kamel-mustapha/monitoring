@@ -13,6 +13,13 @@ module.exports = {
         medium: "repeat(60, 1fr)",
         mobile: "repeat(30, 1fr)",
       },
+      fontFamily: {
+        changa: ["Changa", "sans"],
+        work: ["Work Sans", "arial", "sans"],
+        inter: ["Inter", "arial", "sans"],
+        poppins: ["Poppins", "arial", "sans"],
+        lexend: ["Lexend", "arial", "sans"],
+      },
     },
   },
   plugins: [],

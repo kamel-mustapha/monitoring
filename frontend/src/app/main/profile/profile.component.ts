@@ -18,4 +18,8 @@ export class ProfileComponent implements OnInit {
   }
   plans_colors: any = {};
   user_details: any;
+  copy_key(key: string) {
+    navigator.clipboard.writeText(key);
+    this.shared.show_alert('API key copied to clipboard');
+  }
 }

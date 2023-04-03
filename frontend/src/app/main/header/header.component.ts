@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
       this.dark_mode = res;
     });
     if (localStorage.getItem('dark_mode')) {
-      this.shared.enable_dark_mode();
+      this.dark_mode = true;
     }
     this.shared.emit_user_data();
   }

@@ -14,6 +14,7 @@
     </div>
     <div
       class="button flex items-center gap-2 !bg-red-500"
+      *ngIf="one_page_selected || all_pages_selected"
       (click)="delete_user_page()"
     >
       <i class="fas fa-trash fa-sm"></i>
@@ -90,7 +91,7 @@
         </div>
         <div
           *ngIf="pages.length == 0"
-          class="absolute w-content mx-auto left-0 right-0 top-1/2 -translate-y-1/2 flex flex-col items-center gap-2"
+          class="absolute w-content mx-auto left-0 right-0 top-1/2 -translate-y-1/2 flex flex-col items-center gap-2 text-light-primary dark:text-dark-secondary"
         >
           <i class="fas fa-folder-times fa-xl"></i>
           <span>You have no page</span>
@@ -215,7 +216,7 @@
       <button
         type="button"
         (click)="submit_page(f1, 0)"
-        class="w-full button !bg-gray-400 dark:!bg-gray-800"
+        class="w-full button !bg-gray-800"
       >
         Previous
       </button>
@@ -317,7 +318,7 @@
       <button
         type="button"
         (click)="submit_page(f2, 1)"
-        class="w-full button !bg-gray-400 dark:!bg-gray-800"
+        class="w-full button !bg-gray-800"
       >
         Previous
       </button>

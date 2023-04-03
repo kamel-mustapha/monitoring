@@ -57,6 +57,7 @@
         <div class="flex justify-between bg-light-primary dark:bg-dark-primary">
           <span>{{ user_details.api_key }}</span>
           <span
+            (click)="copy_key(user_details.api_key)"
             class="flex gap-2 text-secondary items-center xl:cursor-pointer hover:underline font-medium text-sm"
           >
             <i class="fas fa-copy"></i>

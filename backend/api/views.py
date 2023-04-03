@@ -284,7 +284,8 @@ def monitor_page_stats(req):
                                 "responses": [
                                         response
                                 ],
-                                "down": monitor.down
+                                "down": monitor.down,
+                                "running": monitor.running
                         }
                         # add old stats
                         event_stats = EventStats.objects.filter(monitor=monitor).order_by("-date")
@@ -308,7 +309,9 @@ def monitor_page_stats(req):
                         # # rounding results
                         round_monitor_results(data)
                         # calculating percentage of responses for frontend
-                        calculate_response_percentage(data["responses"])
+                        try:
+                                calculate_response_percentage(data["responses"])
+                        except:pass
                         # reversing data for display
                         data["responses"].reverse()
                         data["uptimes"].reverse()

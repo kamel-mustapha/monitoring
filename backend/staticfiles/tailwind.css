@@ -1612,8 +1612,8 @@ form.main_form button:hover {
 }
 
 @media (min-width: 1024px) {
-  .lg\:mb-16 {
-    margin-bottom: 4rem;
+  .lg\:mb-8 {
+    margin-bottom: 2rem;
   }
 
   .lg\:mt-0 {
@@ -1628,12 +1628,12 @@ form.main_form button:hover {
     display: grid;
   }
 
-  .lg\:h-\[700px\] {
-    height: 700px;
+  .lg\:h-\[900px\] {
+    height: 900px;
   }
 
-  .lg\:h-\[550px\] {
-    height: 550px;
+  .lg\:h-\[700px\] {
+    height: 700px;
   }
 
   .lg\:w-\[600px\] {
@@ -1642,6 +1642,10 @@ form.main_form button:hover {
 
   .lg\:w-1\/2 {
     width: 50%;
+  }
+
+  .lg\:w-9\/12 {
+    width: 75%;
   }
 
   .lg\:w-7\/12 {

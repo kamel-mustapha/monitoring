@@ -221,6 +221,8 @@ export class PagesComponent implements OnInit {
           if (res.status && res.status == 200) {
             this.refresh_user_pages();
             this.shared.show_alert('Page deleted successfully');
+            this.all_pages_selected = false;
+            this.one_page_selected = false;
           }
         });
       });

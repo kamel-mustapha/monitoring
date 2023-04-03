@@ -1,14 +1,15 @@
 {% extends 'offline/root.html' %} {% load static %} {% block content %}
 <div id="hero" style="min-height: calc(100vh - 104px)" class="px-6 lg:px-12 2xl:px-0 grid xl:place-content-center xl:-translate-y-8">
   <div class="2xl:w-7/12 mx-auto text-center grid gap-8 py-16 xl:py-0">
-    <h1 class="text-5xl xl:text-7xl font-lexend font-medium leading-[60px] xl:leading-[85px]">
-      Monitoring <span class="text-secondary">made simple</span> for small businesses.
-    </h1>
-    <p class="w-10/12 mx-auto leading-8 text-lg">
-      Statuscheks is a monitoring service. You can create one or multiple monitors and get notified when something goes wrong.
+    <h1 class="text-5xl xl:text-7xl font-lexend font-medium leading-[60px] xl:leading-[85px]">Monitoring <span class="text-secondary">made simple</span> for businesses.</h1>
+    <p class="mx-auto leading-8 text-lg">
+      Are you tired of constantly worrying about website downtime or server issues? Our monitoring service has got you covered. With real-time monitoring, instant alerts, and detailed reports, you can
+      stay on top of potential problems before they turn into major issues.
     </p>
     <div class="flex flex-col xl:flex-row gap-6 items-center mx-auto w-content">
-      <a href="{% url 'website:register' %}" class="!bg-gray-900 main whitespace-nowrap">Get 1 month free</a>
+      {% if not user.is_authenticated %}
+      <a href="{% url 'website:register' %}" class="!bg-gray-900 main whitespace-nowrap">Register for free</a>
+      {% endif %}
       <a href="" class="bg-white shadow-md px-4 py-2 rounded-full flex gap-2 items-center hover:shadow-lg w-full justify-center whitespace-nowrap">
         <i class="fas fa-play text-secondary fa-xs"></i>
         Watch a video
@@ -18,9 +19,9 @@
 </div>
 <div id="landing_2" class="py-36 px-6 lg:px-16 grid gap-16">
   <div class="text-gray-800 text-center grid gap-4 xl:w-10/12 mx-auto">
-    <h2 class="text-5xl font-lexend font-semibold">All your services monitored in a single place.</h2>
+    <h2 class="text-5xl font-lexend font-semibold">The all-in-one solution for keeping your website or API running smoothly.</h2>
   </div>
-  <img class="mx-auto rounded-md xl:rounded-xl max-w-full" width="1300" src="{% static 'dashboard_dark.jpg' %}" alt="" />
+  <img class="mx-auto rounded-md xl:rounded-3xl max-w-full" width="1300" src="{% static 'dashboard.jpg' %}" alt="" />
 </div>
 <!-- prettier-ignore -->
 {% include 'offline/services.html' %} {% include 'offline/pricing.html' %} {% include 'offline/faq.html' %} {% include 'offline/contact.html' %} {%endblock %}

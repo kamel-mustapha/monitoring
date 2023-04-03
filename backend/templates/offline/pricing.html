@@ -1,6 +1,10 @@
 <div id="pricing" class="px-6 lg:px-16 py-36 bg_gredient">
   <div x-data="{sub_annually: false}" class="max-w-1400 mx-auto">
-    <h2 class="text-center text-5xl text-gray-800 pt-8 xl:pt-0 lg:mb-16 font-semibold font-lexend">Simple pricing for everyone</h2>
+    <h2 class="text-center text-5xl text-gray-800 pt-8 xl:pt-0 lg:mb-8 font-semibold font-lexend">Simple pricing for everyone</h2>
+    <p class="mb-12 lg:w-9/12 mx-auto text-center text-lg">
+      Whether you're a small business owner, an IT professional, or just someone who wants to ensure their online presence is always up and running, our monitoring service is the solution you've been
+      looking for. Sign up today and experience the peace of mind that comes with knowing your systems are in safe hands.
+    </p>
     <div @click="sub_annually=!sub_annually" class="flex justify-center gap-4 mt-16 lg:mt-0 mx-auto mb-16" (click)="change_sub()">
       <span :class="!sub_annually? 'text-gray-700': 'text-gray-900 font-semibold'">Monthly</span>
       <div class="w-12 h-6 bg-gray-100 rounded-full relative xl:cursor-pointer">
@@ -19,33 +23,30 @@
             { value: '5 minutes between checks', included: true },
             { value: '1 monitor page', included: true },
             { value: '1 alert email', included: true },
-            { value: 'no extra seats', included: false },
           ],
           show_subscribe: false,
         },
         {
           name: 'pro',
-          price_monthly: 6,
-          price_annually: 5,
+          price_monthly: 5,
+          price_annually: 4,
           features: [
             { value: '50 monitors', included: true },
             { value: '1 minute between checks', included: true },
             { value: '5 monitor pages', included: true },
             { value: '3 alert emails', included: true },
-            { value: 'no extra seats', included: false },
           ],
           show_subscribe: true,
         },
         {
           name: 'business',
-          price_monthly: 19,
-          price_annually: 15,
+          price_monthly: 10,
+          price_annually: 8,
           features: [
             { value: '100 monitors', included: true },
             { value: '30 seconds between checks', included: true },
             { value: '10 monitor pages', included: true },
             { value: '10 alert emails', included: true },
-            { value: '3 extra seats', included: true },
           ],
           show_subscribe: true,
         },
