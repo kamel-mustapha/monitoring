@@ -1,11 +1,9 @@
 <div id="main_content">
   <app-header title_="pages" icon="fa-file-alt"></app-header>
-  <div
-    class="pages_toolbar px-4 xl:px-6 py-4 text-light-primary dark:text-dark-primary"
-  >
-    <div class="main_popup_activator">
+  <div class="pages_toolbar text-light-primary dark:text-dark-primary">
+    <div>
       <div
-        class="button flex items-center gap-2"
+        class="button flex items-center gap-2 !rounded-full !px-4"
         (click)="show_creation_window()"
       >
         <i class="fas fa-plus fa-sm"></i>
@@ -13,20 +11,23 @@
       </div>
     </div>
     <div
-      class="button flex items-center gap-2 !bg-red-500"
+      class="button flex items-center gap-2 !bg-red-500 !rounded-full !px-4"
       *ngIf="one_page_selected || all_pages_selected"
       (click)="delete_user_page()"
     >
       <i class="fas fa-trash fa-sm"></i>
       Delete
     </div>
-    <!-- <div *ngIf="one_page_selected" class="flex items-center gap-2">
-      <i class="fas fa-pen fa-sm text-blue-600"></i>
+    <!-- <div
+      *ngIf="one_page_selected"
+      class="button !bg-blue-600 flex items-center gap-2 !rounded-full !px-4"
+    >
+      <i class="fas fa-pen fa-sm"></i>
       Edit
     </div> -->
   </div>
   <div
-    class="flex flex-col overflow-hidden xl:px-8 xl:py-5 mx-2 xl:mx-0 mb-8 xl:mb-0 bg-light-secondary dark:bg-dark-secondary xl:!bg-transparent dark:bg-opacity-20 xl:mx-0 px-8 py-2 xl-py-0 xl:px-0 rounded-2xl xl:rounded-none"
+    class="flex flex-col overflow-hidden xl:px-2 xl:py-5 mx-2 xl:mx-0 mb-8 xl:mb-0 bg-light-secondary dark:bg-dark-secondary xl:!bg-transparent dark:bg-opacity-20 xl:mx-0 px-8 py-2 xl-py-0 xl:px-0 rounded-2xl xl:rounded-none"
   >
     <div
       class="pages_grid header border-primary dark:border-secondary text-light-primary dark:text-dark-primary"
@@ -91,10 +92,39 @@
         </div>
         <div
           *ngIf="pages.length == 0"
-          class="absolute w-content mx-auto left-0 right-0 top-1/2 -translate-y-1/2 flex flex-col items-center gap-2 text-light-primary dark:text-dark-secondary"
+          class="absolute w-content mx-auto left-0 right-0 top-1/2 -translate-y-1/2 flex flex-col items-center gap-2 text-light-secondary dark:text-dark-secondary"
         >
-          <i class="fas fa-folder-times fa-xl"></i>
-          <span>You have no page</span>
+          <svg
+            width="80px"
+            height="80px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.1"
+              d="M4.36986 4.72339C3.30332 5.44763 3 6.82386 3 9.31198V14.688C3 19.0624 3.93757 20 8.312 20H15.688C17.2504 20 18.3744 19.8804 19.1738 19.5273L4.36986 4.72339Z"
+            />
+            <path
+              d="M4.5 4.6405C3.32778 5.34053 3 6.72548 3 9.31199V14.688C3 19.0624 3.93757 20 8.312 20H15.688C17.4759 20 18.6897 19.8434 19.5 19.3595"
+              class="stroke-light-secondary dark:stroke-dark-secondary"
+              stroke-width="2"
+            />
+            <path
+              d="M8.98389 4H9.92952C10.5982 4 11.2227 4.3342 11.5936 4.8906L12.4062 6.1094C12.7771 6.6658 13.4016 7 14.0703 7C15.9646 7 17.8144 7 19.1257 7C20.1806 7 21.0127 7.82095 21.0028 8.8758C21.0011 9.05376 20.9999 9.20638 20.9999 9.312V14.688C20.9999 15.1651 20.9887 15.6014 20.9632 16"
+              class="stroke-light-secondary dark:stroke-dark-secondary"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M3 3L21 21"
+              class="stroke-light-secondary dark:stroke-dark-secondary"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>No page found</span>
         </div>
       </div>
       <div *ngIf="loading_pages" class="h-full overflow-hidden py-4">
@@ -114,7 +144,9 @@
     #f="ngForm"
     (ngSubmit)="submit_page(f, 1)"
   >
-    <h1 class="text-light-primary dark:text-dark-primary text-center">
+    <h1
+      class="text-light-primary dark:text-dark-primary text-center font-medium text-lg"
+    >
       Select page
     </h1>
     <div *ngIf="pages_marketplace.length > 0" class="flex flex-col gap-2 mt-4">
@@ -170,7 +202,9 @@
     (ngSubmit)="submit_page(f1, 2)"
     class="flex flex-col h-full justify-between"
   >
-    <h1 class="text-light-primary dark:text-dark-primary text-center px-16">
+    <h1
+      class="text-light-primary dark:text-dark-primary text-center px-16 font-medium text-lg"
+    >
       Associate monitors
     </h1>
     <div
@@ -216,7 +250,7 @@
       <button
         type="button"
         (click)="submit_page(f1, 0)"
-        class="w-full button !bg-gray-800"
+        class="w-full button !bg-neutral-700"
       >
         Previous
       </button>
@@ -230,8 +264,10 @@
     id="monitor_creation_form"
     class="flex flex-col h-full justify-between text-center text-light-secondary dark:text-dark-secondary"
   >
-    <h1 class="text-light-primary dark:text-dark-primary">Add details</h1>
-    <div class="property_box w-96 max-w-full mt-4">
+    <h1 class="text-light-primary dark:text-dark-primary font-medium text-lg">
+      Add details
+    </h1>
+    <div class="property_box">
       <label>
         Friendly name
         <i
@@ -253,11 +289,14 @@
         class="bg-white dark:bg-transparent"
       />
     </div>
+    <div *ngIf="monitor_form_validation['name']" class="input_error">
+      Please add a valid name
+    </div>
     <div class="property_box">
       <label>
         Title
         <i
-          title="The http link of your application."
+          title="The title of your page."
           class="fa-solid fa-circle-exclamation fa-sm"
         ></i>
       </label>
@@ -274,6 +313,9 @@
         required
         class="bg-white dark:bg-transparent"
       />
+    </div>
+    <div *ngIf="monitor_form_validation['title']" class="input_error">
+      Please add a title to your page
     </div>
     <div class="property_box">
       <label>
@@ -297,11 +339,14 @@
         class="bg-white dark:bg-transparent"
       />
     </div>
+    <div *ngIf="monitor_form_validation['link']" class="input_error">
+      Please add a link to your page
+    </div>
     <div class="property_box">
       <label>
         Icon
         <i
-          title="The http link of your application."
+          title="The logo of your application."
           class="fa-solid fa-circle-exclamation fa-sm"
         ></i>
       </label>
@@ -318,7 +363,7 @@
       <button
         type="button"
         (click)="submit_page(f2, 1)"
-        class="w-full button !bg-gray-800"
+        class="w-full button !bg-neutral-700"
       >
         Previous
       </button>

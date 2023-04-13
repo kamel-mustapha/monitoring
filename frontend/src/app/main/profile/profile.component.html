@@ -2,7 +2,7 @@
   <app-header title_="profile" icon="fa-user"></app-header>
   <div
     *ngIf="user_details"
-    class="mt-12 !overflow-auto relative px-8 py-2 text-light-primary dark:text-dark-primary"
+    class="mt-12 !overflow-auto relative px-4 py-2 text-light-primary dark:text-dark-primary"
   >
     <div class="grid gap-8">
       <div class="profile-grid">
@@ -22,7 +22,7 @@
         <div>Monitors:</div>
         <div class="!shadow-none !bg-transparent !pl-0">
           <div
-            class="relative bg-secondary bg-opacity-40 dark:bg-opacity-20 h-[40px] w-[200px] py-4 rounded-md"
+            class="relative bg-secondary bg-opacity-70 dark:bg-opacity-20 h-[40px] w-[200px] py-4 rounded-md"
           >
             <div
               class="bg-secondary absolute top-0 left-0 h-full"
@@ -66,11 +66,11 @@
         </div>
       </div>
     </div>
-    <span
+    <!-- <span
       class="button !bg-red-500 absolute right-8 top-4 text-red-500 font-medium text-sm xl:cursor-pointer flex items-center gap-2 !py-3"
     >
       <i class="fas fa-trash"></i>
       Delete my account
-    </span>
+    </span> -->
   </div>
 </div>

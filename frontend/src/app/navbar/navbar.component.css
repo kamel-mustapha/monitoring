@@ -1,5 +1,5 @@
 nav.screen {
-  @apply h-full px-6 pb-6 pt-16 flex-col justify-between gap-6 text-center;
+  @apply hidden xl:flex h-full px-6 pb-6 pt-16 flex-col justify-between gap-6 text-center;
 }
 
 nav.screen > a:first-child {
@@ -29,4 +29,8 @@ a.website_link > span:first-child {
 
 a.website_link > span:last-child {
   @apply text-left;
+}
+
+nav.mobile {
+  @apply xl:hidden px-8 pt-3 pb-1 shadow-sm flex justify-between sm:justify-center gap-12;
 }

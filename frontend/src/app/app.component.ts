@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
       this.server.set_api(this.get_api_key(), '/');
     }
 
-    // this.router.navigate(['home']);
     this.shared.show_popup_subject.subscribe((value) => {
       this.is_alert = value;
     });
@@ -33,14 +32,6 @@ export class AppComponent implements OnInit {
       this.popup_alert = value;
     });
 
-    // document.addEventListener('click', (event) => {
-    //   let popup_activator: any[] = Array.from(
-    //     document.querySelectorAll(`.main_popup_activator *`)
-    //   );
-    //   if (!popup_activator.includes(event.target)) {
-    //     this.shared.reset_all_popups();
-    //   }
-    // });
     this.shared.refresh_user_data();
     this.shared.dark_mode_subject.subscribe((res) => {
       this.dark_mode = res;

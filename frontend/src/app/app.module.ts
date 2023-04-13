@@ -8,7 +8,6 @@ import { MainComponent } from './main/main.component';
 import { HomeComponent } from './main/home/home.component';
 
 import { ProfileComponent } from './main/profile/profile.component';
-import { SettingsComponent } from './main/settings/settings.component';
 import { HeaderComponent } from './main/header/header.component';
 import { PagesComponent } from './main/pages/pages.component';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +25,6 @@ import { PaymentComponent } from './payment/payment.component';
     HomeComponent,
 
     ProfileComponent,
-    SettingsComponent,
     HeaderComponent,
     PagesComponent,
     PopupComponent,

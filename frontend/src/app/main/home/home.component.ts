@@ -14,23 +14,19 @@ export class HomeComponent implements OnInit {
   constructor(private shared: SharedService, private server: ServerService) {}
 
   ngOnInit(): void {
-    this.get_monitors();
+    this.get_monitors(true);
     this.shared.shown_popups_subject.subscribe((value) => {
       this.shown_popups = value;
     });
     this.shared.user_data_subject.subscribe((res: any) => {
       this.user_data = res;
-      this.build_monitor_creation_default();
     });
     this.shared.user_data_subject.subscribe((res: any) => {
       this.user_details = res;
-      setTimeout(() => {
-        this.monitor_creation_defaults.interval =
-          this.user_details.min_interval;
-      }, 100);
     });
   }
 
+  monitor_edit_loading: any = {};
   user_details: any;
   monitors: any[] = [];
   monitor_to_edit: any;
@@ -53,30 +49,36 @@ export class HomeComponent implements OnInit {
   };
 
   build_monitor_creation_default() {
+    this.create_word = 'Create';
     this.monitor_creation_defaults = {
       name: '',
       link: '',
-      interval: 60,
+      interval: this.user_details.min_interval,
       success: 200,
       timeout: 30,
     };
     this.alert_emails = [this.user_data.email];
+    for (let i in this.monitor_form_validation) {
+      this.monitor_form_validation[i] = false;
+    }
   }
-  get_monitors() {
+  get_monitors(init = false) {
     this.server.get_monitors().subscribe((value) => {
       if (value.monitors) {
         this.monitors = value.monitors;
       }
-
-      setTimeout(() => {
-        this.loading_monitors = false;
+      if (init) {
+        try {
+          this.select_monitor(this.monitors[0].id);
+        } catch (e) {}
+      } else {
         this.loading_events = false;
-      }, 500);
+      }
+      this.loading_monitors = false;
     });
   }
 
   show_creation_window(edit = false, monitor_id = null) {
-    this.shared.show_hide_element('monitor_creation');
     if (edit) {
       this.create_word = 'Edit';
       this.monitor_to_edit = this.monitors.find(
@@ -91,7 +93,10 @@ export class HomeComponent implements OnInit {
       this.monitor_creation_defaults.success =
         this.monitor_to_edit.success_status;
       this.monitor_creation_defaults.timeout = this.monitor_to_edit.timeout;
+    } else {
+      this.build_monitor_creation_default();
     }
+    this.shared.show_hide_element('monitor_creation');
   }
 
   show_hide_element(elem: string) {
@@ -110,41 +115,63 @@ export class HomeComponent implements OnInit {
         this.events = res.events;
         this.selected_monitor = monitor.name;
       }
-      setTimeout(() => {
-        this.loading_events = false;
-        this.monitor_selected = true;
-      }, 500);
-      this.show_hide_element('select_events');
+      this.loading_events = false;
+      this.monitor_selected = true;
+      this.shared.reset_all_popups();
     });
   }
 
   delete_monitor(id: number) {
-    this.server.delete_monitor({ body: { monitor: id } }).subscribe((res) => {
-      if (res && res.status && res.status == 200) {
-        this.shared.show_alert('Monitor deleted successfully');
-        this.monitors = this.monitors.filter((monitor) => monitor.id != id);
-        this.monitor_selected = false;
-        this.selected_monitor = 'Select a monitor';
+    this.monitor_edit_loading[id] = true;
+    this.server.delete_monitor({ body: { monitor: id } }).subscribe(
+      (res) => {
+        if (res && res.status && res.status == 200) {
+          this.monitor_edit_loading = {};
+          this.shared.reset_all_popups();
+          this.shared.show_alert('Monitor deleted successfully');
+          this.monitors = this.monitors.filter((monitor) => monitor.id != id);
+          this.monitor_selected = false;
+          this.selected_monitor = 'Select a monitor';
+        }
+      },
+      (error) => {
+        this.shared.show_alert(error.statusText, 'alert');
       }
-    });
+    );
   }
   pause_monitor(id: number) {
-    this.server.pause_monitor(id).subscribe((res) => {
-      if (res && res.status && res.status == 200) {
-        this.shared.show_alert('Monitor paused successfully');
+    this.monitor_edit_loading[id] = true;
+    this.server.pause_monitor(id).subscribe(
+      (res) => {
+        if (res && res.status && res.status == 200) {
+          this.monitor_edit_loading = {};
+          this.shared.reset_all_popups();
+          this.shared.show_alert('Monitor paused successfully');
+        }
+        this.get_monitors();
+      },
+      (error) => {
+        this.shared.show_alert(error.statusText, 'alert');
       }
-      this.get_monitors();
-    });
+    );
   }
   start_monitor(id: number) {
-    this.server.start_monitor(id).subscribe((res) => {
-      if (res && res.status && res.status == 200) {
-        this.shared.show_alert('Monitor started successfully');
-        this.get_monitors();
-      } else if (res.message) {
-        this.shared.show_alert(res.message, 'alert');
+    this.monitor_edit_loading[id] = true;
+    this.server.start_monitor(id).subscribe(
+      (res) => {
+        if (res && res.status && res.status == 200) {
+          this.monitor_edit_loading = {};
+          this.shared.reset_all_popups();
+          this.shared.show_alert('Monitor started successfully');
+          this.get_monitors();
+        } else if (res.message) {
+          this.shared.show_alert(res.message, 'alert');
+        }
+      },
+      (error) => {
+        this.shared.show_alert(error.statusText, 'alert');
       }
-    });
+    );
   }
 
   reset_validation() {

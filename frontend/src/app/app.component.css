@@ -1,3 +1,11 @@
+main {
+  @apply flex flex-col-reverse xl:flex-row h-screen overflow-hidden;
+}
+
+main > app-main {
+  @apply w-full h-full overflow-auto xl:overflow-hidden xl:pt-6 xl:pb-6 xl:pr-6;
+}
+
 .alert_popup {
   @apply w-content px-4 py-2 fixed z-10 top-2 left-0 right-0 mx-auto flex items-center gap-4 bg-opacity-90 rounded-lg border  shadow-sm;
   max-width: 500px;

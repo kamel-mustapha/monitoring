@@ -27,6 +27,7 @@ module.exports = {
       borderColor: {
         primary: "#e5e7eb", //gray-100
         secondary: "#1f2937", //gray-800
+        button: "#ff8906",
       },
       width: {
         content: "fit-content",

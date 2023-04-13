@@ -1,7 +1,7 @@
 <div id="main_content">
   <app-header></app-header>
   <div
-    class="overflow-auto h-full w-full xl:flex xl:gap-12 mt-2 xl:mt-6 xl:mt-0 px-2 pb-8 xl:pb-0 xl:px-6 xl:overflow-hidden"
+    class="overflow-auto h-full w-full xl:flex xl:gap-12 mt-2 xl:mt-6 xl:mt-0 px-2 pb-8 xl:pb-0 xl:px-2 xl:overflow-hidden"
   >
     <div
       class="relative w-full h-[500px] xl:h-full flex flex-col text-light-secondary dark:text-dark-secondary xl:!bg-transparent bg-light-secondary dark:bg-dark-secondary dark:bg-opacity-20 xl:mx-0 px-8 py-2 xl-py-0 xl:px-0 rounded-2xl xl:rounded-none"
@@ -10,14 +10,12 @@
         class="flex justify-between items-center border-b border-primary dark:border-secondary py-2"
       >
         <div class="text-light-primary dark:text-dark-primary">Monitors</div>
-        <div class="main_popup_activator">
-          <div
-            (click)="show_creation_window()"
-            class="button main_popup_activator xl:cursor-pointer text-sm gap-2 !px-3 flex items-center"
-          >
-            <i class="fas fa-plus text-gray-100"></i>
-            <span>Create</span>
-          </div>
+        <div
+          (click)="show_creation_window()"
+          class="button xl:cursor-pointer !rounded-full text-sm gap-2 !px-4 flex items-center"
+        >
+          <i class="fas fa-plus text-gray-100"></i>
+          <span>Create</span>
         </div>
       </div>
       <div *ngIf="loading_monitors" class="events_list">
@@ -36,7 +34,38 @@
           *ngIf="monitors.length == 0"
           class="w-content absolute top-1/2 -translate-y-1/2 left-0 right-0 mx-auto"
         >
-          No monitor yet.
+          <svg
+            width="50px"
+            height="50px"
+            viewBox="0 0 24 24"
+            fill="none"
+            class="mx-auto"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.1"
+              d="M4.36986 4.72339C3.30332 5.44763 3 6.82386 3 9.31198V14.688C3 19.0624 3.93757 20 8.312 20H15.688C17.2504 20 18.3744 19.8804 19.1738 19.5273L4.36986 4.72339Z"
+            />
+            <path
+              d="M4.5 4.6405C3.32778 5.34053 3 6.72548 3 9.31199V14.688C3 19.0624 3.93757 20 8.312 20H15.688C17.4759 20 18.6897 19.8434 19.5 19.3595"
+              class="stroke-light-secondary dark:stroke-dark-secondary"
+              stroke-width="2"
+            />
+            <path
+              d="M8.98389 4H9.92952C10.5982 4 11.2227 4.3342 11.5936 4.8906L12.4062 6.1094C12.7771 6.6658 13.4016 7 14.0703 7C15.9646 7 17.8144 7 19.1257 7C20.1806 7 21.0127 7.82095 21.0028 8.8758C21.0011 9.05376 20.9999 9.20638 20.9999 9.312V14.688C20.9999 15.1651 20.9887 15.6014 20.9632 16"
+              class="stroke-light-secondary dark:stroke-dark-secondary"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M3 3L21 21"
+              class="stroke-light-secondary dark:stroke-dark-secondary"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>You have no monitor</span>
         </div>
         <div *ngIf="monitors.length > 0">
           <div
@@ -61,12 +90,18 @@
               <span class="w-2 h-2 bg-orange-400 rounded-full"></span>
               Paused
             </div>
-            <div class="relative main_popup_activator">
+            <div class="relative">
               <i
+                *ngIf="!monitor_edit_loading[monitor.id]"
                 (click)="show_campaign_edit(monitor.id)"
                 class="fas fa-ellipsis-h xl:cursor-pointer"
               >
               </i>
+              <i
+                *ngIf="monitor_edit_loading[monitor.id]"
+                class="fa-solid fa-cog fa-spin fa-spin text-light-secondary dark:text-dark-secondary"
+              ></i>
+
               <div
                 @slideTopShort
                 *ngIf="shown_popups['campaign_edit_element_' + monitor.id]"
@@ -87,11 +122,11 @@
                   Start
                 </div>
                 <div
-                  class="main_popup_activator"
+                  class="testing_app"
                   (click)="show_creation_window(true, monitor.id)"
                 >
                   <i class="fa-solid fa-pen-to-square text-blue-500 fa-sm"></i>
-                  Edit
+                  <span>Edit</span>
                 </div>
                 <div (click)="delete_monitor(monitor.id)">
                   <i class="fa-solid fa-trash-can text-red-500 fa-sm"></i>
@@ -115,12 +150,9 @@
         <!-- <div *ngIf="loading_events" class="w-12 h-12"></div> -->
         <div *ngIf="!loading_events">
           <span *ngIf="monitors.length == 0" class="block">
-            You have no monitor
+            <span>No monitor found</span>
           </span>
-          <div
-            *ngIf="monitors.length > 0"
-            class="monitor_events_select main_popup_activator"
-          >
+          <div *ngIf="monitors.length > 0" class="monitor_events_select">
             <div
               (click)="show_hide_element('select_events')"
               class="flex justify-between"
@@ -170,16 +202,93 @@
           <span *ngIf="monitors.length > 0"
             >Select a monitor to see the events.</span
           >
-          <span *ngIf="monitors.length == 0">You have no monitors yet.</span>
+          <span *ngIf="monitors.length == 0">
+            <svg
+              width="50px"
+              height="50px"
+              viewBox="0 0 24 24"
+              class="mx-auto"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                opacity="0.1"
+                d="M4.36986 4.72339C3.30332 5.44763 3 6.82386 3 9.31198V14.688C3 19.0624 3.93757 20 8.312 20H15.688C17.2504 20 18.3744 19.8804 19.1738 19.5273L4.36986 4.72339Z"
+              />
+              <path
+                d="M4.5 4.6405C3.32778 5.34053 3 6.72548 3 9.31199V14.688C3 19.0624 3.93757 20 8.312 20H15.688C17.4759 20 18.6897 19.8434 19.5 19.3595"
+                class="stroke-light-secondary dark:stroke-dark-secondary"
+                stroke-width="2"
+              />
+              <path
+                d="M8.98389 4H9.92952C10.5982 4 11.2227 4.3342 11.5936 4.8906L12.4062 6.1094C12.7771 6.6658 13.4016 7 14.0703 7C15.9646 7 17.8144 7 19.1257 7C20.1806 7 21.0127 7.82095 21.0028 8.8758C21.0011 9.05376 20.9999 9.20638 20.9999 9.312V14.688C20.9999 15.1651 20.9887 15.6014 20.9632 16"
+                class="stroke-light-secondary dark:stroke-dark-secondary"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M3 3L21 21"
+                class="stroke-light-secondary dark:stroke-dark-secondary"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span>No monitor yet</span>
+          </span>
         </div>
         <div *ngIf="monitor_selected">
           <div
             *ngIf="events.length == 0"
             class="w-content absolute top-1/2 -translate-y-1/2 left-0 right-0 mx-auto"
           >
-            No events found for this monitor
+            <svg
+              width="50px"
+              height="50px"
+              viewBox="0 0 24 24"
+              fill="none"
+              class="mx-auto"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                opacity="0.1"
+                d="M4.36986 4.72339C3.30332 5.44763 3 6.82386 3 9.31198V14.688C3 19.0624 3.93757 20 8.312 20H15.688C17.2504 20 18.3744 19.8804 19.1738 19.5273L4.36986 4.72339Z"
+              />
+              <path
+                d="M4.5 4.6405C3.32778 5.34053 3 6.72548 3 9.31199V14.688C3 19.0624 3.93757 20 8.312 20H15.688C17.4759 20 18.6897 19.8434 19.5 19.3595"
+                class="stroke-light-secondary dark:stroke-dark-secondary"
+                stroke-width="2"
+              />
+              <path
+                d="M8.98389 4H9.92952C10.5982 4 11.2227 4.3342 11.5936 4.8906L12.4062 6.1094C12.7771 6.6658 13.4016 7 14.0703 7C15.9646 7 17.8144 7 19.1257 7C20.1806 7 21.0127 7.82095 21.0028 8.8758C21.0011 9.05376 20.9999 9.20638 20.9999 9.312V14.688C20.9999 15.1651 20.9887 15.6014 20.9632 16"
+                class="stroke-light-secondary dark:stroke-dark-secondary"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M3 3L21 21"
+                class="stroke-light-secondary dark:stroke-dark-secondary"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span>No event yet for this monitor</span>
           </div>
           <div *ngIf="events.length > 0">
+            <!-- filter list -->
+            <div class="flex items-center justify-between my-4 text-sm">
+              <div class="flex items-center gap-6">
+                <span class="font-semibold">All events</span>
+                <span class="opacity-70">Incidents</span>
+              </div>
+              <div
+                class="button flex items-center gap-2 !bg-transparent border border-button !px-4 !py-1 !rounded-full !text-secondary"
+              >
+                <i class="fas fa-plus"></i>
+                Filters
+              </div>
+            </div>
             <div
               *ngFor="let event of events"
               class="monitor_element event_grid text-sm capitalize border-primary dark:border-secondary"
@@ -217,7 +326,7 @@
     class="text-light-secondary dark:text-dark-secondary text-center"
   >
     <h1 class="text-lg font-medium text-light-primary dark:text-dark-primary">
-      Create Monitor
+      {{ create_word }} Monitor
     </h1>
     <div class="property_box">
       <label>
@@ -241,6 +350,9 @@
         required
       />
     </div>
+    <div *ngIf="monitor_form_validation['name']" class="input_error">
+      Please add a valid name
+    </div>
     <div class="property_box">
       <label>
         Link
@@ -262,6 +374,9 @@
         [ngModel]="monitor_creation_defaults.link"
         required
       />
+    </div>
+    <div *ngIf="monitor_form_validation['link']" class="input_error">
+      Please add a valid Link
     </div>
     <div class="grid grid-cols-1 xl:grid-cols-3 gap-2">
       <div class="property_box">

@@ -7,7 +7,7 @@
     <a *ngIf="user_details.sub == 'Free'" routerLink="/plans" class="button">
       Upgrade
     </a>
-    <div class="relative main_popup_activator">
+    <div class="relative">
       <span
         class="relative cursor-pointer"
         (click)="show_hide_element('header_notification_popup')"
@@ -56,7 +56,7 @@
       </div>
     </div>
 
-    <div class="relative main_popup_activator">
+    <div class="relative">
       <span
         class="cursor-pointer flex items-center gap-2"
         (click)="show_hide_element('header_profile_popup')"

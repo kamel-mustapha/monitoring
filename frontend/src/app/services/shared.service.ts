@@ -87,12 +87,11 @@ export class SharedService {
     this.user_data_subject.next(this.user_data);
   }
 
-
-  dark_mode_subject = new Subject<boolean>()
-  enable_dark_mode(){
-    this.dark_mode_subject.next(true)
+  dark_mode_subject = new Subject<boolean>();
+  enable_dark_mode() {
+    this.dark_mode_subject.next(true);
   }
-  disable_dark_mode(){
-    this.dark_mode_subject.next(false)
+  disable_dark_mode() {
+    this.dark_mode_subject.next(false);
   }
 }

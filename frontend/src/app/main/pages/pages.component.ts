@@ -29,11 +29,11 @@ export class PagesComponent implements OnInit {
       if (res.status && res.status == 200) {
         this.pages_marketplace = res.pages;
         // for dev
-        // if (this.pages_marketplace) {
-        //   this.pages_marketplace.forEach(
-        //     (page) => (page.picture = `http://localhost:8000${page.picture}`)
-        //   );
-        // }
+        if (isDevMode() && this.pages_marketplace) {
+          this.pages_marketplace.forEach(
+            (page) => (page.picture = `http://localhost:8000${page.picture}`)
+          );
+        }
       }
     });
     this.refresh_user_pages();
@@ -54,21 +54,15 @@ export class PagesComponent implements OnInit {
   shown_popups: any = {};
 
   page_creations_modes: any = {
-    page: true,
+    page: false,
     monitors: false,
-    details: false,
+    details: true,
   };
 
   monitor_form_validation: any = {
     name: false,
     type: false,
     link: false,
-  };
-
-  page_creation_forms: any = {
-    page: true,
-    monitors: false,
-    details: false,
   };
 
   pages: any[] = [];
@@ -99,6 +93,17 @@ export class PagesComponent implements OnInit {
 
   show_creation_window() {
     if (this.monitors && this.monitors.length > 0) {
+      this.page_creations_modes = {
+        page: true,
+        monitors: false,
+        details: false,
+      };
+      this.monitor_form_validation = {
+        name: false,
+        type: false,
+        link: false,
+      };
+      this.monitors.forEach((monitor) => (monitor.selected = false));
       this.shared.show_hide_element('monitor_creation');
     } else {
       this.shared.show_alert('You need to create monitors first', 'alert');
@@ -108,17 +113,18 @@ export class PagesComponent implements OnInit {
   submit_page(form: NgForm, step: number) {
     this.monitor_form_validation = {};
     if (step == 0) {
-      setTimeout(() => {
-        this.activate_page_creation_mode('page');
-      }, 50);
+      this.activate_page_creation_mode('page');
     } else if (step == 1) {
-      this.page_creation_forms['page'] = form.value;
-      setTimeout(() => {
-        this.activate_page_creation_mode('monitors');
-      }, 50);
+      this.activate_page_creation_mode('monitors');
     } else if (step == 2) {
-      this.page_creation_forms['monitors'] = form.value;
-      this.activate_page_creation_mode('details');
+      if (this.monitors.filter((m) => m.selected).length > 0) {
+        this.activate_page_creation_mode('details');
+      } else {
+        this.shared.show_alert(
+          'At least one monitor should be included in your page',
+          'alert'
+        );
+      }
     } else if (step == 3) {
       if (form.valid) {
         this.creation_in_progress = true;
