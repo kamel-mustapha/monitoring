@@ -1,21 +1,27 @@
 <div id="main_content">
   <app-header></app-header>
+
   <div
-    class="overflow-auto h-full w-full xl:flex xl:gap-12 mt-2 xl:mt-6 xl:mt-0 px-2 pb-8 xl:pb-0 xl:px-2 xl:overflow-hidden"
+    class="overflow-auto h-full w-full xl:flex xl:gap-12 mt-2 xl:mt-0 px-2 pb-8 xl:pb-0 xl:px-2 xl:overflow-hidden"
   >
     <div
       class="relative w-full h-[500px] xl:h-full flex flex-col text-light-secondary dark:text-dark-secondary xl:!bg-transparent bg-light-secondary dark:bg-dark-secondary dark:bg-opacity-20 xl:mx-0 px-8 py-2 xl-py-0 xl:px-0 rounded-2xl xl:rounded-none"
     >
-      <div
-        class="flex justify-between items-center border-b border-primary dark:border-secondary py-2"
-      >
-        <div class="text-light-primary dark:text-dark-primary">Monitors</div>
-        <div
-          (click)="show_creation_window()"
-          class="button xl:cursor-pointer !rounded-full text-sm gap-2 !px-4 flex items-center"
-        >
-          <i class="fas fa-plus text-gray-100"></i>
-          <span>Create</span>
+      <div class="border-b border-primary dark:border-secondary py-2">
+        <div class="flex justify-between items-center">
+          <div class="text-light-primary dark:text-dark-primary">Monitors</div>
+          <div
+            (click)="show_creation_window()"
+            class="button xl:cursor-pointer !rounded-full text-sm gap-2 !px-4 flex items-center"
+          >
+            <i class="fas fa-plus text-gray-100"></i>
+            <span>Create</span>
+          </div>
+        </div>
+        <div *ngIf="monitors.length > 0" class="text-sm flex gap-10 mt-8 pb-2">
+          <span class="font-semibold xl:cursor-pointer">All</span>
+          <span class="opacity-70 xl:cursor-pointer">Running</span>
+          <span class="opacity-70 xl:cursor-pointer">Paused</span>
         </div>
       </div>
       <div *ngIf="loading_monitors" class="events_list">
@@ -28,7 +34,6 @@
           </div>
         </div>
       </div>
-
       <div *ngIf="!loading_monitors" class="events_list">
         <div
           *ngIf="monitors.length == 0"
@@ -67,6 +72,7 @@
           </svg>
           <span>You have no monitor</span>
         </div>
+
         <div *ngIf="monitors.length > 0">
           <div
             *ngFor="let monitor of monitors"
@@ -75,19 +81,25 @@
             <div class="text_overflow_ellipsis">
               {{ monitor.name }}
             </div>
-            <div class="text-sm text_overflow_ellipsis">{{ monitor.link }}</div>
+            <div class="text-sm text_overflow_ellipsis">
+              {{ monitor.link }}
+            </div>
             <div
               *ngIf="monitor.running"
               class="flex items-center gap-2 text-sm font-light"
             >
-              <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+              <span
+                class="w-[11px] h-[11px] border-[3px] bg-green-400 rounded-full border-primary dark:border-secondary"
+              ></span>
               Running
             </div>
             <div
               *ngIf="!monitor.running"
               class="flex items-center gap-2 text-sm font-light"
             >
-              <span class="w-2 h-2 bg-orange-400 rounded-full"></span>
+              <span
+                class="w-[11px] h-[11px] border-[3px] bg-orange-500 rounded-full border-primary dark:border-secondary"
+              ></span>
               Paused
             </div>
             <div class="relative">
@@ -138,49 +150,67 @@
         </div>
       </div>
     </div>
+
     <div
-      class="relative h-[500px] xl:h-full w-full mt-2 xl:mt-0 xl:w-8/12 flex flex-col text-light-secondary dark:text-dark-secondary bg-light-secondary dark:bg-dark-secondary xl:!bg-transparent dark:bg-opacity-20 xl:mx-0 px-8 py-2 xl-py-0 xl:px-0 rounded-2xl xl:rounded-none"
+      class="relative h-[500px] xl:h-full w-full xl:w-7/12 mt-2 xl:mt-0 flex flex-col text-light-secondary dark:text-dark-secondary bg-light-secondary dark:bg-dark-secondary xl:!bg-transparent dark:bg-opacity-20 xl:mx-0 px-8 py-2 xl-py-0 xl:px-0 rounded-2xl xl:rounded-none"
     >
-      <div
-        class="flex w-full justify-between items-center border-b border-primary dark:border-secondary py-2"
-      >
-        <div class="text-light-primary dark:text-dark-primary py-[6px]">
-          Events
-        </div>
-        <!-- <div *ngIf="loading_events" class="w-12 h-12"></div> -->
-        <div *ngIf="!loading_events">
-          <span *ngIf="monitors.length == 0" class="block">
-            <span>No monitor found</span>
-          </span>
-          <div *ngIf="monitors.length > 0" class="monitor_events_select">
-            <div
-              (click)="show_hide_element('select_events')"
-              class="flex justify-between"
-            >
-              <span>{{ selected_monitor }}</span>
-              <span
-                ><i
-                  [ngClass]="{
-                    'fa-chevron-down': !shown_popups['select_events'],
-                    'fa-chevron-up': shown_popups['select_events']
-                  }"
-                  class="fas"
-                ></i
-              ></span>
-            </div>
-            <div
-              @slideTopShort
-              *ngIf="shown_popups['select_events']"
-              class="monitors_select border-primary dark:border-secondary"
-            >
-              <span
-                *ngFor="let monitor of monitors; let i = index"
-                class="flex items-center gap-2"
-                (click)="select_monitor(monitor.id)"
+      <div class="border-b border-primary dark:border-secondary py-2">
+        <div class="flex w-full justify-between items-center">
+          <div class="text-light-primary dark:text-dark-primary py-[6px]">
+            Events
+          </div>
+          <!-- <div *ngIf="loading_events" class="w-12 h-12"></div> -->
+          <div *ngIf="!loading_events">
+            <span *ngIf="monitors.length == 0" class="block">
+              <span>No monitor found</span>
+            </span>
+            <div *ngIf="monitors.length > 0" class="monitor_events_select">
+              <div
+                (click)="show_hide_element('select_events')"
+                class="flex justify-between"
               >
-                {{ monitor.name }}
-              </span>
+                <span>{{ selected_monitor }}</span>
+                <span
+                  ><i
+                    [ngClass]="{
+                      'fa-chevron-down': !shown_popups['select_events'],
+                      'fa-chevron-up': shown_popups['select_events']
+                    }"
+                    class="fas"
+                  ></i
+                ></span>
+              </div>
+              <div
+                @slideTopShort
+                *ngIf="shown_popups['select_events']"
+                class="monitors_select border-primary dark:border-secondary"
+              >
+                <span
+                  *ngFor="let monitor of monitors; let i = index"
+                  class="flex items-center gap-2"
+                  (click)="select_monitor(monitor.id)"
+                >
+                  {{ monitor.name }}
+                </span>
+              </div>
             </div>
+          </div>
+        </div>
+        <!-- filter list -->
+        <div
+          *ngIf="events.length > 0 && monitors.length > 0"
+          class="flex items-center justify-between mt-[31px] text-sm"
+        >
+          <div class="flex items-center gap-6">
+            <span class="font-semibold xl:cursor-pointer">All events</span>
+            <span class="opacity-70 xl:cursor-pointer">Incidents</span>
+            <span class="opacity-70 xl:cursor-pointer">Down</span>
+          </div>
+          <div
+            class="button flex items-center gap-2 !bg-transparent border border-button !px-4 !py-1 !rounded-full !text-secondary"
+          >
+            <i class="fas fa-plus"></i>
+            Filters
           </div>
         </div>
       </div>
@@ -276,28 +306,15 @@
             <span>No event yet for this monitor</span>
           </div>
           <div *ngIf="events.length > 0">
-            <!-- filter list -->
-            <div class="flex items-center justify-between my-4 text-sm">
-              <div class="flex items-center gap-6">
-                <span class="font-semibold">All events</span>
-                <span class="opacity-70">Incidents</span>
-              </div>
-              <div
-                class="button flex items-center gap-2 !bg-transparent border border-button !px-4 !py-1 !rounded-full !text-secondary"
-              >
-                <i class="fas fa-plus"></i>
-                Filters
-              </div>
-            </div>
             <div
               *ngFor="let event of events"
               class="monitor_element event_grid text-sm capitalize border-primary dark:border-secondary"
             >
               <div class="monitor_status">
                 <span
-                  class="status_dot"
+                  class="status_dot border-primary dark:border-secondary"
                   [ngClass]="{
-                    'bg-green-400': event.is_success,
+                    'bg-green-400 ': event.is_success,
                     'bg-red-400': !event.is_success
                   }"
                 ></span>
@@ -361,19 +378,31 @@
           class="fa-solid fa-circle-exclamation fa-sm"
         ></i>
       </label>
-      <input
+      <div
+        class="input !py-0 bg-white dark:bg-transparent flex justify-between items-center"
         [ngClass]="{
           'border-red-400': monitor_form_validation['link'],
           'border-primary dark:border-secondary focus:border-primary':
             !monitor_form_validation['link']
         }"
-        class="bg-white dark:bg-transparent"
-        type="text"
-        placeholder="https://mywebsite.com"
-        name="link"
-        [ngModel]="monitor_creation_defaults.link"
-        required
-      />
+      >
+        <select
+          name="schema"
+          [ngModel]="'https://'"
+          class="!border-none !shadow-none !px-0"
+        >
+          <option value="https://">https://</option>
+          <option value="http://">http://</option>
+        </select>
+        <input
+          class="w-full !border-none !shadow-none"
+          type="text"
+          placeholder="mywebsite.com"
+          name="link"
+          [ngModel]="monitor_creation_defaults.link"
+          required
+        />
+      </div>
     </div>
     <div *ngIf="monitor_form_validation['link']" class="input_error">
       Please add a valid Link

@@ -55,7 +55,7 @@
 }
 
 .button {
-  @apply bg-secondary  text-white px-5 pt-2 pb-2 rounded-sm capitalize hover:shadow-sm active:opacity-70 duration-150 xl:cursor-pointer;
+  @apply bg-secondary  text-white px-5 pt-2 pb-2 rounded-md capitalize hover:shadow-sm active:opacity-70 duration-150 xl:cursor-pointer;
 }
 .toggle {
   @apply w-16 h-6 rounded-full relative cursor-pointer duration-500;

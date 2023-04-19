@@ -1061,6 +1061,14 @@ form.main_form button:hover {
   margin-bottom: 4rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
 .block {
   display: block;
 }
@@ -1127,10 +1135,6 @@ form.main_form button:hover {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-}
-
-.w-10\/12 {
-  width: 83.333333%;
 }
 
 .w-12 {
@@ -1230,6 +1234,10 @@ form.main_form button:hover {
 
 .gap-10 {
   gap: 2.5rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
 }
 
 .overflow-auto {
@@ -1656,6 +1664,10 @@ form.main_form button:hover {
     width: 1000px;
   }
 
+  .lg\:w-8\/12 {
+    width: 66.666667%;
+  }
+
   .lg\:flex-row {
     flex-direction: row;
   }
@@ -1759,8 +1771,8 @@ form.main_form button:hover {
 }
 
 @media (min-width: 1536px) {
-  .\32xl\:w-7\/12 {
-    width: 58.333333%;
+  .\32xl\:w-8\/12 {
+    width: 66.666667%;
   }
 
   .\32xl\:px-0 {

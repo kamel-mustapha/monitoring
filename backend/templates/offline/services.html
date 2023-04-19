@@ -1,11 +1,8 @@
 {% load static %}
 <div id="services" x-data="{slider_offset: 10}" class="max-w-1400 mx-auto pt-36 pb-52 grid gap-16 px-6 lg:px-16 2xl:px-0">
-  <section class="text-center lg:w-7/12 mx-auto mb-16">
-    <h2 class="text-4xl font-lexend mb-4">An easy way to monitor your services.</h2>
-    <p class="text-gray-800 text-lg">
-      Our service offers comprehensive monitoring for a wide range of systems and applications, including websites, servers, databases, and more. Our easy-to-use dashboard provides a clear and concise
-      overview of your system's health, so you can quickly identify and address any problems.
-    </p>
+  <section class="text-center lg:w-9/12 mx-auto mb-16">
+    <h2 class="text-4xl font-lexend mb-8">An easy way to monitor your services.</h2>
+    <p class="text-gray-800 text-lg">Our service offers comprehensive monitoring for a wide range of systems and applications, including websites, API, servers, databases, and more.</p>
   </section>
   <section
     class="grid lg:flex justify-between gap-12"
@@ -15,21 +12,21 @@
                 offset: 10,
                 active: true,
                 name: 'Create monitor',
-                title: 'Stay on top of things with always up-to-date reporting features.',
+                title: 'Create a monitor for all your services.',
                 text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla gravida sem elit, vitae suscipit leo dictum id. Cras sit amet lorem at metus lacinia pellentesque.'
             },
             {   
                 offset: -75,
                 active: false,
                 name: 'Create page',
-                title: 'Stay on top of things with always up-to-date reporting features.',
+                title: 'Create a page and include one or all your monitors.',
                 text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla gravida sem elit, vitae suscipit leo dictum id. Cras sit amet lorem at metus lacinia pellentesque.'
             },
             {
                 offset: -158,
                 active: false,
                 name: 'Expose pages',
-                title: 'Stay on top of things with always up-to-date reporting features.',
+                title: 'Add the url of the page in your website to expose it to your customers.',
                 text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla gravida sem elit, vitae suscipit leo dictum id. Cras sit amet lorem at metus lacinia pellentesque.'
             }
         ]
@@ -38,12 +35,12 @@
     <template x-for="feature in features">
       <div
         :class="feature.active?'opacity-100':'opacity-80'"
-        class="grid gap-4 xl:cursor-pointer hover:opacity-100"
+        class="w-full grid gap-4 xl:cursor-pointer hover:opacity-100"
         @click="features.forEach(feature=>feature.active=false); feature.active=true; slider_offset=feature.offset"
       >
         <h3 :class="feature.active ? 'text-secondary font-semibold': 'text-gray-600'" class="text-lg" x-text="feature.name"></h3>
         <h4 :class="feature.active ? 'text-gray-900 ': 'text-gray-600'" class="text-lg font-medium" x-text="feature.title"></h4>
-        <p :class="feature.active ? 'text-gray-700 ': 'text-gray-600'" x-text="feature.text"></p>
+        <!-- <p :class="feature.active ? 'text-gray-700 ': 'text-gray-600'" x-text="feature.text"></p> -->
       </div>
     </template>
   </section>

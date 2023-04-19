@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
       if (value.monitors) {
         this.monitors = value.monitors;
       }
-      if (init) {
+      if (init && this.monitors.length > 0) {
         try {
           this.select_monitor(this.monitors[0].id);
         } catch (e) {}

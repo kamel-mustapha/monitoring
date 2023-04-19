@@ -56,7 +56,7 @@ class Monitoring(View):
                                                         name=data.get("name"),
                                                         type="http",
                                                         # type=data.get("type"),
-                                                        link=data.get("link"),
+                                                        link=f"{data.get('schema')}{data.get('link')}",
                                                         interval=data.get("interval"), 
                                                         success_status=data.get("success_status"),
                                                         timeout=data.get("timeout"),
@@ -92,7 +92,7 @@ class Monitoring(View):
                                         alert_email = AlertEmail.objects.get_or_create(email=str(email).lower().strip())
                                         monitor.alert_emails.add(alert_email[0])
                                 monitor.name = data.get("name")
-                                monitor.link = data.get("link")
+                                monitor.link = f"{data.get('schema')}{data.get('link')}",
                                 monitor.interval = data.get("interval")
                                 monitor.status = data.get("success_status")
                                 monitor.timeout = data.get("timeout")
@@ -332,8 +332,7 @@ def get_user_details(req):
                                 "sub": req.user.sub,
                                 "monitors": user_monitors,
                                 "max_monitors": user_plan.monitors,
-                                # "usage": (user_monitors*100)/user_plan.monitors,
-                                "usage": 20,
+                                "usage": (user_monitors*100)/user_plan.monitors,
                                 "payment_card": req.user.card_last_digit,
                                 "min_interval": user_plan.interval,
                                 "max_alert_emails": user_plan.alert_emails,

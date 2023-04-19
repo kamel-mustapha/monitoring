@@ -8,6 +8,19 @@ from django.conf import settings
 from logging import getLogger
 logger = getLogger(__name__)
 
+EXCEPTIONS = {
+    "RequestException": "There was an ambiguous exception that occurred while handling your request.",
+    "ConnectionError": "A Connection error occurred.",
+    "HTTPError": "An HTTP error occurred.",
+    "URLRequired": "A valid URL is required to make a request.",
+    "TooManyRedirects": "Too many redirects.", 
+    "ConnectTimeout": "The request timed out while trying to connect to the remote server.",
+    "ReadTimeout": "The server did not send any data in the allotted amount of time.",
+    "Timeout": "The request timed out.",
+    "JSONDecodeError": "Couldn't decode the text into json",
+    "MissingSchema": "Invalid URL. No scheme supplied.",
+    "Unknown": "Unknown exception occured during the request"
+}
 
 status_messages_long = {
     100: "This interim response indicates that the client should continue the request or ignore the response if the request is already finished.",
@@ -142,7 +155,7 @@ status_messages = {
 }
 
 
-def send_alert_email(alert_emails, monitor_link, status, downtime=None, success=False):
+def send_alert_email(alert_emails, monitor_link, status, downtime=None, success=False, exception=False):
     try:
         if success:
             message = f"Your monitor {monitor_link} is up again, good job."
@@ -157,7 +170,17 @@ def send_alert_email(alert_emails, monitor_link, status, downtime=None, success=
                 html_message=message
             )
         else:
-            message = f"<div>Your monitor {monitor_link} went down with a status of {status}.</div><div>{status_messages_long.get(status) if status_messages_long.get(status) else 'Unknown error' }</div>"
+            error_message = "Unknown error occured during the requst"
+            if exception:
+                error_message = EXCEPTIONS[status]
+            elif not exception and status in status_messages_long:
+                error_message = status_messages_long[status]
+            message = f"""
+            <div>Your monitor {monitor_link} went down</div>"""
+            if status:
+                message += f"<div>{status}</div>"
+            if error_message:
+                message += f"<div>{error_message}</div>"
             send_mail(
                 'MONITOR DOWN',
                 'Your monitor went down',
@@ -176,6 +199,7 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
     is_success = False
     failure_start = False
     failure_end = False
+    exception = None
     last_event = MonitorEvent.objects.filter(monitor_id=monitor_id).order_by("-id")[:1]
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0'}
     try:
@@ -202,7 +226,9 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
             monitor.down = True
             monitor.save()
     except Exception as e:
-        status = 404
+        exception =  e.__class__.__name__
+        logger.info(exception)
+        status = 0
         is_success = False
         end = time.time()
         request_time = (end-start)*1000
@@ -212,14 +238,22 @@ def monitor_http(monitor_id, monitor_link, success_status, timeout, alert_emails
             monitor.save()
         if (last_event and last_event[0].is_success) or not last_event:
             failure_start = True
-            send_alert_email(alert_emails, monitor_link, status)
+            if not exception in EXCEPTIONS:
+                exception = "Unknown"
+            send_alert_email(alert_emails, monitor_link, exception, exception=True)
         logger.exception(e)
-        
+    # check error messaage
+    message = "unknown error"
+    if status == 0 and exception:
+        message = exception
+    elif status != 0 and status_messages.get(status):
+        message=status_messages.get(status) if status_messages.get(status) else "unknown error"
+    
     MonitorEvent.objects.create(
         monitor_id=monitor_id,
         status=status,
         time=request_time,
-        message=status_messages.get(status) if status_messages.get(status) else "unknown error",
+        message=message,
         is_success=is_success,
         failure_start=failure_start,
         failure_end=failure_end

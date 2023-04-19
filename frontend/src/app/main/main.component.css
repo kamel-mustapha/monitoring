@@ -1,3 +1,3 @@
 div {
-  @apply h-full xl:p-8  rounded-2xl shadow-sm;
+  @apply h-full xl:px-8 py-6 rounded-3xl shadow-sm;
 }

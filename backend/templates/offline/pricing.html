@@ -3,7 +3,7 @@
     <h2 class="text-center text-5xl text-gray-800 pt-8 xl:pt-0 lg:mb-8 font-semibold font-lexend">Simple pricing for everyone</h2>
     <p class="mb-12 lg:w-9/12 mx-auto text-center text-lg">
       Whether you're a small business owner, an IT professional, or just someone who wants to ensure their online presence is always up and running, our monitoring service is the solution you've been
-      looking for. Sign up today and experience the peace of mind that comes with knowing your systems are in safe hands.
+      looking for.
     </p>
     <div @click="sub_annually=!sub_annually" class="flex justify-center gap-4 mt-16 lg:mt-0 mx-auto mb-16" (click)="change_sub()">
       <span :class="!sub_annually? 'text-gray-700': 'text-gray-900 font-semibold'">Monthly</span>
@@ -70,7 +70,7 @@
           </h3>
           <ul>
             <template x-for="feature of plan.features">
-              <li>
+              <li class="flex gap-2 items-center justify-center">
                 <i class="fas fa-check text-green-500" x-show="feature.included"></i>
                 <i class="fas fa-times text-red-500" x-show="!feature.included"></i>
                 <span x-text="feature.value"></span>

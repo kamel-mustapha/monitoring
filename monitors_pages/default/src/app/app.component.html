@@ -58,9 +58,13 @@
       <h2 class="mb-6 flex gap-4 items-center">
         <span
           *ngIf="monitor.down"
-          class="bg-orange-500 status_dot_down block w-3 h-3 rounded-full"
+          class="bg-red-500 status_dot_down block w-3 h-3 rounded-full"
         ></span>
         <span class="flex gap-2 items-center">
+          <span *ngIf="!monitor.running" class="text-orange-500 text-xs">
+            Paused
+          </span>
+          <span *ngIf="monitor.down" class="text-red-500 text-xs"> Down </span>
           <span class="flex gap-2 items-center xl:cursor-pointer">
             <span class="capitalize font-medium">{{ monitor.name }}</span>
           </span>
@@ -281,11 +285,11 @@
     <span class="text-green-500 font-medium">{{ up_monitors() }}</span></span
   >
   <span
-    >Down
-    <span class="text-red-500 font-medium">{{ down_monitors() }}</span></span
-  >
-  <span
     >Paused
     <span class="text-gray-500 font-medium">{{ paused_monitors() }}</span></span
+  >
+  <span
+    >Down
+    <span class="text-red-500 font-medium">{{ down_monitors() }}</span></span
   >
 </div>

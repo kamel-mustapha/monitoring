@@ -1,5 +1,5 @@
 .events_list {
-  @apply h-full max-h-96 pr-2  xl:max-h-full overflow-y-auto overflow-auto mt-4;
+  @apply h-full max-h-96 pr-2  xl:max-h-full overflow-y-auto overflow-auto mt-2;
 }
 
 .events_list div.monitor_element {
@@ -16,7 +16,7 @@
 }
 .event_grid {
   @apply py-4 border-b;
-  grid-template-columns: 20% 20% 20% 40%;
+  grid-template-columns: 15% 30% 15% 40%;
 }
 
 .event_grid > div {
@@ -28,7 +28,7 @@
 }
 
 .events_list div.monitor_element .monitor_status .status_dot {
-  @apply w-2 h-2 rounded-full;
+  @apply w-[11px] h-[11px] border-[3px] rounded-full;
 }
 
 /* .events_list div.monitor_element .monitor_status > span:last-child {
@@ -43,7 +43,8 @@
   @apply w-36 overflow-hidden text-ellipsis;
 } */
 
-.events_list::-webkit-scrollbar {
+.events_list::-webkit-scrollbar,
+.statistics::-webkit-scrollbar {
   @apply hidden;
 }
 
@@ -106,6 +107,25 @@
 }
 
 #monitor_creation_form input,
-#monitor_creation_form select {
+#monitor_creation_form select,
+.input {
   @apply border  rounded-md px-4 py-2 outline-none shadow-sm;
+}
+
+.statistics {
+  @apply max-w-[100px] pb-2 mt-4 flex flex-col gap-2 h-full overflow-auto;
+}
+
+.statistics > div {
+  @apply rounded-xl flex flex-col gap-4 text-sm text-center;
+}
+
+.statistics > div > div:first-child {
+  @apply px-4 font-medium;
+}
+.statistics > div > div:nth-child(2) {
+  @apply w-16 h-16 border-[8px] mx-auto rounded-full;
+}
+.statistics > div > div:last-child {
+  @apply font-semibold text-xs;
 }
