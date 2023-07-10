@@ -5,3 +5,7 @@
     cursor: default;
   }
 }
+
+img {
+  object-fit: contain;
+}

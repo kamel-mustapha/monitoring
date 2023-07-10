@@ -1008,14 +1008,6 @@ form.main_form button:hover {
   left: 0px;
 }
 
-.top-\[76px\] {
-  top: 76px;
-}
-
-.top-\[100px\] {
-  top: 100px;
-}
-
 .right-0 {
   right: 0px;
 }
@@ -1059,10 +1051,6 @@ form.main_form button:hover {
 
 .mb-16 {
   margin-bottom: 4rem;
-}
-
-.mb-6 {
-  margin-bottom: 1.5rem;
 }
 
 .mb-8 {
@@ -1236,10 +1224,6 @@ form.main_form button:hover {
   gap: 2.5rem;
 }
 
-.gap-3 {
-  gap: 0.75rem;
-}
-
 .overflow-auto {
   overflow: auto;
 }
@@ -1266,10 +1250,6 @@ form.main_form button:hover {
 
 .rounded-3xl {
   border-radius: 1.5rem;
-}
-
-.border {
-  border-width: 1px;
 }
 
 .border-t {
@@ -1562,6 +1542,12 @@ form.main_form button:hover {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-xl {
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .duration-300 {
   transition-duration: 300ms;
 }
@@ -1656,16 +1642,8 @@ form.main_form button:hover {
     width: 75%;
   }
 
-  .lg\:w-7\/12 {
-    width: 58.333333%;
-  }
-
   .lg\:w-\[1000px\] {
     width: 1000px;
-  }
-
-  .lg\:w-8\/12 {
-    width: 66.666667%;
   }
 
   .lg\:flex-row {

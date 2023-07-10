@@ -71,3 +71,15 @@ class NotificationUserDeleted(models.Model):
 
     class Meta:
         db_table = "Notification_Deleted"
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=250)
+    email = models.CharField(max_length=200)
+    text = models.TextField()
+
+    def __str__(self) -> str:
+        return self.email
+
+    class Meta:
+        db_table = "Contact"

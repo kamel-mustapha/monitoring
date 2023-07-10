@@ -45,15 +45,15 @@
     </template>
   </section>
   <section id="image_slider" class="relative h-[400px] lg:h-[900px] rounded-3xl overflow-auto lg:overflow-hidden">
-    <div :style="{ left: `${slider_offset}%`}" class="absolute top-1/2 -translate-y-1/2 flex gap-12 duration-500 ease-out">
+    <div :style="{ left: `${slider_offset}%`}" class="absolute top-1/2 -translate-y-1/2 flex items-center gap-12 duration-500 ease-out">
       <div :class="slider_offset != 10 ? 'lg:opacity-25': 'opacity-100'" class="w-[350px] h-[250px] lg:w-[1000px] lg:h-[700px] duration-300">
-        <img src="{% static 'picture_1.jpg' %}" class="w-full h-full rounded-3xl border border-gray-300" alt="" />
+        <img src="{% static 'picture_1.jpg' %}" class="rounded-3xl shadow-xl" alt="" />
       </div>
       <div :class="slider_offset != -75 ? 'lg:opacity-25': 'opacity-100'" class="w-[350px] h-[250px] lg:w-[1000px] lg:h-[700px] duration-300">
-        <img src="{% static 'picture_2.jpg' %}" class="w-full h-full rounded-3xl border border-gray-300" alt="" />
+        <img src="{% static 'picture_2.jpg' %}" class="rounded-3xl shadow-xl" alt="" />
       </div>
-      <div :class="slider_offset != -158 ? 'lg:opacity-25': 'opacity-100'" class="w-[350px] h-[250px] lg:w-[1000px] lg:h-[700px] duration-300">
-        <img src="{% static 'picture_3.jpg' %}" class="w-full h-full rounded-3xl border border-gray-300" alt="" />
+      <div :class="slider_offset != -158 ? 'lg:opacity-25': 'opacity-100'" class="flex flex-col justify-center w-[350px] h-[250px] lg:w-[1000px] lg:h-[700px] duration-300">
+        <img src="{% static 'picture_3.jpg' %}" class="rounded-3xl shadow-xl" alt="" />
       </div>
     </div>
   </section>

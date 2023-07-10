@@ -15,6 +15,7 @@ urlpatterns = [
     path('activation/', TemplateView.as_view(template_name = "offline/activation.html")),
     path('activate-account/<int:user>/<str:code>', activate_account),
     path('monitor/<int:id>', user_monitor),
+    path('contact/', contact_form)
 ]
 
 for url_path in ANGULAR_PATHS:

@@ -18,11 +18,11 @@
             <span>Create</span>
           </div>
         </div>
-        <div *ngIf="monitors.length > 0" class="text-sm flex gap-10 mt-8 pb-2">
+        <!-- <div *ngIf="monitors.length > 0" class="text-sm flex gap-10 mt-8 pb-2">
           <span class="font-semibold xl:cursor-pointer">All</span>
           <span class="opacity-70 xl:cursor-pointer">Running</span>
           <span class="opacity-70 xl:cursor-pointer">Paused</span>
-        </div>
+        </div> -->
       </div>
       <div *ngIf="loading_monitors" class="events_list">
         <div class="h-full overflow-hidden my-0">
@@ -197,7 +197,7 @@
           </div>
         </div>
         <!-- filter list -->
-        <div
+        <!-- <div
           *ngIf="events.length > 0 && monitors.length > 0"
           class="flex items-center justify-between mt-[31px] text-sm"
         >
@@ -212,7 +212,7 @@
             <i class="fas fa-plus"></i>
             Filters
           </div>
-        </div>
+        </div> -->
       </div>
       <div *ngIf="loading_events" class="events_list">
         <div class="h-full overflow-hidden my-0">

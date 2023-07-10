@@ -104,3 +104,19 @@ def user_monitor(req, id):
         page.save()
         return render(req, f"monitors/{page.page.html_file}.html", context=context)
     raise Http404
+
+
+def contact_form(req):
+    res = {'status': 'error', 'message': 'unknown error'}
+    try:
+        data = json.loads(req.body)
+        if data:
+            Contact.objects.create(
+                name=data.get("name"),
+                email=data.get("email"),
+                text=data.get("text")
+            )
+            res = {'status': 'success'}
+    except Exception as e:
+        print(e)
+    return JsonResponse(res)
