@@ -168,4 +168,4 @@ if DEBUG:
 # }
 
 
-CSRF_TRUSTED_ORIGINS = ["https://statuschecks.net", "https://www.statuschecks.net"]
+CSRF_TRUSTED_ORIGINS = ["https://statuschecks.net", "https://www.statuschecks.net", "http://statuschecks.net", "http://www.statuschecks.net"]
